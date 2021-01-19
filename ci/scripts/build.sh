@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
-pushd sixteens
+pushd dp-design-system
   npm install --unsafe-perm
 popd
 
-cp -r sixteens/dist/* build/
+cp -r dp-design-system/dist/* build/

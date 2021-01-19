@@ -6,10 +6,10 @@ image_resource:
   type: docker-image
   source:
     repository: node
-    tag: 6.10.0
+    tag: 14.15.4
 
 inputs:
-  - name: sixteens
+  - name: dp-design-system
 
 run:
-  path: sixteens/ci/scripts/audit.sh
+  path: dp-design-system/ci/scripts/audit.sh

@@ -4,9 +4,9 @@
   "description": "Digital Publishing (ONS) Design System",
   "main": "",
   "scripts": {
-    "build-css": "mkdir -pv dist/css && node-sass --output-style compressed scss/main.scss dist/css/main.css",
+    "build-css": "sass --style=compressed scss:dist/css",
     "build": "npm run build-css",
-    "watch-css": "onchange 'scss' -e 'scss/work-in-progress' -e 'scss/work-in-progress.scss' -- npm run build-css",
+    "watch-css": "sass --style=compressed --watch scss:dist/css",
     "server": "http-server -p ${PORT:-9001} --cors",
     "dev": "npm run watch-css & npm run server"
   },
@@ -22,8 +22,8 @@
   "homepage": "https://github.com/ONSdigital/dp-design-system#readme",
   "dependencies": {
     "http-server": "^0.12.3",
-    "node-sass": "^5.0.0",
-    "onchange": "^7.1.0"
+    "onchange": "^7.1.0",
+    "sass": "^1.32.4"
   },
   "devDependencies": {
     "sass-lint": "^1.13.1"

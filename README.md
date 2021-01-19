@@ -31,4 +31,3 @@ Released under MIT license, see [LICENSE](LICENSE.md) for details.
 
 [node]: <https://nodejs.org/en/>
 [npm]: <https://www.npmjs.com/>
-[sass-linter]: <https://onsdigital.github.io/ons-pattern-library-starter/>

@@ -1,5 +1,5 @@
 #!/bin/bash -eux
 
-pushd sixteens
+pushd dp-design-system
   npm audit --audit-level=high
 popd
