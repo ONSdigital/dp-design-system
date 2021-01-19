@@ -10,3 +10,9 @@
 .idea/
 *.iml
 *.iws
+
+# Project
+.sass-cache/
+dist/css/
+node_modules/
+npm-debug.log.*
