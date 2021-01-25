@@ -6,4 +6,5 @@ pushd dp-design-system
   SHORT_REF=`git rev-parse --short HEAD`
 popd
 
-cp -r dp-design-system/dist/css/main.css build/$SHORT_REF
+mkdir $SHORT_REF
+cp -r dp-design-system/dist/css/main.css $SHORT_REF/main.css
