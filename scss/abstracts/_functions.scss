@@ -1,0 +1,16 @@
+@import "variables.scss";
+
+// ------------------------------------------------------ COLORS ------------------------------------------------------
+
+/// lighten a color
+@function tint($color, $percentage) {
+  @if index($tints, $percentage) {
+    @if map-has-key($tintable-colors, $color) {
+      @return mix(white, $color, $percentage);
+    }
+    @warn "Unknown `#{$color}` in $tintable-colors. Please use an approved color";
+    @return null;
+  }
+  @warn "Unknown `#{$percentage}` in $tints. Please use an approved tint percentage";
+  @return null;
+}

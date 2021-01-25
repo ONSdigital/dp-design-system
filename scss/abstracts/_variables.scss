@@ -1,0 +1,74 @@
+// ------------------------------------------------------- COLORS ------------------------------------------------------
+// ----------------------------------------------------- ONS COLORS ----------------------------------------------------
+
+// --- ONS General palette ---
+$spring-green: #a8bd3a;
+$mint-green: #00a3a6;
+$sky-blue: #27a0cc;
+$ocean-blue: #206095;
+$night-blue: #003c57;
+
+// --- Census ---
+$indigo-blue: #3c388e;
+$plum-purple: #902082;
+$flamingo-pink: #df0667;
+
+// --- Supporting palette ---
+$ruby-red: #d0021b;
+$jaffa-orange: #f3781f;
+$sun-yellow: #fbc900;
+$neon-yellow: #f0f762;
+$leaf-green: #0f8243;
+
+// --- Grays ---
+$black: #222;
+$grey1: #414042;
+$grey2: #707071;
+$grey3: #bcbcbd;
+$grey4: #e2e2e3;
+$grey5: #f5f5f6;
+$white: #fff;
+
+
+// --- Tints ---
+// Allowed tint percentages
+$tints: (70, 40, 10);
+// colours to be used (currently all listed in colour palettes except greys)
+// @formatter:off
+$tintable-colors: (
+        "spring-green":  $spring-green,
+        "mint-green":    $mint-green,
+        "sky-blue":      $sky-blue,
+        "ocean-blue":    $ocean-blue,
+        "night-blue":    $night-blue,
+        "indigo-blue":   $indigo-blue,
+        "plum-purple":   $plum-purple,
+        "flamingo-pink": $flamingo-pink,
+        "ruby-red":      $ruby-red,
+        "jaffa-orange":  $jaffa-orange,
+        "sun-yellow":    $sun-yellow,
+        "neon-yellow":   $neon-yellow,
+        "leaf-green":    $leaf-green
+);
+// @formatter:on
+// Assignment
+
+$color-text: $black;
+$color-text-inverse: $white;
+
+$color-errors: $ruby-red;
+
+// ----------------------------------------------------- DP COLORS -----------------------------------------------------
+
+// --- Charts ---
+// Palette 1
+$dp-chart-palette-1: ($ocean-blue, $sky-blue, $night-blue, #118C7B, $spring-green);
+
+// Palette 2
+$dp-chart-palette-2: append($dp-chart-palette-1, #871A6B, #F66068, #746CB1, #22D0B6);
+
+// Palette 3
+$dp-chart-palette-2: append($ocean-blue, $sky-blue, #871A6B, $spring-green, #F66068);
+
+// Highlight color for all pallets
+$dp-chart-highlight: #F39431;
