@@ -8,7 +8,8 @@
     "build": "npm run build-css",
     "watch-css": "sass --style=compressed --watch scss:dist/css",
     "server": "http-server -p ${PORT:-9001} --cors",
-    "dev": "npm run watch-css & npm run server"
+    "dev": "npm run watch-css & npm run server",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
