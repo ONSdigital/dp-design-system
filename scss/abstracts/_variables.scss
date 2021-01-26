@@ -2,32 +2,32 @@
 // ----------------------------------------------------- ONS COLORS ----------------------------------------------------
 
 // --- ONS General palette ---
-$spring-green: #a8bd3a;
-$mint-green: #00a3a6;
-$sky-blue: #27a0cc;
+$spring-green: #A8BD3A;
+$aqua-teal: #00A3A6;
+$sky-blue: #27A0CC;
 $ocean-blue: #206095;
-$night-blue: #003c57;
+$night-blue: #003C57;
 
 // --- Census ---
-$indigo-blue: #3c388e;
+$indigo-blue: #3C388E;
 $plum-purple: #902082;
-$flamingo-pink: #df0667;
+$flamingo-pink: #DF0667;
 
 // --- Supporting palette ---
-$ruby-red: #d0021b;
-$jaffa-orange: #f3781f;
-$sun-yellow: #fbc900;
-$neon-yellow: #f0f762;
-$leaf-green: #0f8243;
+$ruby-red: #D0021B;
+$jaffa-orange: #FE781F;
+$sun-yellow: #FBC900;
+$neon-yellow: #F0F762;
+$leaf-green: #0F8243;
 
 // --- Grays ---
 $black: #222;
 $grey1: #414042;
 $grey2: #707071;
-$grey3: #bcbcbd;
-$grey4: #e2e2e3;
-$grey5: #f5f5f6;
-$white: #fff;
+$grey3: #BCBCBD;
+$grey4: #E2E2E3;
+$grey5: #F5F5F6;
+$white: #FFF;
 
 
 // --- Tints ---
@@ -36,19 +36,19 @@ $tints: (70, 40, 10);
 // colours to be used (currently all listed in colour palettes except greys)
 // @formatter:off
 $tintable-colors: (
-        "spring-green":  $spring-green,
-        "mint-green":    $mint-green,
-        "sky-blue":      $sky-blue,
-        "ocean-blue":    $ocean-blue,
-        "night-blue":    $night-blue,
-        "indigo-blue":   $indigo-blue,
-        "plum-purple":   $plum-purple,
-        "flamingo-pink": $flamingo-pink,
-        "ruby-red":      $ruby-red,
-        "jaffa-orange":  $jaffa-orange,
-        "sun-yellow":    $sun-yellow,
-        "neon-yellow":   $neon-yellow,
-        "leaf-green":    $leaf-green
+        "spring-green":   $spring-green,
+        "aqua-teal":      $aqua-teal,
+        "sky-blue":       $sky-blue,
+        "ocean-blue":     $ocean-blue,
+        "night-blue":     $night-blue,
+        "indigo-blue":    $indigo-blue,
+        "plum-purple":    $plum-purple,
+        "flamingo-pink":  $flamingo-pink,
+        "ruby-red":       $ruby-red,
+        "jaffa-orange":   $jaffa-orange,
+        "sun-yellow":     $sun-yellow,
+        "neon-yellow":    $neon-yellow,
+        "leaf-green":     $leaf-green
 );
 // @formatter:on
 // Assignment
