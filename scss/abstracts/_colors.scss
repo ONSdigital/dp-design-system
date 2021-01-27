@@ -34,23 +34,21 @@ $white: #FFF;
 // Allowed tint percentages
 $tints: (70, 40, 10);
 // colours to be used (currently all listed in colour palettes except greys)
-// @formatter:off
 $tintable-colors: (
-        "spring-green":   $spring-green,
-        "aqua-teal":      $aqua-teal,
-        "sky-blue":       $sky-blue,
-        "ocean-blue":     $ocean-blue,
-        "night-blue":     $night-blue,
-        "indigo-blue":    $indigo-blue,
-        "plum-purple":    $plum-purple,
-        "flamingo-pink":  $flamingo-pink,
-        "ruby-red":       $ruby-red,
-        "jaffa-orange":   $jaffa-orange,
-        "sun-yellow":     $sun-yellow,
-        "neon-yellow":    $neon-yellow,
-        "leaf-green":     $leaf-green
+        "spring-green": $spring-green,
+        "aqua-teal": $aqua-teal,
+        "sky-blue": $sky-blue,
+        "ocean-blue": $ocean-blue,
+        "night-blue": $night-blue,
+        "indigo-blue": $indigo-blue,
+        "plum-purple": $plum-purple,
+        "flamingo-pink": $flamingo-pink,
+        "ruby-red": $ruby-red,
+        "jaffa-orange": $jaffa-orange,
+        "sun-yellow": $sun-yellow,
+        "neon-yellow": $neon-yellow,
+        "leaf-green": $leaf-green
 );
-// @formatter:on
 // Assignment
 
 $color-text: $black;
@@ -65,10 +63,10 @@ $color-errors: $ruby-red;
 $dp-chart-palette-1: ($ocean-blue, $sky-blue, $night-blue, #118C7B, $spring-green);
 
 // Palette 2
-$dp-chart-palette-2: append($dp-chart-palette-1, #871A6B, #F66068, #746CB1, #22D0B6);
+$dp-chart-palette-2: join($dp-chart-palette-1, (#871A6B, #F66068, #746CB1, #22D0B6));
 
 // Palette 3
-$dp-chart-palette-2: append($ocean-blue, $sky-blue, #871A6B, $spring-green, #F66068);
+$dp-chart-palette-3: ($ocean-blue, $sky-blue, #871A6B, $spring-green, #F66068);
 
 // Highlight color for all pallets
 $dp-chart-highlight: #F39431;

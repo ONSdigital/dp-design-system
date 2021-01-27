@@ -8,9 +8,12 @@ build:
 	npm run build
 
 audit:
-	  npm audit --audit-level=high
+	  npm run audit --audit-level=high
 
 test:
-	npm test
+	npm run test
 
-.PHONY: all debug build debug audit
+lint:
+	npm run lint
+
+.PHONY: all debug build debug audit lint
