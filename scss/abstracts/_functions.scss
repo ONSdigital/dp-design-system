@@ -1,16 +1,14 @@
-@import "colors";
-
 // ------------------------------------------------------ COLORS ------------------------------------------------------
 
 /// lighten a color
 @function tint($color, $percentage) {
-  @if index($tints, $percentage) {
-    @if map-has-key($tintable-colors, $color) {
+  @if index($tintable-colors, $color) {
+    @if index($tints, $percentage) {
       @return mix(white, $color, $percentage);
     }
-    @error "Unknown `#{$color}` in $tintable-colors. Please use an approved color";
+    @error "Invalid `#{$percentage}`. Please use an approved tint percentage such as: `#{$tints}`";
     @return null;
   }
-  @error "Unknown `#{$percentage}` in $tints. Please use an approved tint percentage";
+  @error "Invalid `#{$color}` Please use an approved tintable color such as: `#{$tintable-colors}`";
   @return null;
 }

@@ -35,26 +35,25 @@ $white: #FFF;
 $tints: (70, 40, 10);
 // colours to be used (currently all listed in colour palettes except greys)
 $tintable-colors: (
-        "spring-green": $spring-green,
-        "aqua-teal": $aqua-teal,
-        "sky-blue": $sky-blue,
-        "ocean-blue": $ocean-blue,
-        "night-blue": $night-blue,
-        "indigo-blue": $indigo-blue,
-        "plum-purple": $plum-purple,
-        "flamingo-pink": $flamingo-pink,
-        "ruby-red": $ruby-red,
-        "jaffa-orange": $jaffa-orange,
-        "sun-yellow": $sun-yellow,
-        "neon-yellow": $neon-yellow,
-        "leaf-green": $leaf-green
-);
-// Assignment
+        $spring-green,
+        $aqua-teal,
+        $sky-blue,
+        $ocean-blue,
+        $night-blue,
+        $indigo-blue,
+        $plum-purple,
+        $flamingo-pink,
+        $ruby-red,
+        $jaffa-orange,
+        $sun-yellow,
+        $neon-yellow,
+        $leaf-green);
 
+// Assignment
 $color-text: $black;
 $color-text-inverse: $white;
 
-$color-errors: $ruby-red;
+$color-error: $ruby-red;
 
 // ----------------------------------------------------- DP COLORS -----------------------------------------------------
 
