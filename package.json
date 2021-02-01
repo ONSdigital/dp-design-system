@@ -9,7 +9,8 @@
     "watch-css": "sass --style=compressed --watch scss:dist/css",
     "server": "http-server -p ${PORT:-9001} --cors",
     "dev": "npm run watch-css & npm run server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"No linting specified\""
   },
   "repository": {
     "type": "git",

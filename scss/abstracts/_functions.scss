@@ -1,0 +1,14 @@
+// ------------------------------------------------------ COLORS ------------------------------------------------------
+
+/// lighten a color
+@function tint($color, $percentage) {
+  @if index($tintable-colors, $color) {
+    @if index($tints, $percentage) {
+      @return mix(white, $color, $percentage);
+    }
+    @error "Invalid `#{$percentage}`. Please use an approved tint percentage such as: `#{$tints}`";
+    @return null;
+  }
+  @error "Invalid `#{$color}` Please use an approved tintable color such as: `#{$tintable-colors}`";
+  @return null;
+}
