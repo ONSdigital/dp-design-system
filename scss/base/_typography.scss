@@ -1,0 +1,16 @@
+$base: 18px;
+$base-font-size: 1rem;
+$base-line-height: 1.5;
+$base-font-family: 'Open Sans', Helvetica, Arial, sans-serif !default;
+
+html {
+  font-size: $base;
+  line-height: 1.6;
+}
+
+body {
+  color: $text-color;
+  font-family: $base-font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
