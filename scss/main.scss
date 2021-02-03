@@ -3,6 +3,8 @@
 // Configuration and helpers
 @import
 'abstracts/variables/colors',
+'abstracts/variables/font',
+'abstracts/variables/breakpoints',
 'abstracts/functions/functions',
 'abstracts/mixins/breakpoints';
 
@@ -10,5 +12,5 @@
 @import
 'base/fonts',
 'base/typography',
-'base/helpers',
-'base/general';
+'base/utilities/hide',
+'base/generic';

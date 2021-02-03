@@ -1,0 +1,43 @@
+// ----------------------------------------------------- Hide Content -----------------------------------------------------
+
+// Hide from both screenreaders and browsers
+.hidden {
+  display: none !important;
+  height: 0;
+  margin: 0;
+  visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders
+.visuallyhidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+
+  // Allow the element to be focusable when navigated to via the keyboard
+  &.focusable:active,
+  &.focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+  }
+}
+
+.hide {
+  @each $breakpoint in $approved-breakpoint-names {
+    &--for-#{$breakpoint} {
+      @include for-size($breakpoint) {
+        display: none !important;
+      }
+    }
+  }
+}
