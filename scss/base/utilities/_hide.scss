@@ -1,7 +1,7 @@
 // ----------------------------------------------------- Hide Content -----------------------------------------------------
 
 // Hide from both screenreaders and browsers
-.hidden {
+.dp-hidden {
   display: none !important;
   height: 0;
   margin: 0;
@@ -9,7 +9,7 @@
 }
 
 // Hide only visually, but have it available for screenreaders
-.visuallyhidden {
+.dp-visuallyhidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -32,7 +32,7 @@
   }
 }
 
-.hide {
+.dp-hide {
   @each $breakpoint in $approved-breakpoint-names {
     &--for-#{$breakpoint} {
       @include for-size($breakpoint) {

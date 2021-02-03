@@ -1,11 +1,20 @@
 html {
   font-size: $base;
-  line-height: 1.6;
+  line-height: $line-height-regular;
 }
 
 body {
   color: $text-color;
-  font-family: $base-font-family;
+  font-family: $font-family-regular;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.dp-font-size {
+  @each $name, $value in $font-sizes {
+    &--#{$name} {
+      font-size: #{$value}rem;
+    }
+  }
+}
+
