@@ -1,5 +1,5 @@
 html {
-  font-size: $base;
+  font-size: $base; /* set 1rem to value of $base */
   line-height: $line-height-regular;
 }
 
@@ -10,11 +10,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.dp-font-size {
-  @each $name, $value in $font-sizes {
-    &--#{$name} {
-      font-size: #{$value}rem;
-    }
-  }
+h1 {
+  font-size: $font-size-5xl;
+}
+
+h2 {
+  font-size: $font-size-xl;
+}
+
+h3 {
+  font-size: $font-size-l;
+}
+
+h4, h5, h6 {
+  font-size: $font-size-m;
 }
 
