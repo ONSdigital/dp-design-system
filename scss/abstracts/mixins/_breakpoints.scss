@@ -1,8 +1,4 @@
-/* develop for mobile first, everything is 'for-size(mobile-up)' by default */
-/* Usage:
-.something {
-  @include for-size(tablet-portrait-up) { color: $white; }
-*/
+/* Develop for mobile first, everything is 'for-size(mobile-up)' by default */
 
 @mixin for-size($size) {
   // mobile-up does nothing, but used for easier utility looping
