@@ -33,11 +33,12 @@
 }
 
 .dp-hide {
-  @each $breakpoint in $approved-breakpoint-names {
-    &--for-#{$breakpoint} {
-      @include for-size($breakpoint) {
+  @each $breakpointName, $breakpointValue in $breakpoints {
+    &--for-#{$breakpointName} {
+      @include mediaQuery($breakpointName) {
         display: none !important;
       }
     }
   }
 }
+

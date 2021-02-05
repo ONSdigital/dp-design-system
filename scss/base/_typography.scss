@@ -10,19 +10,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@each $name, $props in $type-matrix {
+  .#{$name} {
+    @include font-size($props, $base);
+  }
+}
+
 h1 {
-  font-size: $font-size-5xl;
+  @extend .u-fs-xl;
 }
 
 h2 {
-  font-size: $font-size-xl;
+  @extend .u-fs-l;
 }
 
 h3 {
-  font-size: $font-size-l;
+  @extend .u-fs-m;
 }
 
-h4, h5, h6 {
-  font-size: $font-size-m;
+h4 {
+  @extend .u-fs-r--b;
 }
-
