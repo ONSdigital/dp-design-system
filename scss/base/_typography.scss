@@ -1,0 +1,34 @@
+html {
+  font-size: $base; /* set 1rem to value of $base */
+  line-height: $line-height-regular;
+}
+
+body {
+  color: $text-color;
+  font-family: $font-family-regular;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@each $name, $props in $type-matrix {
+  .#{$name} {
+    @include font-size($props, $base);
+  }
+}
+
+h1 {
+  $prop: map-get($type-matrix, "dp-fs-xl");
+  @include font-size($prop, $base);
+}
+
+h2 {
+  @include font-size(map-get($type-matrix, "dp-fs-l"), $base);
+}
+
+h3 {
+  @include font-size(map-get($type-matrix, "dp-fs-m"), $base)
+}
+
+h4 {
+  @include font-size(map-get($type-matrix, "dp-fs-r--b"), $base)
+}

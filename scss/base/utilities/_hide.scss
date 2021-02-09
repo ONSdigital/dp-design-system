@@ -1,0 +1,50 @@
+// ----------------------------------------------------- Hide Content -----------------------------------------------------
+
+// Hide from both screenreaders and browsers
+.dp-hidden {
+  display: none !important;
+  height: 0;
+  margin: 0;
+  visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders
+.dp-visuallyhidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+
+  // Allow the element to be focusable when navigated to via the keyboard
+  &.focusable:active,
+  &.focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+  }
+}
+
+// hide for given breakpoints
+.dp-hide {
+  @each $name, $value in $breakpoints {
+    &--for-#{$name} {
+      @include mediaQuery($value) {
+        display: none !important;
+      }
+    }
+    &--for-#{$name}-up {
+      @include mediaQuery($value, "xxl") {
+        display: none !important;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,47 @@
+// Get a media query between two values, if only on included then media query will match that and above
+@mixin mediaQuery($from: none, $to: none, $from-operator: none, $to-operator: none) {
+  @if $from != none and type-of($from) == 'string' {
+    $from: get-bp-width($from);
+  }
+
+  @if $to != none and type-of($to) == 'string' {
+    $to: get-bp-width($to);
+  }
+
+  @if ($from == none or $from <= nth(nth($breakpoints, 1), 2)) and $to == none {
+    @content;
+  } @else if $from == none or $from <= nth(nth($breakpoints, 1), 2) {
+    @if $to-operator != none and $to-operator == '<' {
+      $to: $to - 1;
+    }
+    @media (max-width: $to) {
+      @content;
+    }
+  } @else if $to == none {
+    @if $from-operator != none and $from-operator == '<' {
+      $from: $from + 1;
+    }
+    @media (min-width: $from) {
+      @content;
+    }
+  } @else {
+    @if $from-operator != none and $from-operator == '<' {
+      $from: $from + 1;
+    }
+    @if $to-operator != none and $to-operator == '<' {
+      $to: $to - 1;
+    }
+    @media (min-width: $from) and (max-width: $to) {
+      @content;
+    }
+  }
+}
+
+// given a breakpoint name get the corresponding value
+@function get-bp-width($name, $breakpoints: $breakpoints) {
+  @if map-has-key($breakpoints, $name) {
+    @return map-get($breakpoints, $name);
+  } @else {
+    @error 'Breakpoint #{$name} wasn\'t found in $breakpoints: #{$breakpoints}';
+  }
+}

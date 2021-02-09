@@ -2,12 +2,17 @@
 
 // Configuration and helpers
 @import
-'abstracts/colors',
-'abstracts/functions',
-'abstracts/mixins';
+'abstracts/variables/colors',
+'abstracts/variables/typography',
+'abstracts/variables/breakpoints',
+'abstracts/functions/helpers',
+'abstracts/functions/colors',
+'abstracts/functions/conversions',
+'abstracts/mixins/typography';
 
 // Base
 @import
 'base/fonts',
 'base/typography',
-'base/helpers';
+'base/utilities/hide',
+'base/generic';
