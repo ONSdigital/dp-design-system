@@ -1,3 +1,4 @@
+// Get a media query between two values, if only on included then media query will match that and above
 @mixin mediaQuery($from: none, $to: none, $from-operator: none, $to-operator: none) {
   @if $from != none and type-of($from) == 'string' {
     $from: get-bp-width($from);
@@ -36,6 +37,7 @@
   }
 }
 
+// given a breakpoint name get the corresponding value
 @function get-bp-width($name, $breakpoints: $breakpoints) {
   @if map-has-key($breakpoints, $name) {
     @return map-get($breakpoints, $name);

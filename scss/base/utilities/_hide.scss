@@ -32,10 +32,16 @@
   }
 }
 
+// hide for given breakpoints
 .dp-hide {
-  @each $breakpointName, $breakpointValue in $breakpoints {
-    &--for-#{$breakpointName} {
-      @include mediaQuery($breakpointName) {
+  @each $name, $value in $breakpoints {
+    &--for-#{$name} {
+      @include mediaQuery($value) {
+        display: none !important;
+      }
+    }
+    &--for-#{$name}-up {
+      @include mediaQuery($value, "xxl") {
         display: none !important;
       }
     }

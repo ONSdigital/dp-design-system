@@ -17,17 +17,18 @@ body {
 }
 
 h1 {
-  @extend .u-fs-xl;
+  $prop: map-get($type-matrix, "dp-fs-xl");
+  @include font-size($prop, $base);
 }
 
 h2 {
-  @extend .u-fs-l;
+  @include font-size(map-get($type-matrix, "dp-fs-l"), $base);
 }
 
 h3 {
-  @extend .u-fs-m;
+  @include font-size(map-get($type-matrix, "dp-fs-m"), $base)
 }
 
 h4 {
-  @extend .u-fs-r--b;
+  @include font-size(map-get($type-matrix, "dp-fs-r--b"), $base)
 }
