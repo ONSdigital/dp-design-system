@@ -4,11 +4,11 @@
   "description": "Digital Publishing (ONS) Design System",
   "main": "",
   "scripts": {
-    "build-css": "sass --style=compressed src/scss:dist/css",
-    "build": "npm run build-css",
-    "watch-css": "sass --style=compressed --watch src/scss:dist/css",
+    "build:css": "sass --style=compressed src/scss:dist/css",
+    "build": "run-s build:*",
+    "watch:css": "sass --style=compressed --watch src/scss:dist/css",
     "server": "http-server -p ${PORT:-9001} --cors",
-    "dev": "npm run watch-css & npm run server",
+    "dev": "run-p watch:* server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "echo \"No linting specified\""
   },
@@ -28,6 +28,7 @@
     "sass": "^1.32.4"
   },
   "devDependencies": {
+    "npm-run-all": "^4.1.5",
     "sass-lint": "^1.13.1"
   }
 }
