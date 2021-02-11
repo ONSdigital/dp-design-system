@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+    @apply text-3xl mb-4 font-medium
+}
+
+p {
+    @apply mb-4
+}
+
+a {
+    @apply text-blue-600
+}
+
+a:hover {
+    @apply underline
+}

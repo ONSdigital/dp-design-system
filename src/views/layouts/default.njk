@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ title or metadata.title }} | Design System | ONS — Digital Publishing </title>
+        <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="/assets/css/tailwind.css">
+        <meta name="robots" content="noindex, nofollow">
+    </head>
+    <body>
+        {% include "header.njk" %}
+        <div class="max-w-7xl mx-auto">
+            <div class="grid gap-4 grid-cols-12">
+                <div class="col-span-3 p-4 mt-2">
+                    {% include "nav.njk" %}
+                </div>
+                <div class="col-span-9 p-4">
+                    <main id="main">
+                        {{ content | safe }}
+                    </main>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
