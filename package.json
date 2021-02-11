@@ -4,9 +4,9 @@
   "description": "Digital Publishing (ONS) Design System",
   "main": "",
   "scripts": {
-    "build-css": "sass --style=compressed scss:dist/css",
+    "build-css": "sass --style=compressed src/scss:dist/css",
     "build": "npm run build-css",
-    "watch-css": "sass --style=compressed --watch scss:dist/css",
+    "watch-css": "sass --style=compressed --watch src/scss:dist/css",
     "server": "http-server -p ${PORT:-9001} --cors",
     "dev": "npm run watch-css & npm run server",
     "test": "echo \"Error: no test specified\" && exit 1",
