@@ -13,6 +13,6 @@
 
 # Project
 .sass-cache/
-dist/css/
+dist/
 node_modules/
 npm-debug.log.*

@@ -7,4 +7,4 @@ pushd dp-design-system
 popd
 
 mkdir build/$SHORT_REF
-cp  dp-design-system/dist/css/main.css build/$SHORT_REF/main.css
+cp  dp-design-system/dist/assets/css/main.css build/$SHORT_REF/main.css
