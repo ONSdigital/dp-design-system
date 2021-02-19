@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 18px;
+  @apply text-grey-1;
+}
+
+h1 {
+  @apply text-5xl mb-4 font-bold;
+}
+
+h2 {
+  @apply text-2xl mb-2 font-bold;
+}
+
+p {
+  @apply mb-4;
+  max-width: 50em;
+}
+
+a {
+  @apply text-ocean-blue underline;
+}
+a:hover {
+  @apply text-night-blue;
+}
+
+code {
+  @apply font-mono text-sm;
+}

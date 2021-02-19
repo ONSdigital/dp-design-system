@@ -1,0 +1,54 @@
+---
+title: Colours
+description: This colour palette should be used to help services look and feel consistent
+layout: default
+eleventyNavigation:
+  key: Colours
+  section: styles
+---
+
+{% macro swatch(key, colour) %}
+    {% if colour == "#FFFFFF" %}
+        {% set border = "border border-grey-4" %}
+    {% endif %}
+    <div class="flex items-center mb-4">
+        <div class="text-white w-16 h-16 rounded-full mr-4 {{border}}" style="background-color:{{colour}}"></div>
+        <div>
+            <div class="font-mono font-bold">${{key}}</div>
+            <div class="font-mono text-sm text-grey-2">{{colour}}</div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro section(name, description, palette) %}
+    <section class="mb-2">
+        <h2 class="mb-4">{{name}}</h2>
+        <p>{{description}}</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 py-4">
+            {% for key, colour in palette %}
+                {{swatch(key, colour)}}
+            {% endfor %}
+        </div>
+    </section>
+{% endmacro %}
+
+<header class="mb-8">
+    <div class="text-grey-2 text-lg mb-1">Styles</div>
+    <h1 class="mb-6">{{title}}</h1>
+    <p>This colour palette should be used to help services look and feel consistent.</p>
+    <p>To use the palette, <a href="https://sass-lang.com/guide#topic-2" rel="external">Sass variables</a> are provided and should be used wherever possible. Using the raw hexadecimal (hex) values (eg. <code>#206095</code>) should be avoided to ensure a <a href="https://en.wikipedia.org/wiki/Single_source_of_truth" rel="external">single source of truth</a>—making updating and maintaining colours easier.</p>
+</header>
+
+{{section("Main", "This palette is for general use.", colours.general)}}
+{{section("Supporting", "Supporting colours are provided to supplement the main colours.", colours.supporting)}}
+{{section("Census", "This palette is to be used only in services associated with the Census.", colours.census)}}
+{{section("Greyscale", "A greyscale palette from black to white.", colours.neutral)}}
+
+<section class="mb-8">
+    <h2 class="mb-4">Tints</h2>
+    <p>Three tints (10%, 40% and 70%) are available for each colour in the main, supporting and census palettes. The tint works by mixing the colour with white to produce a lighter shade.</p>
+    <p>To apply a tint, a Sass function is available, for example:</p>
+    <div class="bg-grey-5 p-4 text-sm">
+        <code>tint($night-blue, 10);</code>
+    </div>
+</section>

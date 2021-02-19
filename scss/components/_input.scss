@@ -1,0 +1,25 @@
+.dp-input {
+  display: block;
+  position: relative;
+  padding: 0.5rem;
+  width: 100%;
+  z-index: 3;
+
+  border: 1px solid $black;
+
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-appearance: none;
+
+  &:focus {
+    outline: 1px solid $black;
+    outline-offset: -2px;
+    box-shadow: 0 0 0 3px $color-focus;
+  }
+
+  &:disabled {
+    border-color: $grey2;
+    cursor: not-allowed;
+  }
+}
