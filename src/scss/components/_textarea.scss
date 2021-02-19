@@ -1,15 +1,10 @@
 .dp-textarea {
-    display: block;
-    position: relative;
-    padding: .5rem;
-    width: 100%;
-    border: 2px solid $black;
-    z-index: 3;
-    color: inherit;
-    font-family: inherit;
+    @extend .dp-input;
 
-    &:focus {
-        outline: 2px solid $jaffa-orange;
-        border: none;
+    line-height: normal;
+    resize: vertical;
+
+    &--error:not(:focus) {
+        @extend .dp-input--error;
     }
 }
