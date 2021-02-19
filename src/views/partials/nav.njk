@@ -17,12 +17,12 @@
         {% for section in sections %}
             <li>
                 {% if section.title %}
-                    <h2 class="font-normal text-gray-400 mb-2">{{section.title}}</h2>
+                    <h2 class="font-normal text-base text-grey-2 mb-2">{{section.title}}</h2>
                 {% endif %}
                 <ul class="mb-4">
                     {% for page in section.pages %}
                         <li class="mb-1">
-                            <a href="{{page.url | url }}">{{page.title}}</a>
+                            <a href="{{page.url | url }}" class="no-underline hover:underline">{{page.title}}</a>
                         </li>
                     {% endfor %}
                 </ul>
