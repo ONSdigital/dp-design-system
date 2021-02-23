@@ -8,7 +8,7 @@
         ]
     }, {
         title: "Styles",
-        pages: collections.all | eleventyNavigation | selectattr("section", "styles")
+        pages: collections.styles | eleventyNavigation
     }
 ] %}
 
@@ -20,13 +20,17 @@
                     <h2 class="font-normal text-base text-grey-2 mb-2">{{section.title}}</h2>
                 {% endif %}
                 <ul class="mb-4">
-                    {% for page in section.pages %}
-                        <li class="mb-1">
-                            <a href="{{page.url | url }}" class="no-underline hover:underline">{{page.title}}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
-</nav>
+                    {% for post in section.pages %}
+                        {% if page.url == post.url %}
+                            <li class="mb-2 pl-2 -ml-3 font-bold border-l-4 border-ocean-blue" aria-current="page">
+                            {% else %}
+                                <li class="mb-2">
+                                {% endif %}
+                                <a href="{{post.url | url }}" class="no-underline hover:underline">{{post.title}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>

@@ -4,7 +4,6 @@ description: This colour palette should be used to help services look and feel c
 layout: default
 eleventyNavigation:
   key: Colours
-  section: styles
 ---
 
 {% macro swatch(key, colour) %}
@@ -15,7 +14,7 @@ eleventyNavigation:
         <div class="text-white w-16 h-16 rounded-full mr-4 {{border}}" style="background-color:{{colour}}"></div>
         <div>
             <div class="font-mono font-bold">${{key}}</div>
-            <div class="font-mono text-sm text-grey-2">{{colour}}</div>
+            <code>{{colour}}</code>
         </div>
     </div>
 {% endmacro %}
@@ -32,9 +31,7 @@ eleventyNavigation:
     </section>
 {% endmacro %}
 
-<header class="mb-8">
-    <div class="text-grey-2 text-lg mb-1">Styles</div>
-    <h1 class="mb-6">{{title}}</h1>
+<div class="mb-8">
     <p>This colour palette should be used to help services look and feel consistent.</p>
     <p>To use the palette, <a href="https://sass-lang.com/guide#topic-2" rel="external">Sass variables</a> are provided and should be used wherever possible. Using the raw hexadecimal (hex) values (eg. <code>#206095</code>) should be avoided to ensure a <a href="https://en.wikipedia.org/wiki/Single_source_of_truth" rel="external">single source of truth</a>—making updating and maintaining colours easier.</p>
 </header>

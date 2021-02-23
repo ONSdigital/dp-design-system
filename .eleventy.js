@@ -8,7 +8,15 @@ module.exports = function (config) {
     open: false,
   });
 
-  config.addPassthroughCopy({ 'src/assets/images': './assets/images' });
+  config.addPassthroughCopy({ 'src/img': './assets/images' });
+
+  config.addCollection('styles', (collection) => {
+    const styles = collection
+      .getAllSorted()
+      .filter((item) => item.url && item.inputPath.includes('styles'));
+
+    return styles;
+  });
 
   return {
     dir: {
