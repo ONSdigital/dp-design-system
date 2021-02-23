@@ -1,4 +1,3 @@
-// Base styling that is extended by all input elements
 .dp-input {
   display: block;
   position: relative;
@@ -28,5 +27,14 @@
     border: 1px solid $ruby-red;
     outline: 1px solid $ruby-red;
     outline-offset: -2px;
+  }
+
+  &--textarea {
+    line-height: normal;
+    resize: vertical;
+  }
+
+  &--with-description {
+    margin-bottom: 0.55rem;
   }
 }
