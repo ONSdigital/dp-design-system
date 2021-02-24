@@ -24,21 +24,17 @@
 
     &--xl {
         @include font-size(map-get($type-matrix, "dp-fs-xl"), $base);
-        margin-bottom: 1rem;
     }
 
     &--l {
         @include font-size(map-get($type-matrix, "dp-fs-l"), $base);
-        margin-bottom: .8rem;
     }
 
     &--m {
         @include font-size(map-get($type-matrix, "dp-fs-m"), $base);
-        margin-bottom: .4rem;
     }
 
     &--s {
         @include font-size(map-get($type-matrix, "dp-fs-s"), $base);
-        margin-bottom: .2rem;
     }
 }

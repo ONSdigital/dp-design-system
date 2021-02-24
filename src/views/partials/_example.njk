@@ -1,0 +1,40 @@
+{% macro example(params) %}
+
+{% set exampleRoot = "src/" + params.group + "/" + params.item + "/" + params.example + "/" %}
+{% set exampleTitle = title %}
+{% if params.open %}
+  {% set exampleId = exampleId + '-open' %}
+{% endif %}
+
+{% set display = params.displayExample | default(true) %}
+{% set exampleURL = "/" + params.group + "/" + params.item + "/" + params.example + "/index.html" %}
+{% set examplePath = exampleRoot + "index.njk" %}
+
+<div class="my-8">
+    {% if display %}
+    <div class="relative border-2 border-gray-400 {{ "mb-0" if params.html }}">
+    <div class="border-b-2 border-gray-400 p-2">
+      <a href="{{ exampleURL }}" class="app-example__new-window" target="_blank">
+        Open this
+        {# Don't use full title visually as the context is shown based on location of this link #}
+        <span class="dp-visuallyhidden">{{ exampleTitle | lower }}</span>
+        example in a new tab
+      </a>
+    </div>
+    <iframe title="{{ exampleTitle + " example" }}" data-module="app-example-frame" class="block border-0 app-example__frame app-example__frame--{{params.size}}" src="{{ exampleURL }}" frameBorder="0" loading="lazy"></iframe>
+    {% endif %}
+    <span id="options-{{ exampleId }}"></span>
+    <ul class="app-example-tabs" role="tablist">
+        <li class="app-example-tabs__item js-tabs__item{{ " js-tabs__item--open" if (params.open) }}" role="presentation"><a href="#{{ exampleId }}-html" role="tab" aria-controls="{{ params.item }}-html" data-track="tab-html">HTML</a></li>
+    </ul>
+    <div class="app-example__panels">
+        <div id="{{ params.item }}-html" class="app-example__panel" role="tab">        
+            <pre class="app-example__pre">
+                <code class="app-example__code language-markup">
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+{% endmacro %}

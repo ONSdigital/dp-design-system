@@ -1,0 +1,57 @@
+.app-example {
+    &__frame {
+        width: 100%;
+        &--xs {
+            height: 8rem;
+        }
+
+        &--s {
+            height: 12rem;
+        }
+
+        &--m {
+            height: 20rem;
+        }
+
+        &--l {
+            height: 30rem;
+        }
+    }
+
+    &__panel {
+        // display: none;
+        padding: 1rem;
+        border-top: 1px solid $grey2;
+    }
+
+    &__pre {
+        margin: 0;
+        font-size: 0.8rem !important;
+        white-space: normal;
+    }
+
+    &__code {
+        font-family: monospace !important;
+        white-space: pre;
+    }
+}
+
+.app-example-tabs {
+    margin: -1px auto;
+    padding: 0.5rem;
+    overflow: visible;
+    list-style-type: none;
+    border-top: 1px solid $black;
+    &__container {
+        padding: 2rem;
+        border: 1px solid $grey2;
+        background-color: $white;
+    }
+
+    &__item {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        color: $link-color;
+        cursor: pointer;
+    }
+}
