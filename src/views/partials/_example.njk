@@ -27,10 +27,10 @@
         <iframe title="{{ exampleTitle + " example" }}" data-module="app-example-frame" class="app-example__frame app-example__frame app-example__frame--{{params.size}}" src="{{ exampleURL }}" frameBorder="0" loading="lazy"></iframe>
         <span id="options-{{ exampleId }}"></span>
         <ul class="app-example-tabs" role="tablist">
-            <li class="app-example-tabs__item js-tabs__item{{ " js-tabs__item--open" if (params.open) }}" role="presentation"><a href="#{{ exampleId }}-html" role="tab" aria-controls="{{ params.item }}-html" data-track="tab-html">HTML</a></li>
+            <li class="app-example-tabs__item" role="tab" aria-controls="{{ params.item }}-html" data-track="tab-html">HTML</li>
         </ul>
         <div class="app-example__panels">
-            <div id="{{ params.item }}-html" class="app-example__panel" role="tab">        
+            <div id="{{ params.item }}-html" class="app-example__panel" role="tabpanel" aria-labelledby="{{ params.item}}-html" tabindex="0" hidden>        
             {% highlight "html" %}
             {{html | safe }} 
             {% endhighlight %}

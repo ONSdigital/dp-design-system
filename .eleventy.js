@@ -12,6 +12,7 @@ module.exports = function (config) {
   });
 
   config.addPassthroughCopy({ 'src/assets/images': './assets/images' });
+  config.addPassthroughCopy({ 'src/js': '/js'})
   config.addNunjucksShortcode("generateHTML", generateHTML)
 
   return {
