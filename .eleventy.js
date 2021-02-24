@@ -1,7 +1,10 @@
 const eleventyNavigationPlugin = require('@11ty/eleventy-navigation');
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const {generateHTML} = require('./lib/generateHTML')
 
 module.exports = function (config) {
   config.addPlugin(eleventyNavigationPlugin);
+  config.addPlugin(syntaxHighlight)
 
   config.setBrowserSyncConfig({
     files: ['dist/**/*'],
@@ -9,6 +12,7 @@ module.exports = function (config) {
   });
 
   config.addPassthroughCopy({ 'src/assets/images': './assets/images' });
+  config.addNunjucksShortcode("generateHTML", generateHTML)
 
   return {
     dir: {

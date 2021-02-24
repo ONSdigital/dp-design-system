@@ -1,5 +1,18 @@
 .app-example {
+    &__container {
+        position: relative;
+        border: 1px solid $grey2;
+    }
+
+    &__toolbar {
+        border-bottom: 1px solid $grey2;
+        padding: 0.5rem 1rem;
+    }
+
     &__frame {
+        display: block;
+        border: none;
+        padding: 1rem;
         width: 100%;
         &--xs {
             height: 8rem;
@@ -21,24 +34,22 @@
     &__panel {
         // display: none;
         padding: 1rem;
+        font-size: 0.8rem;
         border-top: 1px solid $grey2;
-    }
 
-    &__pre {
-        margin: 0;
-        font-size: 0.8rem !important;
-        white-space: normal;
-    }
-
-    &__code {
-        font-family: monospace !important;
-        white-space: pre;
+        pre {
+            white-space: -moz-pre-wrap;
+            white-space: -o-pre-wrap;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border-radius: 0 !important;
+        }
     }
 }
 
 .app-example-tabs {
     margin: -1px auto;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     overflow: visible;
     list-style-type: none;
     border-top: 1px solid $black;
