@@ -32,6 +32,31 @@ eleventyNavigation:
     </section>
 {% endmacro %}
 
+{% macro tint(key, colour) %}
+{% if colour == "#FFFFFF" %}
+    {% set border = "border border-grey-4" %}
+{% endif %}
+<div class="flex items-center mb-4">
+    <div class="text-white w-16 h-16 rounded-full mr-4 {{border}}" style="background-color:{{colour}}"></div>
+    <div>
+        <div class="font-mono font-bold">${{key}}</div>
+        <div class="font-mono text-sm text-grey-2" style="text-transform: uppercase;">{{colour}}</div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro tints(name, description, palette) %}
+<section class="mb-2">
+    <h2 class="mb-4">{{name}}</h2>
+    <p>{{description}}</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 py-4">
+        {% for key, colour in palette %}
+            {{tint(key, colour)}}
+        {% endfor %}
+    </div>
+</section>
+{% endmacro %}
+
 <header class="mb-8">
     <div class="text-grey-2 text-lg mb-1">Styles</div>
     <h1 class="mb-6">{{title}}</h1>
@@ -48,7 +73,12 @@ eleventyNavigation:
     <h2 class="mb-4">Tints</h2>
     <p>Three tints (10%, 40% and 70%) are available for each colour in the main, supporting and census palettes. The tint works by mixing the colour with white to produce a lighter shade.</p>
     <p>To apply a tint, a Sass function is available, for example:</p>
-    <div class="bg-grey-5 p-4 text-sm">
+    <div class="bg-grey-5 p-4 text-sm mb-2">
         <code>tint($night-blue, 10);</code>
     </div>
+    
+    {{tints("General palette tints", "", colours.tintsgeneral)}}
+    {{tints("Supporting palette tints", "", colours.tintssupporting)}}
+    {{tints("Census palette tints", "", colours.tintscensus)}}
+    
 </section>
