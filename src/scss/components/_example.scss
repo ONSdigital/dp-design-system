@@ -1,4 +1,4 @@
-.app-example {
+.doc-example {
     &__container {
         position: relative;
         border: 1px solid $grey2;
@@ -9,10 +9,13 @@
         padding: 0.5rem 1rem;
     }
 
+    &__main {
+        padding: 1rem;
+    }
+
     &__frame {
         display: block;
         border: none;
-        padding: 1rem;
         width: 100%;
         &--xs {
             height: 8rem;
@@ -46,8 +49,8 @@
     }
 }
 
-.app-example-tabs {
-    margin: -1px auto;
+.doc-example-tabs {
+    margin: 0 auto;
     overflow: visible;
     list-style-type: none;
     border-top: 1px solid $black;
@@ -63,7 +66,6 @@
         padding: 1rem;
         color: $link-color;
         cursor: pointer;
-        border-bottom: 1px solid $grey2;
 
         &--selected {
             background: $grey5;

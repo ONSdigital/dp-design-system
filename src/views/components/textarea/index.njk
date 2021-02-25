@@ -14,7 +14,7 @@ eleventyNavigation:
     <p>{{description}}</p>
 </header>
 
-{% from "_example.njk" import example %}
+{% from "example.njk" import example %}
 {{ example({group: "components", item: "textarea", example: "default", html: true, open: false, size: "m"}) }}
 
 <section class="my-8">

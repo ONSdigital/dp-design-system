@@ -1,4 +1,6 @@
 /*
+ *   This is a modified version of the tabs implementation from
+ *   https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-2/tabs.html
  *   This content is licensed according to the W3C Software License at
  *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
  */
@@ -150,7 +152,7 @@
 
     // Remove tabindex attribute
     tab.removeAttribute('tabindex')
-    tab.classList.add('app-example-tabs__item--selected')
+    tab.classList.add('doc-example-tabs__item--selected')
 
     // Set the tab as selected
     tab.setAttribute('aria-selected', 'true')
@@ -169,7 +171,7 @@
 
   function deactivateTab(tab) {
     tab.setAttribute('tabindex', '-1')
-    tab.classList.remove('app-example-tabs__item--selected')
+    tab.classList.remove('doc-example-tabs__item--selected')
     tab.setAttribute('aria-selected', 'false')
     for (p = 0; p < panels.length; p++) {
       panels[p].setAttribute('hidden', 'hidden')

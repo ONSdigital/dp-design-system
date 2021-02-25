@@ -1,0 +1,41 @@
+{% macro example(params) %}
+
+{% set exampleRoot = "src/views/" + params.group + "/" + params.item + "/" + params.example + "/" %}
+{% if params.open %}
+  {% set exampleId = exampleId + '-open' %}
+{% endif %}
+
+{% set display = params.displayExample | default(true) %}
+{% set exampleURL = "/" + params.group + "/" + params.item + "/" + params.example + "/index.html" %}
+{% set examplePath = exampleRoot + "index.njk" %}
+{% set html %}
+{% generateHTML examplePath %}
+{% endset %}
+
+<div class="my-8">
+    {% if display %}
+    <div class="doc-example__container {{ "mb-0" if params.html }}">
+        <div class="doc-example__toolbar">
+            <a href="{{ exampleURL }}" class="doc-example__new-window" target="_blank">
+                Open this
+                <span class="dp-visuallyhidden">{{ exampleTitle | lower }}</span>
+                example in a new tab
+            </a>
+        </div>
+        <iframe title="{{ params.item + " example" }}" data-module="doc-example-frame" class="doc-example__frame doc-example__frame doc-example__frame--{{params.size}}" src="{{ exampleURL }}" frameBorder="0" loading="lazy"></iframe>
+        <span id="options-{{ exampleId }}"></span>
+        <ul class="doc-example-tabs" role="tablist">
+            <li class="doc-example-tabs__item" role="tab" aria-controls="{{ params.item }}-html" data-track="tab-html">HTML</li>
+        </ul>
+        <div class="doc-example__panels">
+            <div id="{{ params.item }}-html" class="doc-example__panel" role="tabpanel" aria-labelledby="{{ params.item}}-html" tabindex="0" hidden>        
+            {% highlight "html" %}
+            {{html | safe }} 
+            {% endhighlight %}
+            </div>
+        </div>
+    </div> 
+    {% endif %}
+</div>
+
+{% endmacro %}

@@ -30,7 +30,6 @@
   "dependencies": {
     "gray-matter": "^4.0.2",
     "http-server": "^0.12.3",
-    "js-beautify": "^1.13.5",
     "onchange": "^7.1.0",
     "sass": "^1.32.4"
   },
