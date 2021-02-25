@@ -1,5 +1,6 @@
 ---
 title: Typography
+tags: styles
 layout: default
 eleventyNavigation:
   key: Typography

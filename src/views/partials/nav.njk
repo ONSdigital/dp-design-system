@@ -8,7 +8,7 @@
         ]
     }, {
         title: "Styles",
-        pages: collections.all | eleventyNavigation | selectattr("section", "styles")
+        pages: collections.styles | eleventyNavigation | selectattr("section", "styles")
     }, { 
         title: "Components",
         pages: collections.components | eleventyNavigation | selectattr("section", "styles")
