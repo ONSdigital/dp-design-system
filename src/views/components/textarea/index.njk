@@ -8,12 +8,6 @@ eleventyNavigation:
   section: components
 ---
 
-<header class="mb-8">
-    <div class="text-grey-2 text-lg mb-1">Components</div>
-    <h1 class="mb-6">{{title}}</h1>
-    <p>{{description}}</p>
-</header>
-
 {% from "example.njk" import example %}
 {{ example({group: "components", item: "textarea", example: "default", html: true, open: false, size: "m"}) }}
 
