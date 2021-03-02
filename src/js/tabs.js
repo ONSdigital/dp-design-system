@@ -152,7 +152,7 @@
 
     // Remove tabindex attribute
     tab.removeAttribute('tabindex')
-    tab.classList.add('doc-example-tabs__item--selected')
+    tab.classList.add('bg-grey-4')
 
     // Set the tab as selected
     tab.setAttribute('aria-selected', 'true')
@@ -171,7 +171,7 @@
 
   function deactivateTab(tab) {
     tab.setAttribute('tabindex', '-1')
-    tab.classList.remove('doc-example-tabs__item--selected')
+    tab.classList.remove('bg-grey-4')
     tab.setAttribute('aria-selected', 'false')
     for (p = 0; p < panels.length; p++) {
       panels[p].setAttribute('hidden', 'hidden')
