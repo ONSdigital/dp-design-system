@@ -9,6 +9,7 @@
         <meta property="og:description" content="{{description}}">
         <title>{{ title }} | Design System | ONS — Digital Publishing </title>
         <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="/assets/css/main.css">
         <link rel="stylesheet" href="/assets/css/tailwind.css">
         <meta name="robots" content="noindex, nofollow">
     </head>
@@ -16,11 +17,13 @@
         {% include "header.njk" %}
         <div class="max-w-7xl mx-auto">
             <div class="grid gap-4 grid-cols-12">
-                <div class="col-span-3 p-4">
+                <div class="col-span-3 p-6">
                     {% include "nav.njk" %}
                 </div>
-                <div class="col-span-9 p-4">
+                <div class="col-span-9 p-6">
                     <main id="main">
+                        <div class="text-grey-2 text-lg mb-1">{{collectionName}}</div>
+                        <h1 class="mb-8">{{title}}</h1>
                         {{ content | safe }}
                     </main>
                 </div>
