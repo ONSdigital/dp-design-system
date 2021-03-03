@@ -8,7 +8,7 @@ build:
 	npm run build
 
 audit:
-	  npm run audit --audit-level=high
+	npm run audit
 
 test:
 	npm run test
