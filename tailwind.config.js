@@ -8,7 +8,7 @@ const {
 const colors = { ...general, ...supporting, ...census, ...neutral };
 
 module.exports = {
-  purge: ['./src/**/*.njk'],
+  purge: ['./src/**/*.njk', './src/js/*.js'],
   darkMode: false,
   theme: {
     colors: colors,

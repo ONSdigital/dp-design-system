@@ -2,7 +2,7 @@
 
 {% set exampleRoot = "src/views/" + params.group + "/" + params.item + "/" + params.example + "/" %}
 {% if params.open %}
-  {% set exampleId = exampleId + '-open' %}
+  {% set exampleId = exampleId + "-open" %}
 {% endif %}
 
 {% set display = params.displayExample | default(true) %}
@@ -15,13 +15,13 @@
 {% set componentLabel = params.item + "-" + params.example %}
 
 {% if params.size == "l" %}
-    {% set panelHeight = 96 %}
+    {% set panelHeight = "h-96" %}
 {% elif params.size == "s" %}
-    {% set panelHeight = 24 %}
+    {% set panelHeight = "h-24" %}
 {% elif params.size == "m" %}
-    {% set panelHeight = 80 %}
+    {% set panelHeight = "h-80" %}
 {% else %}
-    {% set panelHeight = 52 %}
+    {% set panelHeight = "h-52" %}
 {% endif %}
 
 <div class="my-8">
@@ -34,13 +34,13 @@
                 example in a new tab
             </a>
         </div>
-        <iframe title="{{ params.item + " example" }}" id="{{ componentLabel }}-iframe" class="block border-0 w-full h-{{panelHeight}}" src="{{ exampleURL }}" frameBorder="0" loading="lazy">
+        <iframe title="{{ params.item + " example" }}" id="{{ componentLabel }}-iframe" class="block border-0 w-full {{panelHeight}}" src="{{ exampleURL }}" frameBorder="0" loading="lazy">
         </iframe>
         <ul class="my-0 mx-auto overflow-visible list-none border-t border-grey-2" role="tablist">
-            <li class="text-ocean-blue inline-block p-4 cursor-pointer font-bold" role="tab" aria-controls="{{ componentLabel}}-html" data-track="tab-html" tabindex="0">HTML</li>
+            <li class="text-ocean-blue inline-block p-4 cursor-pointer font-bold" role="tab" aria-controls="{{ componentLabel }}-html" data-track="tab-html" tabindex="0">HTML</li>
         </ul>
         <div>
-            <div id="{{ componentLabel}}-html" class="p-4 text-sm border-t border-grey-2" role="tabpanel" aria-labelledby="{{ componentLabel}}-html" tabindex="0" hidden>        
+            <div id="{{ componentLabel }}-html" class="p-4 text-sm border-t border-grey-2" role="tabpanel" aria-labelledby="{{ componentLabel }}-html" tabindex="0" hidden>        
             {% highlight "html" %}
             {{html | safe }} 
             {% endhighlight %}
