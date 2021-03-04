@@ -12,6 +12,18 @@
 {% generateHTML examplePath %}
 {% endset %}
 
+{% set componentLabel = params.item + "-" + params.example %}
+
+{% if params.size == "l" %}
+    {% set panelHeight = 96 %}
+{% elif params.size == "s" %}
+    {% set panelHeight = 28 %}
+{% elif params.size == "m" %}
+    {% set panelHeight = 80 %}
+{% else %}
+    {% set panelHeight = 52 %}
+{% endif %}
+
 <div class="my-8">
     {% if display %}
     <div class="relative border border-grey-2 {{ "mb-0" if params.html }}">
@@ -22,13 +34,13 @@
                 example in a new tab
             </a>
         </div>
-        <iframe title="{{ params.item + " example" }}" data-module="doc-example-frame" class="block border-0 w-full h-80" src="{{ exampleURL }}" frameBorder="0" loading="lazy"></iframe>
-        <span id="options-{{ exampleId }}"></span>
+        <iframe title="{{ params.item + " example" }}" id="{{ componentLabel }}-iframe" class="block border-0 w-full h-{{panelHeight}}" src="{{ exampleURL }}" frameBorder="0" loading="lazy">
+        </iframe>
         <ul class="my-0 mx-auto overflow-visible list-none border-t border-grey-2" role="tablist">
-            <li class="text-ocean-blue inline-block p-4 cursor-pointer font-bold" role="tab" aria-controls="{{ params.item }}-html" data-track="tab-html">HTML</li>
+            <li class="text-ocean-blue inline-block p-4 cursor-pointer font-bold" role="tab" aria-controls="{{ componentLabel}}-html" data-track="tab-html" tabindex="0">HTML</li>
         </ul>
         <div>
-            <div id="{{ params.item }}-html" class="p-4 text-sm border-t border-grey-2" role="tabpanel" aria-labelledby="{{ params.item}}-html" tabindex="0" hidden>        
+            <div id="{{ componentLabel}}-html" class="p-4 text-sm border-t border-grey-2" role="tabpanel" aria-labelledby="{{ componentLabel}}-html" tabindex="0" hidden>        
             {% highlight "html" %}
             {{html | safe }} 
             {% endhighlight %}

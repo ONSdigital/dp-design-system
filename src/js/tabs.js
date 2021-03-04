@@ -183,6 +183,7 @@
     for (t = 0; t < tabs.length; t++) {
       tabs[t].setAttribute('tabindex', '-1')
       tabs[t].setAttribute('aria-selected', 'false')
+      tabs[t].classList.remove('bg-grey-4');
     }
 
     for (p = 0; p < panels.length; p++) {
