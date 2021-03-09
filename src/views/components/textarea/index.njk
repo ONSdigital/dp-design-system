@@ -7,8 +7,11 @@ eleventyNavigation:
   section: components
 ---
 
-{% from "example.njk" import example %}
-{{ example({group: "components", item: "textarea", example: "default", html: true, open: false, size: "m" }) }}
+<section>
+    <p>A textarea lets users enter multiple lines of text, such as when answering an open-ended question.</p>
+    {% from "example.njk" import example %}
+    {{ example({group: "components", item: "textarea", example: "default", html: true, open: false, size: "m" }) }}
+</section>
 
 <section class="my-8">
     <h2 class="mb-4">When to use this component</h2>

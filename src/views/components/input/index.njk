@@ -1,0 +1,31 @@
+---
+title: Input
+description: The input component lets users enter alphanumeric characters for answers that are no longer than one line, using the appropriate keyboard on touch devices.
+layout: default
+eleventyNavigation:
+  key: Input
+  section: components
+---
+
+<section>
+    <p>The input component lets users enter alphanumeric characters for answers that are no longer than one line, using the appropriate keyboard on touch devices.</p>
+    {% from "example.njk" import example %}
+    {{ example({group: "components", item: "input", example: "default", html: true, open: false }) }}
+</section>
+
+<section class="my-8">
+    <h2 class="mb-4">When to use this component</h2>
+    <p>Use the input component when you need to let users enter alphanumeric information that is no longer than one line, such as their telephone number or email address.</p>
+</section>
+
+<section class="mb-8">
+    <h2 class="mb-4">When not to use this component</h2>
+    <p>Do not use this component if you need to let users enter information that will span more than one line. In this case, you should use the <a href="/components/textarea">textarea</a> component.</p>
+</section>
+
+<section class="mb-8">
+    <h2 class="mb-4">How to use this component</h2>
+    <p>All input components must have a visible <a href="/components/label">label</a>.</p>
+    <p>Inputs should be appropriately sized to help the user understand what they should enter by making them the right size for the content they are intended for.</p>
+    <p>By default, the input component will fill the width of its container. A width constraint class can be used to make the input smaller.</p>
+</section>

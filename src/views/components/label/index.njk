@@ -7,8 +7,12 @@ eleventyNavigation:
   section: components
 ---
 
-{% from "example.njk" import example %}
-{{ example({group: "components", item: "label", example: "default", html: true, open: false, size: "s" }) }}
+<section>
+    <p>Labels are paired with inputs, textareas, radios, checkboxes, and selects to describe a form input.</p>
+    {% from "example.njk" import example %}
+    {{ example({group: "components", item: "label", example: "default", html: true, open: false, size: "s" }) }}
+</section>
+
 
 <section class="my-8">
     <h2 class="mb-4">When to use this component</h2>
@@ -24,7 +28,7 @@ eleventyNavigation:
 <section class="mb-8">
     <h2 class="mb-4">How to use this component</h2>
     <p>Generally speaking you <strong>should not</strong> need to implement a label yourself as the form inputs have them imported in their respective templates.</p>
-    <p>All input and textarea components must have a visible label.</p>
+    <p>All <a href="/components/input">input</a> and <a href="/components/textarea">textarea</a> components must have a visible label.</p>
 
     <h3>Do:</h3>
     <ul class="mb-6 list-disc list-inside">
