@@ -173,9 +173,9 @@
     tab.setAttribute('tabindex', '-1')
     tab.classList.remove('bg-grey-4')
     tab.setAttribute('aria-selected', 'false')
-    for (p = 0; p < panels.length; p++) {
-      panels[p].setAttribute('hidden', 'hidden')
-    }
+    panels.forEach(panel => {
+      panel.setAttribute('hidden', 'hidden')
+    })
   }
 
   // Deactivate all tabs and tab panels
