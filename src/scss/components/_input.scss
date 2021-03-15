@@ -1,12 +1,15 @@
+$dp-input-border-size: 1px;
+$dp-input-padding-size: 0.5rem;
+$numeric-character-size: 0.6rem;
+
 .dp-input {
   display: block;
   position: relative;
-  padding: 0.5rem;
+  padding: $dp-input-padding-size;
   width: 100%;
   z-index: 3;
 
-  border: 1px solid $black;
-
+  border: $dp-input-border-size solid $black;
   color: inherit;
   font-family: inherit;
   font-size: inherit;
@@ -38,3 +41,9 @@
     margin-bottom: 0.55rem;
   }
 }
+
+// generation utility for dp-input width modifiers (e.g. dp-input--w-4) for text/mixed cases, based on size of 'W' (largest character)
+@include input-width('dp-input', $dp-input-border-size, $dp-input-padding-size);
+
+// generation utility for dp-input width modifiers (e.g. dp-input-number--w-4) for numbers based on rough size of '4' number (largest charactre)
+@include input-width('dp-input-number', $dp-input-border-size, $dp-input-padding-size, $numeric-character-size);

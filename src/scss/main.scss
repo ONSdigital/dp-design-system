@@ -8,7 +8,8 @@
 'abstracts/functions/helpers',
 'abstracts/functions/colors',
 'abstracts/functions/conversions',
-'abstracts/mixins/typography';
+'abstracts/mixins/typography',
+'abstracts/mixins/forms';
 
 // Base
 @import
@@ -20,4 +21,5 @@
 // Components
 @import
 'components/input',
-'components/label'
+'components/field',
+'components/label';
