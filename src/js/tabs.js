@@ -173,22 +173,22 @@
     tab.setAttribute('tabindex', '-1')
     tab.classList.remove('bg-grey-4')
     tab.setAttribute('aria-selected', 'false')
-    for (p = 0; p < panels.length; p++) {
-      panels[p].setAttribute('hidden', 'hidden')
-    }
+    panels.forEach(panel => {
+      panel.setAttribute('hidden', 'hidden')
+    })
   }
 
   // Deactivate all tabs and tab panels
   function deactivateTabs() {
-    for (t = 0; t < tabs.length; t++) {
-      tabs[t].setAttribute('tabindex', '-1')
-      tabs[t].setAttribute('aria-selected', 'false')
-      tabs[t].classList.remove('bg-grey-4');
-    }
+    tabs.forEach(tab => {
+      tab.setAttribute('tabindex', '-1')
+      tab.setAttribute('aria-selected', 'false')
+      tab.classList.remove('bg-grey-4');
+    })
 
-    for (p = 0; p < panels.length; p++) {
-      panels[p].setAttribute('hidden', 'hidden')
-    }
+    panels.forEach(panel => {
+      panel.setAttribute('hidden', 'hidden')
+    })
   }
 
   // Make a guess
