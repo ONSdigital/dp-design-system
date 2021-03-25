@@ -5,6 +5,7 @@
     font-weight: $font-weight-bold;
     
     &__description {
+      display: inline-block;
       margin: 0.4rem 0;
       line-height: 1.4;
     }
