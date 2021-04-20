@@ -1,5 +1,22 @@
+{% set sections = [
+    {
+        pages: [
+            {
+                url: "/",
+                title: "Getting started"
+            }
+        ]
+    }, {
+        title: "Styles",
+        pages: collections.styles | eleventyNavigation
+    }, {
+        title: "Components",
+        pages: collections.components | eleventyNavigation
+    }
+] %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="text-grey-1">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +28,6 @@
         <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="/assets/css/main.css">
         <link rel="stylesheet" href="/assets/css/tailwind.css">
-        <link rel="stylesheet" href="/assets/css/main.css">
         {% if collectionName == "Components" %}
             <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
         {% endif %}
@@ -19,13 +35,14 @@
     </head>
     <body>
         {% include "header.njk" %}
-        <div class="max-w-7xl mx-auto">
-            <div class="grid gap-4 grid-cols-12">
-                <div class="col-span-3 p-6">
+        {% include "mobile-nav.njk" %}
+        <div class="page-container">
+            <div class="md:grid gap-4 grid-cols-12">
+                <div class="col-span-3">
                     {% include "nav.njk" %}
                 </div>
-                <div class="col-span-9 p-6">
-                    <main id="main">
+                <div class="col-span-9">
+                    <main id="main" class="py-6">
                         <div class="text-grey-2 text-lg mb-1">{{collectionName}}</div>
                         <h1 class="mb-8 dp-fs-xxxl">{{title}}</h1>
                         {{ content | safe }}
@@ -37,4 +54,44 @@
             <script src="/js/tabs.js" defer></script>
         {% endif %}
     </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nav = document.getElementById("nav-mobile")
+            const btnMenu = document.getElementById("btn-menu")
+            const btnMenuArrow = document.getElementById("btn-menu-arrow")
+            const menuSection = document.querySelectorAll(".nav-mobile-btn")
+
+            menuSection.forEach(sectionBtn => sectionBtn.addEventListener("click", (e) => {
+                const index = sectionBtn.getAttribute("data-index")
+                const subMenu = document.getElementById(`nav-mobile-section-${index}`)
+
+                sectionBtn
+                    .querySelector("svg")
+                    .classList
+                    .toggle("-rotate-90")
+
+                subMenu
+                    .classList
+                    .toggle("hidden")
+            }))
+
+            btnMenu.addEventListener("click", function () {
+                const expanded = btnMenu.getAttribute("aria-expanded") === "true"
+
+                nav
+                    .classList
+                    .toggle("hidden")
+
+                btnMenu.setAttribute(
+                    "aria-expanded", expanded
+                    ? "false"
+                    : "true")
+
+                btnMenuArrow
+                    .classList
+                    .toggle("rotate-180")
+            })
+
+        })
+    </script>
 </html>
