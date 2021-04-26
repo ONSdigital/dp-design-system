@@ -3,15 +3,15 @@
         {% for section in sections %}
             <li>
                 {% if section.title %}
-                    <button class="text-base border-b border-grey-4 hover:bg-grey-4 text-left w-full text-grey-1 px-4 p-3 pr-2 flex items-center justify-between nav-mobile-btn" data-index="{{loop.index0}}" >{{section.title}}
+                    <button class="text-base border-b border-grey-4 hover:bg-grey-4 text-left w-full text-grey-1 px-4 p-3 pr-2 flex items-center justify-between nav-mobile-btn" data-index="{{loop.index0}}" aria-expanded="false">{{section.title}}
                         <svg class="transform -rotate-90" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 6H15L10 15L5 6Z"/></svg>
                     </button>
                 {% endif %}
-                <ul class="md:mb-4 {% if section.title %} hidden {% endif %}" id="nav-mobile-section-{{loop.index0}}">
+                <ul class="md:mb-4 {{"hidden" if section.title}}" id="nav-mobile-section-{{loop.index0}}" aria-hidden="true">
                     {% for post in section.pages %}
-                        {% set isActive = page.url == post.url %}
+                        {% set isCurrent = page.url == post.url %}
                         <li class="border-b border-grey-4">
-                            <a href="{{post.url | url }}" class="block px-4 py-3 no-underline hover:bg-grey-4 border-ocean-blue border-opacity-0 border-l-4 border-inset  {% if isActive %} border-opacity-100  {% endif %} " {% if isActive %} aria-current="page" {% endif %}>
+                            <a href="{{post.url | url }}" class="block px-4 py-3 no-underline hover:bg-grey-4 border-ocean-blue border-opacity-0 border-l-4 border-inset {{"border-opacity-100" if isCurrent }}" aria-current={{ "page" if isCurrent else "false" }}>
                                 <span class="-m-1">{{post.title}}</span>
                             </a>
                         </li>

@@ -21,7 +21,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta description="{{ description }}">
+        <meta name="description" content="{{description}}">
         <meta property="og:title" content="{{title}}">
         <meta property="og:description" content="{{description}}">
         <title>{{ title }} | Design System | ONS — Digital Publishing </title>
@@ -54,44 +54,5 @@
             <script src="/js/tabs.js" defer></script>
         {% endif %}
     </body>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const nav = document.getElementById("nav-mobile")
-            const btnMenu = document.getElementById("btn-menu")
-            const btnMenuArrow = document.getElementById("btn-menu-arrow")
-            const menuSection = document.querySelectorAll(".nav-mobile-btn")
-
-            menuSection.forEach(sectionBtn => sectionBtn.addEventListener("click", (e) => {
-                const index = sectionBtn.getAttribute("data-index")
-                const subMenu = document.getElementById(`nav-mobile-section-${index}`)
-
-                sectionBtn
-                    .querySelector("svg")
-                    .classList
-                    .toggle("-rotate-90")
-
-                subMenu
-                    .classList
-                    .toggle("hidden")
-            }))
-
-            btnMenu.addEventListener("click", function () {
-                const expanded = btnMenu.getAttribute("aria-expanded") === "true"
-
-                nav
-                    .classList
-                    .toggle("hidden")
-
-                btnMenu.setAttribute(
-                    "aria-expanded", expanded
-                    ? "false"
-                    : "true")
-
-                btnMenuArrow
-                    .classList
-                    .toggle("rotate-180")
-            })
-
-        })
-    </script>
+    <script src="/js/mobile-nav.js" defer></script>
 </html>
