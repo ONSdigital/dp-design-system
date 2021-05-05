@@ -1,39 +1,21 @@
-{% set sections = [
-    {
-        pages: [
-            {
-                url: "/",
-                title: "Getting started"
-            }
-        ]
-    }, {
-        title: "Styles",
-        pages: collections.styles | eleventyNavigation
-    }, {
-        title: "Components",
-        pages: collections.components | eleventyNavigation
-    }
-] %}
+{% set currentPageIndicatorStyle="pl-2 md:-ml-3 font-bold border-l-4 border-ocean-blue" %}
 
-<nav>
+<nav class="hidden md:block md:py-6">
     <ul>
         {% for section in sections %}
             <li>
                 {% if section.title %}
                     <h2 class="font-normal text-base text-grey-2 mb-2">{{section.title}}</h2>
                 {% endif %}
-                <ul class="mb-4">
+                <ul class="md:mb-4">
                     {% for post in section.pages %}
-                        {% if page.url == post.url %}
-                            <li class="mb-2 pl-2 -ml-3 font-bold border-l-4 border-ocean-blue" aria-current="page">
-                            {% else %}
-                                <li class="mb-2">
-                                {% endif %}
-                                <a href="{{post.url | url }}" class="no-underline hover:underline">{{post.title}}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
-    </nav>
+                        {% set isCurrent = page.url == post.url %}
+                        <li class="mb-2 {{currentPageIndicatorStyle if isCurrent}}" aria-current={{ "page" if isCurrent else "false" }}>
+                            <a href="{{post.url | url }}" class="no-underline hover:underline">{{post.title}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

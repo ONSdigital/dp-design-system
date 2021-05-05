@@ -3,14 +3,19 @@
 @tailwind utilities;
 
 html {
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Open Sans', ui-sans-serif, system-ui;
-  line-height: 1.6;
-  @apply text-grey-1;
+  line-height: 1.5;
+}
+
+@screen md {
+  html {
+    font-size: 18px;
+  }
 }
 
 h1 {
-  @apply text-5xl mb-4 font-bold;
+  @apply text-4xl md:text-5xl mb-4 font-bold;
 }
 
 h2 {
@@ -32,4 +37,8 @@ a:hover {
 
 code {
   @apply font-mono text-sm bg-grey-5 text-ruby-red px-1;
+}
+
+.page-container {
+  @apply max-w-7xl mx-auto px-4 md:px-6 w-full;
 }
