@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+// shortcut variable for static files location when compiled
+$static: '../';
+
 // Configuration and helpers
 @import
 'abstracts/variables/colors',
