@@ -1,0 +1,117 @@
+$button-border-height: 3px;
+
+.dp-button {
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: $font-weight-bold;
+  line-height: 1.35;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  vertical-align: top;
+
+  &::after {
+    border: ems($button-border-height) solid transparent;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .svg-icon {
+    fill: $text-color-inverse;
+    height: 0.8rem;
+    margin: 0 0 0.1rem 0.5rem;
+    vertical-align: middle;
+    width: 0.8rem;
+  }
+
+  &:hover & {
+    &__inner {
+      background: darken($button-color, 5%);
+    }
+  }
+
+  &__inner {
+    background: $button-color;
+    border-bottom: ems($button-border-height) solid rgba(0, 0, 0, 0.6);
+    color: $text-color-inverse;
+    display: inherit;
+    padding: 0.75em 1em;
+    // Required for Google Tag Manager
+    pointer-events: none;
+  }
+
+  // Modifiers
+  &--small,
+  &--mobile {
+    @include font-size(map-get($type-matrix, 'dp-fs-s--b'), $base);
+  }
+
+  &--small &,
+  &--mobile & {
+    &__inner {
+      padding: 0.5em 0.7em;
+    }
+  }
+
+  &--secondary &,
+  &--print & {
+    &__inner {
+      background: $button-secondary-color;
+      color: $text-color;
+      font-weight: normal;
+      .svg-icon {
+        fill: $text-color;
+      }
+    }
+  }
+
+  // When hovered
+  &--secondary:hover &,
+  &--print:hover & {
+    &__inner {
+      background: darken($button-secondary-color, 5%);
+    }
+  }
+
+  // When preceded by another button (e.g. in a group)
+  & + & {
+    margin-left: 0.5rem;
+  }
+
+  // When focussed
+  &:focus:not(:active):not(:hover) {
+    outline: 3px solid transparent;
+  }
+
+  &:focus:not(:active):not(:hover) &__inner {
+    background-color: $color-focus;
+    color: $text-color;
+  }
+
+  &:not([class*='dp-button--secondary']):not([class*='dp-button--print']):focus:hover
+    &__inner {
+    color: $text-color-inverse;
+  }
+
+  &:disabled {
+    &:hover {
+      cursor: not-allowed;
+    }
+
+    > .dp-button__inner {
+      opacity: 0.4;
+    }
+  }
+}

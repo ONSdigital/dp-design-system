@@ -45,3 +45,10 @@
     @error 'Breakpoint #{$name} wasn\'t found in $breakpoints: #{$breakpoints}';
   }
 }
+
+// convert a pixel value to em unit
+@function ems($pxval, $base: $base) {
+  $em-size: $pxval / $base;
+
+  @return #{$em-size}em;
+}

@@ -1,0 +1,53 @@
+---
+title: Button
+description: The button component is used to direct the user to perform a specific interaction.
+layout: default
+eleventyNavigation:
+  key: Button
+  section: components
+---
+{% from "example.njk" import example %}
+
+<section>
+    {{ example({group: "components", item: "button", example: "default", size: "s", html: true, open: false }) }}
+</section>
+
+<section class="my-8">
+    <h2 class="mb-4">When to use this component</h2>
+        <p>Buttons are used to direct the user to perform a specific interaction. 
+    The copy used on the button should be clear, concise and direct.</p>
+</section>
+
+<section class="my-8">
+    <h2 class="mb-4">How it works</h2>
+        <p>Write button text in sentence case, describing the action it performs. For example ‘Save and continue’ or ‘Start now’.</p>
+        <p>Align the primary action button to the left edge of your form.</p>
+</section>
+
+<section class="mb-8">
+    <h2 class="mb-4">Variants</h2>
+
+    <h3 class="mb-4" id="small">Small</h3>
+    <p>In certain circumstances there may be the need for multiple primary actions to exist on a page. 
+    The small primary button should be used in this scenario only when each action has the same context.</p>
+    {{ example({group: "components", item: "button", example: "small", html: true, open: false, size: "s" }) }}
+
+    <h3 class="mb-4" id="secondary">Secondary</h3>
+    <p>Secondary buttons should be used for supplementary actions which users can take. 
+    Secondary buttons <strong>cannot</strong> exist without a primary button in the same context.</p>
+    {{ example({group: "components", item: "button", example: "secondary", size: "s", html: true, open: false }) }}
+
+    <h3 class="mb-4" id="secondary-small">Secondary Small</h3>
+    <p>A small secondary button should be used within the same context of a primary small button when there is an 
+    additional action available along with the primary action.</p>
+    {{ example({group: "components", item: "button", example: "secondary-small", html: true, open: false, size: "s" }) }}
+
+    <h3 class="mb-4" id="group">Group</h3>
+    <p>Groups are used to group two or more buttons together and easily align them alongside eachother. 
+    This will allow for a page to have two actions available to the user such as Continue and Cancel.</p>
+    {{ example({group: "components", item: "button", example: "group", html: true, open: false, size: "s" }) }}
+
+    <h3 class="mb-4" id="disabled">Disabled</h3>
+    <p>Button disabled styling will be applied when the element attribute, <code>disabled=true</code>, is set.</p>
+    {{ example({group: "components", item: "button", example: "disabled", html: true, open: false, size: "s" }) }}
+</section>
