@@ -35,9 +35,34 @@ $numeric-character-size: 0.6rem;
     line-height: normal;
     resize: vertical;
   }
+  
+  &--select {
+    background: $white url('#{$static}/images/icons--chevron-down.svg') no-repeat center right 10px;
+    background-size: 1rem;
+    line-height: 1.3rem;
+    padding: $dp-input-padding-size;
+    max-width: 100%;
+  
+    &::-ms-expand {
+      display: none;
+    }
+  }
 
   &--with-description {
     margin-bottom: 0.55rem;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  @include mediaQuery("m") {
+    &--select {
+      &:not(.dp-input--block):not([class*='dp-input--w-']) {
+        width: 20rem;
+      }
+    }
   }
 }
 
