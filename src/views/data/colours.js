@@ -8,7 +8,7 @@ module.exports = {
   },
   supporting: {
     'ruby-red': '#D0021B',
-    'jaffa-orange': '#FE781F',
+    'jaffa-orange': '#FA6401',
     'sun-yellow': '#FBC900',
     'neon-yellow': '#F0F762',
     'leaf-green': '#0F8243',
