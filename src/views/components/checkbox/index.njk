@@ -1,0 +1,29 @@
+---
+title: Checkbox
+description: Checkboxes let the user select one or more options from a list.
+layout: default
+eleventyNavigation:
+  key: Checkbox
+  section: components
+---
+{% from "example.njk" import example %}
+
+<section>
+    <p>Checkboxes let the user select one or more options from a list.</p>
+    {{ example({group: "components", item: "checkbox", example: "default", size: "m", html: true, open: false }) }}
+</section>
+
+<section class="my-8">
+    <h2 class="mb-4">When to use this component</h2>
+    <p>Use the input component when you need to let users enter alphanumeric information that is no longer than one line, such as their name, telephone number or email address.</p>
+</section>
+
+<section class="mb-8">
+    <h2 class="mb-4">When not to use this component</h2>
+    <p>Do not use the checkboxes component if users can only choose one option from a list. In this case, you should use the <a href="/components/radios">radios</a> component.</p>
+</section>
+
+<section class="mb-8">
+    <h2 class="mb-4">How to use this component</h2>
+    <p>Checkboxes are grouped within a fieldset which starts with a <code>legend</code> which lets the user know what they need to do.</p>
+</section>

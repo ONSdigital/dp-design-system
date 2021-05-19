@@ -1,0 +1,136 @@
+$checkbox-input-width: 1.25rem;
+$checkbox-padding: 0.6rem;
+$checkbox-label-vertical-padding: 0.75rem;
+
+.dp-checkbox {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+
+  &__input {
+    appearance: none;
+    -webkit-appearance: none;
+    background: url('#{$static}/images/icons--check.svg') no-repeat center
+      center;
+    background-color: $white;
+    background-size: 0;
+    border: 2px solid $input-color;
+    box-sizing: border-box;
+    height: $checkbox-input-width;
+    position: absolute;
+    top: $checkbox-padding + 0.15rem;
+    width: $checkbox-input-width;
+    z-index: 1;
+    &:focus,
+    &:checked {
+      outline: 0;
+    }
+    &:checked {
+      background-size: 14px;
+    }
+  }
+
+  &__label {
+    cursor: pointer;
+    display: block;
+    padding: $checkbox-padding 1rem 0 2rem;
+    width: 100%;
+
+    &--with-description {
+      padding: 0 1rem $checkbox-padding 0;
+    }
+
+    .dp-label__description {
+      margin-left: -1.75rem;
+    }
+
+    &::before {
+      background: $white;
+      bottom: 0;
+      content: '';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+    * {
+      pointer-events: none;
+    }
+  }
+
+  &__description {
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  &__hint {
+    padding-left: 2rem;
+    color: $text-color-supporting;
+  }
+
+  &__input:focus {
+    outline: 1px solid $black;
+    outline-offset: -2px;
+    box-shadow: 0 0 0 3px $focus-color;
+  }
+
+  &__input:not(:checked) ~ &__other {
+    display: none;
+  }
+  &__input:not(:checked) ~ &__other--open {
+    display: block;
+  }
+  &--toggle & {
+    &__input {
+      left: 0;
+      top: 0.1rem;
+      &:focus {
+        box-shadow: 0 0 0 3px $focus-color;
+      }
+    }
+    &__label {
+      padding: 0 0 0 ($checkbox-input-width + $checkbox-padding);
+      &::before {
+        background: none;
+        border: 0;
+      }
+    }
+    &__input:checked + .checkbox__label::before,
+    &__input:focus + .checkbox__label::before {
+      background: transparent;
+      box-shadow: none;
+    }
+    &__input:focus + .checkbox__label::before {
+      border: 0;
+      outline: none;
+    }
+  }
+}
+
+.dp-checkboxes {
+  &__label {
+    display: block;
+    margin: 0 0 0.5rem;
+  }
+  &__items {
+    display: block;
+  }
+  &__item {
+    display: inline-block;
+    margin: 0 0 0.5rem;
+    width: 100%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    @include mediaQuery('s') {
+      min-width: 20rem;
+      width: auto;
+    }
+  }
+  &--mutually-exclusive__item {
+    @extend .dp-checkboxes__item;
+    margin-bottom: 0;
+  }
+}

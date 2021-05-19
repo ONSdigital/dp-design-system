@@ -19,6 +19,7 @@ $static: '../';
 'base/fonts',
 'base/typography',
 'base/utilities/hide',
+'base/forms',
 'base/generic';
 
 // Components
@@ -26,4 +27,5 @@ $static: '../';
 'components/button',
 'components/input',
 'components/field',
-'components/label';
+'components/label',
+'components/checkbox';

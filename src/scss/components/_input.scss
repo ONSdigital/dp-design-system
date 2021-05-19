@@ -17,7 +17,7 @@ $numeric-character-size: 0.6rem;
   &:focus {
     outline: 1px solid $black;
     outline-offset: -2px;
-    box-shadow: 0 0 0 3px $color-focus;
+    box-shadow: 0 0 0 3px $focus-color;
   }
 
   &:disabled {
