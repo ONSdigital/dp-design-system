@@ -22,11 +22,11 @@ $leaf-green: #0F8243;
 
 // --- Grays ---
 $black: #222;
-$grey1: #414042;
-$grey2: #707071;
-$grey3: #BCBCBD;
-$grey4: #E2E2E3;
-$grey5: #F5F5F6;
+$grey-100: #414042;
+$grey-75: #707071;
+$grey-35: #BCBCBD;
+$grey-15: #E2E2E3;
+$grey-5: #F5F5F6;
 $white: #FFF;
 
 
@@ -58,7 +58,7 @@ $error-color: $ruby-red;
 $link-color: $ocean-blue;
 
 $button-color: $leaf-green;
-$button-secondary-color: $grey4;
+$button-secondary-color: $grey-15;
 // ----------------------------------------------------- DP COLORS -----------------------------------------------------
 
 // --- Charts ---
