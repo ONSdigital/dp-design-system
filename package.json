@@ -16,7 +16,8 @@
     "dev": "run-p clean watch:* server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "echo \"No linting specified\"",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "percy": "npx percy exec -- node snapshots.mjs"
   },
   "repository": {
     "type": "git",
@@ -29,23 +30,28 @@
   },
   "homepage": "https://github.com/ONSdigital/dp-design-system#readme",
   "dependencies": {
+    "glob": "^7.1.7",
     "gray-matter": "^4.0.2",
     "local-web-server": "^4.2.1",
     "onchange": "^7.1.0",
     "sass": "^1.32.4"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.1",
+    "@11ty/eleventy": "^0.12.1",
     "@11ty/eleventy-navigation": "^0.1.6",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.6",
-    "auditjs": "^4.0.24",
+    "@percy/script": "^1.1.0",
+    "auditjs": "^4.0.25",
     "autoprefixer": "^10.2.4",
     "cssnano": "^4.1.10",
+    "http-server": "^0.12.3",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.2.6",
+    "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
+    "replace-in-file": "^6.2.0",
     "rimraf": "^3.0.2",
     "sass-lint": "^1.13.1",
-    "tailwindcss": "^2.0.3"
+    "tailwindcss": "^2.0.3",
+    "wait-on": "^5.3.0"
   }
 }

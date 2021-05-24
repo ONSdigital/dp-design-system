@@ -2,5 +2,6 @@
 
 pushd dp-design-system
   npm install --unsafe-perm
-  npm run lint
+  npm run build;
+  npm run percy;
 popd
