@@ -1,0 +1,33 @@
+.dp-fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  
+    &__legend {
+      color: inherit;
+      display: block;
+      font-weight: $font-weight-bold;
+      margin-bottom: 0.4rem;
+  
+      &__description {  
+        @extend .dp-fs-s;
+  
+        display: inline-block;
+        line-height: 1.4;
+        margin-top: 6px;
+      }
+  
+      &--with-description {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+  
+      &--placeholder {
+        font-size: 1rem;
+        font-weight: $font-weight-regular;
+        left: 8px;
+        position: absolute;
+        top: 6px;
+      }
+    }
+  }
