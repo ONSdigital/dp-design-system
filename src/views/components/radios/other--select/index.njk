@@ -1,0 +1,41 @@
+---
+title: Other Radios - Select
+description: This variant lets the user provide an answer other to the options in the list, or to provide supplemental information required to describe the nature of their answer from a select list.
+layout: example
+---
+
+<fieldset class="dp-fieldset">
+    <legend class="dp-fieldset__legend">Select your favourite toppings</legend>
+    <div class="dp-radios__items">
+        <p class="dp-radios__item">
+            <span class="dp-radio">
+                <input type="radio" id="bacon-other" class="dp-radio__input" value="bacon" name="food-other">
+                <label class="dp-radio__label" for="bacon-other" id="bacon-other-label">Bacon</label>
+            </span>
+        </p>
+        <br>
+        <p class="dp-radios__item">
+            <span class="dp-radio">
+                <input type="radio" id="olives-other" class="dp-radio__input" value="olives" name="food-other">
+                <label class="dp-radio__label" for="olives-other" id="olives-other-label">Olives</label>
+            </span>
+        </p>
+        <br>
+        <p class="dp-radios__item">
+            <span class="dp-radio">
+                <input type="radio" id="pepperoni-other" class="dp-radio__input" value="pepperoni" name="food-other" aria-controls="pepperoni-other-other-wrap" aria-haspopup="true">
+                <label class="dp-radio__label" for="pepperoni-other" id="pepperoni-other-label">Pepperoni</label>
+                <span class="dp-radio__other" id="pepperoni-other-other-wrap">
+                    <label class="dp-label dp-fs-s--b " for="pepperoni-heat-level">Please specify heat level</label>
+                    <select id="pepperoni-heat-level" name="pepperoni-heat-level" class="dp-input dp-input--select">
+                        <option value="" selected disabled>Select heat level</option>
+                        <option value="mild">Mild</option>
+                        <option value="medium">Medium</option>
+                        <option value="hot">Hot</option>
+                        <option value="extra hot">Extra Hot</option>
+                    </select>
+                </span>
+            </span>
+        </p>
+    </div>
+</fieldset>

@@ -1,0 +1,39 @@
+---
+title: Other Radios - Visible Input
+description: This variant lets the user provide an answer other to the options in the list, or to provide supplemental information required to describe the nature of their answer.
+layout: example
+---
+
+<fieldset class="dp-fieldset">
+  <legend class="dp-fieldset__legend">Select your favourite topping</legend>
+  <div class="dp-radios__items">
+    <p class="dp-radios__item">
+      <span class="dp-radio">
+        <input type="radio" id="bacon-other" class="dp-radio__input" value="bacon" name="food-other">
+        <label class="dp-radio__label" for="bacon-other" id="bacon-other-label">Bacon
+        </label>
+      </span>
+    </p>
+    <br>
+    <p class="dp-radios__item">
+      <span class="dp-radio">
+        <input type="radio" id="olives-other" class="dp-radio__input" value="olives" name="food-other">
+        <label class="dp-radio__label" for="olives-other" id="olives-other-label">Olives
+        </label>
+      </span>
+    </p>
+    <br>
+    <p class="dp-radios__item">
+      <span class="dp-radio">
+        <input type="radio" id="other-radio" class="dp-radio__input" value="other" name="food-other">
+        <label class="dp-radio__label" for="other-radio" id="other-radio-label">Other
+        </label>
+        <span class="dp-radio__other dp-radio__other--open" id="other-radio-other-wrap">
+          <label class="dp-label dp-fs-s--b " for="other-textbox" id="other-textbox-label">Please specify other
+          </label>
+          <input type="text" id="other-textbox" class="dp-input dp-input--text dp-input-type__input dp-input--w-auto " name="other-answer"/>
+        </span>
+      </span>
+    </p>
+  </div>
+</fieldset>
