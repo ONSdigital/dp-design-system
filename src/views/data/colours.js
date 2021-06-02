@@ -8,7 +8,7 @@ module.exports = {
   },
   supporting: {
     'ruby-red': '#D0021B',
-    'jaffa-orange': '#FE781F',
+    'jaffa-orange': '#FA6401',
     'sun-yellow': '#FBC900',
     'neon-yellow': '#F0F762',
     'leaf-green': '#0F8243',
@@ -20,10 +20,10 @@ module.exports = {
   },
   neutral: {
     black: '#222222',
-    'grey-1': '#414042',
-    'grey-2': '#707071',
-    'grey-3': '#BCBCBD',
-    'grey-4': '#E2E2E3',
+    'grey-100': '#414042',
+    'grey-75': '#707071',
+    'grey-35': '#BCBCBD',
+    'grey-15': '#E2E2E3',
     'grey-5': '#F5F5F6',
     white: '#FFFFFF',
   },
