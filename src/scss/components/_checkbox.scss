@@ -15,7 +15,7 @@ $checkbox-label-vertical-padding: 0.75rem;
       center;
     background-color: $white;
     background-size: 0;
-    border: 2px solid $input-border;
+    border: $input-border;
     box-sizing: border-box;
     height: $checkbox-input-width;
     position: absolute;
@@ -36,6 +36,10 @@ $checkbox-label-vertical-padding: 0.75rem;
     display: block;
     padding: $checkbox-padding 1rem 0 2rem;
     width: 100%;
+
+    &:first-child {
+      padding: 0 1rem 0 2rem;
+    }
 
     &--with-description {
       padding: 0 1rem $checkbox-padding 0;
@@ -112,7 +116,7 @@ $checkbox-label-vertical-padding: 0.75rem;
 .dp-checkboxes {
   &__label {
     display: block;
-    margin: .5rem 0;
+    margin: 0 0 0.4rem;
   }
   &__items {
     display: block;
