@@ -29,8 +29,7 @@ $radio-padding: 0.6rem;
 
     &:checked {
       background: $black;
-    }
-    
+    }  
   }
 
   &__input:checked + &__label::before {
@@ -38,7 +37,7 @@ $radio-padding: 0.6rem;
     box-shadow: 0 0 0 1px $black;
   }
 
-  &__label {
+  &__label, &__label--no-border {
     cursor: pointer;
     display: block;
     padding: $radio-padding 1rem $radio-padding
@@ -70,6 +69,12 @@ $radio-padding: 0.6rem;
     * {
       pointer-events: none;
     }
+  }
+
+  &__label--no-border::before {
+    border: none;
+    background: none;
+    box-shadow: none;
   }
 
   &__description {
