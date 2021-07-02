@@ -7,7 +7,7 @@ $radio-padding: 0.6rem;
   width: 100%;
   z-index: 1;
 
-  &__input {
+  &__input, &__input--no-border {
     appearance: none;
     background: url("#{$static}/images/icons--check.svg") no-repeat center
       center;
@@ -29,7 +29,12 @@ $radio-padding: 0.6rem;
 
     &:checked {
       background: $black;
-    }  
+    } 
+    
+    &--no-border {
+      left: 0.05rem;
+      top: 0.15rem;
+    }
   }
 
   &__input:checked + &__label::before {
@@ -69,6 +74,10 @@ $radio-padding: 0.6rem;
     * {
       pointer-events: none;
     }
+  }
+
+  &__label--no-border {
+    padding: 0 0 0 ($radio-input-width + $radio-padding);
   }
 
   &__label--no-border::before {
