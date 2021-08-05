@@ -120,7 +120,7 @@ label.dp-label--with-description {
     display: block;
   }
 
-  &__item {
+  &__item, &__item--no-border {
     display: inline-block;
     margin: 0 0 0.5rem;
     width: 100%;
@@ -133,6 +133,10 @@ label.dp-label--with-description {
       min-width: 20rem;
       width: auto;
     }
+  }
+
+  &__item--no-border {
+    margin: 0 0 1rem;
   }
 
   &__label {
