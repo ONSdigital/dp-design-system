@@ -5,16 +5,11 @@
   "main": "",
   "scripts": {
     "audit": "auditjs ossi --quiet",
-    "build:css": "sass --style=compressed src/scss:dist/assets/css",
-    "build:11ty": "eleventy",
-    "build:tailwind": "NODE_ENV=production postcss ./src/tailwind.css --output ./dist/assets/css/tailwind.css",
+    "build:css": "node-sass --style=compressed src/scss -o dist/assets/css",
     "build": "run-s clean build:*",
-    "watch:css": "sass --style=compressed --watch src/scss:dist/assets/css",
-    "watch:11ty": "eleventy --serve",
-    "watch:tailwind": "postcss ./src/tailwind.css --output ./dist/assets/css/tailwind.css -w",
+    "watch:css": "node-sass --watch src/scss -o dist/assets/css",
     "server": "ws -p ${PORT:-9001}",
     "dev": "run-p clean watch:* server",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "echo \"No linting specified\"",
     "clean": "rimraf ./dist"
   },
@@ -29,23 +24,14 @@
   },
   "homepage": "https://github.com/ONSdigital/dp-design-system#readme",
   "dependencies": {
-    "gray-matter": "^4.0.2",
+    "@ons/design-system": "^41.0.2",
     "local-web-server": "^4.2.1",
-    "onchange": "^7.1.0",
-    "sass": "^1.32.4"
+    "node-sass": "^6.0.1"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.1",
-    "@11ty/eleventy-navigation": "^0.1.6",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.6",
     "auditjs": "^4.0.24",
     "autoprefixer": "^10.2.4",
-    "cssnano": "^4.1.10",
-    "npm-run-all": "^4.1.5",
-    "postcss": "^8.2.6",
-    "postcss-cli": "^8.3.1",
-    "rimraf": "^3.0.2",
-    "sass-lint": "^1.13.1",
-    "tailwindcss": "^2.0.3"
+    "normalize-scss": "^7.0.1",
+    "sass-lint": "^1.13.1"
   }
 }

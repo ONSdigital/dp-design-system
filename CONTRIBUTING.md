@@ -1,7 +1,6 @@
-Contributing guidelines
-=======================
+# Contributing guidelines
 
-### Git workflow
+## Git workflow
 
 * We use git-flow - create a feature branch from `main`, e.g. `feature/new-feature`
 * Pull requests must contain a succinct, clear summary of what the user need is driving this feature change

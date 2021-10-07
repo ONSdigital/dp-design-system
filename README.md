@@ -1,29 +1,28 @@
-dp-design-system
-================
+# dp-design-system
 
-### Getting started
+## Getting started
 
-#### How to install and run locally
+### How to install and run locally
 
 1. Clone this repo onto your machine.
 2. If not already installed then install [Node][node] and [NPM][npm].
 3. Run `npm install` from the root of the repo you've cloned onto your machine.
 4. To run and see changes locally navigate to the root of the project in your terminal and execute `npm run dev`.
 
-### Dependencies
+## Dependencies
 
 1. [Node][node] and [NPM][npm]
 
-### Configuration
+## Configuration
 
 Locally served on port 9001
 .sass-lint
 
-### Contributing
+## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-### License
+## License
 
 Copyright © 2021, Office for National Statistics (https://www.ons.gov.uk)
 
