@@ -5,12 +5,14 @@
   "main": "",
   "scripts": {
     "audit": "auditjs ossi --quiet",
+    "compile:css": "node-sass src/scss -o dist/assets/css",
     "build:css": "node-sass --style=compressed src/scss -o dist/assets/css",
+    "build:js": "esbuild src/js/main.js --bundle --minify --outfile=dist/assets/js/main.js",
     "build": "run-s clean build:*",
-    "watch:css": "node-sass --watch src/scss -o dist/assets/css",
+    "watch:css": "npm run compile:css && node-sass src/scss -wo dist/assets/css",
+    "watch:js": "esbuild src/js/main.js --sourcemap --bundle --watch --outfile=dist/assets/js/main.js",
     "server": "ws -p ${PORT:-9001}",
     "dev": "run-p clean watch:* server",
-    "lint": "echo \"No linting specified\"",
     "clean": "rimraf ./dist"
   },
   "repository": {
@@ -31,7 +33,9 @@
   "devDependencies": {
     "auditjs": "^4.0.24",
     "autoprefixer": "^10.2.4",
+    "esbuild": "^0.13.4",
     "normalize-scss": "^7.0.1",
+    "npm-run-all": "^4.1.5",
     "sass-lint": "^1.13.1"
   }
 }
