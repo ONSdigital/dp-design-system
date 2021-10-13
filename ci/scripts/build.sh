@@ -3,7 +3,6 @@
 pushd dp-design-system
   npm install --unsafe-perm
   npm run build
-  npm transpile:es5
   SHORT_REF=`git rev-parse --short HEAD`
 popd
 
