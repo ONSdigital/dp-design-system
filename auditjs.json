@@ -1,0 +1,7 @@
+{
+    "ignore": [
+        { "id": "64cd5f21-8af4-4eae-ac7d-a53241ea693a", "reason": "transitive dependency of glob-stream, which is used by gulp"},
+        { "id": "b7740d41-fc85-4d22-8af5-5a3159e114ea", "reason": "transitive dependency of updated gulp-cli"},
+        { "id": "7ccaaed0-205b-4382-a963-8a30a0b151b1", "reason": "transitive dependency of updated gulp-cli"}
+    ]
+}
