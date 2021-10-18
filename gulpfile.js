@@ -4,6 +4,9 @@ const gulpIf = require('gulp-if')
 const buffer = require('vinyl-buffer')
 const source = require('vinyl-source-stream')
 const gulpTerser = require('gulp-terser')
+const sass = require('node-sass');
+const gulpSass = require('gulp-sass');
+const nodeSassGlobImporter = require('node-sass-glob-importer');
 
 const babelEsmConfig = require('./babel.conf.esm.js')
 const babelNomoduleConfig = require('./babel.conf.nomodule')
@@ -13,6 +16,12 @@ const isDevelopment = !isProduction
 
 const DESIGN_SYSTEM_MODULE_PATH = './node_modules/@ons/design-system'
 const OUTPUT_DIRECTORY = './dist/assets'
+
+const sassCompiler = gulpSass(sass)
+const sassOptions = {
+  importer: nodeSassGlobImporter(),
+  outputStyle: isProduction ? 'compressed' : '',
+}
 
 const terserOptions = {
   compress: {
@@ -56,15 +65,24 @@ gulp.task('copy-static-assets-from-design-system', () => {
     .pipe(gulp.dest(`${OUTPUT_DIRECTORY}/favicons`))
 })
 
+gulp.task('build-styles', () => {
+  return gulp
+    .src('./src/scss/*.scss')
+    .pipe(sassCompiler(sassOptions).on('error', sassCompiler.logError))
+    .pipe(gulp.dest('./dist/assets/css'))
+});
+
 gulp.task('build-script', gulp.series(...scripts.map(createBuildScriptTask)))
 
 gulp.task('watch-and-build', async () => {
     gulp.watch('./src/js/**', gulp.series('build-script'))
+    gulp.watch('./src/scss/*.scss', gulp.series('build-styles'))
 })
+
 
 gulp.task(
   'build',
-  gulp.series('build-script', 'copy-static-assets-from-design-system')
+  gulp.series('build-script', 'build-styles', 'copy-static-assets-from-design-system')
 )
 
-gulp.task('watch', gulp.series('build-script', 'copy-static-assets-from-design-system', 'watch-and-build'))
+gulp.task('watch', gulp.series('build-script', 'build-styles', 'copy-static-assets-from-design-system', 'watch-and-build'))

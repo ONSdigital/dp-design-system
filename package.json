@@ -9,10 +9,9 @@
     "build:css": "node-sass --style=compressed src/scss -o dist/assets/css",
     "build:js": "NODE_ENV=production gulp build",
     "build": "run-s clean build:*",
-    "watch:css": "npm run compile:css && node-sass src/scss -wo dist/assets/css",
-    "watch:js": "gulp watch",
+    "watch": "gulp watch",
     "server": "ws -p ${PORT:-9001}",
-    "dev": "run-p clean watch:* server",
+    "dev": "run-p clean watch server",
     "clean": "rimraf ./dist"
   },
   "browserslist": [
@@ -60,6 +59,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
     "mdn-polyfills": "^5.20.0",
+    "node-sass-glob-importer": "^5.3.2",
     "normalize-scss": "^7.0.1",
     "npm-run-all": "^4.1.5",
     "sass-lint": "^1.13.1",
