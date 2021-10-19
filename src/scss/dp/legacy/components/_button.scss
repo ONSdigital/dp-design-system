@@ -1,0 +1,239 @@
+//_buttons.scss
+
+button {
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    width: auto;
+    cursor: pointer;
+    padding: 6px $col 10px $col;
+    border: 0 none;
+    text-align: center;
+    -webkit-appearance: none;
+    transition: background-color 0.25s ease-out;
+    text-decoration: none;
+    line-height: $base-line-height;
+
+    &--primary {
+        background-color: $primary;
+        color: $white;
+
+        &:hover,
+        &:focus {
+            background-color: darken($primary, 8%);
+        }
+    }
+
+    &--primary-disabled {
+        opacity: 0.7;
+        &:hover,
+        &:focus {
+            background-color: $primary;
+            cursor: not-allowed;
+        }
+    }
+    
+    &--secondary {
+        background-color: $secondary;
+        color: $white;
+
+        &:hover,
+        &:focus {
+            background-color: $thunder;
+        }
+    }
+
+    &--secondary-active {
+        background-color: $active;
+
+        &:hover,
+        &:focus {
+            background-color: $active;
+            cursor: default;
+        }
+
+    }
+
+    &--secondary-disabled,
+    &--secondary-disabled:hover,
+    &--secondary-disabled:focus {
+        color: $nevada;
+        background: $disabled;
+        cursor: not-allowed;
+    }
+
+    &--tertiary {
+        background-color: $blumine;
+        color: $iron-light;
+
+        &:hover,
+        &:focus {
+            background-color: darken($blumine, 8%);
+        }
+    }
+
+    &--plain {
+        background-color: $white;
+        color: $matisse;
+        text-decoration: underline;
+
+        &:hover,
+        &:focus {
+            background: $gallery;
+            text-decoration: underline;
+        }
+    }
+
+    &--plain-active {
+        background: $ship-grey;
+        color: $iron-light;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            background: $ship-grey;
+            color: $iron-light;
+            text-decoration: none;
+            cursor: default;
+        }
+    }
+    &--focus {
+      &:focus {
+          box-shadow: 0 0 0 3px $carrot;
+          outline: 0;
+      }
+    }
+    &--link {
+        background: transparent;
+        color: $matisse;
+        padding: 6px 0 2px 0;
+
+        &:hover {
+            text-decoration: underline;
+            outline: 0;
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 3px $carrot;
+            outline: 0;
+        }
+
+        &-disabled {
+            color: $ship-grey;
+            cursor: text;
+            text-decoration: none!important;
+            &:hover, &:focus {
+                text-decoration: none;
+                outline: 0;
+            }
+        }
+
+        &-underlined {
+            text-decoration: underline;
+        }
+    }
+
+
+    &--small {
+        font-size: 12px;
+        height: 32px;
+    }
+
+    &--thin {
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 24px; //fix for button tags
+    }
+
+    &--thick {
+        padding-top: 14px;
+        padding-bottom: 18px;
+    }
+
+    &--narrow {
+        padding-left: ($col / 2);
+        padding-right: ($col / 2);
+    }
+
+    &--wide {
+        padding-left: ($col * 2);
+        padding-right: ($col * 2);
+    }
+
+    &--full-width {
+
+        display: block;
+        width: 100%;
+    }
+
+    &--chart-control {
+        width: 50%;
+        max-width: ($col * 6);
+        padding: 0;
+        font-size: 12px;
+        //position: relative;
+        //overflow: hidden;
+
+        &--all {
+            max-width: ($col * 5);
+        }
+
+        &--download {
+            max-width: ($col * 11)
+        }
+
+    }
+
+    &--block {
+        display: block;
+    }
+
+    &--simple {
+        padding: 10px 0 6px 0;
+        color: $matisse;
+        background-color: transparent;
+        text-align: left;
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+
+    }
+
+}
+
+.btn-group {
+    overflow: auto;
+
+    .btn {
+        float: left;
+        margin: 0;
+        border-right: 1px solid $iron;
+
+        &:last-child {
+            border: none;
+        }
+
+    }
+
+    legend {
+        padding: 6px 0 10px 0;
+    }
+
+    input {
+        //display: none; //breaks keyboard tabbing/focus
+        height: 0px;
+        width: 0px;
+        position: absolute;
+        left: -100px;
+    }
+
+    &--active {
+        legend {
+            text-decoration: underline;
+        }
+    }
+}

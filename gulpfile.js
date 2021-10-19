@@ -76,7 +76,7 @@ gulp.task('build-script', gulp.series(...scripts.map(createBuildScriptTask)))
 
 gulp.task('watch-and-build', async () => {
     gulp.watch('./src/js/**', gulp.series('build-script'))
-    gulp.watch('./src/scss/*.scss', gulp.series('build-styles'))
+    gulp.watch('./src/scss/**/*.scss', gulp.series('build-styles'))
 })
 
 

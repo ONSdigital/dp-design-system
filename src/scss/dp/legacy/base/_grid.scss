@@ -1,0 +1,301 @@
+//_grid.scss
+
+
+//--[vars]--
+
+// $baseline: 16px;
+
+$col: 16px;
+$gutter: 16px;
+
+
+$large-complex-grid-cols: 59;
+$medium-complex-grid-cols: 47;
+
+$large: $large-complex-grid-cols * $col;
+$medium: $medium-complex-grid-cols * $col;
+
+//simple cols
+$large-cols-one: $large-complex-grid-cols * $col;
+$large-cols-half: (($large-complex-grid-cols - 1) / 2) * $col;
+$large-cols-one-third: (($large-complex-grid-cols - 2) / 3) * $col;
+$large-cols-two-thirds: (($large-complex-grid-cols - 1) * $col) - $large-cols-one-third;
+$large-cols-one-quarter: (($large-complex-grid-cols - 3) / 4) * $col;
+$large-cols-three-quarters: (($large-complex-grid-cols - 1) * $col) - $large-cols-one-quarter;
+
+$medium-cols-one: $medium-complex-grid-cols * $col;
+$medium-cols-half: (($medium-complex-grid-cols - 1) / 2) * $col;
+$medium-cols-one-third: (($medium-complex-grid-cols - 2) / 3) * $col;
+$medium-cols-two-thirds: (($medium-complex-grid-cols - 1) * $col )- $medium-cols-one-third;
+$medium-cols-one-quarter: (($medium-complex-grid-cols - 3) / 4) * $col;
+$medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) - $medium-cols-one-quarter;
+
+//--[vars end]--
+
+
+
+
+
+
+//--[mixins]--
+
+// Breakpoint mixin in _breakpoints.scss
+
+// Generate the large columns
+@mixin make-lg-column($columns) {
+	position: relative;
+	min-height: 1px;
+	margin-left:  ($gutter);
+	float: left;
+
+	// @media (min-width: $screen-md-min) {
+	// 	float: left;
+	// 	width: percentage(($columns / $grid-columns));
+	// }
+}
+
+
+@mixin large-cols-complex {
+  @for $i from 1 through $large-complex-grid-cols {
+  &--lg-#{$i} {
+  	width: $col * $i;
+  	margin: 0;
+   }
+  }
+}
+
+
+@mixin medium-cols-complex {
+  @for $i from 1 through $medium-complex-grid-cols {
+  &--md-#{$i} {
+  	width: $col * $i;
+  	margin: 0;
+  }
+ }
+}
+
+@mixin large-cols-offset {
+  @for $i from 1 through $large-complex-grid-cols {
+  &--lg-offset-#{$i} {
+  	margin-left: $col * $i;
+   }
+  }
+}
+
+@mixin medium-cols-offset {
+  @for $i from 1 through $medium-complex-grid-cols {
+  &--md-offset-#{$i} {
+  	margin-left: $col * $i;
+   }
+  }
+}
+
+//--[mixins end]--
+
+
+
+
+
+
+//--[classes]--
+.wrapper {
+	// overflow: hidden;
+	@extend %clearfix;
+	width: 100%;
+	margin:0 auto;
+	padding: 0 16px;
+
+	@include breakpoint(md) {
+		width: ($medium);
+		padding: 0;
+	}
+
+	@include breakpoint(lg) {
+		width: ($large);
+		padding: 0;
+	}
+}
+
+
+.col-wrap{
+	// overflow: hidden;
+	@extend %clearfix;
+	width: 100%;
+
+
+	@include breakpoint(md) {
+		width: ($medium + $gutter);
+		margin-left: -$gutter;
+	}
+
+	@include breakpoint(lg) {
+		width: ($large + $gutter);
+		margin-left: -$gutter;
+	}
+
+
+}
+
+.col-span {
+	&--lg {
+		@include breakpoint(lg) {
+			&-thirds {
+				.col {
+					&:nth-child(3n+4) {
+	      				clear: left;
+	      			}
+	  			}
+			}
+			&-half {
+				.col {
+					&:nth-child(2n+3) {
+						clear:left;
+					}
+				}
+			}
+		}
+	}
+
+	&--md {
+		@include breakpoint(md) {
+			&-thirds {
+				.col {
+					&:nth-child(3n+4) {
+	      				clear: left;
+	      			}
+	  			}
+			}
+			&-half {
+				.col {
+					&:nth-child(2n+3) {
+						clear:left;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+.col {
+	// overflow: hidden;
+	@extend %clearfix;
+	width: 100%;
+	//padding-left: $gutter;
+	//padding-right: $gutter;
+	// box-sizing: border-box;
+	float: left;
+
+	@include breakpoint(md) {
+		width: ($medium);
+		margin-left: $gutter;
+		margin-right: 0;
+		// padding-left: 0;
+		// padding-right: 0;
+
+		&--md {
+			&-one {
+				width: $medium-cols-one;
+			}
+		}
+
+		&--md {
+			&-half {
+				width: $medium-cols-half;
+			}
+		}
+
+		&--md {
+			&-one-third {
+				width: $medium-cols-one-third;
+			}
+		}
+
+		&--md {
+			&-two-thirds {
+				width: $medium-cols-two-thirds;
+			}
+		}
+
+		&--md {
+			&-one-quarter {
+				width: $medium-cols-one-quarter;
+			}
+			&-three-quarters {
+				width: $medium-cols-three-quarters;
+			}
+		}
+
+		&--md {
+			&-full-width {
+				width: 100%;
+				margin: 0;
+			}
+		}
+
+		//call complex cols last so the css gets generated last and they take precedence
+		@include medium-cols-complex;
+		@include medium-cols-offset;
+
+	}
+
+	@include breakpoint(lg) {
+		width: ($large);
+		margin-left: $gutter;
+		margin-right: 0;
+		// padding-left: 0;
+		// padding-right: 0;
+
+		&--lg {
+			&-one {
+				width: $large-cols-one;
+			}
+		}
+
+		&--lg {
+			&-half {
+				width: $large-cols-half;
+			}
+		}
+
+		&--lg {
+			&-one-third {
+				width: $large-cols-one-third;
+			}
+		}
+		&--lg {
+			&-two-thirds {
+				width: $large-cols-two-thirds;
+			}
+		}
+
+		&--lg {
+			&-one-quarter {
+				width: $large-cols-one-quarter;
+			}
+			&-three-quarters {
+				width: $large-cols-three-quarters;
+			}
+		}
+
+		&--lg {
+			&-full-width {
+				width: 100%;
+				margin: 0;
+			}
+		}
+
+
+		//call complex cols last so the css gets generated last and they take precedence
+		@include large-cols-complex;
+		@include large-cols-offset;
+
+	}
+
+
+
+	// &--padded { padding: $baseline $gutter; }
+}
+
+
+//--[classes end]--

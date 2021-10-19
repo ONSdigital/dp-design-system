@@ -1,0 +1,79 @@
+//Mono:
+$thunder: 			#323132;
+$ship-grey: 		#414042;
+$abbey: 			#58595B;
+$nevada:        	#6D6E72; //tile hover colour
+$aluminium: 		#A6A8AB;
+$silver:        	#BBBDBF; //tile hover colour
+$silver-light:  	rgba(187,189,191,0.3); // tile hover colour
+$iron: 				#D0D2D3;
+$iron-light: 		#E5E6E7;
+$mercury: 			#E5E5E5;
+$gallery: 			#EAEAEA;
+$alabaster:   		#F9F9F9;
+$haze:				#F0F1F1;
+$white:				#FFFFFF;
+$mine-shaft:		#222222;
+$cod-gray:	    	#111111;
+
+//Colours:
+$neon-yellow:       #F0F762; //highlighting
+$matisse: 			#206095; //links
+$blumine:       	#1A4C76; //hover links
+$salem:				#0F8243; //active links
+$lily-white:    	#edf4f0; //success bg colour
+$poppy:         	#D32F2F; //errors
+$carrot:			#FF9933; //beta content
+$astral:			#3B7A9E;
+//$violet:        	#5f01ae;
+$blue:          	#3a7db4;
+$indigo:			#560072;
+$prim:				#E8DFF0;
+$pineapple-yellow:	#fbc900;
+$night-blue: #003c57;
+
+//Colour types
+$primary:       $salem;
+$secondary:     $nevada;
+
+$active:        $mine-shaft;
+$disabled:      $iron;
+$census:		$indigo;
+$error:         $poppy;
+
+$colours: (
+		//name      			//background-colour 	//font-colour	//anchor-colour
+		("thunder",				$thunder, 				$iron-light,	$iron-light)
+		("ship-grey", 			$ship-grey, 			$iron-light,	$iron-light)
+		("abbey", 				$abbey, 				$iron-light,	$iron-light)
+		("nevada", 				$nevada, 				$white,	        $white)
+		("aluminium", 			$aluminium, 			$thunder,		$matisse)
+		("silver", 				$silver, 				$thunder,		$matisse)
+		("iron", 				$iron, 					$thunder,		$matisse)
+		("iron-light", 			$iron-light, 			$thunder,		$matisse)
+		("mercury",				$mercury, 				$thunder,		$matisse)
+		("gallery", 			$gallery, 				$thunder,		$matisse)
+		("alabaster", 			$alabaster, 			$thunder,		$matisse)
+		("haze", 				$haze,					$thunder,		$matisse)
+		("white", 				$white, 				$thunder,		$matisse)
+		("matisse",				$matisse, 				$white)
+		("blumine", 			$blumine, 				$white)
+		("salem",				$salem, 				$white)
+		("poppy", 				$poppy, 				$white)
+		("carrot", 				$carrot, 				$thunder)
+		("astral", 				$astral, 				$haze)
+		("indigo",				$indigo,				$iron-light)
+		("prim",				$prim,					$thunder)
+		("pineapple-yellow",	$pineapple-yellow, 		$thunder, $night-blue)
+);
+
+
+
+@function colour($key) {
+  @if map-has-key($colours, $key) {
+    @return map-get($colours, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
+}

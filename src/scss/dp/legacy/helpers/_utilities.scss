@@ -1,0 +1,679 @@
+//_utilities.scss
+
+$old-ie: false;
+
+//hiding
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+.hidden {
+	display: none !important;
+	height: 0;
+	margin: 0;
+	visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.visuallyhidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	border: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+
+  	// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+  	&.focusable:active,
+	&.focusable:focus {
+		position: static;
+		width: auto;
+		height: auto;
+		margin: 0;
+		overflow: visible;
+		clip: auto;
+	}
+}
+
+
+
+// margins
+
+.margin {
+
+    &-top {
+
+        &--negative-one-fix {
+            margin-top: -1px !important;
+        }
+
+        &--negative-two-fix {
+            margin-top: -2px !important;
+        }
+        margin-top: ($baseline * 2) !important;
+
+        &--half {
+            margin-top: ($baseline) !important;
+        }
+
+        &--double {
+            margin-top: ($baseline * 4) !important;
+        }
+
+        &--triple {
+            margin-top: ($baseline * 6) !important;
+
+            &-lg {
+                @include breakpoint(lg) {
+                    margin-top: ($baseline * 6) !important;
+                }
+            }
+        }
+    }
+
+    &-right {
+        margin-right: $col !important;
+
+        &--half {
+            margin-right: ($col / 2) !important;
+        }
+
+        &--double {
+            margin-right: ($col * 2) !important;
+        }
+    }
+
+    &-bottom {
+        margin-bottom: ($baseline * 2) !important;
+
+        &--half {
+            margin-bottom: ($baseline) !important;
+        }
+
+        &--double {
+            margin-bottom: ($baseline * 4) !important;
+        }
+    }
+
+    &-left {
+        margin-left: $col !important;
+
+        &--negative-one-fix {
+            margin-left: -1px !important;
+        }
+        &--half {
+            margin-left: ($col / 2) !important;
+        }
+        &--double {
+            margin-left: ($col * 2) !important;
+        }
+    }
+
+    &--0 {
+        margin: 0 !important;
+    }
+
+}
+
+
+
+.flush {
+	margin: 0 !important;
+
+    &--sm {
+        @include breakpoint(sm) {
+            margin: 0 !important;
+        }
+    }
+}
+
+.flush-col {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.flush-bottom {
+	margin-bottom: 0 !important;
+}
+
+.flush-top {
+	margin-top: 0 !important;
+}
+
+
+
+// padding
+
+.padding {
+
+	&-top {
+		padding-top: ($baseline * 2) !important;
+
+		&--half {
+			padding-top: ($baseline) !important;
+		}
+	}
+
+	&-right {
+		padding-right: $col !important;
+
+		&--half {
+			padding-right: ($col / 2) !important;
+		}
+
+		&--none {
+		  padding-left: 0 !important;
+		  padding-right: 0 !important;
+		}
+	}
+
+	&-bottom {
+		padding-bottom: ($baseline * 2) !important;
+
+		&--half {
+			padding-bottom: ($baseline) !important;
+		}
+
+	}
+
+	&-left {
+		padding-left: $col !important;
+
+		&--half {
+			padding-left: ($col / 2) !important;
+		}
+
+	  	&--none {
+		  	padding-left: 0 !important;
+		  	padding-right: 0 !important;
+		}
+    }
+
+    &--0 {
+        padding: 0 !important;
+    }
+
+}
+
+
+// display
+
+.block {
+    display: block !important;
+}
+
+.inline {
+	display: inline !important;
+}
+
+.inline-block {
+	display: inline-block !important;
+
+    // Needed for census landing page - only one medium and above
+    @include breakpoint(md) {
+        &--md {
+            display: inline-block !important;
+        }
+    }
+}
+
+
+
+.hide {
+	display: none !important;
+
+    // Fix for old-ie hiding mobile--hide class
+    @if $old-ie == false {
+        &--sm {
+            @include breakpoint(sm) {
+                display: none !important;
+            }
+        }
+    }
+
+    &--md {
+        @include breakpoint(md) {
+            display: none !important;
+        }
+    }
+
+    &--md-only {
+        @include breakpoint(md) {
+            display: none;
+        }
+        @include breakpoint(lg) {
+            display: block;
+        }
+    }
+
+    &--lg {
+        @include breakpoint(lg) {
+            display: none !important;
+        }
+    }
+}
+
+@if $old-ie == true {
+
+	.old-ie {
+
+		&--display-block {
+			display: block !important;
+		}
+
+	}
+
+}
+
+// float
+
+.float-right {
+	float: right !important;
+}
+
+//  New float rule that includes breakpoints
+.float-el {
+	&--right{
+		&-sm {
+			@include breakpoint(sm) {
+				float: right !important;
+			}
+		}
+		&-md {
+				@include breakpoint(md) {
+					float: right !important;
+				}
+			}
+		&-lg {
+			@include breakpoint(lg) {
+				float: right !important;
+			}
+		}
+	}
+	&--left{
+		&-sm {
+			@include breakpoint(sm) {
+				float: left !important;
+			}
+		}
+		&-md {
+				@include breakpoint(md) {
+					float: left !important;
+				}
+			}
+		&-lg {
+			@include breakpoint(lg) {
+				float: left !important;
+			}
+		}
+	}
+}
+
+.float-left {
+	float: left !important
+}
+
+
+// javascript
+
+.no-js .nojs--hide, .nojs--hide {
+  display: none !important;
+}
+
+.js .js-hidden, .js-hidden  {
+  display: none !important;
+}
+
+.js--show {
+    display: none;
+}
+
+//.js-enhance--show {
+//    display: none;
+//}
+
+
+// clear
+
+.clear-left {
+	clear: left !important;
+}
+
+.clear-right {
+	clear: right !important;
+}
+
+// Make an element full width
+.full-width {
+	width:100%!important;
+}
+
+// hiding polyfill placeholder - temporary fix for IE8/9
+
+.placeholder {
+	display:none;
+}
+
+
+// overflow
+
+.overflow {
+    &--hidden {
+      overflow: hidden !important;
+    }
+}
+
+.nowrap {
+    &-sm {
+        @include breakpoint(sm) {
+            white-space: nowrap;
+        }
+    }
+}
+
+.vertical-align-middle {
+
+    position: relative;
+    &__contents {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%)
+    }
+    &__contents--md {
+        @include breakpoint(md) {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%)
+        }
+    }
+}
+
+
+// Set anything with aria-hidden attributes to correct display state
+ @media only screen {
+     [aria-hidden*=true] {
+         display: none;
+         visibility: hidden;
+     }
+
+     svg[aria-hidden*=true] { // Allow SVGs to still show even with aria:hidden. Only want them hidden from screen readers.
+         display: block;
+         visibility: visible;
+     }
+
+     [aria-hidden*=false] {
+         display: block;
+         visibility: visible;
+     }
+ }
+
+.datepicker__icon[aria-hidden*=true] {
+  visibility: initial;
+}
+
+#viewport {
+
+    &-sm {
+        height: 0;
+        max-height: 0;
+        display: none;
+
+        @include breakpoint(sm) {
+            display: block;
+        }
+    }
+
+    &-md {
+        height: 0;
+        max-height: 0;
+        display: none;
+
+        @include breakpoint(md) {
+            display: block;
+        }
+    }
+
+    &-lg {
+        height: 0;
+        max-height: 0;
+        display: none;
+
+        @include breakpoint(lg) {
+            display: block;
+        }
+
+    }
+
+}
+
+
+//Text transform
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalise:first-letter {
+    text-transform: capitalize;
+}
+
+.text-center {
+    text-align: center !important;
+
+    &--md {
+        @include breakpoint(md) {
+            text-align: center !important;
+        }
+    }
+
+    &--lg {
+        @include breakpoint(lg) {
+            text-align: center !important;
+        }
+    }
+}
+
+.text-right {
+    text-align: right !important;
+
+    &--md {
+        @include breakpoint(md) {
+            text-align: right !important;
+        }
+    }
+
+    &--lg {
+        @include breakpoint(lg) {
+            text-align: right !important;
+        }
+    }
+}
+
+.text-left {
+    text-align: left !important;
+
+    &--sm {
+            @include breakpoint(sm) {
+                text-align: left !important;
+            }
+          }
+
+    &--md {
+        @include breakpoint(md) {
+            text-align: left !important;
+        }
+    }
+
+    &--lg {
+        @include breakpoint(lg) {
+            text-align: left !important;
+        }
+    }
+}
+
+.underline-link {
+    text-decoration: underline !important;
+}
+
+.text-wrap {
+	white-space: normal;
+}
+
+.text-align-top {
+	vertical-align: top;
+}
+
+// Opacity value with fallback
+@mixin opacity($trans) {
+    zoom: 1;
+    filter: unquote('alpha(opacity=' + ($trans * 100) + ')'); // IE6 to IE8
+    opacity: $trans;
+}
+
+// Simple border radius
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius; // Chrome 4.0, Safari 3.1 to 4.0, Mobile Safari 3.2, Android Browser 2.1
+    -moz-border-radius: $radius; // Firefox 2.0 to 3.6
+    border-radius: $radius;
+}
+
+// Simple box shadow
+@mixin box-shadow($shadow) {
+    -webkit-box-shadow: $shadow; // Chrome 4.0 to 9.0, Safari 3.1 to 5.0, Mobile Safari 3.2 to 4.3, Android Browser 2.1 to 3.0
+    -moz-box-shadow: $shadow; // Firefox 3.5 to 3.6
+    box-shadow: $shadow;
+}
+
+// Remove the defauly focus and use our own.
+.show-focus {
+    &:focus {
+        @include box-shadow(0 0 0 3px $carrot);
+        outline:0;
+    }
+}
+
+.img-sparkline {
+    max-height: 100%;
+}
+
+.break-word {
+    word-wrap: break-word;
+}
+
+
+// Baseline
+
+// Used on inline elements that aren't on grid because they're not in a baselined element (eg an anchor not in a <p>)
+.baseline {
+    padding: 3px 0 5px 0;
+}
+
+// Mixin for silent styling to bunch up spacing between elements in big blocks of text (ie markdown)
+@mixin markdown {
+    overflow: visible;
+
+    h4 {
+        font-weight: 700;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+
+    p {
+        margin-top: 0;
+    }
+
+    ul {
+        margin-top: 0;
+    }
+
+    img {
+        max-width: ($col * 38);
+    }
+
+    li {
+        margin: 0;
+
+        // li with only one p shouldn't have padding (spacing looks excessive)
+        p:first-of-type {
+            margin: 0;
+            padding: 0;
+        }
+
+        // to offset above styling second p in an li should have extra margin on the top (giving it the same styling as an ordinary p)
+        p:nth-of-type(2) {
+            @extend p;
+            margin-top: ($baseline * 2);
+        }
+
+    }
+}
+
+.markdown {
+    @include markdown
+}
+
+@mixin font-heading-util {
+    .font-size {
+        @for $i from 1 through 6 {
+            //
+            &--h#{$i} {
+                @extend h#{$i};
+            }
+        }
+    }
+}
+
+@include font-heading-util;
+
+
+// Add ".adjust-font-size--n" class to container elements to increase font size on body elements
+@mixin body-adjust-util {
+   .adjust-font-size {
+        @for $i from 14 through 20 {
+               &--#{$i} {
+                dd, dt, fieldset, input, label, li, p, a, span, .btn--link {
+                   font-size: $i + px;
+               }
+           }
+       }
+   }
+}
+@include body-adjust-util;
+
+// Make all links within the component underlined
+.link-adjust a:not(.btn) {
+	@extend .underline-link;
+	&:focus {
+		@include box-shadow(0 0 0 3px $carrot);
+		outline: 0;
+	}
+}
+
+// Use as alternative to overflow:hidden
+%clearfix {
+    & {
+        *zoom: 1;
+    }
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+// Use as alternative to overflow:hidden
+.clearfix {
+    @extend %clearfix;
+}

@@ -66,5 +66,10 @@
 // High Contrast Mode
 @import '../../node_modules/@ons/design-system/scss/overrides/hcm.scss';
 
-// Digital Publishing specific styles, i.e., header, cookies banner
-@import 'dp/styles';
+
+// Digital Publishing specific styles, utilities and grid system. This is a temporary
+// inclusion to accommodate specific styling that is present on the website, but not in
+// the design system. This includes cookies banner and the site header.
+// Styling dependencies such as breakpoint
+
+@import './dp/styles';
