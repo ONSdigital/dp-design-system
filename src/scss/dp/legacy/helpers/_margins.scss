@@ -1,0 +1,136 @@
+
+   
+// margins mixin
+
+@mixin margins-util {
+    .margin {
+        //
+        &-top {
+            @for $i from 0 through 8 {
+                @include breakpoint(sm) {
+                    &-sm--#{$i} {
+                        margin-top: ($baseline * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 8 {
+                @include breakpoint(md) {
+                    &-md--#{$i} {
+                        margin-top: ($baseline * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 8 {
+                @include breakpoint(lg) {
+                    &-lg--#{$i} {
+                        margin-top: ($baseline * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 8 {
+                &--#{$i} {
+                    margin-top: ($baseline * $i) !important;
+                }
+            }
+            &--auto {
+                margin-top: auto;
+            }
+        }
+        &-bottom {
+            @for $i from 0 through 8 {
+                @include breakpoint(sm) {
+                    &-sm--#{$i} {
+                        margin-bottom: ($baseline * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 8 {
+                @include breakpoint(md) {
+                    &-md--#{$i} {
+                        margin-bottom: ($baseline * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 8 {
+                @include breakpoint(lg) {
+                    &-lg--#{$i} {
+                        margin-bottom: ($baseline * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 8 {
+                &--#{$i} {
+                    margin-bottom: ($baseline * $i) !important;
+                }
+            }
+            &--auto {
+                margin-bottom: auto;
+            }
+        }
+        //
+        &-left {
+            @for $i from 0 through 59 {
+                @include breakpoint(sm) {
+                    &-sm--#{$i} {
+                        margin-left: ($col * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 59 {
+                @include breakpoint(md) {
+                    &-md--#{$i} {
+                        margin-left: ($col * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 59 {
+                @include breakpoint(lg) {
+                    &-lg--#{$i} {
+                        margin-left: ($col * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 59 {
+                &--#{$i} {
+                    margin-left: ($col * $i) !important;
+                }
+            }
+            &--auto {
+                margin-left: auto;
+            }
+        }
+        &-right {
+            @for $i from 0 through 59 {
+                @include breakpoint(sm) {
+                    &-sm--#{$i} {
+                        margin-right: ($col * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 59 {
+                @include breakpoint(md) {
+                    &-md--#{$i} {
+                        margin-right: ($col * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 59 {
+                @include breakpoint(lg) {
+                    &-lg--#{$i} {
+                        margin-right: ($col * $i) !important;
+                    }
+                }
+            }
+            @for $i from 0 through 59 {
+                &--#{$i} {
+                    margin-right: ($col * $i) !important;
+                }
+            }
+            &--auto {
+                margin-right: auto;
+            }
+        }
+    }
+}
+
+@include margins-util;

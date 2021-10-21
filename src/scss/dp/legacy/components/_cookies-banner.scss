@@ -34,7 +34,7 @@
         display: -ms-flexbox;
         justify-content: left;
         align-items: center;
-        margin-top: 1rem;
+        margin-top: 16px;
 
         @include breakpoint(md-max) {
             flex-direction: column;
@@ -53,6 +53,7 @@
 
         a:hover {
             color: $lily-white;
+            text-decoration: none;
         }
 
         @include breakpoint(md-max) {
