@@ -4,9 +4,9 @@ const gulpIf = require('gulp-if')
 const buffer = require('vinyl-buffer')
 const source = require('vinyl-source-stream')
 const gulpTerser = require('gulp-terser')
-const sass = require('node-sass');
-const gulpSass = require('gulp-sass');
-const nodeSassGlobImporter = require('node-sass-glob-importer');
+const sass = require('node-sass')
+const gulpSass = require('gulp-sass')
+const nodeSassGlobImporter = require('node-sass-glob-importer')
 
 const babelEsmConfig = require('./babel.conf.esm.js')
 const babelNomoduleConfig = require('./babel.conf.nomodule')
@@ -16,18 +16,6 @@ const isDevelopment = !isProduction
 
 const DESIGN_SYSTEM_MODULE_PATH = './node_modules/@ons/design-system'
 const OUTPUT_DIRECTORY = './dist/assets'
-
-const sassCompiler = gulpSass(sass)
-const sassOptions = {
-  importer: nodeSassGlobImporter(),
-  outputStyle: isProduction ? 'compressed' : '',
-}
-
-const terserOptions = {
-  compress: {
-    drop_console: true,
-  },
-}
 
 const scripts = [
   {
@@ -44,6 +32,13 @@ const scripts = [
 
 function createBuildScriptTask({ entryPoint, outputFile, config }) {
   const taskName = `build-script:${outputFile}`
+
+  const terserOptions = {
+    compress: {
+      drop_console: true,
+    },
+  }
+
   gulp.task(taskName, () => {
     return browserify(entryPoint, { debug: isDevelopment })
       .transform('babelify', { ...config })
@@ -66,22 +61,31 @@ gulp.task('copy-static-assets-from-design-system', () => {
 })
 
 gulp.task('build-styles', () => {
+  const sassCompiler = gulpSass(sass)
+  const sassOptions = {
+    importer: nodeSassGlobImporter(),
+    outputStyle: isProduction ? 'compressed' : '',
+  }
+  
   return gulp
     .src('./src/scss/*.scss')
     .pipe(sassCompiler(sassOptions).on('error', sassCompiler.logError))
     .pipe(gulp.dest('./dist/assets/css'))
-});
+})
 
 gulp.task('build-script', gulp.series(...scripts.map(createBuildScriptTask)))
 
 gulp.task('watch-and-build', async () => {
-    gulp.watch('./src/js/**', gulp.series('build-script'))
-    gulp.watch('./src/scss/**/*.scss', gulp.series('build-styles'))
+  gulp.watch('./src/js/**', gulp.series('build-script'))
+  gulp.watch('./src/scss/**/*.scss', gulp.series('build-styles'))
 })
 
 gulp.task(
   'build',
-  gulp.series(gulp.parallel('build-script', 'build-styles'), 'copy-static-assets-from-design-system')
+  gulp.series(
+    gulp.parallel('build-script', 'build-styles'),
+    'copy-static-assets-from-design-system'
+  )
 )
 
 gulp.task('watch', gulp.series('build', 'watch-and-build'))

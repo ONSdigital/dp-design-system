@@ -5,10 +5,7 @@
   "main": "",
   "scripts": {
     "audit": "auditjs ossi --quiet",
-    "compile:css": "node-sass src/scss -o dist/assets/css",
-    "build:css": "node-sass --style=compressed src/scss -o dist/assets/css",
-    "build:js": "NODE_ENV=production gulp build",
-    "build": "run-s clean build:*",
+    "build": "NODE_ENV=production gulp build",
     "watch": "gulp watch",
     "server": "ws -p ${PORT:-9001}",
     "dev": "run-p clean watch server",
