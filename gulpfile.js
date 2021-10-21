@@ -79,10 +79,9 @@ gulp.task('watch-and-build', async () => {
     gulp.watch('./src/scss/*.scss', gulp.series('build-styles'))
 })
 
-
 gulp.task(
   'build',
-  gulp.series('build-script', 'build-styles', 'copy-static-assets-from-design-system')
+  gulp.series(gulp.parallel('build-script', 'build-styles'), 'copy-static-assets-from-design-system')
 )
 
-gulp.task('watch', gulp.series('build-script', 'build-styles', 'copy-static-assets-from-design-system', 'watch-and-build'))
+gulp.task('watch', gulp.series('build', 'watch-and-build'))
