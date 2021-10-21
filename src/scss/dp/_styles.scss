@@ -1,11 +1,11 @@
-@import './legacy/base/breakpoint';
-@import './legacy/base/sizing';
-@import './legacy/base/font-size';
-@import './legacy/base/colours';
-@import './legacy/base/grid';
+@import './overrides/base/breakpoint';
+@import './overrides/base/sizing';
+@import './overrides/base/font-size';
+@import './overrides/base/colours';
+@import './overrides/base/grid';
 
-@import './legacy/helpers/utilities';
-@import './legacy/helpers/margins';
+@import './overrides/helpers/utilities';
+@import './overrides/helpers/margins';
 
-@import './legacy/components/button';
-@import './legacy/components/cookies-banner';
+@import './overrides/components/button';
+@import './overrides/components/cookies-banner';
