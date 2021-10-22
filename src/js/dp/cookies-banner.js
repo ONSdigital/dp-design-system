@@ -20,27 +20,40 @@ function determineWhetherToRenderBanner() {
 
 function initCookiesBanner() {
   const jsHideBanner = document.querySelector('.js-hide-cookies-banner')
-  jsHideBanner.addEventListener('click', () =>
-    cookiesBanner.classList.add('hidden')
-  )
-  cookiesBanner.addEventListener('submit', submitCookieForm)
+  if (jsHideBanner) {
+    jsHideBanner.addEventListener('click', () =>
+      cookiesBanner.classList.add('hidden')
+    )
+  }
+
+  if (cookiesBanner) {
+    cookiesBanner.addEventListener('submit', submitCookieForm)
+  }
 }
 
 function submitCookieForm(e) {
   e.preventDefault()
   const cookiesAcceptBanner = document.querySelector('.js-accept-cookies')
 
-  cookiesAcceptBanner.disabled = true
-  cookiesAcceptBanner.classList.add('btn--primary-disabled')
+  if (cookiesAcceptBanner) {
+    cookiesAcceptBanner.disabled = true
+    cookiesAcceptBanner.classList.add('btn--primary-disabled')
+  }
 
   document.cookie = `cookies_preferences_set=${cookiesPreference};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`
   document.cookie = `cookies_policy=${encodedCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`
 
-  console.log(`cookies_policy=${encodedCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`)
-  document.querySelector('.js-cookies-banner-inform').classList.add('hidden')
-  document
-    .querySelector('.js-cookies-banner-confirmation')
-    .classList.remove('hidden')
+  const informDetails = document.querySelector('.js-cookies-banner-inform')
+  if (informDetails) {
+    informDetails.classList.add('hidden')
+  }
+
+  const acceptConfirmation = document.querySelector(
+    '.js-cookies-banner-confirmation'
+  )
+  if (acceptConfirmation) {
+    acceptConfirmation.classList.remove('hidden')
+  }
 }
 
 function extractDomainFromUrl(url) {
@@ -54,7 +67,7 @@ function extractDomainFromUrl(url) {
   const topLevelDomain = url.match(tlds)[0]
   const secondLevelDomain = url.replace(topLevelDomain, '').split('.').pop()
 
-  return '.' + secondLevelDomain + topLevelDomain
+  return `.${secondLevelDomain}${topLevelDomain}`
 }
 
 function hasCookiesPreferencesSet() {
