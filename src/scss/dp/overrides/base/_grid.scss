@@ -101,19 +101,20 @@ $medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) - $medium-
 .wrapper {
 	// overflow: hidden;
 	@extend %clearfix;
-	width: 100%;
-	margin:0 auto;
-	padding: 0 16px;
+	@extend .ons-container;
+	// width: 100%;
+	// margin:0 auto;
+	// padding: 0 16px;
 
-	@include breakpoint(md) {
-		width: ($medium);
-		padding: 0;
-	}
+	// @include breakpoint(md) {
+	// 	width: ($medium);
+	// 	padding: 0;
+	// }
 
-	@include breakpoint(lg) {
-		width: ($large);
-		padding: 0;
-	}
+	// @include breakpoint(lg) {
+	// 	width: ($large);
+	// 	padding: 0;
+	// }
 }
 
 
