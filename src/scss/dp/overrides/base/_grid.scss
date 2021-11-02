@@ -134,6 +134,10 @@ $medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) - $medium-
 		margin-left: -$gutter;
 	}
 
+	@include breakpoint(md-max) {
+		width: 100%;
+		margin-left: -($gutter / 2);
+	}
 
 }
 

@@ -1,0 +1,54 @@
+.footer {
+  background-color: $color-banner-bg;
+
+  &--sticky {
+    bottom: 0;
+    width: 100%;
+  }
+
+  a {
+    color: $color-text-banner-link;
+    text-decoration: underline;
+
+    &:hover {
+      color: $color-text-banner-link-hover;
+      text-decoration: underline solid $color-text-banner-link-hover 2px;
+    }
+  }
+
+  &-nav {
+    &__heading {
+      margin-top: 2rem;
+      font-size: 18px;
+    }
+
+    &__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    &__item {
+      margin: 0;
+      padding: 6px 0 2px 0;
+    }
+  }
+
+  &-license {
+    padding: 1.5rem 0 $col 0;
+
+    &__text {
+      display: inline-block;
+      vertical-align: super;
+    }
+  }
+
+  .ons-footer__ogl-img {
+    float: left;
+    margin-right: 1rem;
+  }
+
+  .ons-external-link .ons-svg-icon {
+    margin-left: 0.5rem;
+  }
+}

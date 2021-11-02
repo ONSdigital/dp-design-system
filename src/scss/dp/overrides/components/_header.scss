@@ -3,430 +3,428 @@
 // PRIMARY NAVIGATION
 
 .primary-nav {
+  background-color: $abbey;
+  position: relative;
 
-    background-color: $abbey;
-    position: relative;
+  @include breakpoint(md) {
+    border-top: 1px solid $thunder;
+    border-bottom: 1px solid $thunder;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0 auto;
+    font-size: 14px;
+    display: flex;
+    align-items: stretch;
+
+    @include breakpoint(md-max) {
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    @include breakpoint(sm) {
+      padding: 0 0 $baseline 0;
+      display: block;
+    }
+  }
+
+  &__item {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+
+    @include breakpoint(sm) {
+      height: $baseline * 6;
+      display: block;
+      padding-left: 16px;
+    }
 
     @include breakpoint(md) {
-        border-top: 1px solid $thunder;
-        border-bottom: 1px solid $thunder;
+      &:nth-child(6) a {
+        border-right: 1px solid $thunder;
+      }
     }
 
-    &__list {
-        list-style: none;
-        margin: 0 auto;
-        font-size: 0;
-        display: flex;
-        align-items: stretch;
-
-        @include breakpoint(sm) {
-            padding: 0 0 $baseline 0;
-            display: block;
-        }
-    }
-
-    &__item {
-        margin: 0;
-        padding: 0;
-        cursor: pointer;
-        display: inline-block;
-
-        @include breakpoint(sm) {
-            height: $baseline * 6;
-            display: block;
-            padding-left: 16px;
-        }
-
-        @include breakpoint(md) {
-            &:nth-child(6) a {
-                border-right: 1px solid $thunder;
-            }
-        }
-
-        //children show on hover
-        &:hover > ul,
-        &--focus > ul {
-            top: 100%;
-            @include breakpoint(md) {
-                background-color: $thunder;
-                color: $white;
-                text-decoration: none;
-                display: block;
-            }
-        }
-
-        //set hover styling - done on link so it works on keyboard tab
-        &:hover > a,
-        &:focus > a,
-        &--focus > a {
-            @include breakpoint(md) {
-                border-left: 1px solid $thunder;
-                background-color: $thunder;
-                color: $white;
-                text-decoration: none;
-            }
-        }
-
-        &--active {
-            @include breakpoint(sm) {
-                & > a {
-                    background-color: $active;
-                }
-            }
-
-            @include breakpoint(md) {
-                background-color: $active;
-            }
-
-            & > a {
-                color: $white;
-            }
-        }
-
-    }
-
-    &__link {
-        color: $iron-light;
+    //children show on hover
+    &:hover > ul,
+    &--focus > ul {
+      top: 100%;
+      @include breakpoint(md) {
+        background-color: $thunder;
+        color: $white;
         text-decoration: none;
-        height: 100%;
-
-        @include breakpoint(sm) {
-            height: ($baseline * 6);
-            padding: 14px 0 10px $col;
-        }
-
-        @include breakpoint(md) {
-            display: inline-block;
-            padding: 5px $baseline*2 9px $baseline*2;
-            border-left: 1px solid $thunder;
-            font-size: 13px; // smaller font on medium for retina screens
-        }
-
-        @include breakpoint(lg) {
-            font-size: 14px;
-        }
-
-        //set focus styling - has to be on link to work (hover styling on li)
-        &:focus {
-            @include breakpoint(md) {
-                border-left: 1px solid $thunder;
-                background-color: $thunder;
-                color: $white;
-                text-decoration: none;
-            }
-        }
-
-        //show sub-menu on keyboard focus of link
-        &:focus + ul {
-            top: 100%;
-
-            @include breakpoint(md) {
-                background-color: $thunder;
-                text-decoration: none;
-                display: block;
-            }
-        }
-
-        &:focus.hide-children + ul {
-            left: -99999px // override class to hide menu even when expandable item has focus
-        }
-
+        display: block;
+      }
     }
 
-    //NAVIGATION CHILDREN
-
-    &__child-list {
-        list-style: none;
+    //set hover styling - done on link so it works on keyboard tab
+    &:hover > a,
+    &:focus > a,
+    &--focus > a {
+      @include breakpoint(md) {
+        border-left: 1px solid $thunder;
+        background-color: $thunder;
         color: $white;
-        margin: 0;
-
-        @include breakpoint(sm) {
-            //display: none; //done with js-nav-hidden class
-            background-color: $ship-grey;
-            padding: 0;
-        }
-
-        @include breakpoint(md) {
-            position: absolute;
-            padding: 0;
-            z-index: 10;
-            display: none;
-            border: 1px solid $thunder;
-        }
+        text-decoration: none;
+      }
     }
 
-    &__child-item {
-        display: block;
-        margin: 0;
-        padding: 0;
-
-        &--active {
-            background-color: $cod-gray;
+    &--active {
+      @include breakpoint(sm) {
+        & > a {
+          background-color: $active;
         }
-    }
+      }
 
-    &__child-link {
-        display: block;
+      @include breakpoint(md) {
+        background-color: $active;
+      }
+
+      & > a {
         color: $white;
+      }
+    }
+  }
 
-        @include breakpoint(sm) {
-            height: 48px;
-            padding: 14px 0 12px $col;
-        }
+  &__link {
+    color: $iron-light;
+    text-decoration: none;
+    height: 100%;
 
-        @include breakpoint(md) {
-            padding: 14px 0 10px $col;
-
-            &:hover,
-            &:focus {
-                outline: 0;
-                background-color: $iron;
-                text-decoration: none;
-                color: $thunder;
-            }
-        }
+    @include breakpoint(sm) {
+      height: ($baseline * 6);
+      padding: 14px 0 10px $col;
     }
 
-    &__language {
+    @include breakpoint(md) {
+      display: inline-block;
+      padding: 5px $baseline * 2 9px $baseline * 2;
+      border-left: 1px solid $thunder;
+      font-size: 13px; // smaller font on medium for retina screens
+    }
+
+    @include breakpoint(lg) {
+      font-size: 14px;
+    }
+
+    //set focus styling - has to be on link to work (hover styling on li)
+    &:focus {
+      @include breakpoint(md) {
+        border-left: 1px solid $thunder;
+        background-color: $thunder;
+        color: $white;
+        text-decoration: none;
+      }
+    }
+
+    //show sub-menu on keyboard focus of link
+    &:focus + ul {
+      top: 100%;
+
+      @include breakpoint(md) {
+        background-color: $thunder;
+        text-decoration: none;
         display: block;
-        color: $iron-light;
-        overflow: hidden;
-        margin: 0;
-        padding-left: 32px;
+      }
     }
+
+    &:focus.hide-children + ul {
+      left: -99999px; // override class to hide menu even when expandable item has focus
+    }
+  }
+
+  //NAVIGATION CHILDREN
+
+  &__child-list {
+    list-style: none;
+    color: $white;
+    margin: 0;
+
+    @include breakpoint(sm) {
+      background-color: $ship-grey;
+      padding: 0;
+    }
+
+    @include breakpoint(md) {
+      position: absolute;
+      padding: 0;
+      z-index: 10;
+      display: none;
+      border: 1px solid $thunder;
+    }
+  }
+
+  &__child-item {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    &--active {
+      background-color: $cod-gray;
+    }
+  }
+
+  &__child-link {
+    display: block;
+    color: $white;
+    text-decoration: none;
+
+    @include breakpoint(sm) {
+      height: 48px;
+      padding: 14px 0 12px $col;
+    }
+
+    @include breakpoint(md) {
+      padding: 14px 0 10px $col;
+
+      &:hover,
+      &:focus {
+        outline: 0;
+        background-color: $iron;
+        text-decoration: none;
+        color: $thunder;
+      }
+    }
+  }
+
+  &__language {
+    display: block;
+    color: $iron-light;
+    overflow: hidden;
+    margin: 0;
+    padding-left: 32px;
+  }
 }
 
 //JQUERY EXPANDABLE MOBILE MENU - temporary until we write our own JS in new library
 
 .js-nav-hidden {
-    @include breakpoint(sm) {
-        display: none;
-    }
+  @include breakpoint(sm) {
+    display: none;
+  }
 }
 
 .js-expandable-active {
-    @include breakpoint(sm) {
-        & > a {
-            background-color: $thunder;
-            //border-bottom: 1px solid $thunder;
-        }
-
-        & ul {
-            display: block !important;
-        }
+  @include breakpoint(sm) {
+    & > a {
+      background-color: $thunder;
     }
+
+    & ul {
+      display: block !important;
+    }
+  }
 }
 
 .nav__top-level-duplicate {
-    @extend .primary-nav__child-item;
+  @extend .primary-nav__child-item;
 
-    & > a {
-        @extend .primary-nav__child-link;
-    }
+  & > a {
+    @extend .primary-nav__child-link;
+  }
 
-    @include breakpoint(md) {
-        display: none;
-    }
+  @include breakpoint(md) {
+    display: none;
+  }
 }
 
 //Add plus symbol - class used for JS too
 .js-expandable {
-    @include breakpoint(sm) {
-        & > a > .expansion-indicator {
-            display: initial;
-            visibility: initial;
+  @include breakpoint(sm) {
+    & > a > .expansion-indicator {
+      display: initial;
+      visibility: initial;
 
-            &:before {
-                position: absolute;
-                color: $iron-light;
-                content: '+';
-                left: $col;
+      &:before {
+        position: absolute;
+        color: $iron-light;
+        content: "+";
+        left: $col;
 
-                @if $old-ie == true {
-                    content: '';
-
-                }
-            }
+        @if $old-ie == true {
+          content: "";
         }
-
-        &-active {
-            & > a  > .expansion-indicator {
-                &:before {
-                    content: '-';
-                    padding-left: 5px;
-                }
-            }
-        }
+      }
     }
+
+    &-active {
+      & > a > .expansion-indicator {
+        &:before {
+          content: "-";
+          padding-left: 5px;
+        }
+      }
+    }
+  }
 }
 
 //Menu and search controls - TODO rewrite with mobile
 .nav--controls {
-    list-style: none;
-    margin: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+
+  @include breakpoint(md) {
+    display: none;
+  }
+
+  &__item {
     padding: 0;
-    display: flex;
-    align-items: stretch;
+    margin: 0;
+    display: inline-block;
+    width: 50%;
+  }
 
-    @include breakpoint(md) {
-        display: none;
-    }
+  &__menu {
+    background-color: $ship-grey;
+    font-size: 17px;
+    float: left;
+    width: 100%;
+    padding: $baseline * 2 $col;
+    color: $iron-light;
+    border-right: 1px solid $thunder;
+  }
 
-    &__item {
-        padding: 0;
-        margin: 0;
-        display: inline-block;
-        width: 50%;
-    }
+  &__no-search {
+    width: 100%;
+  }
 
-    &__menu {
-        background-color: $ship-grey;
-        font-size: 17px;
-        float: left;
-        width: 100%;
-        //padding-left: $col;
-        padding: $baseline*2 $col;
-        color: $iron-light;
-        border-right: 1px solid $thunder;
-    }
-
-    &__no-search {
-      width:100%;
-    }
-
-    &__search {
-        background-color: $ship-grey;
-        font-size: 17px;
-        float: left;
-        width: 100%;
-        //padding-left: $col;
-        padding: $baseline*2 $col;
-        color: $iron-light;
-        // border-bottom: 1px solid $ship-grey;
-        // margin-bottom: -1px;
-    }
+  &__search {
+    background-color: $ship-grey;
+    font-size: 17px;
+    float: left;
+    width: 100%;
+    padding: $baseline * 2 $col;
+    color: $iron-light;
+  }
 }
 
 .menu-is-expanded {
-    & > a {
-        background-color: $abbey;
-    }
+  & > a {
+    background-color: $abbey;
+  }
 }
 
 .search-is-expanded {
-    & > a {
-        background-color: $abbey;
-    }
+  & > a {
+    background-color: $abbey;
+  }
 }
 
 .nav-main--hidden {
-    @include breakpoint(sm) {
-        display: none;
-    }
+  @include breakpoint(sm) {
+    display: none;
+  }
 }
 
 .nav-search--hidden {
-    @include breakpoint(sm) {
-        display: none;
-    }
+  @include breakpoint(sm) {
+    display: none;
+  }
 }
 
 // HEADER - LOGO, LANGUAGE SELECTION AND SECONDARY NAV LINKS
 
 // Header
 .header {
-    padding: 15px 0 9px 0;
-    position: relative; // So language toggle has relative parent
-    height: ($baseline * 9);
+  padding: 15px 0 9px 0;
+  position: relative; // So language toggle has relative parent
+  height: ($baseline * 9);
 
-    &--separator {
-        background-color: $ship-grey;
-        height: 2px;
-    }
+  &--separator {
+    background-color: $ship-grey;
+    height: 2px;
+  }
 }
 
 // Logo
 .logo {
-    display: block;
+  display: block;
 
-    @include breakpoint(sm) {
-        height: $baseline * 6;
-        padding: 2px 0 6px 0; //off-grid on mobile otherwise
-    }
+  @include breakpoint(sm) {
+    height: $baseline * 6;
+    padding: 2px 0 6px 0; //off-grid on mobile otherwise
+  }
 
-    @include breakpoint(md) {
-        height: 39px;
-        margin-top: 2px;
-    }
+  @include breakpoint(md) {
+    height: 39px;
+    margin-top: 2px;
+  }
 }
 
 // Secondary navigation list
 .secondary-nav {
+  @include breakpoint(md-max) {
+    margin: 0;
+    max-width: 55%;
+    float: right;
+  }
 
-    // Fix for old-ie hiding mobile--hide class
-    @if $old-ie == false {
-        @include breakpoint(sm) {
-            display: none;
-        }
+  // Fix for old-ie hiding mobile--hide class
+  @if $old-ie == false {
+    @include breakpoint(sm) {
+      display: none;
+    }
+  }
+
+  &__list {
+    float: right;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  &__item {
+    float: left;
+    margin: 0;
+    padding: 0;
+
+    &:last-child a {
+      padding-right: 0;
+      border-right: 0 solid;
+    }
+  }
+
+  &__link {
+    padding: 0 8px 0 8px;
+    border-right: 1px solid $iron-light;
+    text-decoration: none;
+
+    &--active {
+      @include breakpoint(sm) {
+        background-color: $active;
+      }
     }
 
-    &__list {
-        float: right;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 24px;
+    &:hover {
+      text-decoration: underline;
     }
-
-    &__item {
-        //display: inline-block;
-        float: left;
-        margin: 0;
-        padding: 0;
-
-        &:last-child a {
-            padding-right: 0;
-            border-right: 0 solid;
-        }
-
-    }
-
-    &__link {
-        padding: 0 8px 0 8px;
-        border-right: 1px solid $iron-light;
-        text-decoration: none;
-
-        &--active {
-            @include breakpoint(sm) {
-                background-color: $active;
-            }
-        }
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
+  }
 }
 
 // 'Skip to main content' keyboard tabbable link
 .skiplink {
-    position: absolute;
-    left: -99999px;
+  position: absolute;
+  left: -99999px;
 
-    &:focus {
-        background: $ship-grey;
-        color: $white;
-        top: 0;
-        right: 0;
-        left: 0;
-        margin: 0 auto;
-        z-index: 10;
-        width: ($col * 10);
-        padding: 6px 0 10px 0;
-        font-size: 14px;
-        text-align: center;
-    }
+  &:focus {
+    background: $ship-grey;
+    color: $white;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 10;
+    width: ($col * 10);
+    padding: 6px 0 10px 0;
+    font-size: 14px;
+    text-align: center;
+  }
 }
