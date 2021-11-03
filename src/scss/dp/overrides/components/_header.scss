@@ -34,6 +34,7 @@
     padding: 0;
     cursor: pointer;
     display: inline-block;
+    flex-grow: 1;
 
     @include breakpoint(sm) {
       height: $baseline * 6;
@@ -42,7 +43,7 @@
     }
 
     @include breakpoint(md) {
-      &:nth-child(6) a {
+      &:nth-child(6) {
         border-right: 1px solid $thunder;
       }
     }
@@ -56,6 +57,15 @@
         color: $white;
         text-decoration: none;
         display: block;
+        width: 32.75%;
+      }
+
+      @include breakpoint(md-max) {
+        width: unset;
+      }
+
+      @include breakpoint(sm) {
+        width: 100%;
       }
     }
 
@@ -68,6 +78,11 @@
         background-color: $thunder;
         color: $white;
         text-decoration: none;
+      }
+    }
+    &:hover {
+      @include breakpoint(md) {
+        background-color: $thunder;
       }
     }
 
@@ -116,6 +131,13 @@
         background-color: $thunder;
         color: $white;
         text-decoration: none;
+      }
+    }
+
+    &:hover,
+    &:hover {
+      @include breakpoint(sm) {
+        color: $white;
       }
     }
 
@@ -195,6 +217,12 @@
     overflow: hidden;
     margin: 0;
     padding-left: 32px;
+
+    @include breakpoint(sm) {
+      & a.language__link {
+        color: $white;
+      }
+    }
   }
 }
 
@@ -287,6 +315,15 @@
     padding: $baseline * 2 $col;
     color: $iron-light;
     border-right: 1px solid $thunder;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      @include breakpoint(sm) {
+        color: $white;
+        text-decoration: none;
+      }
+    }
   }
 
   &__no-search {
@@ -300,6 +337,15 @@
     width: 100%;
     padding: $baseline * 2 $col;
     color: $iron-light;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      @include breakpoint(sm) {
+        color: $white;
+        text-decoration: none;
+      }
+    }
   }
 }
 
@@ -360,9 +406,10 @@
 .secondary-nav {
   @include breakpoint(md-max) {
     margin: 0;
-    max-width: 55%;
-    float: right;
   }
+
+  max-width: 55%;
+  float: right;
 
   // Fix for old-ie hiding mobile--hide class
   @if $old-ie == false {

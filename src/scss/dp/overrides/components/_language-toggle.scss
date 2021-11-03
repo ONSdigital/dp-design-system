@@ -2,9 +2,10 @@
   &--js__container {
     @include breakpoint(md-max) {
       margin: 0;
-      max-width: 55%;
-      float: right;
     }
+
+    max-width: 55%;
+    float: right;
 
     // Language selection
     & .language {

@@ -33,8 +33,9 @@
     font-weight: inherit;
     line-height: $base-line-height;
     color: $iron-light;
-    padding: ($baseline * 2) 0 ($baseline * 2) ($baseline * 2);
+    padding: ($baseline * 2) 0;
     overflow: initial;
+    display: flex;
 
     @if $old-ie == false {
       @include breakpoint(sm) {
@@ -57,6 +58,7 @@
     padding: 12px $col 12px 0;
     background-color: transparent;
     position: relative;
+    flex-grow: 1;
 
     @if $old-ie == false {
       @include breakpoint(sm) {
@@ -77,6 +79,7 @@
     background: white;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
+    flex-grow: 1;
 
     &:focus {
       outline: 2px solid $carrot;
