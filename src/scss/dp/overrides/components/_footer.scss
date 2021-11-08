@@ -1,5 +1,6 @@
 .footer {
-  background-color: $color-banner-bg;
+  background-color: $color-grey-100;
+  color: $white;
 
   &--sticky {
     bottom: 0;
@@ -7,12 +8,12 @@
   }
 
   a {
-    color: $color-text-banner-link;
+    color: $color-grey-5;
     text-decoration: underline;
 
     &:hover {
-      color: $color-text-banner-link-hover;
-      text-decoration: underline solid $color-text-banner-link-hover 2px;
+      color: $white;
+      text-decoration: underline solid $white 2px;
     }
   }
 
@@ -46,9 +47,11 @@
   .ons-footer__ogl-img {
     float: left;
     margin-right: 1rem;
+    fill: $white;
   }
 
   .ons-external-link .ons-svg-icon {
     margin-left: 0.5rem;
+    fill: $white;
   }
 }

@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/ONSdigital/dp-design-system#readme",
   "dependencies": {
-    "@ons/design-system": "^41.0.2",
+    "@ons/design-system": "^42.2.0",
     "core-js": "^3.18.3",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",

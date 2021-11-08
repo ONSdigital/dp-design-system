@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const pageURL = window.location.href;
-  const feedbackURL = "/feedback";
+  const feedbackPath = "/feedback";
+  const positiveFeedbackPath = `${feedbackPath}/positive`;
   const feedbackFormHeader = document.querySelector("#feedback-form-header");
   const feedbackMessage =
     '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
@@ -43,26 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "#feedback-form-container"
       );
 
-      const serializedData = serializeFormData(feedbackFormContainer);
-      const request = new XMLHttpRequest();
-      request.open("POST", `${feedbackURL}/positive`, true);
-      request.setRequestHeader(
-        "Content-Type",
-        "application/x-www-form-urlencoded; charset=UTF-8"
-      );
-      request.onreadystatechange = function () {
-        if (request.readyState === XMLHttpRequest.DONE) {
-          const status = request.status;
-          if (status === 0 || (status >= 200 && status < 400)) {
-            feedbackFormHeader.innerHTML = feedbackMessage;
-          } else {
-            console.error(
-              `footer feedback error: ${request.status}: ${request.statusText}`
-            );
-            feedbackFormHeader.innerHTML = feedbackMessageError;
-          }
-        }
-      };
+      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, positiveFeedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError);
       request.send(serializedData);
     });
   }
@@ -132,26 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const serializedData = serializeFormData(feedbackFormContainer);
-      const request = new XMLHttpRequest();
-      request.open("POST", feedbackURL, true);
-      request.setRequestHeader(
-        "Content-Type",
-        "application/x-www-form-urlencoded; charset=UTF-8"
-      );
-      request.onreadystatechange = function () {
-        if (request.readyState === XMLHttpRequest.DONE) {
-          const status = request.status;
-          if (status === 0 || (status >= 200 && status < 400)) {
-            feedbackFormHeader.innerHTML = feedbackMessage;
-          } else {
-            console.error(
-              `footer feedback error: ${request.status}: ${request.statusText}`
-            );
-            feedbackFormHeader.innerHTML = feedbackMessageError;
-          }
-        }
-      };
+      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, feedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError);
       const feedbackForm = document.querySelector("#feedback-form");
       if (feedbackForm) {
         feedbackForm.classList.add("js-hidden");
@@ -161,6 +124,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMessage, feedbackMessageError) {
+  const serializedData = serializeFormData(form);
+  const request = new XMLHttpRequest();
+  request.open("POST", path, true);
+  request.setRequestHeader(
+    "Content-Type",
+    "application/x-www-form-urlencoded; charset=UTF-8"
+  );
+  request.onreadystatechange = function () {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      const status = request.status;
+      if (status === 0 || (status >= 200 && status < 400)) {
+        feedbackFormHeader.innerHTML = feedbackMessage;
+      } else {
+        console.error(
+          `footer feedback error: ${request.status}: ${request.statusText}`
+        );
+        feedbackFormHeader.innerHTML = feedbackMessageError;
+      }
+    }
+  };
+  return { request, serializedData };
+}
 
 function serializeFormData(form) {
   const data = new FormData(form);
