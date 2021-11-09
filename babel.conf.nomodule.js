@@ -1,22 +1,22 @@
 module.exports = {
   babelrc: false,
   plugins: [
-    '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-transform-runtime',
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime",
   ],
   global: true,
-  ignore: [/node_modules\).*/],
-  sourceType: 'module',
+  ignore: [/node_modules\/(?!(chai-as-promised|fetch-mock)\/).*/],
+  sourceType: "module",
   presets: [
     [
-      '@babel/preset-env',
+      "@babel/preset-env",
       {
-        modules: 'commonjs',
+        modules: "commonjs",
         targets: {
-          browsers: ['ie 11'],
+          browsers: ["ie 11"],
         },
       },
     ],
   ],
-}
+};
