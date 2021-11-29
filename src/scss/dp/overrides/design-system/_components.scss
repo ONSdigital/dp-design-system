@@ -8,6 +8,9 @@
     padding-bottom: 0;
   }
   &-table {
+    &__header.ons-u-pb-s {
+      padding-bottom: 1rem;
+    }
     &__cell.ons-u-pb-s.ons-u-pt-s {
       padding-bottom: 1rem;
       padding-top: 1rem;
