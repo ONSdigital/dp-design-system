@@ -10,7 +10,7 @@
   }
 
   &--results-page {
-    height: ($baseline * 24);
+    height: auto;
 
     h1 {
       color: $iron-light;
@@ -32,10 +32,18 @@
     font-family: $base-font-family;
     font-weight: inherit;
     line-height: $base-line-height;
+    width: 100%;
     color: $iron-light;
     padding: ($baseline * 2) 0;
     overflow: initial;
     display: flex;
+
+    align-items:center;
+
+    h1 {
+      font-size: 18px;
+      padding: 12px $col 12px 0;
+    }
 
     @if $old-ie == false {
       @include breakpoint(sm) {
@@ -59,6 +67,7 @@
     background-color: transparent;
     position: relative;
     flex-grow: 1;
+    
 
     @if $old-ie == false {
       @include breakpoint(sm) {
@@ -79,7 +88,7 @@
     background: white;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
-    flex-grow: 1;
+    flex-grow: 2;
 
     &:focus {
       outline: 2px solid $carrot;
