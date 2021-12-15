@@ -38,13 +38,6 @@
     overflow: initial;
     display: flex;
 
-    align-items:center;
-
-    h1 {
-      font-size: 18px;
-      padding: 12px $col 12px 0;
-    }
-
     @if $old-ie == false {
       @include breakpoint(sm) {
         padding: ($baseline * 3) 0;
@@ -61,7 +54,8 @@
     font-family: $base-font-family;
     font-weight: inherit;
     line-height: $base-line-height;
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 700;
     color: $iron-light;
     padding: 12px $col 12px 0;
     background-color: transparent;
