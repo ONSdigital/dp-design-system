@@ -1,3 +1,11 @@
+.col {
+  &--border-top {
+    @media (min-width: 641px) {
+      border-top: 1px solid #000;
+    }
+  }
+}
+
 .search {
   @include breakpoint(sm) {
     background-color: $abbey;
@@ -9,20 +17,52 @@
     height: 80px;
   }
 
-  &--col-border-bottom {
-    border-bottom: 1px solid #000;
+  &__summary {
+    width: 100%;
+    padding: 36px 0 46px;
+
+    .base-font {
+      font-size: 30px;
+    }
+
+    &__query {
+      @extend .base-font;
+      font-weight: 700;
+    }
+
+    &__count {
+      @extend .base-font;
+      font-weight: 300;
+    }
+
+    &__suggestion {
+      @extend .base-font;
+      font-weight: 300;
+    }
   }
 
-  &--results-text {
-    font-size: 200px;
+  &__filter {
+    &__content {
+      @media (min-width: 641px) {
+        margin-top: 46px;
+      }
+      legend {
+        padding-top: 17px;
+      }
+    }
   }
 
-  &--results-page {
+  &__results {
+    margin-top: 17px;
     height: auto;
-
     h1 {
       color: $iron-light;
       margin: ($baseline * 2) 0 $baseline 0;
+    }
+
+    &__item {
+      list-style: none;
+      padding-left: 0;
     }
 
     @if $old-ie == false {
@@ -69,7 +109,6 @@
     position: relative;
     flex-grow: 1;
 
-
     @if $old-ie == false {
       @include breakpoint(sm) {
         display: none;
@@ -104,16 +143,6 @@
         font-size: 14px;
         padding: 12px $col/2 8px $col/2;
       }
-    }
-
-    &__results-page {
-      &--item{
-        &__item {
-          list-style: none;
-          padding-left: 0;
-        }
-      }
-      height: ($baseline * 5);
     }
 
     &--body {
@@ -165,44 +194,15 @@
       height: ($baseline * 5);
       padding-top: ($baseline / 2);
     }
-    //
-    //&--body {
-    //  height: 52px;
-    //  width: 52px;
-    //  margin-top: -2px;
-    //  float: left;
-    //}
-  }
-  &__item {
-    list-style: none;
-    padding-left: 0;
+
+    &--body {
+      height: 52px;
+      width: 52px;
+      margin-top: -2px;
+      float: left;
+    }
   }
 }
-
-.search-summary {
-  width: 100% !important;
-  padding: 36px 0 46px;
-
-  .base-font {
-    font-size: 30px;
-  }
-
-  &__query {
-    @extend .base-font;
-    font-weight: 700;
-  }
-
-  &__count {
-    @extend .base-font;
-    font-weight: 300;
-  }
-
-  &__suggestion {
-    @extend .base-font;
-    font-weight: 300;
-  }
-}
-
 
 [type="search"] {
   &::-webkit-search-cancel-button,
@@ -210,4 +210,3 @@
     -webkit-appearance: auto;
   }
 }
-  
