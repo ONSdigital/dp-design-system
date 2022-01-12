@@ -1,0 +1,22 @@
+.ons {
+  &-metadata__value.ons-u-f-no {
+    float: none;
+  }
+  &-toc-container {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  &-table {
+    &__header.ons-u-pb-s {
+      padding-bottom: 1rem;
+    }
+    &__cell.ons-u-pb-s.ons-u-pt-s {
+      padding-bottom: 1rem;
+      padding-top: 1rem;
+    }
+    &__row.ons-u-bb.ons-u-bt:first-child {
+      border-top-width: 2px !important;
+    }
+  }
+}

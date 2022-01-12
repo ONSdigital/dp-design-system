@@ -391,25 +391,6 @@ $old-ie: false;
     }
 }
 
-
-// Set anything with aria-hidden attributes to correct display state
- @media only screen {
-     [aria-hidden*=true] {
-         display: none;
-         visibility: hidden;
-     }
-
-     svg[aria-hidden*=true] { // Allow SVGs to still show even with aria:hidden. Only want them hidden from screen readers.
-         display: block;
-         visibility: visible;
-     }
-
-     [aria-hidden*=false] {
-         display: block;
-         visibility: visible;
-     }
- }
-
 .datepicker__icon[aria-hidden*=true] {
   visibility: initial;
 }

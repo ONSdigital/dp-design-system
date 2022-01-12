@@ -1,0 +1,63 @@
+.language {
+  &--js__container {
+    @include breakpoint(md-max) {
+      margin: 0;
+    }
+
+    max-width: 55%;
+    float: right;
+
+    // Language selection
+    & .language {
+      font-size: 12px;
+      margin-bottom: 0.25rem;
+
+      @include breakpoint(md) {
+        float: right;
+      }
+
+      &__title {
+        display: inline;
+      }
+
+      &__item {
+        margin: 0 0 0 4px;
+        display: inline;
+      }
+
+      // Styles for js enhanced <select> form
+      &--js {
+        display: none; // Hide until enhanced and shown on page
+        min-width: ($col * 10);
+
+        &__label {
+          font-size: 12px;
+        }
+
+        &__select {
+          padding-bottom: 2px; // Fixes text being 1 pixel below label text
+          float: right;
+          border: 0 !important;
+          font-size: 12px;
+          height: 24px;
+          color: $matisse;
+          -webkit-appearance: none; /*Removes default chrome and safari style*/
+          -moz-appearance: none; /* Removes Default Firefox style*/
+          text-indent: 0.01px; /* Removes default arrow from firefox*/
+          text-overflow: ""; /*Removes default arrow from firefox*/
+
+          // IE10+ fixes
+          &::-ms-expand {
+            display: none;
+          }
+          &:focus::-ms-value {
+            color: $matisse;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

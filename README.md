@@ -30,7 +30,7 @@ When PRs are merged into `main`, compiled assets are made available on the ONS C
 
 ## Configuration
 
-Locally served on port 9001
+Locally served on port 9002
 .sass-lint
 
 ## Contributing
