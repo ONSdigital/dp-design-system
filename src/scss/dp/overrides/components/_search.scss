@@ -1,3 +1,25 @@
+.col {
+  &--border-top {
+    @media (min-width: 641px) {
+      border-top: 1px solid $thunder;
+    }
+  }
+}
+
+.wrapper {
+  @media (min-width: 768px) {
+    width: 752px;
+    padding: 0;
+  }
+  
+  @media (min-width: 992px) {
+    width: 944px;
+    padding: 0;
+  }
+
+
+}
+
 .search {
   @include breakpoint(sm) {
     background-color: $abbey;
@@ -5,23 +27,63 @@
 
   @include breakpoint(md) {
     background-color: $ship-grey;
-    font-size: 17px;
+    font-size: 1.41rem;
     height: 80px;
   }
 
-  &--results-page {
-    height: ($baseline * 24);
+  &__summary {
+    width: 100%;
+    padding: 36px 0 46px;
 
+    .base-font {
+      font-size: 2.5rem;
+    }
+
+    &__query {
+      @extend .base-font;
+      font-weight: 700;
+    }
+
+    &__count {
+      @extend .base-font;
+      font-weight: 300;
+    }
+
+    &__suggestion {
+      @extend .base-font;
+      font-weight: 300;
+    }
+  }
+
+  &__filter {
+    &__content {
+      @media (min-width: 641px) {
+        margin-top: 46px;
+      }
+      legend {
+        padding-top: 17px;
+      }
+    }
+  }
+
+  &__results {
+    margin-top: 17px;
+    height: auto;
     h1 {
       color: $iron-light;
       margin: ($baseline * 2) 0 $baseline 0;
+    }
+
+    &__item {
+      list-style: none;
+      padding-left: 0;
     }
 
     @if $old-ie == false {
       @include breakpoint(sm) {
         height: auto;
         h1 {
-          font-size: 21px;
+          font-size: 1.75rem;
           line-height: ($baseline * 4);
         }
       }
@@ -32,6 +94,7 @@
     font-family: $base-font-family;
     font-weight: inherit;
     line-height: $base-line-height;
+    width: 100%;
     color: $iron-light;
     padding: ($baseline * 2) 0;
     overflow: initial;
@@ -53,7 +116,7 @@
     font-family: $base-font-family;
     font-weight: inherit;
     line-height: $base-line-height;
-    font-size: 17px;
+    font-size: 1rem;
     color: $iron-light;
     padding: 12px $col 12px 0;
     background-color: transparent;
@@ -71,7 +134,7 @@
     font-family: $base-font-family;
     font-weight: inherit;
     line-height: $base-line-height;
-    font-size: 17px;
+    font-size: 1.41rem;
     color: $thunder;
     border: none;
     padding: 4px;
@@ -79,7 +142,7 @@
     background: white;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
-    flex-grow: 1;
+    flex-grow: 2;
 
     &:focus {
       outline: 2px solid $carrot;
@@ -91,13 +154,9 @@
     @if $old-ie == false {
       @include breakpoint(sm) {
         width: 80%;
-        font-size: 14px;
+        font-size: 1.16rem;
         padding: 12px $col/2 8px $col/2;
       }
-    }
-
-    &--results-page {
-      height: ($baseline * 5);
     }
 
     &--body {
@@ -114,7 +173,7 @@
     font-family: $base-font-family;
     font-weight: inherit;
     line-height: $base-line-height;
-    font-size: 17px;
+    font-size: 1.41rem;
     color: $white;
     border: none;
     padding: 0;
@@ -139,7 +198,7 @@
     @if $old-ie == false {
       @include breakpoint(sm) {
         width: 20%;
-        font-size: 14px;
+        font-size: 1.16rem;
         padding-left: $col/2;
         padding-right: $col/2;
       }

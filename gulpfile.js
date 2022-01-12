@@ -25,7 +25,11 @@ const scripts = [
     config: babelEsmConfig,
   },
   {
-    entryPoint: ["./src/js/import-ds.es5.js", "./src/js/polyfills.js", "./src/js/main.js"],
+    entryPoint: [
+      "./src/js/import-ds.es5.js",
+      "./src/js/polyfills.js",
+      "./src/js/main.js",
+    ],
     outputFile: "main.es5.js",
     config: babelNomoduleConfig,
   },
@@ -56,6 +60,11 @@ gulp.task("copy-static-assets-from-design-system", () => {
   gulp
     .src(`${DESIGN_SYSTEM_MODULE_PATH}/fonts/**`)
     .pipe(gulp.dest(`${OUTPUT_DIRECTORY}/fonts`));
+
+  gulp
+    .src(`${DESIGN_SYSTEM_MODULE_PATH}/img/**`)
+    .pipe(gulp.dest(`${OUTPUT_DIRECTORY}/img`));
+
   return gulp
     .src(`${DESIGN_SYSTEM_MODULE_PATH}/favicons/**`)
     .pipe(gulp.dest(`${OUTPUT_DIRECTORY}/favicons`));
