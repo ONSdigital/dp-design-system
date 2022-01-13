@@ -11,13 +11,11 @@
     width: 752px;
     padding: 0;
   }
-  
+
   @media (min-width: 992px) {
     width: 944px;
     padding: 0;
   }
-
-
 }
 
 .search {
@@ -87,6 +85,13 @@
           line-height: ($baseline * 4);
         }
       }
+    }
+  }
+
+  &__pagination {
+    &__item {
+      display: inline;
+      float: left;
     }
   }
 
