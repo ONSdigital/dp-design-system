@@ -14,7 +14,6 @@ const fetchAndReplaceHtml = (url, selector, newSelector) => {
     mode: "cors",
     headers: new Headers({
       Accept: "application/json",
-      "access-control-allow-origin": "*",
     }),
   })
     .then((response) => {
