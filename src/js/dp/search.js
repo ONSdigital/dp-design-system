@@ -15,7 +15,7 @@ const fetchHtml = async (url) => {
       Accept: "application/json",
     }),
   });
-  return (await response) && response.text();
+  return response && await response.text();
 };
 
 const filters = document.querySelectorAll(".child-filter input");
