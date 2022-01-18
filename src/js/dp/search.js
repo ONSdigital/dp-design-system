@@ -21,12 +21,13 @@ const fetchHtml = async (url) => {
 const filters = document.querySelectorAll(".child-filter input");
 let strParams = window.location.search;
 
+
 filters.forEach((item) => {
-  item.addEventListener("click", async (e) => {
+  item.addEventListener("click", async (e) => { 
     if (e.target.checked) {
       strParams += `&filter=${e.target.value}`;
     } else {
-      strParams = strParams.replace(`${new RegExp(/(\&|\?)filter)/)}=${e.target.value}`, "");
+      strParams = strParams.replace(new RegExp(`(\\&|\\?)filter\=${e.target.value}`), "")
     }
 
     const responseText = await fetchHtml(`/search${strParams}`);
@@ -38,6 +39,7 @@ filters.forEach((item) => {
         .replaceWith(dom.querySelector(".search__results"));
 
       // WIP
+      // strParams = strParams.replace(/(\&|\?)page=[0-9]*/, '')
       // document
       //   .querySelector(".search__pagintion")
       //   .replaceWith(dom.querySelector(".search__pagintion"));
