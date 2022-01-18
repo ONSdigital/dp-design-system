@@ -29,7 +29,7 @@ filters.forEach((item) => {
       strParams = strParams.replace(`${new RegExp(/(\&|\?)filter)/)}=${e.target.value}`, "");
     }
 
-    const responseText = await fetchHtml(`/search${strParams}&page=1`);
+    const responseText = await fetchHtml(`/search${strParams}`);
     if (responseText) {
       const dom = new DOMParser().parseFromString(responseText, "text/html");
 
