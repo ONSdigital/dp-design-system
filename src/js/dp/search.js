@@ -40,9 +40,9 @@ filters.forEach((item) => {
 
       // WIP
       // strParams = strParams.replace(/(\&|\?)page=[0-9]*/, '')
-      // document
-      //   .querySelector(".search__pagintion")
-      //   .replaceWith(dom.querySelector(".search__pagintion"));
+      document
+        .querySelector(".search__pagination")
+        .replaceWith(dom.querySelector(".search__pagination"));
     }
   });
 });
