@@ -14,6 +14,9 @@
     &__cell.ons-u-pb-s.ons-u-pt-s {
       padding-bottom: 1rem;
       padding-top: 1rem;
+      &.ons-u-ta-right {
+        text-align: right;
+      }
     }
     &__row.ons-u-bb.ons-u-bt:first-child {
       border-top-width: 2px !important;
