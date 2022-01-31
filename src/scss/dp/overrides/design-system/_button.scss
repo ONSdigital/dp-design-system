@@ -10,4 +10,10 @@ button.ons-btn__btn {
     @extend .ons-btn:focus;
     top: 0;
   }
+  &--search {
+          padding-bottom: 0px;
+          text-decoration-thickness: 1px;
+          font-size: .77778rem;
+          margin-left: .75rem !important;
+      }
 }
