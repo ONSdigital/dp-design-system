@@ -9,17 +9,17 @@ const fetchHtml = async (url) => {
   return response && await response.text();
 };
 
-const replaceWithPolyfill = (el1, el2) => {
+const replaceElementIEPollyfill = (el1, el2) => {
   el1.insertAdjacentElement('beforebegin', el2);
   el1.parentElement.removeChild(el1); // absolutely ridiculous
   
 }
 
-const switchSearchMarkup = async (strParams, resetPagination = false) => {
+const switchSearchMarkup = async (strParams, resetPagination = false, scrollToTop = false) => {
   let theStringParams = strParams;
   if(resetPagination){
     // reset to page 1 since filtering and sorting will change the length/order of results.
-    theStringParams = theStringParams.replace(new RegExp(`[?&]page\=[^&]+`), "page=1");
+    theStringParams = theStringParams.replace(new RegExp(`[?&]page\=[^&]+`), "&page=1");
   }
 
   const responseText = await fetchHtml(`/search${theStringParams}`);
@@ -29,17 +29,26 @@ const switchSearchMarkup = async (strParams, resetPagination = false) => {
     // update the address bar
     history.pushState(null, '', `search${theStringParams}`);
 
-    replaceWithPolyfill(
+    replaceElementIEPollyfill(
       document.querySelector(".search__results"), 
       dom.querySelector(".search__results")
     );
 
-    replaceWithPolyfill(
+    replaceElementIEPollyfill(
       document.querySelector(".search__pagination"), 
       dom.querySelector(".search__pagination")
     );
     
+    replaceElementIEPollyfill(
+      document.querySelector(".search__summary__count"), 
+      dom.querySelector(".search__summary__count")
+    );
+    
     initPaginationListeners();
+    
+    if(scrollToTop){
+      window.scrollTo(0, 0);
+    }
   }
 }
 
@@ -106,7 +115,7 @@ const initPaginationListeners = () => {
         strParams = strParams.replace(new RegExp(`[?&]page\=[^&]+`), "");
         // add the new page target
         strParams += `&page=${targetPage}`;
-        switchSearchMarkup(strParams)
+        switchSearchMarkup(strParams, false, true)
       });
     });
   }
