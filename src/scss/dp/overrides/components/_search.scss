@@ -34,27 +34,53 @@
   }
 
   &__filter {
+    &__heading {
+      height: 2.5rem;
+      border-bottom: 1px solid $iron;
+    }
+    
     &__content {
-      @media (min-width: 641px) {
-        margin-top: 46px;
-      }
-      legend {
-        padding-top: 17px;
+      margin-top: $grid-gutters;
+      
+      &__archive-info {
+        margin-top: ($baseline * 4);
       }
     }
+  }
+
+  &__sort {
+    height: 2.5rem;
+    border-bottom: 1px solid $iron;
   }
 
   &__results {
     margin-top: 17px;
     height: auto;
+
     h1 {
       color: $iron-light;
       margin: ($baseline * 2) 0 $baseline 0;
     }
 
+
     &__item {
       list-style: none;
       padding-left: 0;
+      margin: ($baseline * 4) 0;
+
+      h3 {
+        margin-bottom: $baseline;
+        
+        & a {
+          text-decoration: none;
+        }
+      }
+
+      p {
+        margin-bottom: $baseline;
+      }
+
+
     }
 
     @if $old-ie == false {
