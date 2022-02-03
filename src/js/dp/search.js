@@ -122,3 +122,19 @@ const initPaginationListeners = () => {
 }
 
 initPaginationListeners();
+
+// filter menu for mobile
+// if the page is running javascript let's make the filter menus togglable and full-screen when displayed
+const toggleBtns = [...document.querySelectorAll('.search__filter__mobile-filter-toggle')]
+const filterMenu = document.querySelector('#search-filter')
+filterMenu.classList.add('js-fullscreen-filter-menu-content', 'hide--sm');
+toggleBtns.map((btn) => {
+  btn.classList.remove('hide');
+  btn.addEventListener('click', () => {
+      if( filterMenu.classList.contains('hide--sm') ) {
+          filterMenu.classList.remove('hide--sm');
+      } else {
+          filterMenu.classList.add('hide--sm')
+      }
+  })
+});

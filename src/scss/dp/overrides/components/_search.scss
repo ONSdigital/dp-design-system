@@ -11,10 +11,18 @@
 
   &__summary {
     width: 100%;
-    padding: 36px 0 46px;
+    padding: ($baseline * 4) 0 ($baseline * 4);
 
+    @include breakpoint(sm) {
+      padding: ($baseline * 2) 0 ($baseline * 2);
+    }
+    
     .base-font {
       font-size: 2.5rem;
+      
+      @include breakpoint(sm) {
+        font-size: 1.25rem;
+      }
     }
 
     &__query {
@@ -34,9 +42,47 @@
   }
 
   &__filter {
+
+    &__mobile-filter-toggle {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+      margin: ($baseline *2) 0 0 0;
+      display: none;
+
+      @include breakpoint(sm) {
+        display: inline-block;
+      }
+
+      button {
+        @include breakpoint(sm) {
+          width: 100%;
+          display: block;
+        }
+      }
+    }
+
+    &.js-fullscreen-filter-menu-content {
+      @include breakpoint(sm) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: white;
+        padding: 40px;
+        z-index: 9999999999;
+      }
+    }
+
     &__heading {
-      height: 2.5rem;
+      height: ($baseline * 8);
       border-bottom: 1px solid $iron;
+
+      h3 {
+        margin: 0;
+        line-height: ($baseline * 8);
+      }
     }
     
     &__content {
@@ -49,8 +95,36 @@
   }
 
   &__sort {
-    height: 2.5rem;
+    height: ($baseline * 8);
     border-bottom: 1px solid $iron;
+    
+    @include breakpoint(sm) {
+      height: auto;
+      margin: $baseline 0;
+      border-bottom: none;
+    }
+
+    &__select {
+
+      line-height: ($baseline * 8);
+
+      label {
+        vertical-align: unset;
+      }
+
+      @include breakpoint(sm) {
+        display: flex;
+        
+        label {
+          margin: 0 0.25rem 0 0;
+          border-bottom: none;
+        }
+  
+        select {
+          flex-grow: 1;
+        }
+      }
+    }
   }
 
   &__results {
