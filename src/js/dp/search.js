@@ -9,10 +9,10 @@ const fetchHtml = async (url) => {
   return response && await response.text();
 };
 
-const replaceElementIEPollyfill = (el1, el2) => {
+const replaceWithIEPollyfill = (el1, el2) => {
+  // element.replaceWith() is not IE compatible, this is a workaround
   el1.insertAdjacentElement('beforebegin', el2);
-  el1.parentElement.removeChild(el1); // absolutely ridiculous
-  
+  el1.parentElement.removeChild(el1);
 }
 
 const switchSearchMarkup = async (strParams, resetPagination = false, scrollToTop = false) => {
@@ -29,25 +29,26 @@ const switchSearchMarkup = async (strParams, resetPagination = false, scrollToTo
     // update the address bar
     history.pushState(null, '', `search${theStringParams}`);
 
-    replaceElementIEPollyfill(
+    replaceWithIEPollyfill(
       document.querySelector(".search__results"), 
       dom.querySelector(".search__results")
     );
 
-    replaceElementIEPollyfill(
+    replaceWithIEPollyfill(
       document.querySelector(".search__pagination"), 
       dom.querySelector(".search__pagination")
     );
     
-    replaceElementIEPollyfill(
+    replaceWithIEPollyfill(
       document.querySelector(".search__summary__count"), 
       dom.querySelector(".search__summary__count")
     );
     
     initPaginationListeners();
     
+    // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
     if(scrollToTop){
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 0)
     }
   }
 }

@@ -112,6 +112,10 @@
         vertical-align: unset;
       }
 
+      .ons-btn {
+        vertical-align: initial;
+      }
+
       @include breakpoint(sm) {
         display: flex;
         
@@ -169,6 +173,8 @@
   }
 
   &__pagination {
+    margin-bottom: ($baseline * 2);
+
     &__item {
       display: inline;
       float: left;
