@@ -35,8 +35,11 @@ $old-ie: false;
 		clip: auto;
 	}
 }
+// line-height
 
-
+.default-line-height {
+    line-height: $base-line-height;
+}
 
 // margins
 
@@ -125,6 +128,10 @@ $old-ie: false;
         @include breakpoint(sm) {
             margin: 0 !important;
         }
+    }
+
+    &--padding {
+        padding: 0!important;
     }
 }
 

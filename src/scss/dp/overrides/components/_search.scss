@@ -1,25 +1,3 @@
-.col {
-  &--border-top {
-    @media (min-width: 641px) {
-      border-top: 1px solid $thunder;
-    }
-  }
-}
-
-.wrapper {
-  @media (min-width: 768px) {
-    width: 752px;
-    padding: 0;
-  }
-  
-  @media (min-width: 992px) {
-    width: 944px;
-    padding: 0;
-  }
-
-
-}
-
 .search {
   @include breakpoint(sm) {
     background-color: $abbey;
@@ -33,10 +11,18 @@
 
   &__summary {
     width: 100%;
-    padding: 36px 0 46px;
+    padding: ($baseline * 4) 0 ($baseline * 4);
 
+    @include breakpoint(sm) {
+      padding: ($baseline * 2) 0 ($baseline * 2);
+    }
+    
     .base-font {
       font-size: 2.5rem;
+      
+      @include breakpoint(sm) {
+        font-size: 1.25rem;
+      }
     }
 
     &__query {
@@ -56,12 +42,91 @@
   }
 
   &__filter {
-    &__content {
-      @media (min-width: 641px) {
-        margin-top: 46px;
+
+    &__mobile-filter-toggle {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+      margin: ($baseline *2) 0 0 0;
+      display: none;
+
+      @include breakpoint(sm) {
+        display: inline-block;
       }
-      legend {
-        padding-top: 17px;
+
+      button {
+        @include breakpoint(sm) {
+          width: 100%;
+          display: block;
+        }
+      }
+    }
+
+    &.js-fullscreen-filter-menu-content {
+      @include breakpoint(sm) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: white;
+        padding: 40px;
+        z-index: 9999999999;
+      }
+    }
+
+    &__heading {
+      height: ($baseline * 8);
+      border-bottom: 1px solid $iron;
+
+      h3 {
+        margin: 0;
+        line-height: ($baseline * 8);
+      }
+    }
+    
+    &__content {
+      margin-top: $grid-gutters;
+      
+      &__archive-info {
+        margin-top: ($baseline * 4);
+      }
+    }
+  }
+
+  &__sort {
+    height: ($baseline * 8);
+    border-bottom: 1px solid $iron;
+    
+    @include breakpoint(sm) {
+      height: auto;
+      margin: $baseline 0;
+      border-bottom: none;
+    }
+
+    &__select {
+
+      line-height: ($baseline * 8);
+
+      label {
+        vertical-align: unset;
+      }
+
+      .ons-btn {
+        vertical-align: initial;
+      }
+
+      @include breakpoint(sm) {
+        display: flex;
+        
+        label {
+          margin: 0 0.25rem 0 0;
+          border-bottom: none;
+        }
+  
+        select {
+          flex-grow: 1;
+        }
       }
     }
   }
@@ -69,14 +134,31 @@
   &__results {
     margin-top: 17px;
     height: auto;
+
     h1 {
       color: $iron-light;
       margin: ($baseline * 2) 0 $baseline 0;
     }
 
+
     &__item {
       list-style: none;
       padding-left: 0;
+      margin: ($baseline * 4) 0;
+
+      h3 {
+        margin-bottom: $baseline;
+        
+        & a {
+          text-decoration: none;
+        }
+      }
+
+      p {
+        margin-bottom: $baseline;
+      }
+
+
     }
 
     @if $old-ie == false {
@@ -87,6 +169,15 @@
           line-height: ($baseline * 4);
         }
       }
+    }
+  }
+
+  &__pagination {
+    margin-bottom: ($baseline * 2);
+
+    &__item {
+      display: inline;
+      float: left;
     }
   }
 
