@@ -1,0 +1,19 @@
+.ons-field {
+    &--search-sort {
+        label, .ons-field .ons-btn, .ons-input {
+            display: inline;
+        }
+
+        label {
+            vertical-align: bottom;
+        }
+    
+        .ons-input {
+            &--select{
+                width: auto!important;
+                line-height: 0.75rem;
+                margin: 0 0.25rem 0 0.25rem;
+            }
+        }
+    }  
+}
