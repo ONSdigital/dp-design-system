@@ -5,3 +5,4 @@ import "./dp/viewport-size";
 import "./dp/nav";
 import "./dp/improve-this-page";
 import "./dp/search";
+import "./dp/map";
