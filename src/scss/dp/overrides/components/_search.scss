@@ -146,6 +146,11 @@
       padding-left: 0;
       margin: ($baseline * 4) 0;
 
+      &--product-page {
+        border: 0.25rem solid $iron-light;
+        padding: 0.75rem;
+      }
+
       h3 {
         margin-bottom: $baseline;
         
