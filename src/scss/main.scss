@@ -9,6 +9,9 @@
 @import '../../node_modules/@ons/design-system/scss/objects/index';
 @import '../../node_modules/@ons/design-system/scss/utilities/index';
 
+// Import census colours for hero banner
+@import '../../node_modules/@ons/design-system/scss/settings/census';
+
 // ONS Design System Components relevant to the ONS Website
 @import '../../node_modules/@ons/design-system/components/articles/articles';
 @import '../../node_modules/@ons/design-system/components/autosuggest/autosuggest';
@@ -29,6 +32,7 @@
 @import '../../node_modules/@ons/design-system/components/fieldset/fieldset';
 @import '../../node_modules/@ons/design-system/components/field/field-group';
 @import '../../node_modules/@ons/design-system/components/footer/footer';
+@import '../../node_modules/@ons/design-system/components/hero/hero';
 @import '../../node_modules/@ons/design-system/components/icons/icons';
 @import '../../node_modules/@ons/design-system/components/images/images';
 @import '../../node_modules/@ons/design-system/components/input/input-type';
