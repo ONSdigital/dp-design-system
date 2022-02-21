@@ -8,18 +8,18 @@
     font-size: 1.41rem;
     height: 80px;
   }
-
+  
   &__summary {
     width: 100%;
-    padding: ($baseline * 4) 0 ($baseline * 4);
-
+    padding: ($baseline * 3) 0 ($baseline * 3);
+    
     @include breakpoint(sm) {
       padding: ($baseline * 2) 0 ($baseline * 2);
     }
     
     .base-font {
-      font-size: 2.5rem;
-      
+      font-size: 2rem;
+        
       @include breakpoint(sm) {
         font-size: 1.25rem;
       }
@@ -36,6 +36,11 @@
     }
 
     &__suggestion {
+      display: block;
+      margin-top: ($baseline * 3);
+    }
+    
+    &__generic {
       @extend .base-font;
       font-weight: 300;
     }
@@ -206,6 +211,18 @@
     @include breakpoint(md-max) {
       display: flex;
     }
+
+    &--standalone {
+      display: initial;
+      margin: 0 0 ($baseline * 2) 0;
+      padding: 0;
+      display: inline-block;
+      
+      margin-bottom: 10rem;
+      @include breakpoint(sm) {
+        margin-bottom: 5rem;
+      }
+    }
   }
 
   &__label {
@@ -223,6 +240,13 @@
       @include breakpoint(sm) {
         display: none;
       }
+    }
+
+    &--standalone {
+      color: initial;
+      font-weight: 600;
+      display: block;
+      margin: 0 0 $baseline 0;
     }
   }
 
@@ -263,6 +287,13 @@
       position: relative;
       float: left;
     }
+
+    &--standalone {
+      border: $mine-shaft 2px solid;
+      height: ($baseline * 5);
+      flex-grow: unset;
+      float: left;
+    }
   }
 
   &__button {
@@ -276,21 +307,21 @@
     background-color: $primary;
     height: ($baseline * 6);
     position: relative;
-
+    
     &:hover,
     &:focus {
       background-color: darken($primary, 8%);
     }
-
+    
     &:focus {
       outline: 3px solid $carrot;
     }
-
+    
     & > * {
       display: flex;
       justify-content: center;
     }
-
+    
     @if $old-ie == false {
       @include breakpoint(sm) {
         width: 20%;
@@ -299,16 +330,23 @@
         padding-right: $col/2;
       }
     }
-
+    
     &--results-page {
       height: ($baseline * 5);
       padding-top: ($baseline / 2);
     }
-
+    
     &--body {
       height: 52px;
       width: 52px;
       margin-top: -2px;
+      float: left;
+    }
+    
+    &--standalone {
+      width: ($baseline * 5);
+      height: ($baseline * 5);
+      flex-grow: unset;
       float: left;
     }
   }
