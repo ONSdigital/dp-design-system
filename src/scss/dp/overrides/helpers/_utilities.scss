@@ -79,7 +79,7 @@ $old-ie: false;
         margin-right: $col !important;
 
         &--half {
-            margin-right: ($col / 2) !important;
+            margin-right: calc($col / 2) !important;
         }
 
         &--double {
@@ -106,7 +106,7 @@ $old-ie: false;
             margin-left: -1px !important;
         }
         &--half {
-            margin-left: ($col / 2) !important;
+            margin-left: calc($col / 2) !important;
         }
         &--double {
             margin-left: ($col * 2) !important;
@@ -166,7 +166,7 @@ $old-ie: false;
 		padding-right: $col !important;
 
 		&--half {
-			padding-right: ($col / 2) !important;
+			padding-right: calc($col / 2) !important;
 		}
 
 		&--none {
@@ -188,7 +188,7 @@ $old-ie: false;
 		padding-left: $col !important;
 
 		&--half {
-			padding-left: ($col / 2) !important;
+			padding-left: calc($col / 2) !important;
 		}
 
 	  	&--none {

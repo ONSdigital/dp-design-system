@@ -7,7 +7,7 @@ button.ons-btn__btn {
   }
   &--link:active,
   &--link:focus {
-    @extend .ons-btn:focus;
+    @extend .ons-btn;
     top: 0;
   }
   &--search {

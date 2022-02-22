@@ -13,21 +13,18 @@ $medium: $medium-complex-grid-cols * $col;
 
 //simple cols
 $large-cols-one: $large-complex-grid-cols * $col;
-$large-cols-half: (($large-complex-grid-cols - 1) / 2) * $col;
-$large-cols-one-third: (($large-complex-grid-cols - 2) / 3) * $col;
-$large-cols-two-thirds: (($large-complex-grid-cols - 1) * $col) -
-  $large-cols-one-third;
-$large-cols-one-quarter: (($large-complex-grid-cols - 3) / 4) * $col;
-$large-cols-three-quarters: (($large-complex-grid-cols - 1) * $col) -
-  $large-cols-one-quarter;
+$large-cols-half: calc(calc($large-complex-grid-cols - 1) / 2) * $col;
+$large-cols-one-third: calc(calc($large-complex-grid-cols - 2) / 3) * $col;
+$large-cols-two-thirds: (($large-complex-grid-cols - 1) * $col) - $large-cols-one-third;
+$large-cols-one-quarter: calc(calc($large-complex-grid-cols - 3) / 4) * $col;
+$large-cols-three-quarters: (($large-complex-grid-cols - 1) * $col) - $large-cols-one-quarter;
 
 $medium-cols-one: $medium-complex-grid-cols * $col;
-$medium-cols-half: (($medium-complex-grid-cols - 1) / 2) * $col;
-$medium-cols-one-third: (($medium-complex-grid-cols - 2) / 3) * $col;
+$medium-cols-half: calc(calc($medium-complex-grid-cols - 1) / 2) * $col;
+$medium-cols-one-third: calc(calc($medium-complex-grid-cols - 2) / 3) * $col;
 $medium-cols-two-thirds: (($medium-complex-grid-cols - 1) * $col)- $medium-cols-one-third;
-$medium-cols-one-quarter: (($medium-complex-grid-cols - 3) / 4) * $col;
-$medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) -
-  $medium-cols-one-quarter;
+$medium-cols-one-quarter: calc(calc($medium-complex-grid-cols - 3) / 4) * $col;
+$medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) - $medium-cols-one-quarter;
 
 //--[vars end]--
 
