@@ -154,8 +154,8 @@ button {
     }
 
     &--narrow {
-        padding-left: ($col / 2);
-        padding-right: ($col / 2);
+        padding-left: calc($col / 2);
+        padding-right: calc($col / 2);
     }
 
     &--wide {
