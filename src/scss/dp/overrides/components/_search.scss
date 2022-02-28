@@ -96,6 +96,10 @@
       &__archive-info {
         margin-top: ($baseline * 4);
       }
+
+      .ons-collapsible__content {
+        border-left: none;
+      }
     }
   }
 
