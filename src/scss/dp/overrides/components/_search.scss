@@ -212,7 +212,7 @@
       display: flex;
     }
 
-    &--standalone {
+    &--no-results {
       display: initial;
       margin: 0 0 ($baseline * 2) 0;
       padding: 0;
@@ -242,7 +242,7 @@
       }
     }
 
-    &--standalone {
+    &--no-results {
       color: initial;
       font-weight: 600;
       display: block;
@@ -288,7 +288,7 @@
       float: left;
     }
 
-    &--standalone {
+    &--no-results {
       border: $mine-shaft 2px solid;
       height: ($baseline * 5);
       flex-grow: unset;
@@ -343,7 +343,7 @@
       float: left;
     }
     
-    &--standalone {
+    &--no-results {
       width: ($baseline * 5);
       height: ($baseline * 5);
       flex-grow: unset;
