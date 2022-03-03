@@ -1,3 +1,5 @@
+const searchContainer = document.querySelector('.search__container');
+
 const fetchHtml = async (url) => {
   const response = await fetch(url, {
     method: "get",
@@ -30,17 +32,17 @@ const switchSearchMarkup = async (strParams, resetPagination = false, scrollToTo
     history.pushState(null, '', `search${theStringParams}`);
 
     replaceWithIEPollyfill(
-      document.querySelector(".search__results"), 
+      searchContainer.querySelector(".search__results"), 
       dom.querySelector(".search__results")
     );
 
     replaceWithIEPollyfill(
-      document.querySelector(".search__pagination"), 
+      searchContainer.querySelector(".search__pagination"), 
       dom.querySelector(".search__pagination")
     );
     
     replaceWithIEPollyfill(
-      document.querySelector(".search__summary__count"), 
+      searchContainer.querySelector(".search__summary__count"), 
       dom.querySelector(".search__summary__count")
     );
     
@@ -48,8 +50,8 @@ const switchSearchMarkup = async (strParams, resetPagination = false, scrollToTo
     
     // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
     if(scrollToTop){
-      const searchResultsSection = document.querySelector('[aria-label="Search results"]')
-      const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top + document.documentElement.scrollTop;
+      const searchResultsSection = searchContainer.querySelector('[aria-label="Search results"]')
+      const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top + searchContainer.documentElement.scrollTop;
       window.scrollTo(0, resultsSectionOffsetFromTop)
     }
   }
@@ -74,9 +76,9 @@ const switchCheckbox = (paramsArray) => {
 }
 
 // create listeners for checkboxes controlling eachother
-[...document.querySelectorAll('.ons-checkboxes__items [aria-controls]')].map(topFilter => {
+[...searchContainer.querySelectorAll('.ons-checkboxes__items [aria-controls]')].map(topFilter => {
   const childrenSelector = topFilter.getAttribute('aria-controls');
-  const theChildren = [...document.querySelectorAll(`#${childrenSelector} [type=checkbox]`)];
+  const theChildren = [...searchContainer.querySelectorAll(`#${childrenSelector} [type=checkbox]`)];
   if(!childrenSelector) return;
   topFilter.addEventListener("change", async (e) => {
       const paramsArray = theChildren.map(item => ({isChecked: e.target.checked, filterName: item.value}));
@@ -92,7 +94,7 @@ const switchCheckbox = (paramsArray) => {
 });
 
 // create listeners for the sort dropdown
-const sortSelector = document.querySelector(".ons-input--sort-select");
+const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
 if(!!sortSelector) {
   sortSelector.addEventListener("change", async (e) => {
     let strParams = window.location.search;
@@ -106,7 +108,7 @@ if(!!sortSelector) {
 
 // create listeners for the pagination
 const initPaginationListeners = () => {
-  const paginationItems = document.querySelectorAll(".ons-pagination__item a[data-target-page]");
+  const paginationItems = searchContainer.querySelectorAll(".ons-pagination__item a[data-target-page]");
   if(!!paginationItems) {
     paginationItems.forEach((item) => {
       item.addEventListener("click", async (e) => {
@@ -128,8 +130,8 @@ initPaginationListeners();
 
 // filter menu for mobile
 // if the page is running javascript let's make the filter menus togglable and full-screen when displayed
-const toggleBtns = [...document.querySelectorAll('.search__filter__mobile-filter-toggle')]
-const filterMenu = document.querySelector('#search-filter')
+const toggleBtns = [...searchContainer.querySelectorAll('.search__filter__mobile-filter-toggle')]
+const filterMenu = searchContainer.querySelector('#search-filter')
 filterMenu.classList.add('js-fullscreen-filter-menu-content', 'hide--sm');
 toggleBtns.map((btn) => {
   btn.classList.remove('hide');
