@@ -51,7 +51,7 @@ const switchSearchMarkup = async (strParams, resetPagination = false, scrollToTo
     // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
     if(scrollToTop){
       const searchResultsSection = searchContainer.querySelector('[aria-label="Search results"]')
-      const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top + searchContainer.documentElement.scrollTop;
+      const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top + document.documentElement.scrollTop;
       window.scrollTo(0, resultsSectionOffsetFromTop)
     }
   }
