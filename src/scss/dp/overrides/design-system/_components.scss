@@ -29,4 +29,18 @@
       border-top-width: 2px !important;
     }
   }
+
+  &-summary {
+    &__item-title.ons-u-pt-s.ons-u-pb-s,
+    &__values.ons-u-pt-s.ons-u-pb-s,
+    &__actions.ons-u-pt-s.ons-u-pb-s {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    &__item-title.ons-u-pr-m,
+    &__values.ons-u-pr-m {
+      padding-right: 1.333333rem;
+    }
+  }
 }
