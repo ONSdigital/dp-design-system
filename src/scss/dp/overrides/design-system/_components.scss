@@ -1,4 +1,38 @@
 .ons {
+  &-compact-search {
+    border: 1px solid $mine-shaft;
+    border-radius: 3px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 1px;
+
+    &:focus-within {
+      box-shadow: 0 0 0 3px $pineapple-yellow, inset 0 0 0 1px $mine-shaft;
+      outline: none;
+    }
+
+    &__input {
+      border: none;
+      line-height: 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+      padding: 0.39rem 0.5rem;
+      width: 100%;
+      appearance: none;
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+
+    &__btn {
+      padding: 0.6rem 1rem;
+      margin: 0 !important;
+    }
+  }
+
   &-metadata__value.ons-u-f-no {
     float: none;
   }
