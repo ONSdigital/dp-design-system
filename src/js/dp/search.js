@@ -132,6 +132,14 @@ if (searchContainer) {
       strParams += `&sort=${e.target.value}`;
       switchSearchMarkup(strParams, true);
     });
+
+    // Google Tag Manager
+    if('dataLayer' in window) {
+      window.dataLayer.push({
+        'event': 'SortBy',
+        'sort-by': e.target.value
+      });
+    }
   }
 
   // create listeners for the pagination
