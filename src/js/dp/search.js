@@ -1,3 +1,5 @@
+import { gtmDataLayerPush } from "../utilities";
+
 const fetchHtml = async (url) => {
   const response = await fetch(url, {
     method: "get",
@@ -99,6 +101,12 @@ if(!!sortSelector) {
     // replace
     strParams += `&sort=${e.target.value}`;
     switchSearchMarkup(strParams, true)
+
+    // Google Tag Manager
+    gtmDataLayerPush({
+      'event': 'SortBy',
+      'sort-by': e.target.value
+    });
   });
 }
 
