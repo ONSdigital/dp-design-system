@@ -1,3 +1,5 @@
+import { gtmDataLayerPush } from "../utilities";
+
 const searchContainer = document.querySelector(".search__container");
 
 const fetchHtml = async (url) => {
@@ -131,6 +133,12 @@ if (searchContainer) {
       // replace
       strParams += `&sort=${e.target.value}`;
       switchSearchMarkup(strParams, true);
+
+      // Google Tag Manager
+      gtmDataLayerPush({
+        'event': 'SortBy',
+        'sort-by': e.target.value
+      });
     });
   }
 
