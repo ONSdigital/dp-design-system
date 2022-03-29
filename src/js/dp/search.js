@@ -2,96 +2,98 @@ import { gtmDataLayerPush } from "../utilities";
 
 const searchContainer = document.querySelector(".search__container");
 
-const fetchHtml = async (url) => {
-  const response = await fetch(url, {
-    method: "get",
-    mode: "cors",
-    headers: new Headers({
-      Accept: "application/json",
-    }),
-  });
-  return response && (await response.text());
-};
-
-const replaceWithIEPollyfill = (el1, el2) => {
-  // element.replaceWith() is not IE compatible, this is a workaround
-  el1.insertAdjacentElement("beforebegin", el2);
-  el1.parentElement.removeChild(el1);
-};
-
-const switchSearchMarkup = async (
-  strParams,
-  resetPagination = false,
-  scrollToTop = false
-) => {
-  let theStringParams = strParams;
-  if (resetPagination) {
-    // reset to page 1 since filtering and sorting will change the length/order of results.
-    theStringParams = theStringParams.replace(
-      new RegExp(`[?&]page\=[^&]+`),
-      "&page=1"
-    );
-  }
-
-  const responseText = await fetchHtml(`/search${theStringParams}`);
-  if (responseText) {
-    const dom = new DOMParser().parseFromString(responseText, "text/html");
-
-    // update the address bar
-    history.pushState(null, "", `search${theStringParams}`);
-
-    replaceWithIEPollyfill(
-      searchContainer.querySelector(".search__results"),
-      dom.querySelector(".search__results")
-    );
-
-    replaceWithIEPollyfill(
-      searchContainer.querySelector(".search__pagination"),
-      dom.querySelector(".search__pagination")
-    );
-
-    replaceWithIEPollyfill(
-      searchContainer.querySelector(".search__summary__count"),
-      dom.querySelector(".search__summary__count")
-    );
-
-    initPaginationListeners();
-
-    // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
-    if (scrollToTop) {
-      const searchResultsSection = searchContainer.querySelector(
-        '[aria-label="Search results"]'
-      );
-      const resultsSectionOffsetFromTop =
-        searchResultsSection.getBoundingClientRect().top +
-        document.documentElement.scrollTop;
-      window.scrollTo(0, resultsSectionOffsetFromTop);
-    }
-  }
-};
-
-const switchCheckbox = (paramsArray) => {
-  // get current param
-  let strParams = window.location.search;
-
-  // build new param
-  paramsArray.map((param) => {
-    if (!("isChecked" in param) || !("filterName" in param)) return;
-    if (param.isChecked) {
-      strParams += `&filter=${param.filterName}`;
-    } else {
-      strParams = strParams.replace(
-        new RegExp(`(\\&|\\?)filter\=${param.filterName}`),
-        ""
-      );
-    }
-  });
-
-  // make the change to the markup
-  switchSearchMarkup(strParams, true);
-};
-
 if (searchContainer) {
+
+  const fetchHtml = async (url) => {
+    const response = await fetch(url, {
+      method: "get",
+      mode: "cors",
+      headers: new Headers({
+        Accept: "application/json",
+      }),
+    });
+    return response && (await response.text());
+  };
+
+  const replaceWithIEPollyfill = (el1, el2) => {
+    // element.replaceWith() is not IE compatible, this is a workaround
+    el1.insertAdjacentElement("beforebegin", el2);
+    el1.parentElement.removeChild(el1);
+  };
+
+  const switchSearchMarkup = async (
+    strParams,
+    resetPagination = false,
+    scrollToTop = false
+  ) => {
+    let theStringParams = strParams;
+    if (resetPagination) {
+      // reset to page 1 since filtering and sorting will change the length/order of results.
+      theStringParams = theStringParams.replace(
+        new RegExp(`[?&]page\=[^&]+`),
+        "&page=1"
+      );
+    }
+
+    const responseText = await fetchHtml(`/search${theStringParams}`);
+    if (responseText) {
+      const dom = new DOMParser().parseFromString(responseText, "text/html");
+
+      // update the address bar
+      history.pushState(null, "", `search${theStringParams}`);
+
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__results"),
+        dom.querySelector(".search__results")
+      );
+
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__pagination"),
+        dom.querySelector(".search__pagination")
+      );
+
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__summary__count"),
+        dom.querySelector(".search__summary__count")
+      );
+
+      initPaginationListeners();
+
+      // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
+      if (scrollToTop) {
+        const searchResultsSection = searchContainer.querySelector(
+          '[aria-label="Search results"]'
+        );
+        const resultsSectionOffsetFromTop =
+          searchResultsSection.getBoundingClientRect().top +
+          document.documentElement.scrollTop;
+        window.scrollTo(0, resultsSectionOffsetFromTop);
+      }
+    }
+  };
+
+  const switchCheckbox = (paramsArray) => {
+    // get current param
+    let strParams = window.location.search;
+
+    // build new param
+    paramsArray.map((param) => {
+      if (!("isChecked" in param) || !("filterName" in param)) return;
+      if (param.isChecked) {
+        strParams += `&filter=${param.filterName}`;
+      } else {
+        strParams = strParams.replace(
+          new RegExp(`(\\&|\\?)filter\=${param.filterName}`),
+          ""
+        );
+      }
+    });
+
+    // make the change to the markup
+    switchSearchMarkup(strParams, true);
+  };
+
+
   // create listeners for checkboxes controlling eachother
   [
     ...searchContainer.querySelectorAll(
@@ -112,6 +114,13 @@ if (searchContainer) {
       }));
       theChildren.map((item) => (item.checked = e.target.checked));
       switchCheckbox(paramsArray);
+
+      // Google Tag Manager
+      gtmDataLayerPush({
+        'event': 'Filter',
+        'sort-by': findAndParseLabel(e.target.id),
+        'selected': e.target.checked ? 'selected' : 'unselected'
+      });
     });
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
@@ -119,9 +128,21 @@ if (searchContainer) {
           { isChecked: e.target.checked, filterName: e.target.value },
         ]);
         topFilter.checked = theChildren.some((x) => x.checked);
+
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'Filter',
+          'sort-by': findAndParseLabel(e.target.id),
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
       });
     });
   });
+
+  const findAndParseLabel = (id) => {
+    const theLabel = document.querySelector(`label[for="${id}"]`).innerText;
+    return theLabel.replace(new RegExp(/\(\d*?\)/g), "").trim();
+  }
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
