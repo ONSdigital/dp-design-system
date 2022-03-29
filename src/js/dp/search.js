@@ -116,7 +116,7 @@ if (searchContainer) {
       // Google Tag Manager
       gtmDataLayerPush({
         'event': 'Filter',
-        'sort-by': findAndParseLabel(e.target.id),
+        'filter-by': findAndParseLabel(e.target.id),
         'selected': e.target.checked ? 'selected' : 'unselected'
       });
     });
@@ -130,7 +130,7 @@ if (searchContainer) {
         // Google Tag Manager
         gtmDataLayerPush({
           'event': 'Filter',
-          'sort-by': findAndParseLabel(e.target.id),
+          'filter-by': findAndParseLabel(e.target.id),
           'selected': e.target.checked ? 'selected' : 'unselected'
         });
       });
