@@ -112,6 +112,13 @@ if (searchContainer) {
       }));
       theChildren.map((item) => (item.checked = e.target.checked));
       switchCheckbox(paramsArray);
+
+      // Google Tag Manager
+      gtmDataLayerPush({
+        'event': 'Filter',
+        'sort-by': findAndParseLabel(e.target.id),
+        'selected': e.target.checked ? 'selected' : 'unselected'
+      });
     });
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
@@ -119,9 +126,21 @@ if (searchContainer) {
           { isChecked: e.target.checked, filterName: e.target.value },
         ]);
         topFilter.checked = theChildren.some((x) => x.checked);
+
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'Filter',
+          'sort-by': findAndParseLabel(e.target.id),
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
       });
     });
   });
+
+  const findAndParseLabel = (id) => {
+    const theLabel = document.querySelector(`label[for="${id}"]`).innerText;
+    return theLabel.replace(new RegExp(/\(\d*?\)/g), "").trim();
+  }
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
