@@ -116,7 +116,7 @@ if (searchContainer) {
       // Google Tag Manager
       gtmDataLayerPush({
         'event': 'Filter',
-        'filter-by': findAndParseLabel(e.target.id),
+        'filter-by': e.target.dataset.readableName,
         'selected': e.target.checked ? 'selected' : 'unselected'
       });
     });
@@ -130,17 +130,12 @@ if (searchContainer) {
         // Google Tag Manager
         gtmDataLayerPush({
           'event': 'Filter',
-          'filter-by': findAndParseLabel(e.target.id),
+          'filter-by': e.target.dataset.readableName,
           'selected': e.target.checked ? 'selected' : 'unselected'
         });
       });
     });
   });
-
-  const findAndParseLabel = (id) => {
-    const theLabel = document.querySelector(`label[for="${id}"]`).innerText;
-    return theLabel.replace(new RegExp(/\(\d*?\)/g), "").trim();
-  }
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
