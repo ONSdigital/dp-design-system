@@ -112,6 +112,13 @@ if (searchContainer) {
       }));
       theChildren.map((item) => (item.checked = e.target.checked));
       switchCheckbox(paramsArray);
+
+      // Google Tag Manager
+      gtmDataLayerPush({
+        'event': 'Filter',
+        'filter-by': e.target.dataset.gtmLabel,
+        'selected': e.target.checked ? 'selected' : 'unselected'
+      });
     });
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
@@ -119,6 +126,13 @@ if (searchContainer) {
           { isChecked: e.target.checked, filterName: e.target.value },
         ]);
         topFilter.checked = theChildren.some((x) => x.checked);
+
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
       });
     });
   });
