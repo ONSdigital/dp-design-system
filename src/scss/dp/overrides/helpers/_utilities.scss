@@ -665,3 +665,8 @@ $old-ie: false;
 .clearfix {
     @extend %clearfix;
 }
+
+// Flexbox
+.align-items-baseline {
+    align-items: baseline !important;
+}
