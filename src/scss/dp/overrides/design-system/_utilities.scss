@@ -1,0 +1,21 @@
+// Utility overrides for design system that do not exist elsewhere
+// follow naming convention ons-u...
+
+.ons-u {
+  @include mq(xxs, s) {
+    &-fw\@xxs\@s {
+      width: 100% !important;
+    }
+    &-bb-no\@xxs\@s {
+      border-bottom: none;
+    }
+    &-flex--2\@xxs\@s {
+      flex: 2;
+    }
+  }
+  @for $i from 1 to 10 {
+    &-order--#{$i} {
+      order: #{$i};
+    }
+  }
+}
