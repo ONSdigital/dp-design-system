@@ -665,3 +665,10 @@ $old-ie: false;
 .clearfix {
     @extend %clearfix;
 }
+
+// Highlighting - temporary fix while waiting for the design system to include highlighting in their npm package
+.ons-highlight {
+  background-color: $color-highlight;
+  font-style: normal;
+  padding: 0 2px;
+}
