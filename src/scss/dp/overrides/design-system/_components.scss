@@ -52,6 +52,14 @@
         &.ons-u-ta-right {
           text-align: right;
         }
+        @include mq(xxs, s) {
+          &.ons-u-pt-no\@xxs\@s {
+            padding-top: 0;
+          }
+          &.ons-u-pl-no\@xxs\@s {
+            padding-left: 0;
+          }
+        }
       }
       .sticker {
         background-color: $color-grey-15;
@@ -75,6 +83,12 @@
     &__item-title.ons-u-pr-m,
     &__values.ons-u-pr-m {
       padding-right: 1.333333rem;
+    }
+
+    @include mq(xxs, s) {
+      &__values.ons-u-pt-no\@xxs\@s {
+        padding-top: 0 !important;
+      }
     }
   }
 }

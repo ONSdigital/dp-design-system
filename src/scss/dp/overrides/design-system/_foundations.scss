@@ -2,8 +2,14 @@
   &-page {
     overflow-x: initial;
   }
-
   &-label.ons-u-fw-n {
     font-weight: $font-weight-regular;
+  }
+  @include mq(xxs, s) {
+    &-grid--flex\@xxs\@s.ons-grid--between\@xxs\@s {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
   }
 }
