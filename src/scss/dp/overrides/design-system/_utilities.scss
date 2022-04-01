@@ -1,6 +1,14 @@
 // Utility overrides for design system that do not exist elsewhere
 // follow naming convention ons-u...
 
+$alignItems: (
+  fs: flex-start,
+  fe: flex-end,
+  c: center,
+  s: stretch,
+  b: baseline,
+);
+
 .ons-u {
   @include mq(xxs, s) {
     &-fw\@xxs\@s {
@@ -16,6 +24,12 @@
   @for $i from 1 to 10 {
     &-order--#{$i} {
       order: #{$i};
+    }
+  }
+
+  @each $key, $value in $alignItems {
+    &-flex-ai-#{$key} {
+      align-items: #{$value} !important;
     }
   }
 }

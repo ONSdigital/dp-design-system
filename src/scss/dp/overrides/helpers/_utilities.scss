@@ -1,4 +1,5 @@
-//_utilities.scss
+// Utilities inherited from Sixteens design system, destined for removal
+// once the transition to the ONS design system is complete.
 
 $old-ie: false;
 
@@ -664,9 +665,4 @@ $old-ie: false;
 // Use as alternative to overflow:hidden
 .clearfix {
     @extend %clearfix;
-}
-
-// Flexbox
-.align-items-baseline {
-    align-items: baseline !important;
 }
