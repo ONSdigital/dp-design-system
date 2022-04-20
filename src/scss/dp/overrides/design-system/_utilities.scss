@@ -32,4 +32,8 @@ $alignItems: (
       align-items: #{$value} !important;
     }
   }
+
+  &-tt-l {
+    text-transform: lowercase;
+  }
 }
