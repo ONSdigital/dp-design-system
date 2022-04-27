@@ -20,6 +20,17 @@ if (searchContainer) {
     el1.parentElement.removeChild(el1);
   };
 
+  const scrollToTopOfSearch = () => {
+    // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
+    const searchResultsSection = searchContainer.querySelector(
+      '[aria-label="Search results"]'
+    );
+    const resultsSectionOffsetFromTop =
+      searchResultsSection.getBoundingClientRect().top +
+      document.documentElement.scrollTop;
+    window.scrollTo(0, resultsSectionOffsetFromTop);
+  }
+
   const switchSearchMarkup = async (
     strParams,
     resetPagination = false,
@@ -34,13 +45,28 @@ if (searchContainer) {
       );
     }
 
+    // if it takes more than 500ms to retreive results, show a loading message
+    var loadingPanel = setTimeout(() => {
+      document.querySelector('#results-loading').classList.remove('hide')
+      if (scrollToTop) scrollToTopOfSearch();
+    }, 500);
+
     const responseText = await fetchHtml(`/search${theStringParams}`);
-    if (responseText) {
+
+    if (scrollToTop) scrollToTopOfSearch();
+
+    if (!responseText) {
+      const pTag = document.querySelector('#results-loading p');
+      pTag.innerText = pTag.dataset.errorMessage;
+    } else {
+      // cancel a pending loading message and hide it if it's already showing
+      clearTimeout(loadingPanel);
+      document.querySelector('#results-loading').classList.remove('hide')
+      
       const dom = new DOMParser().parseFromString(responseText, "text/html");
 
       // update the address bar
       history.pushState(null, "", `search${theStringParams}`);
-
       replaceWithIEPollyfill(
         searchContainer.querySelector(".search__results"),
         dom.querySelector(".search__results")
@@ -57,17 +83,6 @@ if (searchContainer) {
       );
 
       initPaginationListeners();
-
-      // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
-      if (scrollToTop) {
-        const searchResultsSection = searchContainer.querySelector(
-          '[aria-label="Search results"]'
-        );
-        const resultsSectionOffsetFromTop =
-          searchResultsSection.getBoundingClientRect().top +
-          document.documentElement.scrollTop;
-        window.scrollTo(0, resultsSectionOffsetFromTop);
-      }
     }
   };
 
