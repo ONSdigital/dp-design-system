@@ -46,8 +46,9 @@ if (searchContainer) {
     }
 
     // if it takes more than 500ms to retreive results, show a loading message
-    var loadingPanel = setTimeout(() => {
-      document.querySelector('#results-loading').classList.remove('hide')
+    const resultsLoader = document.querySelector('#results-loading');
+    setTimeout(() => {
+      if (resultsLoader) resultsLoader.classList.remove('hide');
       if (scrollToTop) scrollToTopOfSearch();
     }, 500);
 
@@ -56,13 +57,9 @@ if (searchContainer) {
     if (scrollToTop) scrollToTopOfSearch();
 
     if (!responseText) {
-      const pTag = document.querySelector('#results-loading p');
-      pTag.innerText = pTag.dataset.errorMessage;
+      const pTag = resultsLoader.querySelector('p');
+      if(pTag) pTag.innerText = pTag.dataset.errorMessage;
     } else {
-      // cancel a pending loading message and hide it if it's already showing
-      clearTimeout(loadingPanel);
-      document.querySelector('#results-loading').classList.remove('hide')
-      
       const dom = new DOMParser().parseFromString(responseText, "text/html");
 
       // update the address bar
