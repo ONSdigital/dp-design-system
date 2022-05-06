@@ -1,4 +1,13 @@
 .release {
+  h1 {
+    display: flex;
+    justify-content: flex-start;
+
+    & > img {
+      height: 59px;
+    }
+  }
+
   .about-the-data {
     .welsh-statistic > img {
       height: 44px;
