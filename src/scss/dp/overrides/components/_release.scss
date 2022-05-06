@@ -1,0 +1,18 @@
+.release {
+  .about-the-data {
+    .welsh-statistic > img {
+      height: 44px;
+    }
+
+    .national-statistic {
+      h2 {
+        display: flex;
+        justify-content: flex-start;
+
+        & > img {
+          height: 36px;
+        }
+      }
+    }
+  }
+}
