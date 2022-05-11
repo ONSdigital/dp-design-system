@@ -91,4 +91,12 @@
       }
     }
   }
+
+  &-back-to {
+    &__link {
+      padding: 0.5rem 0.666667rem;
+      display: inline-flex;
+      border: 1px solid $color-grey-75;
+    }
+  }
 }
