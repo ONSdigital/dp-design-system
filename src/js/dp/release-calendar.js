@@ -26,5 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     nodeRadioSet.addEventListener("change", onChangeHandler);
   }
 
-  releaseTypeAutoSubmit(".release-calendar__filters .filters__release-type");
+  if (findNode(".release-calendar")) {
+    releaseTypeAutoSubmit(".release-calendar__filters .filters__release-type");
+  }
 });
