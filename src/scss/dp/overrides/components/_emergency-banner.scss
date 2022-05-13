@@ -1,0 +1,192 @@
+.emergency-banner {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #b1b4b6;
+    color: #fff;
+    margin-top: 2px;
+    padding: 15px 0
+}
+@media print {
+    .emergency-banner {
+        font-family: sans-serif
+    }
+}
+@media (min-width: 40.0625em) {
+    .emergency-banner {
+        font-size:19px;
+        line-height: 1.3157894737;
+    }
+}
+@media print {
+    .emergency-banner {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+@media (min-width: 40.0625em) {
+    .emergency-banner {
+        padding:30px 0
+    }
+}
+.emergency-banner {
+    border-bottom: 5px solid #fff;
+    margin-top: 0;
+    position: relative;
+    z-index: 10
+}
+.emergency-banner__heading {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.1111111111;
+    margin: 0;
+    padding: 0;
+}
+@media print {
+    .emergency-banner__heading {
+        font-family: sans-serif
+    }
+}
+@media (min-width: 40.0625em) {
+    .emergency-banner__heading {
+        font-size:32px;
+        line-height: 1.25
+    }
+}
+@media print {
+    .emergency-banner__heading {
+        font-size: 18pt;
+        line-height: 1.15;
+    }
+}
+.homepage .emergency-banner__heading {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    line-height: 1.09375
+}
+@media print {
+    .homepage .emergency-banner__heading {
+        font-family: sans-serif
+    }
+}
+@media (min-width: 40.0625em) {
+    .homepage .emergency-banner__heading {
+        font-size:48px;
+        line-height: 1.0416666667;
+    }
+}
+@media print {
+    .homepage .emergency-banner__heading {
+        font-size: 32pt;
+        line-height: 1.15;
+    }
+}
+@media (min-width: 40.0625em) {
+    .homepage .emergency-banner__heading {
+        margin-bottom:20px;
+    }
+}
+.emergency-banner__description {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 20px
+}
+@media print {
+    .emergency-banner__description {
+        font-family: sans-serif;
+    }
+}
+@media (min-width: 40.0625em) {
+    .emergency-banner__description {
+        font-size:19px;
+        line-height: 1.3157894737;
+    }
+}
+@media print {
+    .emergency-banner__description {
+        font-size: 14pt;
+        line-height: 1.15;
+    }
+}
+.emergency-banner__description:last-child {
+    margin-bottom: 0;
+}
+.emergency-banner__description {
+    margin: 20px 0;
+    padding: 0;
+}
+.emergency-banner__link {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.25;
+}
+@media print {
+    .emergency-banner__link {
+        font-family: sans-serif;
+    }
+}
+@media (min-width: 40.0625em) {
+    .emergency-banner__link {
+        font-size:19px;
+        line-height: 1.3157894737
+    }
+}
+@media print {
+    .emergency-banner__link {
+        font-size: 14pt;
+        line-height: 1.15;
+    }
+}
+.emergency-banner__link:visited {
+    color: #fff;
+}
+.emergency-banner__link:focus {
+    background-color: #FBC900;
+    color: #0b0c0c;
+}
+.emergency-banner--notable-death {
+    background-color: #0b0c0c;
+}
+.emergency-banner--national-emergency {
+    background-color: #b10e1e;
+}
+.emergency-banner--local-emergency {
+    background-color: #28a197;
+}
+
+.banner__body {
+    display: flex;
+    display: -ms-flexbox;
+    padding-bottom:8px
+}
+
+.banner {
+    background-color: $white;
+
+    &--half-padding {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    &__icon {
+            vertical-align: middle;
+            position: relative;
+
+            @include breakpoint(sm) {
+                display: none;
+            }
+        }
+}
