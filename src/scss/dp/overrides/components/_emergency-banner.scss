@@ -17,13 +17,13 @@
 @media (min-width: 40.0625em) {
     .emergency-banner {
         font-size:19px;
-        line-height: 1.3157894737;
+        line-height: 1.5;
     }
 }
 @media print {
     .emergency-banner {
         font-size: 14pt;
-        line-height: 1.15
+        line-height: 1.5
     }
 }
 @media (min-width: 40.0625em) {
@@ -32,17 +32,15 @@
     }
 }
 .emergency-banner {
-    border-bottom: 5px solid #fff;
     margin-top: 0;
     position: relative;
     z-index: 10
 }
 .emergency-banner__heading {
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     font-weight: 700;
-    font-size: 32px;
-    line-height: 1.1111111111;
+    font-size: 1.7rem;
+    line-height: 1.5;
     margin: 0;
     padding: 0;
 }
@@ -54,20 +52,20 @@
 @media (min-width: 40.0625em) {
     .emergency-banner__heading {
         font-size:32px;
-        line-height: 1.25
+        line-height: 1.5
     }
 }
 @media print {
     .emergency-banner__heading {
         font-size: 18pt;
-        line-height: 1.15;
+        line-height: 1.5;
     }
 }
 .homepage .emergency-banner__heading {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 700;
-    line-height: 1.09375
+    line-height: 1.5
 }
 @media print {
     .homepage .emergency-banner__heading {
@@ -77,13 +75,13 @@
 @media (min-width: 40.0625em) {
     .homepage .emergency-banner__heading {
         font-size:48px;
-        line-height: 1.0416666667;
+        line-height: 1.5;
     }
 }
 @media print {
     .homepage .emergency-banner__heading {
         font-size: 32pt;
-        line-height: 1.15;
+        line-height: 1.5;
     }
 }
 @media (min-width: 40.0625em) {
@@ -96,10 +94,9 @@
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     font-size: 16px;
-    line-height: 1.25;
+    line-height: 1.5;
     color: #fff;
     margin-top: 0;
-    margin-bottom: 20px
 }
 @media print {
     .emergency-banner__description {
@@ -109,29 +106,26 @@
 @media (min-width: 40.0625em) {
     .emergency-banner__description {
         font-size:19px;
-        line-height: 1.3157894737;
+        line-height: 1.5;
     }
 }
 @media print {
     .emergency-banner__description {
         font-size: 14pt;
-        line-height: 1.15;
+        line-height: 1.5;
     }
 }
 .emergency-banner__description:last-child {
     margin-bottom: 0;
 }
-.emergency-banner__description {
-    margin: 20px 0;
-    padding: 0;
-}
+
 .emergency-banner__link {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
     color: #fff;
-    line-height: 1.25;
+    line-height: 1.5;
 }
 @media print {
     .emergency-banner__link {
@@ -141,22 +135,31 @@
 @media (min-width: 40.0625em) {
     .emergency-banner__link {
         font-size:19px;
-        line-height: 1.3157894737
+        line-height: 1.5
     }
 }
 @media print {
     .emergency-banner__link {
-        font-size: 14pt;
-        line-height: 1.15;
+        font-size: 1rem;
+        line-height: 1.5;
     }
 }
 .emergency-banner__link:visited {
     color: #fff;
 }
+
+.emergency-banner__link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
 .emergency-banner__link:focus {
     background-color: #FBC900;
     color: #0b0c0c;
 }
+
+
+
 .emergency-banner--notable-death {
     background-color: #0b0c0c;
 }
@@ -189,4 +192,426 @@
                 display: none;
             }
         }
+}
+
+//_icons.scss
+
+@mixin small-icon {
+    height: 16px;
+    width: 20px;
+}
+
+
+
+$sprite: 'https://cdn.ons.gov.uk/assets/images/icon-sprite/v2/icon-sprite.png';
+$png: 'https://cdn.ons.gov.uk/assets/images/icon-sprite/v2/icon-sprite.png';
+$svg: 'https://cdn.ons.gov.uk/assets/images/icon-sprite/v2/icon-sprite.svg';
+
+
+// Don't show icons on print - stops conflicts with print :after for links too
+@media screen {
+    .icon {
+
+        @if($old-ie == true) {
+            background:url($png);
+            background-size: 300px 1000px !important; // Horrible fix for the horrible fix on SVGs to stop small icons being blurry (TODO - a better solution!)
+        } @else {
+            background-image:url($svg);
+            background-repeat: no-repeat;
+        }
+        display: inline-block;
+        background-size: 300px 1000px;
+        height: 36px;
+        width: 40px;
+
+        &-arrow-up {
+
+            &--dark {
+                background-position: -15px -14px;
+                height: ($baseline * 4);
+            }
+
+            &--dark-small {
+                background-position: -138px -14px;
+                @include small-icon;
+                height: ($baseline * 2);
+                background-size: 301px 1000px; // Horrible fix to small icons being blurry, possibly problem with SVG creation/export?
+            }
+
+            &--light {
+                background-position: -79px -14px;
+                height: ($baseline * 4);
+            }
+
+            &--light-small {
+                background-position: -170px -14px;
+                @include small-icon;
+                height: ($baseline * 2);
+                background-size: 301px 1000px;
+            }
+        }
+
+
+        &-arrow-down {
+
+            &--dark {
+                background-position: -15px -44px;
+            }
+
+            &--dark-small {
+                background-position: -138px -30px;
+                @include small-icon;
+                height: ($baseline * 2);
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -44px;
+            }
+
+            &--light-small {
+                background-position: -170px -30px;
+                @include small-icon;
+                height: ($baseline * 2);
+                background-size: 301px 1000px;
+            }
+        }
+
+        &-arrow-right {
+
+            &--dark {
+                background-position: -16px -478px;
+            }
+
+            &--dark-small {
+                background-position: -138px -246px;
+                width: 20px;
+                height:17px;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -80px -478px;
+            }
+
+            &--light-small {
+                background-position: -170px -246px;
+                width: 20px;
+                height:17px;
+                background-size: 301px 1000px;
+            }
+        }
+
+        &-arrow-left {
+
+            &--dark {
+                background-position: -16px -542px;
+            }
+
+            &--dark-small {
+                background-position: -138px -278px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -80px -542px;
+            }
+
+            &--light-small {
+                background-position: -170px -278px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+        }
+
+
+        &-print {
+
+            &--dark {
+                background-position: -14px -76px;
+                width: 40px; //icon needs more width or else it cuts off one side
+            }
+
+            &--dark-small {
+                background-position: -138px -46px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -76px;
+                width: 40px;
+            }
+
+            &--light-small {
+                background-position: -170px -46px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+        }
+
+        &-email {
+
+            &--dark {
+                background-position: -11px -776px;
+                width: 40px; //icon needs more width or else it cuts off one side
+            }
+
+            &--dark-small {
+                background-position: -138px -398px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -776px;
+                width: 40px;
+            }
+
+            &--light-small {
+                background-position: -170px -398px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+        }
+
+
+        &-external {
+
+            &--dark {
+                background-position: -14px -126px;
+            }
+
+            &--dark-small {
+                background-position: -138px -71px;
+                @include small-icon;
+                width: 16px;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -126px;
+            }
+
+            &--light-small {
+                background-position: -170px -71px;
+                @include small-icon;
+                width: 16px;
+                background-size: 301px 1000px;
+            }
+        }
+
+
+        &-download {
+
+            &--dark {
+                background-position: -14px -173px;
+            }
+
+            &--dark-small {
+                background-position: -138px -95px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -173px;
+            }
+
+            &--light-small {
+                background-position: -170px -95px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+        }
+
+
+        &-calendar {
+            &--dark {
+                background-position: -14px -221px;
+            }
+
+            &--dark-small {
+                background-position: -138px -119px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -221px;
+            }
+
+            &--light-small {
+                background-position: -170px -119px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+        }
+
+
+        &-rss {
+
+            &--dark {
+                background-position: -14px -268px;
+            }
+
+            &--dark-small {
+                background-position: -138px -143px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -268px;
+            }
+
+            &--light-small {
+                background-position: -170px -143px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+        }
+
+
+        &-menu {
+
+            &--dark {
+                background-position: -14px -325px;
+            }
+
+            &--dark-small {
+                background-position: -138px -171px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -325px;
+            }
+
+            &--light-small {
+                background-position: -170px -171px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+        }
+
+
+        &-search {
+
+            &--dark {
+                background-position: -12px -387px;
+                height: ($baseline * 3); // Smaller icon so smaller height & width
+                width: ($col * 2)
+            }
+
+            &--dark-small {
+                background-position: -138px -196px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -74px -387px;
+                height: ($baseline * 3); // Smaller icon so smaller height & width
+                width: ($col * 2)
+            }
+
+            &--light-small {
+                background-position: -170px -196px;
+                @include small-icon;
+                background-size: 301px 1000px;
+            }
+
+        }
+
+        &-arrow-back {
+            &--dark-small {
+              background-position: -143px -421px;
+              width: 13px;
+              height: 20px;
+              background-size: 301px 1000px;
+            }
+
+            &--light-small {
+                background-position: -176px -421px;
+                @include small-icon;
+                width: 13px;
+                height: 20px;
+                background-size: 301px 1000px;
+            }
+        }
+
+        &-arrow-forward {
+            &--dark-small {
+              background-position: -140px -447px;
+              width: 13px;
+              height: 20px;
+              background-size: 301px 1000px;
+            }
+
+            &--light-small {
+                background-position: -173px -447px;
+                @include small-icon;
+                width: 13px;
+                height: 20px;
+                background-size: 301px 1000px;
+            }
+        }
+
+        &-return {
+
+            &--dark {
+                background-position: -14px -613px;
+            }
+
+            &--dark-small {
+                background-position: -138px -313px;
+                @include small-icon;
+                height: 18px;
+                background-size: 301px 1000px;
+            }
+
+            &--light {
+                background-position: -79px -613px;
+            }
+
+            &--light-small {
+                background-position: -170px -313px;
+                @include small-icon;
+                height: 18px;
+                background-size: 301px 1000px;
+            }
+        }
+
+        &-info {
+            background-position: -15px -681px;
+            width: 35px;
+            height: 35px;
+
+            &--info-box {
+                position: absolute;
+                left: $col;
+                top: 22px;
+            }
+
+
+            // specific class to all previous versions text to appear along side on grid
+            &--inline {
+                background-position: -15px -677px;
+                width: 35px;
+                height: 35px;
+                display: block;
+                margin-bottom: -26px;
+            }
+
+
+        }
+
+        &-drop-down {
+            background-position: -16px -738px;
+        }
+    }
 }

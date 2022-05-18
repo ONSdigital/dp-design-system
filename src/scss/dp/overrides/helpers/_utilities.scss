@@ -192,6 +192,10 @@ $old-ie: false;
 			padding-left: calc($col / 2) !important;
 		}
 
+        &--triple-half {
+            padding-left: ($col * 3.5) !important;
+        }
+
 	  	&--none {
 		  	padding-left: 0 !important;
 		  	padding-right: 0 !important;
