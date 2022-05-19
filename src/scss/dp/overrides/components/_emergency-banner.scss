@@ -2,7 +2,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.5;
     background-color: #b1b4b6;
     color: #fff;
@@ -16,7 +16,7 @@
 }
 @media (min-width: 40.0625em) {
     .emergency-banner {
-        font-size:19px;
+        font-size:1rem;
         line-height: 1.5;
     }
 }
@@ -51,7 +51,7 @@
 }
 @media (min-width: 40.0625em) {
     .emergency-banner__heading {
-        font-size:32px;
+        font-size:1.7rem;
         line-height: 1.5
     }
 }
@@ -80,7 +80,7 @@
 }
 @media print {
     .homepage .emergency-banner__heading {
-        font-size: 32pt;
+        font-size: 1.7rem;
         line-height: 1.5;
     }
 }
@@ -93,7 +93,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.5;
     color: #fff;
     margin-top: 0;
@@ -105,7 +105,7 @@
 }
 @media (min-width: 40.0625em) {
     .emergency-banner__description {
-        font-size:19px;
+        font-size: 1rem;
         line-height: 1.5;
     }
 }
@@ -134,7 +134,7 @@
 }
 @media (min-width: 40.0625em) {
     .emergency-banner__link {
-        font-size:19px;
+        font-size: 1rem;
         line-height: 1.5
     }
 }
