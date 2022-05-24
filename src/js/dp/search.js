@@ -103,17 +103,17 @@ if (searchContainer) {
     // make the change to the markup
     switchSearchMarkup(strParams, true);
   };
-
+  
   // create listeners for checkboxes controlling eachother
   [
     ...searchContainer.querySelectorAll(
-      ".ons-checkboxes__items [aria-controls]"
+      ".ons-checkboxes__items [aria-controls]:not(input:disabled)"
     ),
   ].map((topFilter) => {
     const childrenSelector = topFilter.getAttribute("aria-controls");
     const theChildren = [
       ...searchContainer.querySelectorAll(
-        `#${childrenSelector} [type=checkbox]`
+        `#${childrenSelector} [type=checkbox]:not(input:disabled)`
       ),
     ];
     if (!childrenSelector) return;
