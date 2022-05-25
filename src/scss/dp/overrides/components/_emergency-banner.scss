@@ -1,17 +1,16 @@
 .emergency-banner {
-    -webkit-font-smoothing: antialiased;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5;
-    background-color: #b1b4b6;
-    color: #fff;
+    font-weight: $font-weight-regular;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    background-color: $banner-grey;
+    color: $white;
     padding: 15px 0;
     margin-top: 0;
     position: relative;
     z-index: 10;
 
     @media print {
-        font-family: sans-serif;
+        font-family: $font-sans;
         font-size: 14pt;
     }
 
@@ -20,37 +19,37 @@
     }
 
     &--notable-death {
-        background-color: #0b0c0c;
+        background-color: $banner-black;
     }
 
     &--national-emergency {
-        background-color: #b10e1e;
+        background-color: $banner-red;
     }
 
     &--local-emergency {
-        background-color: #28a197;
+        background-color: $banner-teal;
     }
 
     &__heading {
         font-weight: 700;
         font-size: 1.7rem;
-        line-height: 1.5;
+        line-height: $base-line-height;
         margin: 0;
         padding: 0;
 
         @media print {
-            font-family: sans-serif;
+            font-family: $font-sans;
             font-size: 18pt;
         }
     }
 
     &__description {
-        font-weight: 400;
-        color: #fff;
+        font-weight: $font-weight-regular;
+        color: $white;
         margin-top: 0;
 
         @media print {
-            font-family: sans-serif;
+            font-family: $font-sans;
             font-size: 14pt;
         }
 
@@ -60,17 +59,17 @@
     }
 
     &__link {
-        font-weight: 400;
+        font-weight: $font-weight-regular;
         font-size: 1rem;
-        color: #fff;
+        color: $white;
 
         @media print {
-            font-family: sans-serif;
+            font-family: $font-sans;
         }
 
         &:hover {
-            color: #fff;
-            text-decoration: underline solid #fff 2px;
+            color: $white;
+            text-decoration: underline solid $white 2px;
         }
     }
 }

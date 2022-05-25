@@ -3,8 +3,14 @@
     display: flex;
     justify-content: flex-start;
 
-    & > img {
-      height: 59px;
+    .national-statistics {
+      &__logo {
+        display: block;
+        height: 59px;
+        width: 59px;
+        min-height: 59px;
+        min-width: 59px;
+      }
     }
   }
 
@@ -13,14 +19,18 @@
       height: 44px;
     }
 
-    .national-statistic {
+    .national-statistics {
       h2 {
         display: flex;
         justify-content: flex-start;
+      }
 
-        & > img {
-          height: 36px;
-        }
+      &__logo {
+        display: block;
+        height: 36px;
+        width: 36px;
+        min-height: 36px;
+        min-width: 36px;
       }
     }
   }
