@@ -47,7 +47,7 @@
     "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "abortcontroller-polyfill": "^1.7.3",
-    "auditjs": "^4.0.24",
+    "auditjs": "^4.0.37",
     "autoprefixer": "^10.2.4",
     "babel-eslint": "^10.1.0",
     "babelify": "^10.0.0",
