@@ -1,4 +1,8 @@
 .release {
+  &__document-type {
+    color: $color-grey-75;
+  }
+
   h1 {
     display: flex;
     justify-content: flex-start;
