@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .writeText(window.location.href)
       .then(success(btnText), failure(btnText))
       .catch((error) => console.error(error));
-    timeoutId = setTimeout(resetBtnState, 5000, btnText, elemInitialContent);
   }
 
   function failure(elem) {
     return function () {
       elem.textContent = elem.dataset.copyLinkFailure;
+      copyBtn.classList.add("ons-btn--disabled")
       copyBtn.setAttribute("aria-live", "polite");
       copyBtn.setAttribute("disabled", "true");
     };
@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return function () {
       elem.textContent = elem.dataset.copyLinkSuccess;
       copyBtn.setAttribute("aria-live", "polite");
+      timeoutId = setTimeout(resetBtnState, 5000, btnText, elemInitialContent);
     };
   }
 
