@@ -1,4 +1,4 @@
-import { findNode } from "../utilities";
+import { findNode, gtmDataLayerPush } from "../utilities";
 
 document.addEventListener("DOMContentLoaded", function () {
   function releaseTypeAutoSubmit(formSelector) {
@@ -17,7 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const nodeRadioSet = findNode(nodeReleaseTypeForm, ":scope .ons-radios__items");
+    const nodeRadioSet = findNode(
+      nodeReleaseTypeForm,
+      ":scope .ons-radios__items"
+    );
     if (!nodeRadioSet) {
       console.warn("releaseTypeAutoSubmit() No radio set found");
       return;
@@ -30,3 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
     releaseTypeAutoSubmit(".release-calendar__filters .filters__release-type");
   }
 });
+
+const sortSelector = document.querySelector(".ons-input--select");
+if (sortSelector) {
+  sortSelector.addEventListener("change", async (e) => {
+    gtmDataLayerPush({
+      event: "SortBy",
+      "sort-by": e.target.value,
+    });
+  });
+}
