@@ -1,5 +1,7 @@
 import { findNode, gtmDataLayerPush } from "../utilities";
 
+const releaseCalendarContainer = document.querySelector(".release-calendar");
+
 document.addEventListener("DOMContentLoaded", function () {
   function releaseTypeAutoSubmit(formSelector) {
     function onChangeHandler(event) {
@@ -40,6 +42,33 @@ if (sortSelector) {
     gtmDataLayerPush({
       event: "SortBy",
       "sort-by": e.target.value,
+    });
+  });
+}
+
+[
+  ...releaseCalendarContainer.querySelectorAll(
+    ".ons-radio__input[type=radio]:not(input:disabled)"
+  ),
+].map((topFilter) => {
+  topFilter.addEventListener("change", async (e) => {
+    gtmDataLayerPush({
+      event: "Filter",
+      "filter-by": e.target.name,
+      selected: e.target.value.replace("type-", ""),
+    });
+  });
+});
+
+const searchKeywordForm = document.querySelector('[aria-label="Keywords"]');
+if (searchKeywordForm) {
+  searchKeywordForm.addEventListener("submit", async (e) => {
+    const formData = new FormData(e.target);
+    const formProps = Object.fromEntries(formData);
+    gtmDataLayerPush({
+      event: "Filter",
+      "filter-by": "search",
+      "search-term": formProps.keywords,
     });
   });
 }
