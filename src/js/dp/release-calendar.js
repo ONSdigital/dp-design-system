@@ -1,4 +1,4 @@
-import { findNode, gtmDataLayerPush } from "../utilities";
+import { findNode, gtmDataLayerPush, days } from "../utilities";
 
 const releaseCalendarContainer = document.querySelector(".release-calendar");
 
@@ -60,15 +60,40 @@ if (sortSelector) {
   });
 });
 
-const searchKeywordForm = document.querySelector('[aria-label="Keywords"]');
-if (searchKeywordForm) {
-  searchKeywordForm.addEventListener("submit", async (e) => {
-    const formData = new FormData(e.target);
-    const formProps = Object.fromEntries(formData);
-    gtmDataLayerPush({
-      event: "Filter",
-      "filter-by": "search",
-      "search-term": formProps.keywords,
-    });
+document.querySelector('[aria-label="Keywords"]').onsubmit = async (e) => {
+  const formData = new FormData(e.target);
+  const formProps = Object.fromEntries(formData);
+  gtmDataLayerPush({
+    event: "Filter",
+    "filter-by": "search",
+    "search-term": formProps.keywords,
   });
-}
+};
+
+document.querySelector('[aria-label="Released date"]').onsubmit = async (e) => {
+  const formData = new FormData(e.target);
+  const formProps = Object.fromEntries(formData);
+  const startDate = `${formProps["after-year"]}/${formProps["after-month"]}/${formProps["after-day"]}`;
+  const endDate = `${formProps["before-year"]}/${formProps["before-month"]}/${formProps["before-day"]}`;
+
+  const numberOfDays = days(
+    new Date(
+      formProps["after-year"],
+      formProps["after-month"],
+      formProps["after-day"]
+    ),
+    new Date(
+      formProps["before-year"],
+      formProps["before-month"],
+      formProps["before-day"]
+    )
+  );
+
+  gtmDataLayerPush({
+    event: "Filter",
+    "filter-by": "date-range",
+    "start-date": startDate,
+    "end-date": endDate,
+    "number-of-days": numberOfDays,
+  });
+};
