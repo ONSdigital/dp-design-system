@@ -104,20 +104,24 @@ if (releaseCalendarContainer) {
 }
 
 if (releasePageContainer) {
-  const releaseStatus = document.querySelector(".release-status").textContent;
+  const releaseStatus = releasePageContainer.getAttribute(
+    "data-gtm-release-status"
+  );
   const releaseDate = new Date(
-    document.querySelector(".release-date").textContent
+    releasePageContainer.getAttribute("data-gtm-release-date")
   );
   const releaseTime = new Date(
-    document.querySelector(".release-time").textContent
+    releasePageContainer.getAttribute("data-gtm-release-time")
   );
-  const releaseDateStatus = document.querySelector(
-    ".release-date-status"
-  ).textContent;
+  const releaseDateStatus = releasePageContainer.getAttribute(
+    "data-gtm-release-date-status"
+  );
   const nextReleaseDate = new Date(
-    document.querySelector(".next-release-date").textContent
+    releasePageContainer.getAttribute("data-gtm-next-release-date")
   );
-  const contactName = document.querySelector(".contact-name").textContent;
+  const contactName = releasePageContainer.getAttribute(
+    "data-gtm-contact-name"
+  );
 
   const year = releaseDate.getFullYear().toString().padStart(2, "0");
   const month = releaseDate.getMonth().toString().padStart(2, "0");
