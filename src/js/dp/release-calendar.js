@@ -37,32 +37,32 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-const sortSelector = document.querySelector(".ons-input--select");
-if (sortSelector) {
-  sortSelector.addEventListener("change", async (e) => {
-    gtmDataLayerPush({
-      event: "SortBy",
-      "sort-by": e.target.value,
-    });
-  });
-}
-
 if (releaseCalendarContainer) {
+  const sortSelector = document.querySelector(".ons-input--select");
+  if (sortSelector) {
+    sortSelector.addEventListener("change", (e) => {
+      gtmDataLayerPush({
+        event: "SortBy",
+        "sort-by": e.target.value,
+      });
+    });
+  }
+
   [
     ...releaseCalendarContainer.querySelectorAll(
       ".ons-radio__input[type=radio]:not(input:disabled)"
     ),
   ].map((topFilter) => {
-    topFilter.addEventListener("change", async (e) => {
+    topFilter.addEventListener("change", (e) => {
       gtmDataLayerPush({
         event: "Filter",
-        "filter-by": e.target.name,
+        "filter-by": e.target.name.toString(),
         selected: e.target.value.replace("type-", ""),
       });
     });
   });
 
-  document.querySelector('[aria-label="Keywords"]').onsubmit = async (e) => {
+  document.querySelector(".release-calender-search-keyword").onsubmit = (e) => {
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
     gtmDataLayerPush({
@@ -72,7 +72,7 @@ if (releaseCalendarContainer) {
     });
   };
 
-  document.querySelector('[aria-label="Released date"]').onsubmit = async (
+  document.querySelector(".release-calender-released-date").onsubmit = async (
     e
   ) => {
     const formData = new FormData(e.target);
@@ -104,24 +104,14 @@ if (releaseCalendarContainer) {
 }
 
 if (releasePageContainer) {
-  const releaseStatus = releasePageContainer.getAttribute(
-    "data-gtm-release-status"
-  );
-  const releaseDate = new Date(
-    releasePageContainer.getAttribute("data-gtm-release-date")
-  );
-  const releaseTime = new Date(
-    releasePageContainer.getAttribute("data-gtm-release-time")
-  );
-  const releaseDateStatus = releasePageContainer.getAttribute(
-    "data-gtm-release-date-status"
-  );
+  const releaseStatus = releasePageContainer.dataset.gtmReleaseStatus;
+  const releaseDate = new Date(releasePageContainer.dataset.gtmReleaseDate);
+  const releaseTime = new Date(releasePageContainer.dataset.gtmReleaseTime);
+  const releaseDateStatus = releasePageContainer.dataset.gtmReleaseDateStatus;
   const nextReleaseDate = new Date(
-    releasePageContainer.getAttribute("data-gtm-next-release-date")
+    releasePageContainer.dataset.gtmNextReleaseDate
   );
-  const contactName = releasePageContainer.getAttribute(
-    "data-gtm-contact-name"
-  );
+  const contactName = releasePageContainer.dataset.gtmContactName;
 
   const year = releaseDate.getFullYear().toString().padStart(2, "0");
   const month = releaseDate.getMonth().toString().padStart(2, "0");
