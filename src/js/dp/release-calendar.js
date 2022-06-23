@@ -56,8 +56,8 @@ if (releaseCalendarContainer) {
     topFilter.addEventListener("change", (e) => {
       gtmDataLayerPush({
         event: "Filter",
-        "filter-by": e.target.name.toString(),
-        selected: e.target.value.replace("type-", ""),
+        "filter-by": e.target.name,
+        selected: e.target.value.toString().replace("type-", ""),
       });
     });
   });
@@ -104,6 +104,7 @@ if (releaseCalendarContainer) {
 }
 
 if (releasePageContainer) {
+  console;
   const releaseStatus = releasePageContainer.dataset.gtmReleaseStatus;
   const releaseDate = new Date(releasePageContainer.dataset.gtmReleaseDate);
   const releaseTime = new Date(releasePageContainer.dataset.gtmReleaseTime);
