@@ -1,4 +1,4 @@
-import { findNode, gtmDataLayerPush, days } from "../utilities";
+import { findNode, gtmDataLayerPush, daysBetween } from "../utilities";
 
 const releaseCalendarContainer = document.querySelector(".release-calendar");
 const releasePageContainer = document.querySelector(".release");
@@ -80,7 +80,7 @@ if (releaseCalendarContainer) {
     const startDate = `${formProps["after-year"]}/${formProps["after-month"]}/${formProps["after-day"]}`;
     const endDate = `${formProps["before-year"]}/${formProps["before-month"]}/${formProps["before-day"]}`;
 
-    const numberOfDays = days(
+    const numberOfDays = daysBetween(
       new Date(
         formProps["after-year"],
         formProps["after-month"],
