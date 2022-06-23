@@ -72,9 +72,7 @@ if (releaseCalendarContainer) {
     });
   };
 
-  document.querySelector(".release-calender-released-date").onsubmit = async (
-    e
-  ) => {
+  document.querySelector(".release-calender-released-date").onsubmit = (e) => {
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
     const startDate = `${formProps["after-year"]}/${formProps["after-month"]}/${formProps["after-day"]}`;
