@@ -10,6 +10,9 @@ $alignItems: (
 );
 
 .ons-u {
+  &-fw {
+    width: 100%;
+  }
   @include mq(xxs, s) {
     &-fw\@xxs\@s {
       width: 100% !important;
