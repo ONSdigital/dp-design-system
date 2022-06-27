@@ -102,7 +102,6 @@ if (releaseCalendarContainer) {
 }
 
 if (releasePageContainer) {
-  console;
   const releaseStatus = releasePageContainer.dataset.gtmReleaseStatus;
   const releaseDate = new Date(releasePageContainer.dataset.gtmReleaseDate);
   const releaseTime = new Date(releasePageContainer.dataset.gtmReleaseTime);
