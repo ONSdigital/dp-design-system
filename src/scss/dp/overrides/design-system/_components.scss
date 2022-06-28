@@ -72,6 +72,12 @@
     }
   }
 
+  &-sticker {
+    background-color: $color-grey-15;
+    border: 1px solid  $color-grey-35;
+    padding: 0.3rem 0.5rem;
+  }
+
   &-summary {
     &__item-title.ons-u-pt-s.ons-u-pb-s,
     &__values.ons-u-pt-s.ons-u-pb-s,
