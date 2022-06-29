@@ -2,4 +2,10 @@
   &__document-type {
     color: $color-grey-75;
   }
+
+  .page-action__icon--no-roundel > svg {
+    margin: 0.25rem !important;
+    height: 1.5rem;
+    width: 1.5em;
+  }
 }
