@@ -156,13 +156,14 @@ if (searchContainer) {
     // build new param
     paramsArray.map((param) => {
       if (!("isChecked" in param) || !("topics" in param)) return;
+      
+      strParams = strParams.replace(
+        new RegExp(/&topics=\d*/gi),
+        ""
+      );
+      
       if (param.isChecked) {
         strParams += `&topics=${param.topics}`;
-      } else {
-        strParams = strParams.replace(
-          new RegExp(`(\\&|\\?)topics\=${param.topics}`),
-          ""
-        );
       }
     });
 
