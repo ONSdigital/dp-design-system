@@ -158,7 +158,7 @@ if (searchContainer) {
       if (!("isChecked" in param) || !("topics" in param)) return;
       
       strParams = strParams.replace(
-        new RegExp(/&topics=\d*/gi),
+        new RegExp(/&topics=\w*/gi),
         ""
       );
       
