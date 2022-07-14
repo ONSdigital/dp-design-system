@@ -5,14 +5,14 @@
       justify-content: space-between;
       align-content: center;
       align-items: baseline;
-      gap: .5em;
+      gap: 0.5em;
       padding: 0.5em 0;
       margin-bottom: 0;
       &:first-child {
         border-top-width: 2px !important;
       }
 
-      & .ons-btn__inner {
+      .ons-btn__inner {
         padding: 0.3em 0.7em;
       }
     }
@@ -20,7 +20,7 @@
   &-selection {
     display: flex;
     flex-wrap: wrap;
-    gap: .5em;
+    gap: 0.5em;
     &__selected .ons-btn__inner {
       padding: 0.5em 0.666667em 0.666667em 0.666667em;
       box-shadow: none;
