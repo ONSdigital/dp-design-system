@@ -232,30 +232,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  expandableItems.forEach((item) => {
-    const expandBehaviour = () => {
-      if (!document.body.classList.contains("viewport-sm")) {
-        const navLink = item.querySelector(".primary-nav__link");
-        navLink.ariaExpanded = true;
-        const expandable = item.querySelector(".js-expandable__content");
-        expandable.ariaExpanded = true;
-      }
+  const expandBehaviour = (item, expandedBool) => {
+    if (!document.body.classList.contains("viewport-sm")) {
+      const navLink = item.querySelector(".primary-nav__link");
+      navLink.ariaExpanded = expandedBool;
+      const expandable = item.querySelector(".js-expandable__content");
+      expandable.ariaExpanded = expandedBool;
     }
-    item.addEventListener("focusin", expandBehaviour);
-    item.addEventListener("pointerenter", expandBehaviour);
+  }
+
+  expandableItems.forEach((item) => {
+    item.addEventListener("focusin", () => expandBehaviour(item, true));
+    item.addEventListener("pointerenter", () => expandBehaviour(item, true));
   });
 
   expandableItems.forEach((item) => {
-    const expandBehaviour = () => {
-      if (!document.body.classList.contains("viewport-sm")) {
-        const navLink = item.querySelector(".primary-nav__link");
-        navLink.ariaExpanded = false;
-        const expandable = item.querySelector(".js-expandable__content");
-        expandable.ariaExpanded = false;
-      }
-    }
-    item.addEventListener("focusout", expandBehaviour);
-    item.addEventListener("pointerleave", expandBehaviour);
+    item.addEventListener("focusout", () => expandBehaviour(item, false));
+    item.addEventListener("pointerleave", () => expandBehaviour(item, false));
   });
 
   const menuToggle = document.querySelector("#menu-toggle");
