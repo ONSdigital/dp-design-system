@@ -233,25 +233,29 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   expandableItems.forEach((item) => {
-    item.addEventListener("pointerenter", function (e) {
+    const expandBehaviour = () => {
       if (!document.body.classList.contains("viewport-sm")) {
         const navLink = item.querySelector(".primary-nav__link");
         navLink.ariaExpanded = true;
         const expandable = item.querySelector(".js-expandable__content");
         expandable.ariaExpanded = true;
       }
-    });
+    }
+    item.addEventListener("focusin", expandBehaviour);
+    item.addEventListener("pointerenter", expandBehaviour);
   });
 
   expandableItems.forEach((item) => {
-    item.addEventListener("pointerleave", function (e) {
+    const expandBehaviour = () => {
       if (!document.body.classList.contains("viewport-sm")) {
         const navLink = item.querySelector(".primary-nav__link");
         navLink.ariaExpanded = false;
         const expandable = item.querySelector(".js-expandable__content");
         expandable.ariaExpanded = false;
       }
-    });
+    }
+    item.addEventListener("focusout", expandBehaviour);
+    item.addEventListener("pointerleave", expandBehaviour);
   });
 
   const menuToggle = document.querySelector("#menu-toggle");
