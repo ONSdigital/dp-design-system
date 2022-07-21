@@ -25,6 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       window.print();
     });
+
+    attachAction(actionsList, ".page-action--copy-link", (event) => {
+      event.preventDefault();
+      if (navigator.clipboard) {
+        navigator.clipboard
+          .writeText(window.location.href)
+          .catch(console.error);
+      }
+    });
   }
 
   if (findNode(".bulletin")) {
