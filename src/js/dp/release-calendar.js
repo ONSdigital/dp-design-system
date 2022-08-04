@@ -35,6 +35,39 @@ document.addEventListener("DOMContentLoaded", function () {
   if (findNode(".release-calendar")) {
     releaseTypeAutoSubmit(".release-calendar__filters .filters__release-type");
   }
+
+  function releaseTypeCensusAutoSubmit(formSelector) {
+    function onChangeHandler(event) {
+      if (
+        event.target.nodeName === "INPUT" &&
+        event.target.classList.contains("ons-checkbox__input")
+      ) {
+        event.target.form.submit();
+      }
+    }
+
+    const nodeReleaseTypeCensusForm = findNode(formSelector);
+    if (!nodeReleaseTypeCensusForm) {
+      console.warn("releaseTypeCensusAutoSubmit() No form found");
+      return;
+    }
+
+    const nodeCheckboxSet = findNode(
+      nodeReleaseTypeCensusForm,
+      ":scope .ons-checkboxes__items"
+    );
+
+    if (!nodeCheckboxSet) {
+      console.warn("releaseTypeCensusAutoSubmit() No checkbox set found");
+      return;
+    }
+
+    nodeCheckboxSet.addEventListener("change", onChangeHandler);
+  }
+
+  if (findNode(".release-calendar")) {
+    releaseTypeCensusAutoSubmit(".filters__release-census");
+  }
 });
 
 if (releaseCalendarContainer) {
