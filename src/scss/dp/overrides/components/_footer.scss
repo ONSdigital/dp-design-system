@@ -1,3 +1,9 @@
+@media print {
+  footer.print--hide {
+    display: none;
+  }
+}
+
 .footer {
   background-color: $color-grey-100;
   color: $white;
