@@ -134,7 +134,6 @@ function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMess
   );
   request.onreadystatechange = function () {
     if (request.readyState === XMLHttpRequest.DONE) {
-      feedbackFormHeader.classList.toggle("js-hidden");
       const status = request.status;
       if (status === 0 || (status >= 200 && status < 400)) {
         feedbackFormHeader.innerHTML = feedbackMessage;
@@ -144,6 +143,7 @@ function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMess
         );
         feedbackFormHeader.innerHTML = feedbackMessageError;
       }
+      feedbackFormHeader.classList.toggle("js-hidden");
     }
   };
   return { request, serializedData };
