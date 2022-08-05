@@ -119,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (feedbackForm) {
         feedbackForm.classList.add("js-hidden");
       }
-      feedbackFormHeader.classList.toggle("js-hidden");
       request.send(serializedData);
     });
   }
@@ -135,6 +134,7 @@ function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMess
   );
   request.onreadystatechange = function () {
     if (request.readyState === XMLHttpRequest.DONE) {
+      feedbackFormHeader.classList.toggle("js-hidden");
       const status = request.status;
       if (status === 0 || (status >= 200 && status < 400)) {
         feedbackFormHeader.innerHTML = feedbackMessage;
