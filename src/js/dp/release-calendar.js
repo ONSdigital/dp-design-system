@@ -32,10 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     nodeRadioSet.addEventListener("change", onChangeHandler);
   }
 
-  if (findNode(".release-calendar")) {
-    releaseTypeAutoSubmit(".release-calendar__filters .filters__release-type");
-  }
-
   function releaseTypeCensusAutoSubmit(formSelector) {
     function onChangeHandler(event) {
       if (
@@ -66,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (findNode(".release-calendar")) {
+    releaseTypeAutoSubmit(".release-calendar__filters .filters__release-type");
     releaseTypeCensusAutoSubmit(".filters__release-census");
   }
 });
