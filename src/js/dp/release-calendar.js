@@ -102,6 +102,16 @@ if (releaseCalendarContainer) {
     });
   };
 
+  document
+    .querySelector("#release-type-census")
+    .addEventListener("change", (e) => {
+      gtmDataLayerPush({
+        event: "Filter",
+        "filter-by": "census",
+        selected: "census",
+      });
+    });
+
   document.querySelector(".release-calender-released-date").onsubmit = (e) => {
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
@@ -134,7 +144,6 @@ if (releaseCalendarContainer) {
 if (releasePageContainer) {
   const releaseStatus = releasePageContainer.dataset.gtmReleaseStatus;
   const releaseDate = new Date(releasePageContainer.dataset.gtmReleaseDate);
-  const releaseTime = new Date(releasePageContainer.dataset.gtmReleaseTime);
   const releaseDateStatus = releasePageContainer.dataset.gtmReleaseDateStatus;
   const nextReleaseDate = new Date(
     releasePageContainer.dataset.gtmNextReleaseDate
@@ -144,8 +153,8 @@ if (releasePageContainer) {
   const year = releaseDate.getFullYear().toString().padStart(2, "0");
   const month = releaseDate.getMonth().toString().padStart(2, "0");
   const date = releaseDate.getDate().toString().padStart(2, "0");
-  const hour = releaseTime.getHours().toString().padStart(2, "0");
-  const minutes = releaseTime.getMinutes().toString().padStart(2, "0");
+  const hour = releaseDate.getHours().toString().padStart(2, "0");
+  const minutes = releaseDate.getMinutes().toString().padStart(2, "0");
 
   const nextReleaseYear = nextReleaseDate
     .getFullYear()
