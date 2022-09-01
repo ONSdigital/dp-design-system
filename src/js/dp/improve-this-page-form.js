@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const pageURL = window.location.href;
   const feedbackURL = "/feedback";
   const positiveFeedbackPath = `${feedbackURL}/positive`;
-  const feedbackThanks = document.querySelector("#feedback-thanks");
+  const feedbackThanks = document.querySelector(".feedback-thanks");
 
   const feedbackMessage =
     '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
@@ -102,7 +102,7 @@ function initFeedbackRequestHandler(form, path, feedbackMessageError, feedbackTh
     if (request.readyState === XMLHttpRequest.DONE) {
       const status = request.status;
       if (status === 0 || (status >= 200 && status < 400)) {
-        document.querySelector("#feedback-content").remove();
+        document.querySelector("#feedback-form-container").remove();
         feedbackThanks.innerHTML = "Thank you";
         var displayURL = document.referrer;
         var len = displayURL.length;
