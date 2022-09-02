@@ -1,18 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const pageURL = window.location.href;
   const feedbackURL = "/feedback";
-  const positiveFeedbackPath = `${feedbackURL}/positive`;
-  const feedbackThanks = document.querySelector(".feedback-thanks");
 
-  const feedbackMessage =
-    '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
-  const feedbackMessageError =
-    '<span id="feedback-form-error role="alert"">Something went wrong, try using our <a href="/feedback">feedback form</a>.</span>';
-
-  const feedbackFormURL = document.querySelector("#feedback-form-url");
-  if (feedbackFormURL) {
-    feedbackFormURL.value = pageURL;
-  }
 
   const feedbackFormContainer = document.querySelector(
     "#feedback-form-container"
@@ -79,14 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, feedbackURL, feedbackMessageError, feedbackThanks);
+      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, feedbackURL);
 
       request.send(serializedData);
     });
   }
 });
 
-function initFeedbackRequestHandler(form, path, feedbackMessageError, feedbackThanks) {
+function initFeedbackRequestHandler(form, path, feedbackMessageError) {
   const serializedData = serializeFormData(form);
   const request = new XMLHttpRequest();
   request.open("POST", path, true);
@@ -103,14 +92,20 @@ function initFeedbackRequestHandler(form, path, feedbackMessageError, feedbackTh
       const status = request.status;
       if (status === 0 || (status >= 200 && status < 400)) {
         document.querySelector("#feedback-form-container").remove();
+        const feedbackThanks = document.querySelector(".feedback-thanks")
         feedbackThanks.innerHTML = "Thank you";
-        var displayURL = document.referrer;
-        var len = displayURL.length;
+        let displayURL = document.referrer;
+        if (displayURL === "") {
+          displayURL = "www.ons.gov.uk";
+        };
+        let len = displayURL.length;
         if (len > 50) {
         displayURL = "..." + displayURL.slice(len - 50, len);
         }
-        document.querySelector("#feedback-description").html("<div class=\"font-size--16\"><br>Your feedback will help us to improve the website. We are unable to respond to all enquiries. If your matter is urgent, please <a href=\"/aboutus/contactus\">contact us</a>.<br><br>Return to <a class=\"underline-link\" href=\"" + document.referrer + "\">" + displayURL + "</a></div>")
-    } else {
+        const feedbackDescription = document.querySelector("#feedback-description");
+        let feedbackSuccess = "<div class=\"font-size--16\"><br>Your feedback will help us to improve the website. We are unable to respond to all enquiries. If your matter is urgent, please <a href=\"/aboutus/contactus\">contact us</a>.<br><br>Return to <a class=\"underline-link\" href=\"" + document.referrer + "\">" + displayURL + "</a></div>";
+        feedbackDescription.innerHTML = feedbackSuccess;
+      } else {
       console.error(
           `footer feedback error: ${request.status}: ${request.statusText}`
       )
