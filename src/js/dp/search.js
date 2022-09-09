@@ -242,15 +242,17 @@ if (searchContainer) {
     ),
   ];
   const filterMenu = searchContainer.querySelector("#search-filter");
-  filterMenu.classList.add("js-fullscreen-filter-menu-content", "hide--sm");
-  toggleBtns.map((btn) => {
-    btn.classList.remove("hide");
-    btn.addEventListener("click", () => {
-      if (filterMenu.classList.contains("hide--sm")) {
-        filterMenu.classList.remove("hide--sm");
-      } else {
-        filterMenu.classList.add("hide--sm");
-      }
+  if (filterMenu) {
+    filterMenu.classList.add("js-fullscreen-filter-menu-content", "hide--sm");
+    toggleBtns.map((btn) => {
+      btn.classList.remove("hide");
+      btn.addEventListener("click", () => {
+        if (filterMenu.classList.contains("hide--sm")) {
+          filterMenu.classList.remove("hide--sm");
+        } else {
+          filterMenu.classList.add("hide--sm");
+        }
+      });
     });
-  });
+  };
 }
