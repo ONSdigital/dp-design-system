@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
               document.querySelector("#email-field-label");
             emailFieldLabel.insertAdjacentHTML("beforeend", emailError);
           }
+          emailField.classList.add("form-control__error");
           hasErrors = true;
         }
       }
