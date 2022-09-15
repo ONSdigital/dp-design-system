@@ -2,4 +2,22 @@
   &-page {
     overflow-x: initial;
   }
+  &-label.ons-u-fw-n {
+    font-weight: $font-weight-regular;
+  }
+  @include mq(xxs, s) {
+    &-grid--flex\@xxs\@s.ons-grid--between\@xxs\@s {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
 }
+
+// Highlighting - temporary fix while waiting for the design system to include highlighting in their npm package
+.ons-highlight {
+  background-color: $color-highlight;
+  font-style: normal;
+  padding: 0 2px;
+}
+

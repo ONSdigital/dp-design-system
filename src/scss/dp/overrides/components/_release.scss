@@ -1,0 +1,50 @@
+.release {
+  &__document-type {
+    color: $color-grey-75;
+  }
+
+  h1 {
+    display: flex;
+    justify-content: space-between;
+
+    .national-statistics {
+      &__logo {
+        display: block;
+        height: 59px;
+        width: 59px;
+        min-height: 59px;
+        min-width: 59px;
+      }
+
+      @media (max-width: 739px) {
+        &__logo {
+          height: 41px;
+          width: 41px;
+          min-height: 41px;
+          min-width: 41px;
+        }
+      }
+    }
+  }
+
+  .about-the-data {
+    .welsh-statistic > img {
+      height: 44px;
+    }
+
+    .national-statistics {
+      h2 {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      &__logo {
+        display: block;
+        height: 36px;
+        width: 36px;
+        min-height: 36px;
+        min-width: 36px;
+      }
+    }
+  }
+}

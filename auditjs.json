@@ -1,7 +1,36 @@
 {
-    "ignore": [
-        { "id": "64cd5f21-8af4-4eae-ac7d-a53241ea693a", "reason": "transitive dependency of glob-stream, which is used by gulp"},
-        { "id": "b7740d41-fc85-4d22-8af5-5a3159e114ea", "reason": "transitive dependency of updated gulp-cli"},
-        { "id": "7ccaaed0-205b-4382-a963-8a30a0b151b1", "reason": "transitive dependency of updated gulp-cli"}
-    ]
+  "ignore": [
+    {
+      "id": "64cd5f21-8af4-4eae-ac7d-a53241ea693a",
+      "reason": "transitive dependency of glob-stream, which is used by gulp"
+    },
+    {
+      "id": "b7740d41-fc85-4d22-8af5-5a3159e114ea",
+      "reason": "transitive dependency of updated gulp-cli"
+    },
+    {
+      "id": "7ccaaed0-205b-4382-a963-8a30a0b151b1",
+      "reason": "transitive dependency of updated gulp-cli"
+    },
+    {
+      "id": "CVE-2021-23362",
+      "reason": "hosted-git-info is a transitive dependency of npm-run-all which is no longer maintained"
+    },
+    {
+      "id": "sonatype-2018-0616",
+      "reason": "koa is a transitive dependency of local-web-server@4; upgrading to version 5 would force an upgrade of Node"
+    },
+    {
+      "id": "CVE-2021-23440",
+      "reason": "set-value is a transitive dependency of gulp-cli which is no longer maintained"
+    },
+    {
+      "id": "sonatype-2021-0459",
+      "reason": "unset-value is a transitive dependency of gulp-cli which is no longer maintained"
+    },
+    {
+      "id": "CVE-2020-7608",
+      "reason": "yargs-parser@5 is a transitive dependency of gulp-cli which is no longer maintained"
+    }
+  ]
 }

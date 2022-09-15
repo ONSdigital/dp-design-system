@@ -1,0 +1,55 @@
+// Utility overrides for design system that do not exist elsewhere
+// follow naming convention ons-u...
+
+$alignItems: (
+  fs: flex-start,
+  fe: flex-end,
+  c: center,
+  s: stretch,
+  b: baseline,
+);
+
+.ons-u {
+  &-fw {
+    width: 100%;
+  }
+  @include mq(xxs, s) {
+    &-fw\@xxs\@s {
+      width: 100% !important;
+    }
+    &-bb-no\@xxs\@s {
+      border-bottom: none;
+    }
+    &-flex--2\@xxs\@s {
+      flex: 2;
+    }
+  }
+  @for $i from 1 to 10 {
+    &-order--#{$i} {
+      order: #{$i};
+    }
+  }
+
+  @each $key, $value in $alignItems {
+    &-flex-ai-#{$key} {
+      align-items: #{$value} !important;
+    }
+  }
+
+  &-tt-l {
+    text-transform: lowercase;
+  }
+
+  &-us-no {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  &-bg--tr {
+    background-color: transparent;
+  }
+}

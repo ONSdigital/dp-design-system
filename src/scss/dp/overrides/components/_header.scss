@@ -3,6 +3,12 @@
 // PRIMARY NAVIGATION
 
 .primary-nav {
+  @media print {
+    &.print--hide {
+      display: none;
+    }
+  }
+
   background-color: $abbey;
   position: relative;
 
@@ -390,6 +396,12 @@
   &--separator {
     background-color: $ship-grey;
     height: 2px;
+  }
+
+  @media print {
+    .print--hide {
+      display: none;
+    }
   }
 }
 

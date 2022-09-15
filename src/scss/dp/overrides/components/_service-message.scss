@@ -1,0 +1,23 @@
+.banner {
+    background-color: $white;
+
+    &--half-padding {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    &__body {
+        display: flex;
+        display: -ms-flexbox;
+        padding-bottom: 8px
+    }
+
+    &__icon {
+            vertical-align: middle;
+            position: relative;
+
+            @include breakpoint(sm) {
+                display: none;
+            }
+    }
+}
