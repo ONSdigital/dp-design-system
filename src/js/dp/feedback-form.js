@@ -4,20 +4,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   const feedbackFormContainer = document.querySelector(
-    "#feedback-form-container"
+    "#feedback-form-page-container"
   );
   if (feedbackFormContainer) {
     feedbackFormContainer.addEventListener("submit", function (e) {
       e.preventDefault();
       const fieldErrors = document.querySelectorAll(
-        "#feedback-form-container .form-control__error"
+        "#feedback-form-page-container .feedback__form-control__error"
       );
       fieldErrors.forEach((fieldError) => {
-        fieldError.classList.remove("form-control__error");
+        fieldError.classList.remove("feedback__form-control__error");
       });
 
       const formErrors = document.querySelectorAll(
-        "#feedback-form-container .form-error"
+        "#feedback-form-page-container .feedback__form-error"
       );
       formErrors.forEach((formError) => {
         formError.remove();
@@ -29,17 +29,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (descriptionField && descriptionField.value === "") {
         const descriptionError =
-          '<span class="form-error" role="alert">Write some feedback</span>';
-        if (!document.querySelector("#description-field-label .form-error")) {
+          '<span class="feedback__form-error" role="alert">Write some feedback</span>';
+        if (!document.querySelector("#description-field-label .feedback__form-error")) {
           const descriptionFieldLabel = document.querySelector(
             "#description-field-label"
           );
           descriptionFieldLabel.insertAdjacentHTML(
-            "beforeend",
+            "afterend",
             descriptionError
           );
         }
-        descriptionField.classList.add("form-control__error");
+        descriptionField.classList.add("feedback__form-control__error");
+        descriptionField.focus();
         hasErrors = true;
       }
 
@@ -47,25 +48,27 @@ document.addEventListener("DOMContentLoaded", function () {
         let emailError = "";
         if (hasErrors) {
           emailError =
-            '<span class="form-error" role="alert" aria-live="polite">This is not a valid email address, correct it or delete it</span>';
+            '<span class="feedback__form-error" role="alert" aria-live="polite">This is not a valid email address, correct it or delete it</span>';
         } else {
           emailError =
-            '<span class="form-error" role="alert">This is not a valid email address, correct it or delete it</span>';
+            '<span class="feedback__form-error" role="alert">This is not a valid email address, correct it or delete it</span>';
         }
 
         const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/g;
         if (!emailRegex.test(emailField.value)) {
-          if (!document.querySelector("#email-field-label .form-error")) {
+          if (!document.querySelector("#email-field-label .feedback__form-error")) {
             const emailFieldLabel =
               document.querySelector("#email-field-label");
             emailFieldLabel.insertAdjacentHTML("beforeend", emailError);
           }
-          emailField.classList.add("form-control__error");
+          emailField.classList.add("feedback__form-control__error");
           hasErrors = true;
         }
       }
 
       if (hasErrors) {
+        const feedbackButton = document.querySelector(".feedback__feedback-btn")
+        feedbackButton.blur();
         return;
       }
 
@@ -86,13 +89,11 @@ function initFeedbackRequestHandler(form, path, feedbackMessageError) {
     "application/x-www-form-urlencoded; charset=UTF-8",
   );
   request.send();
-  console.log(request)
   request.onreadystatechange = function () {
-    console.log(request)
     if (request.readyState === XMLHttpRequest.DONE) {
       const status = request.status;
       if (status === 0 || (status >= 200 && status < 400)) {
-        document.querySelector("#feedback-form-container").remove();
+        document.querySelector("#feedback-form-page-container").remove();
         const feedbackThanks = document.querySelector(".feedback-thanks")
         feedbackThanks.innerHTML = "Thank you";
         let displayURL = document.referrer;
