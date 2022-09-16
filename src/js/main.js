@@ -8,3 +8,4 @@ import "./dp/bulletin";
 import "./dp/search";
 import "./dp/release-calendar";
 import "./dp/copy-link";
+import "./dp/get-data";
