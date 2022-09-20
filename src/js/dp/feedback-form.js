@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const pageURL = window.location.href;
-    const feedbackURL = "/feedback";
-
-
     const feedbackFormContainer = document.querySelector(
         "#feedback-form-page-container"
     );
     if (feedbackFormContainer) {
+        const pageURL = window.location.href;
+        const feedbackURL = "/feedback";
         feedbackFormContainer.addEventListener("submit", function (e) {
             e.preventDefault();
             const fieldErrors = document.querySelectorAll(
@@ -28,16 +26,16 @@ document.addEventListener("DOMContentLoaded", function () {
             let hasErrors = false;
 
             if (descriptionField && descriptionField.value === "") {
-                const descriptionError =
-                    '<span class="feedback-form-error" role="alert">Write some feedback</span>';
+                const descriptionError = document.createElement("span");
+                descriptionError.className = "feedback-form-error";
+                descriptionError.textContent = "Write some feedback";
+                descriptionError.setAttribute('role', "alert");
                 if (!document.querySelector("#description-field-label .feedback-form-error")) {
                     const descriptionFieldLabel = document.querySelector(
                         "#description-field-label"
                     );
-                    descriptionFieldLabel.insertAdjacentHTML(
-                        "afterend",
-                        descriptionError
-                    );
+                    const feedbackDescriptionParent = document.querySelector("#feedback-description-field")
+                    feedbackDescriptionParent.insertBefore(descriptionError, descriptionField);
                 }
                 descriptionField.classList.add("feedback-form-control__error");
                 descriptionField.focus();
