@@ -31,9 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 descriptionError.textContent = "Write some feedback";
                 descriptionError.setAttribute('role', "alert");
                 if (!document.querySelector("#description-field-label .feedback-form-error")) {
-                    const descriptionFieldLabel = document.querySelector(
-                        "#description-field-label"
-                    );
                     const feedbackDescriptionParent = document.querySelector("#feedback-description-field")
                     feedbackDescriptionParent.insertBefore(descriptionError, descriptionField);
                 }
@@ -43,21 +40,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (emailField && emailField.value !== "") {
-                let emailError = "";
+                const emailError = document.createElement("span");
+                emailError.className = "feedback-form-error"
+                emailError.setAttribute('role', "alert")
+                emailError.textContent = "This is not a valid email address, correct it or delete it."
                 if (hasErrors) {
-                    emailError =
-                        '<span class="feedback-form-error" role="alert" aria-live="polite">This is not a valid email address, correct it or delete it</span>';
+                    emailError
                 } else {
-                    emailError =
-                        '<span class="feedback-form-error" role="alert">This is not a valid email address, correct it or delete it</span>';
+                    emailError
                 }
 
                 const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/g;
                 if (!emailRegex.test(emailField.value)) {
                     if (!document.querySelector("#email-field-label .feedback-form-error")) {
-                        const emailFieldLabel =
-                            document.querySelector("#email-field-label");
-                        emailFieldLabel.insertAdjacentHTML("beforeend", emailError);
+                        const emailParent = document.querySelector("#reply-request")
+                        emailParent.insertBefore(emailError, emailField);
                     }
                     emailField.classList.add("feedback-form-control__error");
                     hasErrors = true;
