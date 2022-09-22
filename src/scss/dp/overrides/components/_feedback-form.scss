@@ -97,12 +97,6 @@
         display: none;
     }
 
-    @if $old-ie == true {
-        [type=radio]:not(.redundant-class) + &__content {
-            display: none;
-        }
-    }
-
     [type=radio]:checked ~ &__content {
         left: 0;
         display: block;
@@ -152,8 +146,6 @@
         cursor: default;
     }
 }
-
-
 
 .feedback-form-control {
     width: 100%;
