@@ -1,9 +1,9 @@
 import {findNode, gtmDataLayerPush, daysBetween} from "../utilities";
 
-const releaseCalendarContainer = document.querySelector(".release-calendar");
-const releasePageContainer = document.querySelector(".release");
-
 document.addEventListener("DOMContentLoaded", function () {
+    const releaseCalendarContainer = document.querySelector(".release-calendar");
+    const releasePageContainer = document.querySelector(".release");
+
     function releaseTypeAutoSubmit(formSelector) {
         function onChangeHandler(event) {
             if (
@@ -102,80 +102,81 @@ document.addEventListener("DOMContentLoaded", function () {
             "next-release-date": `${nextReleaseYear}${nextReleaseMonth}${nextReleaseDayDate}`,
         });
     }
+    if (releaseCalendarContainer) {
+        const sortSelector = document.querySelector(".ons-input--select");
+        if (sortSelector) {
+            sortSelector.addEventListener("change", (e) => {
+                gtmDataLayerPush({
+                    event: "SortBy",
+                    "sort-by": e.target.value,
+                });
+            });
+        }
+
+        [
+            ...releaseCalendarContainer.querySelectorAll(
+                ".ons-radio__input[type=radio]:not(input:disabled)"
+            ),
+        ].map((topFilter) => {
+            topFilter.addEventListener("change", (e) => {
+                gtmDataLayerPush({
+                    event: "Filter",
+                    "filter-by": e.target.name,
+                    selected: e.target.value.toString().replace("type-", ""),
+                });
+            });
+        });
+
+        document.querySelector(".release-calender-search-keyword").onsubmit = (e) => {
+            const formData = new FormData(e.target);
+            const formProps = Object.fromEntries(formData);
+            gtmDataLayerPush({
+                event: "Filter",
+                "filter-by": "search",
+                "search-term": formProps.keywords,
+            });
+        };
+
+        document
+            .querySelector("#release-type-census")
+            .addEventListener("change", (e) => {
+                gtmDataLayerPush({
+                    event: "Filter",
+                    "filter-by": "census",
+                    selected: "census",
+                });
+            });
+
+        document.querySelector(".release-calender-released-date").onsubmit = (e) => {
+            const formData = new FormData(e.target);
+            const formProps = Object.fromEntries(formData);
+            const startDate = `${formProps["after-year"]}/${formProps["after-month"]}/${formProps["after-day"]}`;
+            const endDate = `${formProps["before-year"]}/${formProps["before-month"]}/${formProps["before-day"]}`;
+
+            const numberOfDays = daysBetween(
+                new Date(
+                    formProps["after-year"],
+                    formProps["after-month"],
+                    formProps["after-day"]
+                ),
+                new Date(
+                    formProps["before-year"],
+                    formProps["before-month"],
+                    formProps["before-day"]
+                )
+            );
+
+            gtmDataLayerPush({
+                event: "Filter",
+                "filter-by": "date-range",
+                "start-date": startDate,
+                "end-date": endDate,
+                "number-of-days": numberOfDays,
+            });
+        };
+    }
 });
 
-if (releaseCalendarContainer) {
-    const sortSelector = document.querySelector(".ons-input--select");
-    if (sortSelector) {
-        sortSelector.addEventListener("change", (e) => {
-            gtmDataLayerPush({
-                event: "SortBy",
-                "sort-by": e.target.value,
-            });
-        });
-    }
 
-    [
-        ...releaseCalendarContainer.querySelectorAll(
-            ".ons-radio__input[type=radio]:not(input:disabled)"
-        ),
-    ].map((topFilter) => {
-        topFilter.addEventListener("change", (e) => {
-            gtmDataLayerPush({
-                event: "Filter",
-                "filter-by": e.target.name,
-                selected: e.target.value.toString().replace("type-", ""),
-            });
-        });
-    });
-
-    document.querySelector(".release-calender-search-keyword").onsubmit = (e) => {
-        const formData = new FormData(e.target);
-        const formProps = Object.fromEntries(formData);
-        gtmDataLayerPush({
-            event: "Filter",
-            "filter-by": "search",
-            "search-term": formProps.keywords,
-        });
-    };
-
-    document
-        .querySelector("#release-type-census")
-        .addEventListener("change", (e) => {
-            gtmDataLayerPush({
-                event: "Filter",
-                "filter-by": "census",
-                selected: "census",
-            });
-        });
-
-    document.querySelector(".release-calender-released-date").onsubmit = (e) => {
-        const formData = new FormData(e.target);
-        const formProps = Object.fromEntries(formData);
-        const startDate = `${formProps["after-year"]}/${formProps["after-month"]}/${formProps["after-day"]}`;
-        const endDate = `${formProps["before-year"]}/${formProps["before-month"]}/${formProps["before-day"]}`;
-
-        const numberOfDays = daysBetween(
-            new Date(
-                formProps["after-year"],
-                formProps["after-month"],
-                formProps["after-day"]
-            ),
-            new Date(
-                formProps["before-year"],
-                formProps["before-month"],
-                formProps["before-day"]
-            )
-        );
-
-        gtmDataLayerPush({
-            event: "Filter",
-            "filter-by": "date-range",
-            "start-date": startDate,
-            "end-date": endDate,
-            "number-of-days": numberOfDays,
-        });
-    };
-}
 
 
