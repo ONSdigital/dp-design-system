@@ -2,9 +2,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const feedbackFormContainer = document.querySelector(
         "#feedback-form-page-container"
     );
+
     if (feedbackFormContainer) {
-        const pageURL = window.location.href;
+        const pageURL = document.referrer;
         const feedbackURL = "/feedback";
+        const feedbackFormURL = document.querySelector("#feedback-form-url");
+        if (feedbackFormURL) {
+            feedbackFormURL.value = pageURL;
+        }
         feedbackFormContainer.addEventListener("submit", function (e) {
             e.preventDefault();
             const fieldErrors = document.querySelectorAll(
@@ -67,51 +72,49 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, feedbackURL);
-
-            request.send(serializedData);
+            const fetchConfig = {
+                method: "POST",
+                body: serializeFormData(feedbackFormContainer),
+                headers: new Headers({
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+                })
+            };
+            return fetch(feedbackURL, fetchConfig)
+                .then(response => {
+                    if (!response.ok) {
+                        throw response;
+                    } else {
+                        document.querySelector("#feedback-form-page-container").remove();
+                        const feedbackThanks = document.querySelector(".feedback-thanks")
+                        feedbackThanks.innerHTML = "Thank you";
+                        let displayURL = document.referrer;
+                        if ((displayURL === feedbackURL) || (displayURL === "")) {
+                            displayURL = "https://www.ons.gov.uk/";
+                        };
+                        let len = displayURL.length;
+                        if (len > 50) {
+                            displayURL = "..." + displayURL.slice(len - 50, len);
+                        }
+                        const feedbackDescription = document.querySelector("#feedback-description");
+                        let feedbackSuccess = "<div class=\"font-size--16\" aria-live=\"polite\"><br>Your feedback will help us to improve the website. We are unable to respond to all enquiries. If your matter is urgent, please <a href=\"/aboutus/contactus\">contact us</a>.<br><br>Return to <a class=\"underline-link\" href=\"" + displayURL + "\">" + displayURL + "</a></div>";
+                        feedbackDescription.innerHTML = feedbackSuccess;
+                    }
+                    return response.text();
+                })
+                .then(response => {
+                    return response;
+                })
+                .catch(error => {
+                    console.error(error);
+                    return Promise.reject(error);
+                });
         });
     }
 });
-
-function initFeedbackRequestHandler(form, path, feedbackMessageError) {
-    const serializedData = serializeFormData(form);
-    const request = new XMLHttpRequest();
-    request.open("POST", path, true);
-    console.log(request)
-    request.setRequestHeader(
-        "Content-Type",
-        "application/x-www-form-urlencoded; charset=UTF-8",
-    );
-    request.send();
-    request.onreadystatechange = function () {
-        if (request.readyState === XMLHttpRequest.DONE) {
-            const status = request.status;
-            if (status >= 200 && status < 400) {
-                document.querySelector("#feedback-form-page-container").remove();
-                const feedbackThanks = document.querySelector(".feedback-thanks")
-                feedbackThanks.innerHTML = "Thank you";
-                let displayURL = document.referrer;
-                if (displayURL === "") {
-                    displayURL = "www.ons.gov.uk";
-                };
-                let len = displayURL.length;
-                if (len > 50) {
-                    displayURL = "..." + displayURL.slice(len - 50, len);
-                }
-                const feedbackDescription = document.querySelector("#feedback-description");
-                let feedbackSuccess = "<div class=\"font-size--16\" aria-live=\"polite\"><br>Your feedback will help us to improve the website. We are unable to respond to all enquiries. If your matter is urgent, please <a href=\"/aboutus/contactus\">contact us</a>.<br><br>Return to <a class=\"underline-link\" href=\"" + document.referrer + "\">" + displayURL + "</a></div>";
-                feedbackDescription.innerHTML = feedbackSuccess;
-            } else {
-                console.error(
-                    `footer feedback error: ${request.status}: ${request.statusText}`
-                )
-            }
-            return { request, serializedData };
-        }}}
 
 function serializeFormData(form) {
     const data = new FormData(form);
     const serializedData = new URLSearchParams(data).toString();
     return serializedData;
 }
+//href=\"" + document.referrer + "\">" + displayURL + "</a>
