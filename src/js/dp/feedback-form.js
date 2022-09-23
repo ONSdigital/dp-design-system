@@ -117,4 +117,3 @@ function serializeFormData(form) {
     const serializedData = new URLSearchParams(data).toString();
     return serializedData;
 }
-//href=\"" + document.referrer + "\">" + displayURL + "</a>
