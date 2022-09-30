@@ -1,6 +1,6 @@
 {
   "name": "dp-design-system",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Digital Publishing (ONS) Design System",
   "main": "",
   "scripts": {
@@ -8,8 +8,8 @@
     "audit": "auditjs ossi --quiet",
     "build": "npm run clean && NODE_ENV=production gulp build",
     "watch": "gulp watch",
-    "server": "ws -p ${PORT:-9002}",
-    "dev": "run-p clean watch server",
+    "start": "ws -p ${PORT:-9002}",
+    "dev": "run-p clean watch start",
     "clean": "rimraf ./dist"
   },
   "browserslist": [
@@ -24,13 +24,13 @@
     "url": "git+https://github.com/ONSdigital/dp-design-system.git"
   },
   "author": "Digital Publishing (ONS)",
-  "license": "Open Government License v3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ONSdigital/dp-design-system/issues"
   },
   "homepage": "https://github.com/ONSdigital/dp-design-system#readme",
   "dependencies": {
-    "@ons/design-system": "^49.1.0",
+    "@ons/design-system": "^57.0.1",
     "core-js": "^3.18.3",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",

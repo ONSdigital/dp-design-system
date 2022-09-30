@@ -119,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (feedbackForm) {
         feedbackForm.classList.add("js-hidden");
       }
-      feedbackFormHeader.classList.toggle("js-hidden");
       request.send(serializedData);
     });
   }
@@ -144,6 +143,7 @@ function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMess
         );
         feedbackFormHeader.innerHTML = feedbackMessageError;
       }
+      feedbackFormHeader.classList.toggle("js-hidden");
     }
   };
   return { request, serializedData };
