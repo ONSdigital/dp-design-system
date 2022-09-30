@@ -7,29 +7,10 @@ $alignItems: (
   c: center,
   s: stretch,
   b: baseline,
+  sb: space-between,
 );
 
 .ons-u {
-  &-fw {
-    width: 100%;
-  }
-  @include mq(xxs, s) {
-    &-fw\@xxs\@s {
-      width: 100% !important;
-    }
-    &-bb-no\@xxs\@s {
-      border-bottom: none;
-    }
-    &-flex--2\@xxs\@s {
-      flex: 2;
-    }
-  }
-  @for $i from 1 to 10 {
-    &-order--#{$i} {
-      order: #{$i};
-    }
-  }
-
   @each $key, $value in $alignItems {
     &-flex-ai-#{$key} {
       align-items: #{$value} !important;
@@ -58,4 +39,22 @@ $alignItems: (
   @include bp-suffix(ons-u-flex-jc-#{$key}, $create-between-breakpoints: true) {
     justify-content: #{$value} !important;
   }
+}
+
+@for $i from 1 to 10 {
+  @include bp-suffix(ons-u-order--#{$i}, $create-between-breakpoints: true) {
+    order: #{$i};
+  }
+}
+
+@include bp-suffix(ons-u-fw, $create-between-breakpoints: true) {
+  width: 100% !important;
+}
+
+@include bp-suffix(ons-u-bb-no, $create-between-breakpoints: true) {
+  border-bottom: none;
+}
+
+@include bp-suffix(ons-u-flex--2, $create-between-breakpoints: true) {
+  flex: 2;
 }
