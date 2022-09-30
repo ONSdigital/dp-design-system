@@ -53,3 +53,9 @@ $alignItems: (
     background-color: transparent;
   }
 }
+
+@each $key, $value in $alignItems {
+  @include bp-suffix(ons-u-flex-jc-#{$key}, $create-between-breakpoints: true) {
+    justify-content: #{$value} !important;
+  }
+}
