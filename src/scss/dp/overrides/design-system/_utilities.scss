@@ -49,3 +49,9 @@ $alignItems: (
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
   }
 }
+
+@each $key, $value in $alignItems {
+  @include bp-suffix(ons-u-flex-jc-#{$key}, $create-between-breakpoints: true) {
+    justify-content: #{$value} !important;
+  }
+}
