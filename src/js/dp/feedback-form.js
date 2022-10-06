@@ -72,6 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            const returnToURL = document.querySelector("#page-url-field").value;
+            const feedbackThanksURL = returnToURL ? feedbackThanks+"?returnTo="+returnToURL : feedbackThanks
+
             const fetchConfig = {
                 method: "POST",
                 body: serializeFormData(feedbackFormContainer),
@@ -79,12 +82,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
                 })
             };
-            return fetch(feedbackThanks, fetchConfig)
+            return fetch(feedbackThanksURL, fetchConfig)
                 .then(response => {
                     if (!response.ok) {
                         throw response;
                     } else {
-                        window.location.href = feedbackThanks;
+                        window.location.href = feedbackThanksURL;
                         }
                     return response.text();
                 })
