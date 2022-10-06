@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (feedbackFormContainer) {
         const pageURL = document.referrer;
-        const feedbackURL = "/feedback";
+        const feedbackThanks = "/feedback/thanks"
         const feedbackFormURL = document.querySelector("#feedback-form-url");
         if (feedbackFormURL) {
             feedbackFormURL.value = pageURL;
@@ -79,26 +79,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
                 })
             };
-            return fetch(feedbackURL, fetchConfig)
+            return fetch(feedbackThanks, fetchConfig)
                 .then(response => {
                     if (!response.ok) {
                         throw response;
                     } else {
-                        document.querySelector("#feedback-form-page-container").remove();
-                        const feedbackThanks = document.querySelector(".feedback-thanks")
-                        feedbackThanks.innerHTML = "Thank you";
-                        let displayURL = document.referrer;
-                        if ((displayURL === feedbackURL) || (displayURL === "")) {
-                            displayURL = "https://www.ons.gov.uk/";
-                        };
-                        let len = displayURL.length;
-                        if (len > 50) {
-                            displayURL = "..." + displayURL.slice(len - 50, len);
+                        window.location.href = feedbackThanks;
                         }
-                        const feedbackDescription = document.querySelector("#feedback-description");
-                        let feedbackSuccess = "<div class=\"font-size--16\" aria-live=\"polite\"><br>Your feedback will help us to improve the website. We are unable to respond to all enquiries. If your matter is urgent, please <a href=\"/aboutus/contactus\">contact us</a>.<br><br>Return to <a class=\"underline-link\" href=\"" + displayURL + "\">" + displayURL + "</a></div>";
-                        feedbackDescription.innerHTML = feedbackSuccess;
-                    }
                     return response.text();
                 })
                 .then(response => {
