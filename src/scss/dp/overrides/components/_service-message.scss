@@ -7,17 +7,26 @@
     }
 
     &__body {
-        display: flex;
-        display: -ms-flexbox;
-        padding-bottom: 8px
+
+        display: inline-block;
+        padding-top: $baseline;
+        margin-left: $col;
+
+        @include breakpoint(sm) {
+            padding-top: 0px;
+            margin-left: 0px;
+            display: block;
+        }
     }
 
     &__icon {
             vertical-align: middle;
             position: relative;
-
-            @include breakpoint(sm) {
-                display: none;
+            
+            &.icon {
+                @include breakpoint(sm) {
+                    display: none;
+                }
             }
     }
 }
