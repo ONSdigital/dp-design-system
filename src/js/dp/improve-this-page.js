@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const pageURL = window.location.href;
   const feedbackPath = "/feedback";
-  const positiveFeedbackPath = `${feedbackPath}/positive`;
+  const positiveFeedbackPath = `${feedbackPath}/thanks`;
   const feedbackFormHeader = document.querySelector("#feedback-form-header");
   const feedbackMessage =
     '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (feedbackForm) {
         feedbackForm.classList.add("js-hidden");
       }
+      feedbackFormHeader.classList.toggle("js-hidden");
       request.send(serializedData);
     });
   }
@@ -143,7 +144,6 @@ function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMess
         );
         feedbackFormHeader.innerHTML = feedbackMessageError;
       }
-      feedbackFormHeader.classList.toggle("js-hidden");
     }
   };
   return { request, serializedData };
