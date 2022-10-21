@@ -143,4 +143,62 @@
       word-break: break-word;
     }
   }
+
+  &-loading-spinner {
+    animation-play-state: running;
+    position: relative;
+
+    @keyframes spinner {
+      0% {
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate3d(-50%, -50%, 0) rotate(360deg);
+      }
+    }
+
+    @mixin spinner {
+      animation: 1s linear infinite spinner;
+      animation-play-state: inherit;
+      border: solid 8px rgb(191, 207, 224);
+      border-bottom-color: rgb(32, 96, 149);
+      border-radius: 50%;
+      content: "";
+      height: 60px;
+      left: 30px;
+      opacity: inherit;
+      position: absolute;
+      top: 30px;
+      transform: translate3d(-50%, -50%, 0);
+      width: 60px;
+      will-change: transform;
+      display: inline-block;
+      position: relative;
+      margin-bottom: $baseline;
+    }
+
+    &--before {
+      &::before {
+        @include spinner()
+      }
+    }
+
+    &--after {
+      &::after {
+        @include spinner()
+      }
+    }
+    
+    &__hidden-text {
+      position: absolute;
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      clip: rect(0 0 0 0);
+    }
+  }
 }
