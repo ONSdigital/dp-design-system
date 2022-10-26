@@ -1,25 +1,8 @@
-import { gtmDataLayerPush } from "../utilities";
+import { gtmDataLayerPush, fetchHtml, replaceWithIEPollyfill } from "../utilities";
 
 const searchContainer = document.querySelector(".search__container");
 
 if (searchContainer) {
-  const fetchHtml = async (url) => {
-    const response = await fetch(url, {
-      method: "get",
-      mode: "cors",
-      headers: new Headers({
-        Accept: "application/json",
-      }),
-    });
-    return response && (await response.text());
-  };
-
-  const replaceWithIEPollyfill = (el1, el2) => {
-    // element.replaceWith() is not IE compatible, this is a workaround
-    el1.insertAdjacentElement("beforebegin", el2);
-    el1.parentElement.removeChild(el1);
-  };
-
   const scrollToTopOfSearch = () => {
     // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
     const searchResultsSection = searchContainer.querySelector(
