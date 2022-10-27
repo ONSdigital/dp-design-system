@@ -1,0 +1,74 @@
+.emergency-banner {
+    font-weight: $font-weight-regular;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    background-color: $banner-grey;
+    color: $white;
+    padding: 15px 0;
+    margin-top: 0;
+    position: relative;
+    z-index: 10;
+
+    @media print {
+        font-family: $font-sans;
+        font-size: 14pt;
+    }
+
+    @media (min-width: 40.0625em) {
+        padding:30px 0;
+    }
+
+    &--notable-death {
+        background-color: $banner-black;
+    }
+
+    &--national-emergency {
+        background-color: $banner-red;
+    }
+
+    &--local-emergency {
+        background-color: $banner-teal;
+    }
+
+    &__heading {
+        font-weight: 700;
+        line-height: $base-line-height;
+        margin: 0;
+        padding: 0;
+
+        @media print {
+            font-family: $font-sans;
+            font-size: 18pt;
+        }
+    }
+
+    &__description {
+        font-weight: $font-weight-regular;
+        color: $white;
+        margin-top: 0;
+
+        @media print {
+            font-family: $font-sans;
+            font-size: 14pt;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__link {
+        font-weight: $font-weight-regular;
+        font-size: 1rem;
+        color: $white;
+
+        @media print {
+            font-family: $font-sans;
+        }
+
+        &:hover {
+            color: $white;
+            text-decoration: underline solid $white 2px;
+        }
+    }
+}

@@ -2,4 +2,23 @@
   &-page {
     overflow-x: initial;
   }
+  &-label.ons-u-fw-n {
+    font-weight: $font-weight-regular;
+  }
+}
+
+// Highlighting - temporary fix while waiting for the design system to include highlighting in their npm package
+.ons-highlight {
+  background-color: $color-highlight;
+  font-style: normal;
+  padding: 0 2px;
+}
+
+@include bp-suffix(ons-grid--flex, $create-between-breakpoints: true) {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@include bp-suffix(ons-grid--row, $create-between-breakpoints: true) {
+  flex-direction: row;
 }

@@ -1,6 +1,8 @@
 # dp-design-system
 
-dp-design-system is the Digital Publishing (DP) build of the [ONS Design System](https://ons-design-system.netlify.app).
+[![GitHub release](https://img.shields.io/github/release/ONSdigital/dp-design-system.svg)](https://github.com/ONSdigital/dp-design-system/releases)
+
+`dp-design-system` is the Digital Publishing (DP) build of the [ONS Design System](https://ons-design-system.netlify.app).
 
 dp-design-system allows us to use the modules from the ONS design system that are pertinent to the ONS website, in tandem with any patterns or styles that are DP-specific. An example of this would be the cookies banner and its JS interactions, which the ONS website handles differently to the way the design system does.
 

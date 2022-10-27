@@ -1,0 +1,32 @@
+.banner {
+    background-color: $white;
+
+    &--half-padding {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    &__body {
+
+        display: inline-block;
+        padding-top: $baseline;
+        margin-left: $col;
+
+        @include breakpoint(sm) {
+            padding-top: 0px;
+            margin-left: 0px;
+            display: block;
+        }
+    }
+
+    &__icon {
+            vertical-align: middle;
+            position: relative;
+            
+            &.icon {
+                @include breakpoint(sm) {
+                    display: none;
+                }
+            }
+    }
+}

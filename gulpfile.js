@@ -4,9 +4,7 @@ const gulpIf = require("gulp-if");
 const buffer = require("vinyl-buffer");
 const source = require("vinyl-source-stream");
 const gulpTerser = require("gulp-terser");
-const sass = require("node-sass");
-const gulpSass = require("gulp-sass");
-const nodeSassGlobImporter = require("node-sass-glob-importer");
+const sass = require('gulp-sass')(require('sass'));
 
 const babelEsmConfig = require("./babel.conf.esm");
 const babelNomoduleConfig = require("./babel.conf.nomodule");
@@ -71,15 +69,9 @@ gulp.task("copy-static-assets-from-design-system", () => {
 });
 
 gulp.task("build-styles", () => {
-  const sassCompiler = gulpSass(sass);
-  const sassOptions = {
-    importer: nodeSassGlobImporter(),
-    outputStyle: isProduction ? "compressed" : "",
-  };
-
   return gulp
     .src("./src/scss/*.scss")
-    .pipe(sassCompiler(sassOptions).on("error", sassCompiler.logError))
+    .pipe(sass({outputStyle: isProduction ? "compressed" : "expanded"}).on('error', sass.logError))
     .pipe(gulp.dest("./dist/assets/css"));
 });
 

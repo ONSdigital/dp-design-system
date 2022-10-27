@@ -1,0 +1,27 @@
+$png: 'https://cdn.ons.gov.uk/assets/images/icon-sprite/v2/icon-sprite.png';
+$svg: 'https://cdn.ons.gov.uk/assets/images/icon-sprite/v2/icon-sprite.svg';
+
+// Don't show icons on print - stops conflicts with print :after for links too
+@media screen {
+    .icon {
+
+        @if($old-ie == true) {
+            background:url($png);
+            background-size: 300px 1000px !important; // Horrible fix for the horrible fix on SVGs to stop small icons being blurry (TODO - a better solution!)
+        } @else {
+            background-image:url($svg);
+            background-repeat: no-repeat;
+        }
+
+        display: inline-block;
+        background-size: 300px 1000px;
+        height: 36px;
+        width: 40px;
+
+        &-info {
+            background-position: -15px -681px;
+            width: 35px;
+            height: 35px;
+        }
+    }
+}

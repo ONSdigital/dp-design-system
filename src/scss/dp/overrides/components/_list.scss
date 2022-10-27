@@ -1,0 +1,17 @@
+.ons-list {
+  &--container {
+    line-height: 1.4rem;
+  }
+  &--truncated {
+    @extend .ons-list;
+  }
+
+  &__item--truncated {
+    @extend .ons-list__item;
+    &:nth-child(3)::after,
+    &:nth-child(6)::after {
+      content: "\a ...";
+      white-space: pre;
+    }
+  }
+}

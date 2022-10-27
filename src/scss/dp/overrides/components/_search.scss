@@ -1,4 +1,10 @@
 .search {
+  @media print {
+    &.print--hide {
+      display: none;
+    }
+  }
+
   @include breakpoint(sm) {
     background-color: $abbey;
   }
@@ -11,15 +17,15 @@
 
   &__summary {
     width: 100%;
-    padding: ($baseline * 4) 0 ($baseline * 4);
+    padding: ($baseline * 3) 0 ($baseline * 3);
 
     @include breakpoint(sm) {
       padding: ($baseline * 2) 0 ($baseline * 2);
     }
-    
+
     .base-font {
-      font-size: 2.5rem;
-      
+      font-size: 2rem;
+
       @include breakpoint(sm) {
         font-size: 1.25rem;
       }
@@ -36,6 +42,11 @@
     }
 
     &__suggestion {
+      display: block;
+      margin-top: ($baseline * 3);
+    }
+
+    &__generic {
       @extend .base-font;
       font-weight: 300;
     }
@@ -84,12 +95,26 @@
         line-height: ($baseline * 8);
       }
     }
-    
+
     &__content {
       margin-top: $grid-gutters;
-      
+
       &__archive-info {
         margin-top: ($baseline * 4);
+      }
+
+      .ons-collapsible__content {
+        border-left: none;
+      }
+
+      #topicsFilterForm {
+        fieldset {
+          div:last-of-type {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid $iron;
+            margin-bottom: 1rem;
+          }
+        }
       }
     }
   }
@@ -97,7 +122,7 @@
   &__sort {
     height: ($baseline * 8);
     border-bottom: 1px solid $iron;
-    
+
     @include breakpoint(sm) {
       height: auto;
       margin: $baseline 0;
@@ -118,12 +143,12 @@
 
       @include breakpoint(sm) {
         display: flex;
-        
+
         label {
           margin: 0 0.25rem 0 0;
           border-bottom: none;
         }
-  
+
         select {
           flex-grow: 1;
         }
@@ -146,9 +171,14 @@
       padding-left: 0;
       margin: ($baseline * 4) 0;
 
+      &--product-page {
+        border: 0.25rem solid $iron-light;
+        padding: 0.75rem;
+      }
+
       h3 {
         margin-bottom: $baseline;
-        
+
         & a {
           text-decoration: none;
         }
@@ -201,6 +231,18 @@
     @include breakpoint(md-max) {
       display: flex;
     }
+
+    &--no-results {
+      display: initial;
+      margin: 0 0 ($baseline * 2) 0;
+      padding: 0;
+      display: inline-block;
+
+      margin-bottom: 10rem;
+      @include breakpoint(sm) {
+        margin-bottom: 5rem;
+      }
+    }
   }
 
   &__label {
@@ -218,6 +260,13 @@
       @include breakpoint(sm) {
         display: none;
       }
+    }
+
+    &--no-results {
+      color: initial;
+      font-weight: 600;
+      display: block;
+      margin: 0 0 $baseline 0;
     }
   }
 
@@ -246,7 +295,7 @@
       @include breakpoint(sm) {
         width: 80%;
         font-size: 1.16rem;
-        padding: 12px $col/2 8px $col/2;
+        padding: 12px calc($col/2) 8px calc($col/2);
       }
     }
 
@@ -256,6 +305,13 @@
       outline-offset: 0;
       z-index: 1;
       position: relative;
+      float: left;
+    }
+
+    &--no-results {
+      border: $mine-shaft 2px solid;
+      height: ($baseline * 5);
+      flex-grow: unset;
       float: left;
     }
   }
@@ -290,20 +346,27 @@
       @include breakpoint(sm) {
         width: 20%;
         font-size: 1.16rem;
-        padding-left: $col/2;
-        padding-right: $col/2;
+        padding-left: calc($col/2);
+        padding-right: calc($col/2);
       }
     }
 
     &--results-page {
       height: ($baseline * 5);
-      padding-top: ($baseline / 2);
+      padding-top: calc($baseline / 2);
     }
 
     &--body {
       height: 52px;
       width: 52px;
       margin-top: -2px;
+      float: left;
+    }
+
+    &--no-results {
+      width: ($baseline * 5);
+      height: ($baseline * 5);
+      flex-grow: unset;
       float: left;
     }
   }

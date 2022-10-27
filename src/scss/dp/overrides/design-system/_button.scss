@@ -7,13 +7,13 @@ button.ons-btn__btn {
   }
   &--link:active,
   &--link:focus {
-    @extend .ons-btn:focus;
+    @extend .ons-btn;
     top: 0;
   }
   &--search {
           padding-bottom: 0px;
           text-decoration-thickness: 1px;
           font-size: .77778rem;
-          margin-left: .75rem !important;
+          margin-left: .75rem;
       }
 }

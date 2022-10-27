@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const pageURL = window.location.href;
   const feedbackPath = "/feedback";
-  const positiveFeedbackPath = `${feedbackPath}/positive`;
+  const positiveFeedbackPath = `${feedbackPath}/thanks`;
   const feedbackFormHeader = document.querySelector("#feedback-form-header");
   const feedbackMessage =
     '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';

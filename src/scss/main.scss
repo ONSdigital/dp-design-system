@@ -9,8 +9,10 @@
 @import '../../node_modules/@ons/design-system/scss/objects/index';
 @import '../../node_modules/@ons/design-system/scss/utilities/index';
 
+// Import census colours for hero banner
+@import '../../node_modules/@ons/design-system/scss/settings/census';
+
 // ONS Design System Components relevant to the ONS Website
-@import '../../node_modules/@ons/design-system/components/articles/articles';
 @import '../../node_modules/@ons/design-system/components/autosuggest/autosuggest';
 @import '../../node_modules/@ons/design-system/components/breadcrumbs/breadcrumbs';
 @import '../../node_modules/@ons/design-system/components/button/button';
@@ -21,7 +23,7 @@
 @import '../../node_modules/@ons/design-system/components/collapsible/collapsible';
 @import '../../node_modules/@ons/design-system/components/content-pagination/content-pagination';
 @import '../../node_modules/@ons/design-system/components/download-resources/download-resources';
-@import '../../node_modules/@ons/design-system/components/downloads/downloads';
+@import '../../node_modules/@ons/design-system/components/document-list/document-list';
 @import '../../node_modules/@ons/design-system/components/external-link/external-link';
 @import '../../node_modules/@ons/design-system/components/feedback/feedback';
 @import '../../node_modules/@ons/design-system/components/field/field-group';
@@ -29,6 +31,7 @@
 @import '../../node_modules/@ons/design-system/components/fieldset/fieldset';
 @import '../../node_modules/@ons/design-system/components/field/field-group';
 @import '../../node_modules/@ons/design-system/components/footer/footer';
+@import '../../node_modules/@ons/design-system/components/hero/hero';
 @import '../../node_modules/@ons/design-system/components/icons/icons';
 @import '../../node_modules/@ons/design-system/components/images/images';
 @import '../../node_modules/@ons/design-system/components/input/input-type';
@@ -45,7 +48,7 @@
 @import '../../node_modules/@ons/design-system/components/radios/radio';
 @import '../../node_modules/@ons/design-system/components/radios/radios';
 @import '../../node_modules/@ons/design-system/components/related-content/related-content';
-@import '../../node_modules/@ons/design-system/components/related-links/related-links';
+@import '../../node_modules/@ons/design-system/components/related-content/related-content';
 @import '../../node_modules/@ons/design-system/components/search/search';
 @import '../../node_modules/@ons/design-system/components/section-navigation/section-navigation';
 @import '../../node_modules/@ons/design-system/components/skip-to-content/skip';

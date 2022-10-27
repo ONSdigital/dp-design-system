@@ -1,0 +1,60 @@
+// Utility overrides for design system that do not exist elsewhere
+// follow naming convention ons-u...
+
+$alignItems: (
+  fs: flex-start,
+  fe: flex-end,
+  c: center,
+  s: stretch,
+  b: baseline,
+  sb: space-between,
+);
+
+.ons-u {
+  @each $key, $value in $alignItems {
+    &-flex-ai-#{$key} {
+      align-items: #{$value} !important;
+    }
+  }
+
+  &-tt-l {
+    text-transform: lowercase;
+  }
+
+  &-us-no {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  &-bg--tr {
+    background-color: transparent;
+  }
+}
+
+@each $key, $value in $alignItems {
+  @include bp-suffix(ons-u-flex-jc-#{$key}, $create-between-breakpoints: true) {
+    justify-content: #{$value} !important;
+  }
+}
+
+@for $i from 1 to 10 {
+  @include bp-suffix(ons-u-order--#{$i}, $create-between-breakpoints: true) {
+    order: #{$i};
+  }
+}
+
+@include bp-suffix(ons-u-fw, $create-between-breakpoints: true) {
+  width: 100% !important;
+}
+
+@include bp-suffix(ons-u-bb-no, $create-between-breakpoints: true) {
+  border-bottom: none;
+}
+
+@include bp-suffix(ons-u-flex--2, $create-between-breakpoints: true) {
+  flex: 2;
+}

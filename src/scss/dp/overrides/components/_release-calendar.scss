@@ -1,0 +1,23 @@
+.release-calendar {
+  &__filters {
+    &__heading {
+      line-height: 1.3rem;
+      padding: 0.39rem 2rem 0.39rem 0;
+      margin-bottom: 1rem;
+
+      &--margin-one-fix {
+        margin-top: 1px;
+        margin-bottom: 1px;
+      }
+    }
+  }
+  .ons-pagination {
+    @media screen and (max-width: 980px) {
+      &__item {
+        &:not(:where(.ons-pagination__item--previous, .ons-pagination__item--next)) {
+          display: none;
+        }
+      }
+    }
+  }
+}
