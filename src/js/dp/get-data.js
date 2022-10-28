@@ -2,7 +2,7 @@ import { fetchHtml, replaceWithIEPollyfill, gtmDataLayerPush } from "../utilitie
 
 document.addEventListener("DOMContentLoaded", function () {
   // Checking for downloads with loading spinner
-  const loadingSection = document.querySelector("[data-get-data-form-downloads=loading]");  
+  const loadingSection = document.querySelector("[data-get-data-form-downloads=loading]");
   if (!!loadingSection) {
     let pollCount = 0;
     const pollForDownloads = setInterval(async () => {
@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const dom = new DOMParser().parseFromString(responseText, "text/html");
       const downloadForm = dom.querySelector("[data-get-data-form-downloads=ready]")
       if(!!downloadForm) {
+        const allRequiredFormats = downloadForm.querySelectorAll("input#csv, input#csvw, input#txt").length >= 3;
+        if (!allRequiredFormats) return;
         replaceWithIEPollyfill(
           loadingSection,
           downloadForm
