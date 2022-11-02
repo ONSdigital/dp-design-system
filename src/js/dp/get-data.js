@@ -25,7 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
           );
         }, 2500)
       }
-      if(pollCount > 60) clearTimeout(pollForDownloads);
+      // Stop polling and remove spinner
+      if(pollCount > 60) {
+        clearTimeout(pollForDownloads);
+        const spinner = loadingSection.querySelector(".ons-loading-spinner--after");
+        spinner?.classList.add("ons-u-hidden");
+      }
     }, 500)
   }
 
