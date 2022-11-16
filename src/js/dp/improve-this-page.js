@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
   const feedbackMessageError =
     '<span id="feedback-form-error role="alert"">Something went wrong, try using our <a href="/feedback">feedback form</a>.</span>';
+  let feedbackPositive = false
 
   const feedbackFormURL = document.querySelector("#feedback-form-url");
   if (feedbackFormURL) {
@@ -39,13 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const feedbackFormYes = document.querySelector("#feedback-form-yes");
   if (feedbackFormYes && feedbackFormHeader) {
     feedbackFormYes.addEventListener("click", function (e) {
+      feedbackPositive = true
       e.preventDefault();
       const feedbackFormContainer = document.querySelector(
         "#feedback-form-container"
       );
 
-      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, positiveFeedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError);
+      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, positiveFeedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError, feedbackPositive);
+      feedbackFormHeader.innerHTML = feedbackMessage;
       request.send(serializedData);
+
     });
   }
 
@@ -114,18 +118,17 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, feedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError);
+      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, feedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError, feedbackPositive);
       const feedbackForm = document.querySelector("#feedback-form");
       if (feedbackForm) {
         feedbackForm.classList.add("js-hidden");
       }
-      feedbackFormHeader.classList.toggle("js-hidden");
       request.send(serializedData);
     });
   }
 });
 
-function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMessage, feedbackMessageError) {
+function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMessage, feedbackMessageError, feedbackPositive) {
   const serializedData = serializeFormData(form);
   const request = new XMLHttpRequest();
   request.open("POST", path, true);
@@ -136,7 +139,9 @@ function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMess
   request.onreadystatechange = function () {
     if (request.readyState === XMLHttpRequest.DONE) {
       const status = request.status;
-      if (status === 0 || (status >= 200 && status < 400)) {
+      if (feedbackPositive) {
+        return
+      } else if (status === 0 || (status >= 200 && status < 400)) {
         feedbackFormHeader.innerHTML = feedbackMessage;
       } else {
         console.error(
@@ -145,6 +150,7 @@ function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMess
         feedbackFormHeader.innerHTML = feedbackMessageError;
       }
     }
+    feedbackFormHeader.classList.toggle("js-hidden");
   };
   return { request, serializedData };
 }
