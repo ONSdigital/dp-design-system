@@ -1,0 +1,18 @@
+.topics {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.topics>* {
+        flex-basis: 1 1 160px;
+    }
+
+.topics-box {
+    align-items: center;
+    color: $color-ocean-blue;
+    border-style: solid;
+    padding: .5em .3em .3em .3em;
+    margin: .3em .6em .3em 0;
+    line-height: 1.5;
+}
