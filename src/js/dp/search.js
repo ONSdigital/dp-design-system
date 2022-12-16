@@ -144,7 +144,8 @@ if (searchContainer) {
         strParams += `&topics=${param.topics}`;
       } else {
         strParams = strParams.replace(
-            new RegExp(/&topics=\w*/gi),
+            new RegExp(`(\\&|\\?)topics\=${param.topics}`),
+            //new RegExp(/&topics=\w*/gi),
             ""
         );
       } console.log(paramsArray);
