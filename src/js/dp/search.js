@@ -157,13 +157,23 @@ if (searchContainer) {
   // create listeners for topic filter checkboxes
   [
     ...searchContainer.querySelectorAll(
-      ".topic-filter [name]:not(input:disabled)"
+      ".topic-filter [aria-controls]:not(input:disabled)"
     ),
   ].map((topicFilter) => {
+    const childrenSelector = topicFilter.getAttribute("aria-controls");
+    const theChildren = [
+        ...searchContainer.querySelectorAll(
+            `#${childrenSelector} [type=checkbox]:not(input:disabled)`
+        ),
+    ];
+    if (!childrenSelector) return;
     topicFilter.addEventListener("change", async (e) => {
-      switchTopicFilterCheckbox([
-        { isChecked: e.target.checked, topics: e.target.value },
-      ]);
+      const paramsArray = theChildren.map((item) => ({
+        isChecked: e.target.checked,
+        topics: item.value,
+      }));
+      theChildren.map((item) => (item.checked = e.target.checked));
+      switchTopicFilterCheckbox(paramsArray);
 
       // Google Tag Manager
       gtmDataLayerPush({
@@ -172,6 +182,21 @@ if (searchContainer) {
         'selected': e.target.checked ? 'selected' : 'unselected'
       });
     });
+    theChildren.map((item) => {
+      item.addEventListener("change", async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, filterName: e.target.value },
+        ]);
+        topicFilter.checked= theChildren.some((x) => x.checked);
+
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'SubTopics-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
+      })
+    })
   });
 
   // create listeners for the sort dropdown
