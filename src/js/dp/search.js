@@ -47,20 +47,20 @@ if (searchContainer) {
 
       // update the address bar
       history.pushState(null, "", `search${theStringParams}`);
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__results"),
-        dom.querySelector(".search__results")
-      );
-
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__pagination"),
-        dom.querySelector(".search__pagination")
-      );
-
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__summary__count"),
-        dom.querySelector(".search__summary__count")
-      );
+      // replaceWithIEPollyfill(
+      //   searchContainer.querySelector(".search__results"),
+      //   dom.querySelector(".search__results")
+      // );
+      //
+      // replaceWithIEPollyfill(
+      //   searchContainer.querySelector(".search__pagination"),
+      //   dom.querySelector(".search__pagination")
+      // );
+      //
+      // replaceWithIEPollyfill(
+      //   searchContainer.querySelector(".search__summary__count"),
+      //   dom.querySelector(".search__summary__count")
+      // );
 
       initPaginationListeners();
     }
@@ -139,15 +139,15 @@ if (searchContainer) {
     // build new param
     paramsArray.map((param) => {
       if (!("isChecked" in param) || !("topics" in param)) return;
-      
-      strParams = strParams.replace(
-        new RegExp(/&topics=\w*/gi),
-        ""
-      );
-      
+
       if (param.isChecked) {
         strParams += `&topics=${param.topics}`;
-      }
+      } else {
+        strParams = strParams.replace(
+            new RegExp(/&topics=\w*/gi),
+            ""
+        );
+      } console.log(paramsArray);
     });
 
     // make the change to the markup
@@ -185,7 +185,7 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, filterName: e.target.value },
+          { isChecked: e.target.checked, topics: e.target.value },
         ]);
         topicFilter.checked= theChildren.some((x) => x.checked);
 
