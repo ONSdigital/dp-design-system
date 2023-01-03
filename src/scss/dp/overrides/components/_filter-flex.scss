@@ -36,7 +36,7 @@
 
 .dimension-search__results .ons-btn {
   align-self: flex-start;
-} 
+}
 
 @include mq(xxs, s) {
   .dimension-search__results {
@@ -46,4 +46,10 @@
       margin-right: -3rem;
     }
   }
+}
+
+.ons-list--categorisations {
+  list-style-position: inside;
+  padding: 2px 0 0 0.65em;
+  line-height: 1.4rem;
 }
