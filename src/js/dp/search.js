@@ -137,17 +137,16 @@ if (searchContainer) {
     let strParams = window.location.search;
 
     // build new param
-    let topicsQuery = false
+    let topicsQuery = false;
     paramsArray.map((param) => {
-
       if (!("isChecked" in param) || !("topics" in param)) return;
 
       if (param.isChecked) {
         if (!strParams.includes("topics")) {
           strParams += `&topics=${param.topics}`;
-          topicsQuery = true
+          topicsQuery = true;
         } else {
-          strParams = strParams.replace(`topics=`, `topics=${param.topics},`)
+          strParams = strParams.replace(`topics=`, `topics=${param.topics},`);
         }
       } else if (strParams.includes(`${param.topics}`)) {
         if (strParams.includes(`${param.topics},`)) {
@@ -159,15 +158,15 @@ if (searchContainer) {
           strParams = strParams.replace(
               new RegExp(`,${param.topics}`),
               ""
-          )
+          );
         } else if (strParams.includes(`&topics=`)) {
           strParams = strParams.replace(
               new RegExp(`&topics=${param.topics}`),
               ""
-          )
+          );
         }
       }
-    })
+    });
 
       // make the change to the markup
       switchSearchMarkup(strParams, true);
