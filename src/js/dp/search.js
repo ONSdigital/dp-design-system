@@ -139,48 +139,59 @@ if (searchContainer) {
     // build new param
     let topicsQuery = false
     paramsArray.map((param) => {
-console.log(paramsArray, "PARAMS ARRAY")
+
       if (!("isChecked" in param) || !("topics" in param)) return;
 
       if (param.isChecked) {
-        if ((!topicsQuery) && !(strParams.includes("topics"))) {
-          strParams += `&topics=`
+        if (!strParams.includes("topics")) {
+          strParams += `&topics=${param.topics}`;
           topicsQuery = true
+        } else {
+          console.log(strParams)
+          strParams = strParams.replace(`topics=`, `topics=${param.topics},`)
         }
 
-        if (strParams.slice(-1).match( /[0-9A-Za-z]/ )) {
-          strParams += `,`
-        }
 
-
-        strParams += `${param.topics}`;
-        //strParams += `,`
-
-      } else {
-        strParams = strParams.replace(
-            new RegExp(`${param.topics}`),
-            ""
-        );
       }
+    })
+      //     if ((!topicsQuery) && !(strParams.includes("topics"))) {
+      //       strParams += `&topics=`
+      //       topicsQuery = true
+      //     }
+      //
+      //     if (strParams.slice(-1).match( /[0-9A-Za-z]/ )) {
+      //       strParams += `,`
+      //     }
+      //
+      //     if (topicsQuery) {
+      //
+      //     }
+      //     strParams += `${param.topics}`;
+      //     //strParams += `,`
+      //
+      //   } else if (strParams.includes(`=${param.topics}`)) {
+      //       strParams = strParams.replace(
+      //           new RegExp(`${param.topics},`),
+      //           ""
+      //       );
+      //   } else {
+      //     strParams = strParams.replace(
+      //         new RegExp(`${param.topics}`),
+      //         ""
+      //     );
+      //   }
+      //
+      //   console.log(paramsArray);
+      // });
+      //
+      // if (strParams.slice(-1) === ",") {
+      //   strParams = strParams.slice(0, -1)
+      // }
 
-      console.log(paramsArray);
-    });
-
-    if (strParams.slice(-1) === ",") {
-      strParams = strParams.slice(0, -1)
-    }
-
-    if (topicsQuery) {
-      let topicsID = /\d+/g;
-      let indexOfTopics = strParams.indexOf(`&topics=`)
-      console.log(indexOfTopics)
-      //strParams += `&topics=`
-      //strParams += strParams.match(topicsID).toString();
-    }
-
-    // make the change to the markup
-    switchSearchMarkup(strParams, true);
+      // make the change to the markup
+      switchSearchMarkup(strParams, true);
   };
+
 
   // create listeners for topic filter checkboxes
   [
