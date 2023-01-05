@@ -147,46 +147,27 @@ if (searchContainer) {
           strParams += `&topics=${param.topics}`;
           topicsQuery = true
         } else {
-          console.log(strParams)
           strParams = strParams.replace(`topics=`, `topics=${param.topics},`)
         }
-
-
+      } else if (strParams.includes(`${param.topics}`)) {
+        if (strParams.includes(`${param.topics},`)) {
+          strParams = strParams.replace(
+              new RegExp(`${param.topics},`),
+              ""
+          );
+        } else if (strParams.includes(`,${param.topics}`)) {
+          strParams = strParams.replace(
+              new RegExp(`,${param.topics}`),
+              ""
+          )
+        } else if (strParams.includes(`&topics=`)) {
+          strParams = strParams.replace(
+              new RegExp(`&topics=${param.topics}`),
+              ""
+          )
+        }
       }
     })
-      //     if ((!topicsQuery) && !(strParams.includes("topics"))) {
-      //       strParams += `&topics=`
-      //       topicsQuery = true
-      //     }
-      //
-      //     if (strParams.slice(-1).match( /[0-9A-Za-z]/ )) {
-      //       strParams += `,`
-      //     }
-      //
-      //     if (topicsQuery) {
-      //
-      //     }
-      //     strParams += `${param.topics}`;
-      //     //strParams += `,`
-      //
-      //   } else if (strParams.includes(`=${param.topics}`)) {
-      //       strParams = strParams.replace(
-      //           new RegExp(`${param.topics},`),
-      //           ""
-      //       );
-      //   } else {
-      //     strParams = strParams.replace(
-      //         new RegExp(`${param.topics}`),
-      //         ""
-      //     );
-      //   }
-      //
-      //   console.log(paramsArray);
-      // });
-      //
-      // if (strParams.slice(-1) === ",") {
-      //   strParams = strParams.slice(0, -1)
-      // }
 
       // make the change to the markup
       switchSearchMarkup(strParams, true);
