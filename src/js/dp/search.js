@@ -47,20 +47,20 @@ if (searchContainer) {
 
       // update the address bar
       history.pushState(null, "", `search${theStringParams}`);
-      // replaceWithIEPollyfill(
-      //   searchContainer.querySelector(".search__results"),
-      //   dom.querySelector(".search__results")
-      // );
-      //
-      // replaceWithIEPollyfill(
-      //   searchContainer.querySelector(".search__pagination"),
-      //   dom.querySelector(".search__pagination")
-      // );
-      //
-      // replaceWithIEPollyfill(
-      //   searchContainer.querySelector(".search__summary__count"),
-      //   dom.querySelector(".search__summary__count")
-      // );
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__results"),
+        dom.querySelector(".search__results")
+      );
+
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__pagination"),
+        dom.querySelector(".search__pagination")
+      );
+
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__summary__count"),
+        dom.querySelector(".search__summary__count")
+      );
 
       initPaginationListeners();
     }
@@ -172,7 +172,6 @@ if (searchContainer) {
       // make the change to the markup
       switchSearchMarkup(strParams, true);
   };
-
 
   // create listeners for topic filter checkboxes
   [
