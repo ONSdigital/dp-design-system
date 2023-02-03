@@ -201,4 +201,20 @@
       clip: rect(0 0 0 0);
     }
   }
+
+  &-badge {
+    display: flex;
+    gap: 0.5rem;
+  
+    &__item {
+      display: flex;
+      align-items: center;
+      background-color: $color-grey-15;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 0.5em 0.75em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  }
 }

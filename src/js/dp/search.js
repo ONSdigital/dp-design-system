@@ -137,33 +137,61 @@ if (searchContainer) {
     let strParams = window.location.search;
 
     // build new param
+    let topicsQuery = false;
     paramsArray.map((param) => {
       if (!("isChecked" in param) || !("topics" in param)) return;
-      
-      strParams = strParams.replace(
-        new RegExp(/&topics=\w*/gi),
-        ""
-      );
-      
+
       if (param.isChecked) {
-        strParams += `&topics=${param.topics}`;
+        if (!strParams.includes("topics")) {
+          strParams += `&topics=${param.topics}`;
+          topicsQuery = true;
+        } else {
+          strParams = strParams.replace(`topics=`, `topics=${param.topics},`);
+        }
+      } else if (strParams.includes(`${param.topics}`)) {
+        if (strParams.includes(`${param.topics},`)) {
+          strParams = strParams.replace(
+              new RegExp(`${param.topics},`),
+              ""
+          );
+        } else if (strParams.includes(`,${param.topics}`)) {
+          strParams = strParams.replace(
+              new RegExp(`,${param.topics}`),
+              ""
+          );
+        } else if (strParams.includes(`&topics=`)) {
+          strParams = strParams.replace(
+              new RegExp(`&topics=${param.topics}`),
+              ""
+          );
+        }
       }
     });
 
-    // make the change to the markup
-    switchSearchMarkup(strParams, true);
+      // make the change to the markup
+      switchSearchMarkup(strParams, true);
   };
 
   // create listeners for topic filter checkboxes
   [
     ...searchContainer.querySelectorAll(
-      ".topic-filter [name]:not(input:disabled)"
+      ".topic-filter [aria-controls]:not(input:disabled)"
     ),
   ].map((topicFilter) => {
+    const childrenSelector = topicFilter.getAttribute("aria-controls");
+    const theChildren = [
+        ...searchContainer.querySelectorAll(
+            `#${childrenSelector} [type=checkbox]:not(input:disabled)`
+        ),
+    ];
+    if (!childrenSelector) return;
     topicFilter.addEventListener("change", async (e) => {
-      switchTopicFilterCheckbox([
-        { isChecked: e.target.checked, topics: e.target.value },
-      ]);
+      const paramsArray = theChildren.map((item) => ({
+        isChecked: e.target.checked,
+        topics: item.value,
+      }));
+      theChildren.map((item) => (item.checked = e.target.checked));
+      switchTopicFilterCheckbox(paramsArray);
 
       // Google Tag Manager
       gtmDataLayerPush({
@@ -172,6 +200,21 @@ if (searchContainer) {
         'selected': e.target.checked ? 'selected' : 'unselected'
       });
     });
+    theChildren.map((item) => {
+      item.addEventListener("change", async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, topics: e.target.value },
+        ]);
+        topicFilter.checked= theChildren.some((x) => x.checked);
+
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'SubTopics-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
+      })
+    })
   });
 
   // create listeners for the sort dropdown

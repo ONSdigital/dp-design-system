@@ -5,7 +5,7 @@
       display: flex;
       justify-content: space-between;
       align-content: center;
-      align-items: baseline;
+      align-items: center;
       gap: 0.5em;
       padding: 0.5em 0;
       margin-bottom: 0;
@@ -34,6 +34,10 @@
   }
 }
 
+.dimension-search__results .ons-btn {
+  align-self: flex-start;
+}
+
 @include mq(xxs, s) {
   .dimension-search__results {
     align-items: flex-start !important;
@@ -42,4 +46,11 @@
       margin-right: -3rem;
     }
   }
+}
+
+.ons-list--categorisations {
+  list-style-position: inside;
+  padding-left: 0.65em;
+  margin-top: 1rem;
+  line-height: 1.4rem;
 }
