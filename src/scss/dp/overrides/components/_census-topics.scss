@@ -1,27 +1,8 @@
-.topics {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.topics>* {
-        flex-basis: 1 1 160px;
-    }
-
-.current-topics-box {
-    align-items: center;
+.current-topics {
+    text-align: center;
     color: $color-ocean-blue;
     border-style: solid;
-    padding: .5em .3em .3em .3em;
-    margin: .3em .6em .3em 0;
-    line-height: 1.5;
-}
-
-.next-topics-box {
-    align-items: center;
-    color: $mine-shaft;
-    border-style: solid;
-    padding: .5em .3em .3em .3em;
-    margin: .3em .6em .3em 0;
+    padding: .4em .6em .5em .5em;
+    margin: .5em 1em .5em 0;
     line-height: 1.5;
 }
