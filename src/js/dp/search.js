@@ -23,46 +23,62 @@ if (searchContainer) {
     if (resetPagination) {
       // reset to page 1 since filtering and sorting will change the length/order of results.
       theStringParams = theStringParams.replace(
-        new RegExp(`[?&]page\=[^&]+`),
-        "&page=1"
+        new RegExp(`([?&])page\=[^&]+`),
+        "$1page=1"
       );
     }
 
-    // if it takes more than 500ms to retreive results, show a loading message
     const resultsLoader = document.querySelector('#results-loading');
-    setTimeout(() => {
-      if (resultsLoader) resultsLoader.classList.remove('hide');
+
+    if(theStringParams.length > 0 && theStringParams !== "?page=1") {
+      // if it takes more than 500ms to retreive results, show a loading message
+      setTimeout(() => {
+        if (resultsLoader) resultsLoader.classList.remove('hide');
+        if (scrollToTop) scrollToTopOfSearch();
+      }, 500);
+
+      const responseText = await fetchHtml(`/search${theStringParams}`);
+
       if (scrollToTop) scrollToTopOfSearch();
-    }, 500);
 
-    const responseText = await fetchHtml(`/search${theStringParams}`);
+      if (!responseText) {
+        const pTag = resultsLoader.querySelector('p');
+        if(pTag) pTag.innerText = pTag.dataset.errorMessage;
+      } else {
+        const dom = new DOMParser().parseFromString(responseText, "text/html");
 
-    if (scrollToTop) scrollToTopOfSearch();
+        // update the address bar
+        history.pushState(null, "", `search${theStringParams}`);
+        replaceWithIEPollyfill(
+          searchContainer.querySelector(".search__results"),
+          dom.querySelector(".search__results")
+        );
 
-    if (!responseText) {
-      const pTag = resultsLoader.querySelector('p');
-      if(pTag) pTag.innerText = pTag.dataset.errorMessage;
+        replaceWithIEPollyfill(
+          searchContainer.querySelector(".search__pagination"),
+          dom.querySelector(".search__pagination")
+        );
+
+        replaceWithIEPollyfill(
+          searchContainer.querySelector(".search__summary__count"),
+          dom.querySelector(".search__summary__count")
+        );
+
+        initPaginationListeners();
+      }
     } else {
-      const dom = new DOMParser().parseFromString(responseText, "text/html");
+      searchContainer.querySelector("#results > ul").innerHTML = '';
+      searchContainer.querySelector(".search__pagination").innerHTML = '';
+      searchContainer.querySelector(".search__summary__count").innerHTML = '0 results';
 
-      // update the address bar
+      if(resultsLoader) {
+        const pTag = resultsLoader.querySelector('p');
+        if(pTag) pTag.innerText = "Please select some filters or enter a search query to get results.";
+        resultsLoader.classList.remove('hide');
+      }
+
+      // Update address bar
       history.pushState(null, "", `search${theStringParams}`);
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__results"),
-        dom.querySelector(".search__results")
-      );
-
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__pagination"),
-        dom.querySelector(".search__pagination")
-      );
-
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__summary__count"),
-        dom.querySelector(".search__summary__count")
-      );
-
-      initPaginationListeners();
     }
   };
 
@@ -135,6 +151,7 @@ if (searchContainer) {
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
     let strParams = window.location.search;
+    let queryStringExists = strParams.length > 0;
 
     // build new param
     let topicsQuery = false;
@@ -143,7 +160,8 @@ if (searchContainer) {
 
       if (param.isChecked) {
         if (!strParams.includes("topics")) {
-          strParams += `&topics=${param.topics}`;
+          let strParamPrefix = queryStringExists ? "&" : "?";
+          strParams += `${strParamPrefix}topics=${param.topics}`;
           topicsQuery = true;
         } else {
           strParams = strParams.replace(`topics=`, `topics=${param.topics},`);
@@ -159,9 +177,14 @@ if (searchContainer) {
               new RegExp(`,${param.topics}`),
               ""
           );
-        } else if (strParams.includes(`&topics=`)) {
+        } else if (strParams.includes(`?topics=${param.topics}&`)) {
           strParams = strParams.replace(
-              new RegExp(`&topics=${param.topics}`),
+            new RegExp(`topics=${param.topics}&`),
+            ""
+          );
+        } else if (strParams.includes(`topics=${param.topics}`)) {
+          strParams = strParams.replace(
+              new RegExp(`.{1}topics=${param.topics}`),
               ""
           );
         }
