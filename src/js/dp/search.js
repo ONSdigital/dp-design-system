@@ -204,7 +204,7 @@ if (searchContainer) {
     const childrenSelector = topicFilter.getAttribute("aria-controls");
     const theChildren = [
         ...searchContainer.querySelectorAll(
-            `#${childrenSelector} [type=checkbox]:not(input:disabled)`
+            `#${childrenSelector} [type=checkbox]`
         ),
     ];
     if (!childrenSelector) return;
