@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     '<span id="feedback-form-error role="alert"">Something went wrong, try using our <a href="/feedback">feedback form</a>.</span>';
   let feedbackPositive = false
 
+  const useFeedbackAPI = document.querySelector("#feedback-api-enabled");
+  const feedbackAPIURL = document.querySelector("#feedback-api-url");
+
   const feedbackFormURL = document.querySelector("#feedback-form-url");
   if (feedbackFormURL) {
     feedbackFormURL.value = pageURL;
@@ -45,11 +48,19 @@ document.addEventListener("DOMContentLoaded", function () {
       const feedbackFormContainer = document.querySelector(
         "#feedback-form-container"
       );
-
-      const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, positiveFeedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError, feedbackPositive);
-      feedbackFormHeader.innerHTML = feedbackMessage;
-      request.send(serializedData);
-
+      if(useFeedbackAPI && useFeedbackAPI.value && feedbackAPIURL ) {
+        const postObject = {
+          is_page_useful: true,
+          is_general_feedback: false,
+          ons_url: pageURL
+        }
+        const postJson = JSON.stringify(postObject);
+        fetchFeedbackAPI(feedbackFormContainer, feedbackAPIURL.value, feedbackFormHeader, postJson, feedbackMessageError, feedbackMessage);
+      } else {
+        const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, positiveFeedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError, feedbackPositive);
+        feedbackFormHeader.innerHTML = feedbackMessage;
+        request.send(serializedData);
+        }
     });
   }
 
@@ -75,6 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const emailField = document.querySelector("#email-field");
       const descriptionField = document.querySelector("#description-field");
+      const nameField = document.querySelector("#name-field");
+
       let hasErrors = false;
 
       if (descriptionField && descriptionField.value === "") {
@@ -118,12 +131,24 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+      if(useFeedbackAPI && useFeedbackAPI.value && feedbackAPIURL) {
+        const postObject = {
+          is_page_useful: false,
+          is_general_feedback: false,
+          ons_url: pageURL,
+          name: nameField.value,
+          email_address: emailField.value
+        }
+        const postJson = JSON.stringify(postObject);
+        fetchFeedbackAPI(feedbackFormContainer, feedbackAPIURL.value, feedbackFormHeader, postJson, feedbackMessageError, feedbackMessage);
+      } else {
       const { request, serializedData } = initFeedbackRequestHandler(feedbackFormContainer, feedbackPath, feedbackFormHeader, feedbackMessage, feedbackMessageError, feedbackPositive);
       const feedbackForm = document.querySelector("#feedback-form");
       if (feedbackForm) {
         feedbackForm.classList.add("js-hidden");
       }
       request.send(serializedData);
+      }
     });
   }
 });
@@ -150,9 +175,33 @@ function initFeedbackRequestHandler(form, path, feedbackFormHeader, feedbackMess
         feedbackFormHeader.innerHTML = feedbackMessageError;
       }
     }
-    feedbackFormHeader.classList.toggle("js-hidden");
   };
   return { request, serializedData };
+}
+
+
+function fetchFeedbackAPI(form, url, feedbackFormHeader, postJson, feedbackMessageError, feedbackMessage) {
+  const fetchConfig = {
+    method: "POST",
+    body: postJson,
+    headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+    })
+  }
+    
+  fetch(url, fetchConfig)
+  .then(response => {
+      if (!response.ok) {
+          throw response;
+      }
+  })
+  .then(response => { 
+    feedbackFormHeader.innerHTML = feedbackMessage;
+  })
+  .catch(error => {
+      console.error(error);
+      feedbackFormHeader.innerHTML = feedbackMessageError;
+  });
 }
 
 function serializeFormData(form) {
