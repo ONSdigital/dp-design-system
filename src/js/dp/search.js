@@ -37,7 +37,7 @@ if (searchContainer) {
         if (scrollToTop) scrollToTopOfSearch();
       }, 500);
 
-      const responseText = await fetchHtml(`/search${theStringParams}`);
+      const responseText = await fetchHtml(`${theStringParams}`);
 
       if (scrollToTop) scrollToTopOfSearch();
 
@@ -48,7 +48,7 @@ if (searchContainer) {
         const dom = new DOMParser().parseFromString(responseText, "text/html");
 
         // update the address bar
-        history.pushState(null, "", `search${theStringParams}`);
+        history.pushState(null, "", `${theStringParams}`);
         replaceWithIEPollyfill(
           searchContainer.querySelector(".search__results"),
           dom.querySelector(".search__results")
@@ -78,7 +78,7 @@ if (searchContainer) {
       }
 
       // Update address bar
-      history.pushState(null, "", `search${theStringParams}`);
+      history.pushState(null, "", `${theStringParams}`);
     }
   };
 
