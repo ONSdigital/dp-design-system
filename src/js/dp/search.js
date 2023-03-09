@@ -15,91 +15,77 @@ if (searchContainer) {
   }
 
   const switchSearchMarkup = async (
-    strParams,
+    url,
     resetPagination = false,
     scrollToTop = false
   ) => {
-    let theStringParams = strParams;
     if (resetPagination) {
-      // reset to page 1 since filtering and sorting will change the length/order of results.
-      theStringParams = theStringParams.replace(
-        new RegExp(`([?&])page\=[^&]+`),
-        "$1page=1"
-      );
+      /*
+      * reset to page 1 since filtering and sorting will change the length/order of results.
+      * in the case where it's page one, remove page from searchParams.
+      */ 
+      url.searchParams.set("page", "1");
     }
-
     const resultsLoader = document.querySelector('#results-loading');
-
-    if(theStringParams.length > 0 && theStringParams !== "?page=1") {
-      // if it takes more than 500ms to retreive results, show a loading message
-      setTimeout(() => {
-        if (resultsLoader) resultsLoader.classList.remove('hide');
-        if (scrollToTop) scrollToTopOfSearch();
-      }, 500);
-
-      const responseText = await fetchHtml(`${theStringParams}`);
-
+    // if it takes more than 500ms to retreive results, show a loading message
+    setTimeout(() => {
+      if (resultsLoader) resultsLoader.classList.remove('hide');
       if (scrollToTop) scrollToTopOfSearch();
+    }, 500);
 
-      if (!responseText) {
-        const pTag = resultsLoader.querySelector('p');
-        if(pTag) pTag.innerText = pTag.dataset.errorMessage;
-      } else {
-        const dom = new DOMParser().parseFromString(responseText, "text/html");
+    const responseText = await fetchHtml(url);
 
-        // update the address bar
-        history.pushState(null, "", `${theStringParams}`);
-        replaceWithIEPollyfill(
-          searchContainer.querySelector(".search__results"),
-          dom.querySelector(".search__results")
-        );
+    if (scrollToTop) scrollToTopOfSearch();
 
-        replaceWithIEPollyfill(
-          searchContainer.querySelector(".search__pagination"),
-          dom.querySelector(".search__pagination")
-        );
-
-        replaceWithIEPollyfill(
-          searchContainer.querySelector(".search__summary__count"),
-          dom.querySelector(".search__summary__count")
-        );
-
-        initPaginationListeners();
-      }
+    if (!responseText) {
+      const pTag = resultsLoader.querySelector('p');
+      if(pTag) pTag.innerText = pTag.dataset.errorMessage;
     } else {
-      searchContainer.querySelector("#results > ul").innerHTML = '';
-      searchContainer.querySelector(".search__pagination").innerHTML = '';
-      searchContainer.querySelector(".search__summary__count").innerHTML = '0 results';
+      const dom = new DOMParser().parseFromString(responseText, "text/html");
 
-      if(resultsLoader) {
-        const pTag = resultsLoader.querySelector('p');
-        if(pTag) pTag.innerText = "Please select some filters or enter a search query to get results.";
-        resultsLoader.classList.remove('hide');
-      }
+      // update the address bar
+      history.pushState(null, "", decodeURIComponent(url));
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__results"),
+        dom.querySelector(".search__results")
+      );
 
-      // Update address bar
-      history.pushState(null, "", `${theStringParams}`);
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__pagination"),
+        dom.querySelector(".search__pagination")
+      );
+
+      replaceWithIEPollyfill(
+        searchContainer.querySelector(".search__summary__count"),
+        dom.querySelector(".search__summary__count")
+      );
+
+      initPaginationListeners();
     }
   };
 
   const switchContentTypeFilterCheckbox = (paramsArray) => {
     // get current param
-    let strParams = window.location.search;
+    let url = new URL(location.href);
+
     // build new param
     paramsArray.map((param) => {
       if (!("isChecked" in param) || !("filterName" in param)) return;
       if (param.isChecked) {
-        strParams += `&filter=${param.filterName}`;
+        url.searchParams.append("filter", param.filterName);
       } else {
-        strParams = strParams.replace(
-          new RegExp(`(\\&|\\?)filter\=${param.filterName}`),
-          ""
-        );
+        let tmpValues = url.searchParams.getAll("filter").filter(e => e !== param.filterName);
+        url.searchParams.delete("filter");
+        if (tmpValues.length !== 0) {
+          tmpValues.forEach((x, i) => {
+            url.searchParams.append("filter", x);
+          });
+        }
       }
     });
 
     // make the change to the markup
-    switchSearchMarkup(strParams, true);
+    switchSearchMarkup(url, true);
   };
   
   // create listeners for content-type filter checkboxes controlling each other
@@ -149,48 +135,36 @@ if (searchContainer) {
 
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
-    let strParams = window.location.search;
-    let queryStringExists = strParams.length > 0;
-    // build new param
-    let topicsQuery = false;
+    let url = new URL(location.href);
     paramsArray.map((param) => {
       if (!("isChecked" in param) || !("topics" in param) || !("strParamType" in param)) return;
       let strParamType = param.strParamType;
-      if (param.isChecked) {
-        if (!strParams.includes("topics")) {
-          let strParamPrefix = queryStringExists ? "&" : "?";
-          strParams += `${strParamPrefix}${strParamType}=${param.topics}`;
-          topicsQuery = true;
+      let tmpValues = url.searchParams.getAll(strParamType);
+      url.searchParams.delete(strParamType);
+      if (tmpValues.length <= 1) {
+        if (param.isChecked) {
+          if (tmpValues.length === 0) {
+            tmpValues.push(param.topics);
+            url.searchParams.append(strParamType,tmpValues);
+          } else {
+            let tmpValue = tmpValues[0].split(",");
+            tmpValue.push(param.topics);
+            url.searchParams.append(strParamType,tmpValue);
+          }
         } else {
-          strParams = strParams.replace(`${strParamType}=`, `${strParamType}=${param.topics},`);
-        }
-      } else if (strParams.includes(`${param.topics}`)) {
-        if (strParams.includes(`${param.topics},`)) {
-          strParams = strParams.replace(
-              new RegExp(`${param.topics},`),
-              ""
-          );
-        } else if (strParams.includes(`,${param.topics}`)) {
-          strParams = strParams.replace(
-              new RegExp(`,${param.topics}`),
-              ""
-          );
-        } else if (strParams.includes(`?${strParamType}=${param.topics}&`)) {
-          strParams = strParams.replace(
-            new RegExp(`${strParamType}=${param.topics}&`),
-            ""
-          );
-        } else if (strParams.includes(`${strParamType}=${param.topics}`)) {
-          strParams = strParams.replace(
-              new RegExp(`.{1}${strParamType}=${param.topics}`),
-              ""
-          );
+          if (tmpValues.length <= 1) {
+            let tmpValue = tmpValues[0].split(",");
+            let tmpParam = tmpValue.filter(e => e !== param.topics);
+            if (tmpParam.length !== 0) {
+              url.searchParams.append(strParamType, tmpParam);
+            }
+          }
         }
       }
     });
 
       // make the change to the markup
-      switchSearchMarkup(strParams, true);
+      switchSearchMarkup(url, true);
   };
 
   // create listeners for topic filter checkboxes
@@ -302,12 +276,9 @@ if (searchContainer) {
   const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
   if (!!sortSelector) {
     sortSelector.addEventListener("change", async (e) => {
-      let strParams = window.location.search;
-      // remove old param
-      strParams = strParams.replace(new RegExp(`[?&]sort\=[^&]+`), "");
-      // replace
-      strParams += `&sort=${e.target.value}`;
-      switchSearchMarkup(strParams, true);
+      let url = new URL(location.href);
+      url.searchParams.set("sort",e.target.value)
+      switchSearchMarkup(url, true);
 
       // Google Tag Manager
       gtmDataLayerPush({
@@ -326,14 +297,11 @@ if (searchContainer) {
       paginationItems.forEach((item) => {
         item.addEventListener("click", async (e) => {
           e.preventDefault();
-          let strParams = window.location.search;
+          let url = new URL(location.href);
           const { targetPage } = e.target.dataset;
           if (!targetPage) return;
-          // remove old param if it's there
-          strParams = strParams.replace(new RegExp(`[?&]page\=[^&]+`), "");
-          // add the new page target
-          strParams += `&page=${targetPage}`;
-          switchSearchMarkup(strParams, false, true);
+          url.searchParams.set("page", targetPage)
+          switchSearchMarkup(url, false, true);
         });
       });
     }
