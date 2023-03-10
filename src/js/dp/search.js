@@ -283,21 +283,6 @@ if (searchContainer) {
 
   initPaginationListeners();
 
-  //capture focus in checkboxes
-  let showResultsBtn = document.getElementById('show-results');
-  let checkboxes = document.querySelectorAll('input[type="checkbox"]:not([disabled])');
-  let firstCheckbox = checkboxes[0];
-  let KEYCODE_TAB = 9;
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Tab' || e.code === KEYCODE_TAB.toString()) {
-      if (document.activeElement === showResultsBtn) {
-        firstCheckbox.focus();
-        e.preventDefault();
-      }
-    }
-  });
-
   // filter menu for mobile
   // if the page is running javascript let's make the filter menus togglable and full-screen when displayed
   const toggleBtns = [
@@ -319,4 +304,34 @@ if (searchContainer) {
       });
     });
   };
+
+  //capture focus in checkboxes
+  const showResultsBtn = document.getElementById('show-results');
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]:not([disabled])');
+  const firstCheckbox = checkboxes[0];
+  const keycodeTab = 9;
+
+  if (showResultsBtn) {
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Tab' || e.code === keycodeTab.toString()) {
+        if (document.activeElement === showResultsBtn) {
+          firstCheckbox.focus();
+          e.preventDefault();
+        }
+      }
+    });
+
+    //tab to checkboxes after filtering results
+    const keycodeEnter = 13
+    const filterBtn = document.getElementById("filter-results");
+    if (filterBtn) {
+      document.addEventListener('keyup', function (e) {
+        if (e.key === 'Enter' || e.code === keycodeEnter.toString()) {
+          if (document.activeElement === filterBtn) {
+            firstCheckbox.focus();
+          }
+        }
+      });
+    }
+  }
 }
