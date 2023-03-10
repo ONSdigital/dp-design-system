@@ -283,6 +283,21 @@ if (searchContainer) {
 
   initPaginationListeners();
 
+  //capture focus in checkboxes
+  let showResultsBtn = document.getElementById('show-results');
+  let checkboxes = document.querySelectorAll('input[type="checkbox"]:not([disabled])');
+  let firstCheckbox = checkboxes[0];
+  let KEYCODE_TAB = 9;
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab' || e.code === KEYCODE_TAB.toString()) {
+      if (document.activeElement === showResultsBtn) {
+        firstCheckbox.focus();
+        e.preventDefault();
+      }
+    }
+  });
+
   // filter menu for mobile
   // if the page is running javascript let's make the filter menus togglable and full-screen when displayed
   const toggleBtns = [
