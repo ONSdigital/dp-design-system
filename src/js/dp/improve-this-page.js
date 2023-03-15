@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const feedbackFormContainer = document.querySelector(
         "#feedback-form-container"
       );
-      if(useFeedbackAPI && useFeedbackAPI.value && feedbackAPIURL ) {
+      if(useFeedbackAPI && useFeedbackAPI.value === "true" && feedbackAPIURL ) {
         const postObject = {
           is_page_useful: true,
           is_general_feedback: false,
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      if(useFeedbackAPI && useFeedbackAPI.value && feedbackAPIURL) {
+      if(useFeedbackAPI && useFeedbackAPI.value === "true" && feedbackAPIURL) {
         const postObject = {
           is_page_useful: false,
           is_general_feedback: false,
