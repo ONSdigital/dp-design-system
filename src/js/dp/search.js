@@ -309,12 +309,10 @@ if (searchContainer) {
   const showResultsBtn = document.getElementById('show-results');
   const focusableElmnts = document.querySelectorAll('input[type="checkbox"]:not([disabled]), #clear-search');
   const firstFocusableElmnt = focusableElmnts[0];
-  console.log(firstFocusableElmnt, 'first focusable element')
-  const keycodeTab = 9;
 
   if (showResultsBtn) {
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Tab' || e.code === keycodeTab.toString()) {
+      if (e.key === 'Tab') {
         if (document.activeElement === showResultsBtn) {
           firstFocusableElmnt.focus();
           e.preventDefault();
