@@ -307,30 +307,28 @@ if (searchContainer) {
 
   //capture focus in checkboxes
   const showResultsBtn = document.getElementById('show-results');
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]:not([disabled])');
-  const firstCheckbox = checkboxes[0];
+  const focusableElmnts = document.querySelectorAll('input[type="checkbox"]:not([disabled]), #clear-search');
+  const firstFocusableElmnt = focusableElmnts[0];
+  console.log(firstFocusableElmnt, 'first focusable element')
   const keycodeTab = 9;
 
   if (showResultsBtn) {
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Tab' || e.code === keycodeTab.toString()) {
         if (document.activeElement === showResultsBtn) {
-          firstCheckbox.focus();
+          firstFocusableElmnt.focus();
           e.preventDefault();
         }
       }
     });
 
     //tab to checkboxes after filtering results
-    const keycodeEnter = 13
     const filterBtn = document.getElementById("filter-results");
     if (filterBtn) {
-      document.addEventListener('keyup', function (e) {
-        if (e.key === 'Enter' || e.code === keycodeEnter.toString()) {
+      document.addEventListener("click", () => {
           if (document.activeElement === filterBtn) {
-            firstCheckbox.focus();
+            firstFocusableElmnt.focus();
           }
-        }
       });
     }
   }
