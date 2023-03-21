@@ -85,7 +85,6 @@ if (searchContainer) {
   const switchContentTypeFilterCheckbox = (paramsArray) => {
     // get current param
     let strParams = window.location.search;
-
     // build new param
     paramsArray.map((param) => {
       if (!("isChecked" in param) || !("filterName" in param)) return;
@@ -152,19 +151,18 @@ if (searchContainer) {
     // get current param
     let strParams = window.location.search;
     let queryStringExists = strParams.length > 0;
-
     // build new param
     let topicsQuery = false;
     paramsArray.map((param) => {
-      if (!("isChecked" in param) || !("topics" in param)) return;
-
+      if (!("isChecked" in param) || !("topics" in param) || !("strParamType" in param)) return;
+      let strParamType = param.strParamType;
       if (param.isChecked) {
         if (!strParams.includes("topics")) {
           let strParamPrefix = queryStringExists ? "&" : "?";
-          strParams += `${strParamPrefix}topics=${param.topics}`;
+          strParams += `${strParamPrefix}${strParamType}=${param.topics}`;
           topicsQuery = true;
         } else {
-          strParams = strParams.replace(`topics=`, `topics=${param.topics},`);
+          strParams = strParams.replace(`${strParamType}=`, `${strParamType}=${param.topics},`);
         }
       } else if (strParams.includes(`${param.topics}`)) {
         if (strParams.includes(`${param.topics},`)) {
@@ -177,14 +175,14 @@ if (searchContainer) {
               new RegExp(`,${param.topics}`),
               ""
           );
-        } else if (strParams.includes(`?topics=${param.topics}&`)) {
+        } else if (strParams.includes(`?${strParamType}=${param.topics}&`)) {
           strParams = strParams.replace(
-            new RegExp(`topics=${param.topics}&`),
+            new RegExp(`${strParamType}=${param.topics}&`),
             ""
           );
-        } else if (strParams.includes(`topics=${param.topics}`)) {
+        } else if (strParams.includes(`${strParamType}=${param.topics}`)) {
           strParams = strParams.replace(
-              new RegExp(`.{1}topics=${param.topics}`),
+              new RegExp(`.{1}${strParamType}=${param.topics}`),
               ""
           );
         }
@@ -212,6 +210,7 @@ if (searchContainer) {
       const paramsArray = theChildren.map((item) => ({
         isChecked: e.target.checked,
         topics: item.value,
+        strParamType: 'topics',
       }));
       theChildren.map((item) => (item.checked = e.target.checked));
       switchTopicFilterCheckbox(paramsArray);
@@ -226,7 +225,7 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value },
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
         ]);
         topicFilter.checked= theChildren.some((x) => x.checked);
 
@@ -239,6 +238,65 @@ if (searchContainer) {
       })
     })
   });
+
+    // create listeners for population-types filter checkboxes
+    [
+      ...searchContainer.querySelectorAll(
+        ".population-types"
+      ),
+    ].map((topicFilter) => {
+      const theChildren = [
+          ...topicFilter.querySelectorAll(
+              `[type=checkbox]`
+          ),
+      ];
+
+      if (!theChildren) return;
+      theChildren.map((item) => {
+        item.addEventListener("change", async (e) => {
+          switchTopicFilterCheckbox([
+            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
+          ]);
+          topicFilter.checked= theChildren.some((x) => x.checked);
+  
+          // Google Tag Manager
+          gtmDataLayerPush({
+            'event': 'PopulationTypes-Filter',
+            'filter-by': e.target.dataset.gtmLabel,
+            'selected': e.target.checked ? 'selected' : 'unselected'
+          });
+        })
+      })
+    });
+
+    // create listeners for dimensions filter checkboxes
+    [
+      ...searchContainer.querySelectorAll(
+        ".dimensions"
+      ),
+    ].map((topicFilter) => {
+      const theChildren = [
+          ...topicFilter.querySelectorAll(
+              `[type=checkbox]`
+          ),
+      ];
+      if (!theChildren) return;
+      theChildren.map((item) => {
+        item.addEventListener("change", async (e) => {
+          switchTopicFilterCheckbox([
+            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
+          ]);
+          topicFilter.checked= theChildren.some((x) => x.checked);
+  
+          // Google Tag Manager
+          gtmDataLayerPush({
+            'event': 'Dimensions-Filter',
+            'filter-by': e.target.dataset.gtmLabel,
+            'selected': e.target.checked ? 'selected' : 'unselected'
+          });
+        })
+      })
+    });
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
