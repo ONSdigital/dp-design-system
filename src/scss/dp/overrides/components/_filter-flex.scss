@@ -27,9 +27,17 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5em;
-    &__selected .ons-btn__inner {
-      padding: 0.5em 0.666667em 0.666667em 0.666667em;
-      box-shadow: none;
+    &__selected {
+      .ons-btn {
+        text-align: left;
+        white-space: normal;
+      }
+      .ons-btn__inner {
+        display: flex;
+        align-items: center;
+        padding: 0.5em 0.666667em 0.666667em 0.666667em;
+        box-shadow: none;
+      }
     }
   }
 }
