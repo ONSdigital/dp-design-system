@@ -30,9 +30,12 @@ if (searchContainer) {
 
     const numOfParams = Array.from(url.searchParams).length
 
-    // Current behaviour bugs out due to search controller not rendering results if 
-    // no filters and no query is selected. This renders a message instead. 
-    const noFiltersSelected = numOfParams === 0 || numOfParams === 1 && url.searchParams.has("page");
+    /*
+    * Current behaviour of search controller gets the results using fetch and render in page
+    * However, if no filters are selected or no query - the fetched page has no results and
+    * so they can't be retrieved. This condition below bypasses that until it is fixed. 
+    */
+    const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has("page"));
 
     if (noFiltersSelected) {
       searchContainer.querySelector("#results > ul").innerHTML = '';
@@ -69,7 +72,7 @@ if (searchContainer) {
         const noResults = resultsCount.startsWith("0");
         const noResultsMessage = document.querySelector('#results-zero')
 
-        if (noResults ) {
+        if (noResults) {
           if (noResultsMessage) noResultsMessage.classList.remove('hide');
           searchContainer.querySelector("#results > ul").innerHTML = '';
           searchContainer.querySelector(".search__pagination").innerHTML = '';
