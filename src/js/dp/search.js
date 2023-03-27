@@ -27,40 +27,72 @@ if (searchContainer) {
       url.searchParams.set("page", "1");
     }
     const resultsLoader = document.querySelector('#results-loading');
-    // if it takes more than 500ms to retreive results, show a loading message
-    setTimeout(() => {
-      if (resultsLoader) resultsLoader.classList.remove('hide');
-      if (scrollToTop) scrollToTopOfSearch();
-    }, 500);
 
-    const responseText = await fetchHtml(url);
+    const numOfParams = Array.from(url.searchParams).length
 
-    if (scrollToTop) scrollToTopOfSearch();
+    // Current behaviour bugs out due to search controller not rendering results if 
+    // no filters and no query is selected. This renders a message instead. 
+    const noFiltersSelected = numOfParams === 0 || numOfParams === 1 && url.searchParams.has("page");
 
-    if (!responseText) {
-      const pTag = resultsLoader.querySelector('p');
-      if(pTag) pTag.innerText = pTag.dataset.errorMessage;
+    if (noFiltersSelected) {
+      searchContainer.querySelector("#results > ul").innerHTML = '';
+      searchContainer.querySelector(".search__pagination").innerHTML = '';
+      searchContainer.querySelector(".search__summary__count").innerHTML = '0 results ';
+
+      if(resultsLoader) {
+        const pTag = resultsLoader.querySelector('p');
+        if(pTag) pTag.innerText = "Please select some filters or enter a search query to get results.";
+        resultsLoader.classList.remove('hide');
+      }
     } else {
-      const dom = new DOMParser().parseFromString(responseText, "text/html");
+      // if it takes more than 500ms to retreive results, show a loading message
+      const timer = setTimeout(() => {
+        if (resultsLoader) resultsLoader.classList.remove('hide');
+        if (scrollToTop) scrollToTopOfSearch();
+      }, 500);
 
-      // update the address bar
-      history.pushState(null, "", decodeURIComponent(url));
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__results"),
-        dom.querySelector(".search__results")
-      );
+      const responseText = await fetchHtml(url);
+      clearTimeout(timer);
 
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__pagination"),
-        dom.querySelector(".search__pagination")
-      );
+      if (scrollToTop) scrollToTopOfSearch();
 
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__summary__count"),
-        dom.querySelector(".search__summary__count")
-      );
+      if (!responseText) {
+        const pTag = resultsLoader.querySelector('p');
+        if(pTag) pTag.innerText = pTag.dataset.errorMessage;
+      } else {
+        // update the address bar
+        history.pushState(null, "", decodeURIComponent(url));
 
-      initPaginationListeners();
+        const dom = new DOMParser().parseFromString(responseText, "text/html");
+
+        const resultsCount = dom.querySelector(".search__summary__count").innerText;
+        const noResults = resultsCount.startsWith("0");
+        const noResultsMessage = document.querySelector('#results-zero')
+
+        if (noResults ) {
+          if (noResultsMessage) noResultsMessage.classList.remove('hide');
+          searchContainer.querySelector("#results > ul").innerHTML = '';
+          searchContainer.querySelector(".search__pagination").innerHTML = '';
+          searchContainer.querySelector(".search__summary__count").innerHTML = '0 results for ';
+        } else {
+          replaceWithIEPollyfill(
+            searchContainer.querySelector(".search__results"),
+            dom.querySelector(".search__results")
+          );
+
+          replaceWithIEPollyfill(
+            searchContainer.querySelector(".search__pagination"),
+            dom.querySelector(".search__pagination")
+          );
+
+          replaceWithIEPollyfill(
+            searchContainer.querySelector(".search__summary__count"),
+            dom.querySelector(".search__summary__count")
+          );
+
+          initPaginationListeners();
+        }
+      }
     }
   };
 
