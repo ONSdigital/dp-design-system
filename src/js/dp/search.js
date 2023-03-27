@@ -76,7 +76,14 @@ if (searchContainer) {
           if (noResultsMessage) noResultsMessage.classList.remove('hide');
           searchContainer.querySelector("#results > ul").innerHTML = '';
           searchContainer.querySelector(".search__pagination").innerHTML = '';
-          searchContainer.querySelector(".search__summary__count").innerHTML = '0 results for ';
+
+          const hasQuery = url.searchParams.has("q")
+
+          if(hasQuery) {
+            searchContainer.querySelector(".search__summary__count").innerHTML = '0 results for ';
+          } else {
+            searchContainer.querySelector(".search__summary__count").innerHTML = '0 results';
+          }
         } else {
           replaceWithIEPollyfill(
             searchContainer.querySelector(".search__results"),
