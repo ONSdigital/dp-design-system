@@ -45,11 +45,6 @@
       font-weight: 700;
     }
 
-    &__count {
-      @extend .base-font;
-      font-weight: 300;
-    }
-
     &__suggestion {
       display: block;
       margin-top: ($baseline * 3);

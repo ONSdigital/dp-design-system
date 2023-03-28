@@ -37,73 +37,54 @@ if (searchContainer) {
     */
     const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has("page"));
 
-    if (noFiltersSelected) {
-      searchContainer.querySelector("#results > ul").innerHTML = '';
-      searchContainer.querySelector(".search__pagination").innerHTML = '';
-      searchContainer.querySelector(".search__summary__count").innerHTML = '0 results ';
-
-      if(resultsLoader) {
-        const pTag = resultsLoader.querySelector('p');
-        if(pTag) pTag.innerText = "Please select some filters or enter a search query to get results.";
-        resultsLoader.classList.remove('hide');
-      }
-    } else {
-      // if it takes more than 500ms to retreive results, show a loading message
-      const timer = setTimeout(() => {
-        if (resultsLoader) resultsLoader.classList.remove('hide');
-        if (scrollToTop) scrollToTopOfSearch();
-      }, 500);
-
-      const responseText = await fetchHtml(url);
-      clearTimeout(timer);
-
+    // if it takes more than 500ms to retreive results, show a loading message
+    const timer = setTimeout(() => {
+      if (resultsLoader) resultsLoader.classList.remove('hide');
       if (scrollToTop) scrollToTopOfSearch();
+    }, 500);
 
-      if (!responseText) {
-        const pTag = resultsLoader.querySelector('p');
-        if(pTag) pTag.innerText = pTag.dataset.errorMessage;
+    const responseText = await fetchHtml(url);
+    clearTimeout(timer);
+
+    if (scrollToTop) scrollToTopOfSearch();
+
+    if (!responseText) {
+      const pTag = resultsLoader.querySelector('p');
+      if(pTag) pTag.innerText = pTag.dataset.errorMessage;
+    } else {
+      const fetchedDom = new DOMParser().parseFromString(responseText, "text/html");
+
+      const resultsCount = fetchedDom.querySelector(".search__summary__count").innerText;
+      const noResults = resultsCount.startsWith("0");
+      const noResultsMessage = document.querySelector('#results-zero')
+
+      if (noResults) {
+        if (noResultsMessage) noResultsMessage.classList.remove('hide');
+        searchContainer.querySelector("#results > ul").innerHTML = '';
+        searchContainer.querySelector(".search__pagination").innerHTML = '';
+        searchContainer.querySelector(".search__summary__count").innerText = '0';
       } else {
-        // update the address bar
-        history.pushState(null, "", decodeURIComponent(url));
+        replaceWithIEPollyfill(
+          searchContainer.querySelector(".search__results"),
+          fetchedDom.querySelector(".search__results")
+        );
 
-        const dom = new DOMParser().parseFromString(responseText, "text/html");
+        replaceWithIEPollyfill(
+          searchContainer.querySelector(".search__pagination"),
+          fetchedDom.querySelector(".search__pagination")
+        );
 
-        const resultsCount = dom.querySelector(".search__summary__count").innerText;
-        const noResults = resultsCount.startsWith("0");
-        const noResultsMessage = document.querySelector('#results-zero')
+        replaceWithIEPollyfill(
+          searchContainer.querySelector(".search__summary__count"),
+          fetchedDom.querySelector(".search__summary__count")
+        );
 
-        if (noResults) {
-          if (noResultsMessage) noResultsMessage.classList.remove('hide');
-          searchContainer.querySelector("#results > ul").innerHTML = '';
-          searchContainer.querySelector(".search__pagination").innerHTML = '';
-
-          const hasQuery = url.searchParams.has("q")
-
-          if(hasQuery) {
-            searchContainer.querySelector(".search__summary__count").innerHTML = '0 results for ';
-          } else {
-            searchContainer.querySelector(".search__summary__count").innerHTML = '0 results';
-          }
-        } else {
-          replaceWithIEPollyfill(
-            searchContainer.querySelector(".search__results"),
-            dom.querySelector(".search__results")
-          );
-
-          replaceWithIEPollyfill(
-            searchContainer.querySelector(".search__pagination"),
-            dom.querySelector(".search__pagination")
-          );
-
-          replaceWithIEPollyfill(
-            searchContainer.querySelector(".search__summary__count"),
-            dom.querySelector(".search__summary__count")
-          );
-
-          initPaginationListeners();
-        }
+        initPaginationListeners();
       }
     }
+
+    // update the address bar
+    history.pushState(null, "", decodeURIComponent(url));
   };
 
   const switchContentTypeFilterCheckbox = (paramsArray) => {
