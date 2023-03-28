@@ -100,8 +100,6 @@
     }
 
     &__content {
-      margin-top: $grid-gutters;
-
       &__archive-info {
         margin-top: ($baseline * 4);
       }
@@ -110,21 +108,15 @@
         border-left: none;
       }
 
-      #topicsFilterForm {
-        fieldset {
-          div:last-of-type {
-            padding-bottom: 1rem;
-            border-bottom: 1px solid $iron;
-            margin-bottom: 1rem;
-          }
-        }
+      #topicsFilterForm > details > fieldset {
+        margin-bottom: 1rem;
       }
     }
   }
 
   &__sort {
     padding: 1rem 0;
-    border-bottom: 1px solid $iron;
+    border-bottom: 1px solid $color-borders;
 
     @include breakpoint(sm) {
       height: auto;
