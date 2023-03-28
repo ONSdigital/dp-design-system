@@ -90,12 +90,12 @@
     }
 
     &__heading {
-      height: ($baseline * 8);
+      padding: 1rem 0;
       border-bottom: 1px solid $iron;
 
       h3 {
         margin: 0;
-        line-height: ($baseline * 8);
+        display:inline-block
       }
     }
 
@@ -123,7 +123,7 @@
   }
 
   &__sort {
-    height: ($baseline * 8);
+    padding: 1rem 0;
     border-bottom: 1px solid $iron;
 
     @include breakpoint(sm) {
@@ -133,8 +133,6 @@
     }
 
     &__select {
-
-      line-height: ($baseline * 8);
 
       label {
         vertical-align: unset;
