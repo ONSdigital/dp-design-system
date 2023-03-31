@@ -295,6 +295,35 @@ if (searchContainer) {
       })
     });
 
+    // create listeners for dimensions filter checkboxes
+    [
+      ...searchContainer.querySelectorAll(
+        ".census"
+      ),
+    ].map((topicFilter) => {
+      const theChildren = [
+          ...topicFilter.querySelectorAll(
+              `[type=checkbox]`
+          ),
+      ];
+      if (!theChildren) return;
+      theChildren.map((item) => {
+        item.addEventListener("change", async (e) => {
+          switchTopicFilterCheckbox([
+            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+          ]);
+          topicFilter.checked= theChildren.some((x) => x.checked);
+  
+          // Google Tag Manager
+          gtmDataLayerPush({
+            'event': 'Census-Filter',
+            'filter-by': e.target.dataset.gtmLabel,
+            'selected': e.target.checked ? 'selected' : 'unselected'
+          });
+        })
+      })
+    });
+
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
   if (!!sortSelector) {
