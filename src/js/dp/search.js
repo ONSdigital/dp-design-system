@@ -54,14 +54,19 @@ if (searchContainer) {
     } else {
       const fetchedDom = new DOMParser().parseFromString(responseText, "text/html");
 
+      let resultsCount = 0;
       const searchPrompt = fetchedDom.querySelector(".search__form--no-results");
-      const noResultsMessage = document.querySelector('#results-zero')
+      if (!searchPrompt) {
+        resultsCount = fetchedDom.querySelector(".search__summary__count").innerText;
+      }
 
-      if (searchPrompt) {
-        if (noResultsMessage) noResultsMessage.classList.remove('hide');
-        searchContainer.querySelector("#results > ul").innerHTML = '';
-        searchContainer.querySelector(".search__pagination").innerHTML = '';
-        searchContainer.querySelector(".search__summary__count").innerText = '0';
+      const noResultsMessage = document.querySelector("#results-zero");
+
+      if (resultsCount === 0) {
+        if (noResultsMessage) noResultsMessage.classList.remove("hide");
+        searchContainer.querySelector("#results > ul").innerHTML = "";
+        searchContainer.querySelector(".search__pagination").innerHTML = "";
+        searchContainer.querySelector(".search__summary__count").innerText = "0";
       } else {
         replaceWithIEPollyfill(
           searchContainer.querySelector(".search__results"),
