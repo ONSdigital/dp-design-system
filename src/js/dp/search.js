@@ -57,13 +57,15 @@ if (searchContainer) {
       let resultsCount = 0;
       const searchPrompt = fetchedDom.querySelector(".search__form--no-results");
       if (!searchPrompt) {
-        resultsCount = fetchedDom.querySelector(".search__summary__count").innerText;
+        resultsCount = parseInt(fetchedDom.querySelector(".search__summary__count").innerText, 10);
       }
 
       const noResultsMessage = document.querySelector("#results-zero");
 
       if (resultsCount === 0) {
-        if (noResultsMessage) noResultsMessage.classList.remove("hide");
+        if (noResultsMessage) {
+          noResultsMessage.classList.remove("hide");
+        }
         searchContainer.querySelector("#results > ul").innerHTML = "";
         searchContainer.querySelector(".search__pagination").innerHTML = "";
         searchContainer.querySelector(".search__summary__count").innerText = "0";
