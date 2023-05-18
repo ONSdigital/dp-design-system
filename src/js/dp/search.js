@@ -1,4 +1,4 @@
-import { gtmDataLayerPush, fetchHtml, replaceWithIEPollyfill } from "../utilities";
+import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from "../utilities";
 
 const searchContainer = document.querySelector(".search__container");
 
@@ -70,17 +70,17 @@ if (searchContainer) {
         searchContainer.querySelector(".search__pagination").innerHTML = "";
         searchContainer.querySelector(".search__summary__count").innerText = "0";
       } else {
-        replaceWithIEPollyfill(
+        replaceWithIEPolyfill(
           searchContainer.querySelector(".search__results"),
           fetchedDom.querySelector(".search__results")
         );
 
-        replaceWithIEPollyfill(
+        replaceWithIEPolyfill(
           searchContainer.querySelector(".search__pagination"),
           fetchedDom.querySelector(".search__pagination")
         );
 
-        replaceWithIEPollyfill(
+        replaceWithIEPolyfill(
           searchContainer.querySelector(".search__summary__count"),
           fetchedDom.querySelector(".search__summary__count")
         );

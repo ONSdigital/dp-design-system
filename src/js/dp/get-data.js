@@ -1,4 +1,4 @@
-import { fetchHtml, replaceWithIEPollyfill, gtmDataLayerPush } from "../utilities";
+import { fetchHtml, replaceWithIEPolyfill, gtmDataLayerPush } from "../utilities";
 
 document.addEventListener("DOMContentLoaded", function () {
   // Checking for downloads with loading spinner
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         clearTimeout(pollForDownloads);
         setTimeout(async () => {
           downloadForm = await getPage();
-          replaceWithIEPollyfill(
+          replaceWithIEPolyfill(
             loadingSection,
             downloadForm
           );
