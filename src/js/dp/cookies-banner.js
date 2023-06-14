@@ -62,7 +62,7 @@ function extractDomainFromUrl(url) {
   }
 
   // top level domains (TLD/SLD) in use
-  const tlds = new RegExp('(.co.uk|.onsdigital.uk|.gov.uk)')
+  const tlds = new RegExp('(.uk|.onsdigital.uk|.gov.uk)')
 
   const topLevelDomain = url.match(tlds)[0]
   const secondLevelDomain = url.replace(topLevelDomain, '').split('.').pop()
