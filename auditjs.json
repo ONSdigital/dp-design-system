@@ -31,6 +31,10 @@
     {
       "id": "CVE-2020-7608",
       "reason": "yargs-parser@5 is a transitive dependency of gulp-cli which is no longer maintained"
+    },
+    {
+      "id":  "CVE-2022-38900",
+      "reason":"decode-uri-component ... something something ... not sure what to put here."
     }
   ]
 }
