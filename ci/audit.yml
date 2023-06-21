@@ -5,8 +5,8 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: node
-    tag: 14.15.4
+    repository: onsdigital/dp-concourse-tools-node-go
+    tag: latest
 
 inputs:
   - name: dp-design-system
