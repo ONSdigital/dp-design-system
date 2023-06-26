@@ -31,7 +31,8 @@
   "homepage": "https://github.com/ONSdigital/dp-design-system#readme",
   "dependencies": {
     "@ons/design-system": "^57.0.1",
-    "core-js": "^3.18.3",
+    "core-js": "^3.28.0",
+    "glob-parent": "^5.1.2",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.3.0",
@@ -65,8 +66,9 @@
     "whatwg-fetch": "^3.6.2"
   },
   "overrides": {
-    "glob-parent": "^5.1.2",
-    "semver": "7.5.2",
-    "minimatch": "^3.1.1"
+    "glob-parent": "^6.0.2",
+    "minimatch": "^3.1.1",
+    "decode-uri-component": "^0.3.0",
+    "semver": "7.5.2"
   }
 }

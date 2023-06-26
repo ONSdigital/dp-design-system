@@ -1,0 +1,6 @@
+FROM node:14.15.4 AS base
+
+# RUN ln -s / /dp-design-system
+WORKDIR /dp-design-system
+
+CMD make debug
