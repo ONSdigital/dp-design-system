@@ -1,25 +1,8 @@
-import { gtmDataLayerPush } from "../utilities";
+import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from "../utilities";
 
 const searchContainer = document.querySelector(".search__container");
 
 if (searchContainer) {
-  const fetchHtml = async (url) => {
-    const response = await fetch(url, {
-      method: "get",
-      mode: "cors",
-      headers: new Headers({
-        Accept: "application/json",
-      }),
-    });
-    return response && (await response.text());
-  };
-
-  const replaceWithIEPollyfill = (el1, el2) => {
-    // element.replaceWith() is not IE compatible, this is a workaround
-    el1.insertAdjacentElement("beforebegin", el2);
-    el1.parentElement.removeChild(el1);
-  };
-
   const scrollToTopOfSearch = () => {
     // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
     const searchResultsSection = searchContainer.querySelector(
@@ -32,27 +15,36 @@ if (searchContainer) {
   }
 
   const switchSearchMarkup = async (
-    strParams,
+    url,
     resetPagination = false,
     scrollToTop = false
   ) => {
-    let theStringParams = strParams;
     if (resetPagination) {
-      // reset to page 1 since filtering and sorting will change the length/order of results.
-      theStringParams = theStringParams.replace(
-        new RegExp(`[?&]page\=[^&]+`),
-        "&page=1"
-      );
+      /*
+      * reset to page 1 since filtering and sorting will change the length/order of results.
+      * in the case where it's page one, remove page from searchParams.
+      */ 
+      url.searchParams.set("page", "1");
     }
+    const resultsLoader = document.querySelector('#results-loading');
+
+    const numOfParams = Array.from(url.searchParams).length
+
+    /*
+    * Current behaviour of search controller gets the results using fetch and render in page
+    * However, if no filters are selected or no query - the fetched page has no results and
+    * so they can't be retrieved. This condition below bypasses that until it is fixed. 
+    */
+    const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has("page"));
 
     // if it takes more than 500ms to retreive results, show a loading message
-    const resultsLoader = document.querySelector('#results-loading');
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       if (resultsLoader) resultsLoader.classList.remove('hide');
       if (scrollToTop) scrollToTopOfSearch();
     }, 500);
 
-    const responseText = await fetchHtml(`/search${theStringParams}`);
+    const responseText = await fetchHtml(url);
+    clearTimeout(timer);
 
     if (scrollToTop) scrollToTopOfSearch();
 
@@ -60,48 +52,69 @@ if (searchContainer) {
       const pTag = resultsLoader.querySelector('p');
       if(pTag) pTag.innerText = pTag.dataset.errorMessage;
     } else {
-      const dom = new DOMParser().parseFromString(responseText, "text/html");
+      const fetchedDom = new DOMParser().parseFromString(responseText, "text/html");
 
-      // update the address bar
-      history.pushState(null, "", `search${theStringParams}`);
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__results"),
-        dom.querySelector(".search__results")
-      );
+      let resultsCount = 0;
+      const searchPrompt = fetchedDom.querySelector(".search__form--no-results");
+      if (!searchPrompt) {
+        resultsCount = parseInt(fetchedDom.querySelector(".search__summary__count").innerText, 10);
+      }
 
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__pagination"),
-        dom.querySelector(".search__pagination")
-      );
+      const noResultsMessage = document.querySelector("#results-zero");
 
-      replaceWithIEPollyfill(
-        searchContainer.querySelector(".search__summary__count"),
-        dom.querySelector(".search__summary__count")
-      );
+      if (resultsCount === 0) {
+        if (noResultsMessage) {
+          noResultsMessage.classList.remove("hide");
+        }
+        searchContainer.querySelector("#results > ul").innerHTML = "";
+        searchContainer.querySelector(".search__pagination").innerHTML = "";
+        searchContainer.querySelector(".search__summary__count").innerText = "0";
+      } else {
+        replaceWithIEPolyfill(
+          searchContainer.querySelector(".search__results"),
+          fetchedDom.querySelector(".search__results")
+        );
 
-      initPaginationListeners();
+        replaceWithIEPolyfill(
+          searchContainer.querySelector(".search__pagination"),
+          fetchedDom.querySelector(".search__pagination")
+        );
+
+        replaceWithIEPolyfill(
+          searchContainer.querySelector(".search__summary__count"),
+          fetchedDom.querySelector(".search__summary__count")
+        );
+
+        initPaginationListeners();
+      }
     }
+
+    // update the address bar
+    history.pushState(null, "", decodeURIComponent(url));
   };
 
   const switchContentTypeFilterCheckbox = (paramsArray) => {
     // get current param
-    let strParams = window.location.search;
+    let url = new URL(location.href);
 
     // build new param
     paramsArray.map((param) => {
       if (!("isChecked" in param) || !("filterName" in param)) return;
       if (param.isChecked) {
-        strParams += `&filter=${param.filterName}`;
+        url.searchParams.append("filter", param.filterName);
       } else {
-        strParams = strParams.replace(
-          new RegExp(`(\\&|\\?)filter\=${param.filterName}`),
-          ""
-        );
+        let tmpValues = url.searchParams.getAll("filter").filter(e => e !== param.filterName);
+        url.searchParams.delete("filter");
+        if (tmpValues.length !== 0) {
+          tmpValues.forEach((x, i) => {
+            url.searchParams.append("filter", x);
+          });
+        }
       }
     });
 
     // make the change to the markup
-    switchSearchMarkup(strParams, true);
+    switchSearchMarkup(url, true);
   };
   
   // create listeners for content-type filter checkboxes controlling each other
@@ -151,36 +164,59 @@ if (searchContainer) {
 
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
-    let strParams = window.location.search;
-
-    // build new param
+    let url = new URL(location.href);
     paramsArray.map((param) => {
-      if (!("isChecked" in param) || !("topics" in param)) return;
-      
-      strParams = strParams.replace(
-        new RegExp(/&topics=\w*/gi),
-        ""
-      );
-      
-      if (param.isChecked) {
-        strParams += `&topics=${param.topics}`;
+      if (!("isChecked" in param) || !("topics" in param) || !("strParamType" in param)) return;
+      let strParamType = param.strParamType;
+      let tmpValues = url.searchParams.getAll(strParamType);
+      url.searchParams.delete(strParamType);
+      if (tmpValues.length <= 1) {
+        if (param.isChecked) {
+          if (tmpValues.length === 0) {
+            tmpValues.push(param.topics);
+            url.searchParams.append(strParamType,tmpValues);
+          } else {
+            let tmpValue = tmpValues[0].split(",");
+            tmpValue.push(param.topics);
+            url.searchParams.append(strParamType,tmpValue);
+          }
+        } else {
+          if (tmpValues.length <= 1) {
+            let tmpValue = tmpValues[0].split(",");
+            let tmpParam = tmpValue.filter(e => e !== param.topics);
+            if (tmpParam.length !== 0) {
+              url.searchParams.append(strParamType, tmpParam);
+            }
+          }
+        }
       }
     });
 
-    // make the change to the markup
-    switchSearchMarkup(strParams, true);
+      // make the change to the markup
+      switchSearchMarkup(url, true);
   };
 
   // create listeners for topic filter checkboxes
   [
     ...searchContainer.querySelectorAll(
-      ".topic-filter [name]:not(input:disabled)"
+      ".topic-filter [aria-controls]:not(input:disabled)"
     ),
   ].map((topicFilter) => {
+    const childrenSelector = topicFilter.getAttribute("aria-controls");
+    const theChildren = [
+        ...searchContainer.querySelectorAll(
+            `#${childrenSelector} [type=checkbox]`
+        ),
+    ];
+    if (!childrenSelector) return;
     topicFilter.addEventListener("change", async (e) => {
-      switchTopicFilterCheckbox([
-        { isChecked: e.target.checked, topics: e.target.value },
-      ]);
+      const paramsArray = theChildren.map((item) => ({
+        isChecked: e.target.checked,
+        topics: item.value,
+        strParamType: 'topics',
+      }));
+      theChildren.map((item) => (item.checked = e.target.checked));
+      switchTopicFilterCheckbox(paramsArray);
 
       // Google Tag Manager
       gtmDataLayerPush({
@@ -189,18 +225,118 @@ if (searchContainer) {
         'selected': e.target.checked ? 'selected' : 'unselected'
       });
     });
+    theChildren.map((item) => {
+      item.addEventListener("change", async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+        ]);
+        topicFilter.checked= theChildren.some((x) => x.checked);
+
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'SubTopics-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
+      })
+    })
   });
+
+    // create listeners for population-types filter checkboxes
+    [
+      ...searchContainer.querySelectorAll(
+        ".population-types"
+      ),
+    ].map((topicFilter) => {
+      const theChildren = [
+          ...topicFilter.querySelectorAll(
+              `[type=checkbox]`
+          ),
+      ];
+
+      if (!theChildren) return;
+      theChildren.map((item) => {
+        item.addEventListener("change", async (e) => {
+          switchTopicFilterCheckbox([
+            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
+          ]);
+          topicFilter.checked= theChildren.some((x) => x.checked);
+  
+          // Google Tag Manager
+          gtmDataLayerPush({
+            'event': 'PopulationTypes-Filter',
+            'filter-by': e.target.dataset.gtmLabel,
+            'selected': e.target.checked ? 'selected' : 'unselected'
+          });
+        })
+      })
+    });
+
+    // create listeners for dimensions filter checkboxes
+    [
+      ...searchContainer.querySelectorAll(
+        ".dimensions"
+      ),
+    ].map((topicFilter) => {
+      const theChildren = [
+          ...topicFilter.querySelectorAll(
+              `[type=checkbox]`
+          ),
+      ];
+      if (!theChildren) return;
+      theChildren.map((item) => {
+        item.addEventListener("change", async (e) => {
+          switchTopicFilterCheckbox([
+            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
+          ]);
+          topicFilter.checked= theChildren.some((x) => x.checked);
+  
+          // Google Tag Manager
+          gtmDataLayerPush({
+            'event': 'Dimensions-Filter',
+            'filter-by': e.target.dataset.gtmLabel,
+            'selected': e.target.checked ? 'selected' : 'unselected'
+          });
+        })
+      })
+    });
+
+    // create listeners for dimensions filter checkboxes
+    [
+      ...searchContainer.querySelectorAll(
+        ".census"
+      ),
+    ].map((topicFilter) => {
+      const theChildren = [
+          ...topicFilter.querySelectorAll(
+              `[type=checkbox]`
+          ),
+      ];
+      if (!theChildren) return;
+      theChildren.map((item) => {
+        item.addEventListener("change", async (e) => {
+          switchTopicFilterCheckbox([
+            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+          ]);
+          topicFilter.checked= theChildren.some((x) => x.checked);
+  
+          // Google Tag Manager
+          gtmDataLayerPush({
+            'event': 'Census-Filter',
+            'filter-by': e.target.dataset.gtmLabel,
+            'selected': e.target.checked ? 'selected' : 'unselected'
+          });
+        })
+      })
+    });
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
   if (!!sortSelector) {
     sortSelector.addEventListener("change", async (e) => {
-      let strParams = window.location.search;
-      // remove old param
-      strParams = strParams.replace(new RegExp(`[?&]sort\=[^&]+`), "");
-      // replace
-      strParams += `&sort=${e.target.value}`;
-      switchSearchMarkup(strParams, true);
+      let url = new URL(location.href);
+      url.searchParams.set("sort",e.target.value)
+      switchSearchMarkup(url, true);
 
       // Google Tag Manager
       gtmDataLayerPush({
@@ -219,14 +355,11 @@ if (searchContainer) {
       paginationItems.forEach((item) => {
         item.addEventListener("click", async (e) => {
           e.preventDefault();
-          let strParams = window.location.search;
+          let url = new URL(location.href);
           const { targetPage } = e.target.dataset;
           if (!targetPage) return;
-          // remove old param if it's there
-          strParams = strParams.replace(new RegExp(`[?&]page\=[^&]+`), "");
-          // add the new page target
-          strParams += `&page=${targetPage}`;
-          switchSearchMarkup(strParams, false, true);
+          url.searchParams.set("page", targetPage)
+          switchSearchMarkup(url, false, true);
         });
       });
     }
@@ -255,4 +388,30 @@ if (searchContainer) {
       });
     });
   };
+
+  //capture focus in checkboxes
+  const showResultsBtn = document.getElementById('show-results');
+  const focusableElmnts = document.querySelectorAll('input[type="checkbox"]:not([disabled]), #clear-search');
+  const firstFocusableElmnt = focusableElmnts[0];
+
+  if (showResultsBtn) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        if (document.activeElement === showResultsBtn) {
+          firstFocusableElmnt.focus();
+          e.preventDefault();
+        }
+      }
+    });
+
+    //tab to checkboxes after filtering results
+    const filterBtn = document.getElementById("filter-results");
+    if (filterBtn) {
+      document.addEventListener("click", () => {
+          if (document.activeElement === filterBtn) {
+            firstFocusableElmnt.focus();
+          }
+      });
+    }
+  }
 }

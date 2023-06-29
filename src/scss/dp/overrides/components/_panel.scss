@@ -1,0 +1,6 @@
+// extending panel component from design system
+.ons-panel--pending {
+  background: $pending-vibrant-tint;
+  border-color: $pending-vibrant;
+  outline: 1px solid transparent;
+}

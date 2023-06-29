@@ -15,6 +15,15 @@
     height: 80px;
   }
 
+  &__count {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid $color-borders;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
   &__summary {
     width: 100%;
     padding: ($baseline * 3) 0 ($baseline * 3);
@@ -36,11 +45,6 @@
       font-weight: 700;
     }
 
-    &__count {
-      @extend .base-font;
-      font-weight: 300;
-    }
-
     &__suggestion {
       display: block;
       margin-top: ($baseline * 3);
@@ -53,6 +57,7 @@
   }
 
   &__filter {
+    margin-bottom: ($baseline * 15);
 
     &__mobile-filter-toggle {
       width: 100%;
@@ -78,27 +83,26 @@
         position: fixed;
         top: 0;
         left: 0;
-        height: 100%;
-        width: 100%;
+        height: 100vh;
+        width: 100vw;
         background: white;
         padding: 40px;
         z-index: 9999999999;
+        overflow-y:auto;
+        overflow-x:hidden;
       }
     }
 
     &__heading {
-      height: ($baseline * 8);
-      border-bottom: 1px solid $iron;
+      padding: 1rem 0;
 
       h3 {
         margin: 0;
-        line-height: ($baseline * 8);
+        display:inline-block
       }
     }
 
     &__content {
-      margin-top: $grid-gutters;
-
       &__archive-info {
         margin-top: ($baseline * 4);
       }
@@ -107,21 +111,15 @@
         border-left: none;
       }
 
-      #topicsFilterForm {
-        fieldset {
-          div:last-of-type {
-            padding-bottom: 1rem;
-            border-bottom: 1px solid $iron;
-            margin-bottom: 1rem;
-          }
-        }
+      #topicsFilterForm > details > fieldset {
+        margin-bottom: 1rem;
       }
     }
   }
 
   &__sort {
-    height: ($baseline * 8);
-    border-bottom: 1px solid $iron;
+    padding: 1rem 0;
+    border-bottom: 1px solid $color-borders;
 
     @include breakpoint(sm) {
       height: auto;
@@ -130,8 +128,6 @@
     }
 
     &__select {
-
-      line-height: ($baseline * 8);
 
       label {
         vertical-align: unset;
