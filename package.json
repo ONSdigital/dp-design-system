@@ -32,7 +32,7 @@
   "dependencies": {
     "@ons/design-system": "^57.0.1",
     "core-js": "^3.28.0",
-    "glob-parent": "^5.1.2",
+    "glob-parent": "^6.0.2",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.3.0",
