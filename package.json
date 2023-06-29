@@ -4,7 +4,7 @@
   "description": "Digital Publishing (ONS) Design System",
   "main": "",
   "scripts": {
-    "preinstall": "npx --yes npm-force-resolutions",
+    "preinstall": "npx npm-force-resolutions",
     "audit": "auditjs ossi --quiet",
     "build": "npm run clean && NODE_ENV=production gulp build",
     "watch": "gulp watch",
@@ -65,8 +65,7 @@
     "whatwg-fetch": "^3.6.2"
   },
   "overrides": {
-    "glob-parent": "^5.1.2",
-    "semver": "7.5.2",
-    "minimatch": "^3.1.1"
+    "glob-parent": "^6.0.2",
+    "semver": "7.5.2"
   }
 }
