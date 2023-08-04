@@ -10,9 +10,7 @@ const encodedCookiesPolicy = '%7B%22essential%22%3Atrue%2C%22usage%22%3Atrue%7D'
 const cookiesPath = '/'
 
 function determineWhetherToRenderBanner() {
-  const cookiesAreNotSet = !cookiesSet || userIsOnCookiesPreferencesPage()
-
-  if (cookiesAreNotSet) {
+  if (!cookiesSet && !userIsOnCookiesPreferencesPage()) {
     cookiesBanner.classList.remove('cookies-banner--hidden')
     initCookiesBanner()
   }
