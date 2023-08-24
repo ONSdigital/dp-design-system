@@ -31,14 +31,14 @@
   "homepage": "https://github.com/ONSdigital/dp-design-system#readme",
   "dependencies": {
     "@ons/design-system": "^57.0.1",
-    "core-js": "^3.28.0",
+    "core-js": "^3.32.1",
     "glob-parent": "^6.0.2",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.3.0",
     "local-web-server": "^4.2.1",
-    "regenerator-runtime": "^0.13.9",
-    "sass": "^1.52.1"
+    "regenerator-runtime": "^0.14.0",
+    "sass": "^1.66.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
