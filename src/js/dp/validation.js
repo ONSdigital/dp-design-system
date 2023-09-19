@@ -7,6 +7,7 @@ export const clearValidation = (formId, errSummaryContainerId, pageTitle) => {
     const label = panel.querySelector("label");
     const input =
       panel.querySelector("input") || panel.querySelector("textarea");
+    input?.classList?.remove("ons-input--error");
     panel.parentNode.replaceChildren(label, input);
   });
   const summary = document.querySelector(
@@ -40,7 +41,9 @@ function setFieldValidation(field, errors) {
     const fieldErr = getFieldErr(errText, fieldLabel, `${field.id}-error`);
     if (!fieldLabel.parentNode.classList.contains("ons-panel__body")) {
       fieldLabel.parentNode.innerHTML = fieldErr;
-      document.getElementById(field.id).value = field.value;
+      const newField = document.getElementById(field.id);
+      newField.value = field.value;
+      newField.classList.add("ons-input--error");
     }
     errors.push(new ValidationError(errText, `#${field.id}-error`));
   }
