@@ -7,6 +7,7 @@ import "./dp/nav";
 import "./dp/improve-this-page";
 import "./dp/bulletin";
 import "./dp/search";
+import "./dp/data-aggregation";
 import "./dp/release-calendar";
 import "./dp/copy-link";
 import "./dp/feedback-form";
