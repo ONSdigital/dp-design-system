@@ -1,4 +1,8 @@
-import { clearValidation, validateFields, setFormValidation } from "./validation";
+import {
+  clearValidation,
+  validateFields,
+  setFormValidation,
+} from "./validation";
 
 document.addEventListener("DOMContentLoaded", function () {
   const pageURL = window.location.href;
@@ -8,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const feedbackMessage =
     '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
   const feedbackMessageError =
-    '<span id="feedback-form-error role="alert"">Something went wrong, try using our <a href="/feedback">feedback form</a>.</span>';
+    '<span id="feedback-form-error role="alert">Something went wrong, try using our <a href="/feedback">feedback form</a>.</span>';
   let feedbackPositive = false;
   const title = document.title;
 
@@ -60,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         const postJson = JSON.stringify(postObject);
         fetchFeedbackAPI(
+          false,
           feedbackAPIURL.value,
           feedbackFormHeader,
           postJson,
@@ -68,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       } else {
         fetchFeedbackAPI(
+          true,
           positiveFeedbackPath,
           feedbackFormHeader,
           serializeFormData(feedbackFormContainer),
@@ -150,8 +156,9 @@ function fetchFeedbackAPI(
   feedbackMessageError,
   feedbackMessage
 ) {
-
-  const contentType = useUrlEncoding ? "application/x-www-form-urlencoded" : "application/json; charset=UTF-8"
+  const contentType = useUrlEncoding
+    ? "application/x-www-form-urlencoded"
+    : "application/json; charset=UTF-8";
   const fetchConfig = {
     method: "POST",
     body: form,
