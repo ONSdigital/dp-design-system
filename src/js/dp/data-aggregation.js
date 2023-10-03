@@ -100,16 +100,65 @@ if (searchContainer) {
     // build new param
     paramsArray.map((param) => {
       if (param && param.query) {
-        console.log(url.searchParams.get('q'));
         if(!url.searchParams.get('q')){
           url.searchParams.append("q", param.query);
         } else{
           url.searchParams.set("q", param.query);
         }
       } else{
-        console.log('aint nun');
         url.searchParams.delete("q");
       }
+    });
+
+    // make the change to the markup
+    switchSearchMarkup(url, true);
+  };
+
+
+  const switchDate = (paramsArray) => {
+    // get current param
+    let url = new URL(location.href);
+
+    const dateParamsArray = [
+      {
+        key: 'afterYear',
+        queryKey: 'after-year'
+      },
+      {
+        key: 'afterMonth',
+        queryKey: 'after-month'
+      },
+      {
+        key: 'afterDate',
+        queryKey: 'after-day'
+      },
+      {
+        key: 'beforeYear',
+        queryKey: 'before-year'
+      },
+      {
+        key: 'beforeMonth',
+        queryKey: 'before-month'
+      },
+      {
+        key: 'beforeDate',
+        queryKey: 'before-day'
+      },
+    ]
+
+    // build new param
+    paramsArray.map((param) => {
+      dateParamsArray.forEach(element => {
+        if (param && param[element.key]) {
+          if(!url.searchParams.get(element.queryKey)){
+            url.searchParams.append(element.queryKey, param[element.key]);
+          } else{
+            url.searchParams.set(element.queryKey, param[element.key]);
+          }
+        } else{
+          url.searchParams.delete(element.queryKey);
+        }
+      });
     });
 
     // make the change to the markup
@@ -128,39 +177,45 @@ if (searchContainer) {
         `#keywords`
       ),
     ];
-    console.log(theChildren);
-    console.log("shtip");
     topFilter.addEventListener("input", async (e) => {
-      console.log("its up");
       const paramsArray = theChildren.map((item) => ({
         query: item.value,
       }));
-      theChildren.map((item) => (item.checked = e.target.checked));
       switchQuery(paramsArray);
-
-      // // Google Tag Manager
-      // gtmDataLayerPush({
-      //   'event': 'Filter',
-      //   'filter-by': e.target.dataset.gtmLabel,
-      //   'selected': e.target.checked ? 'selected' : 'unselected'
-      // });
     });
-    // theChildren.map((item) => {
-    //   item.addEventListener("change", async (e) => {
-    //     switchQuery([
-    //       { isChecked: e.target.checked, filterName: e.target.value },
-    //     ]);
-    //     topFilter.checked = theChildren.some((x) => x.checked);
-
-    //     // Google Tag Manager
-    //     gtmDataLayerPush({
-    //       'event': 'ContentType-Filter',
-    //       'filter-by': e.target.dataset.gtmLabel,
-    //       'selected': e.target.checked ? 'selected' : 'unselected'
-    //     });
-    //   });
-    // });
   });
+
+    // create listeners for content-type filter checkboxes controlling each other
+    [
+      ...searchContainer.querySelectorAll(
+        ".date-filters"
+      ),
+    ].map((topFilter) => {
+      // const childrenSelector = topFilter.getAttribute("aria-controls");
+      const fromYear= searchContainer.querySelector(`#fromDateYear`);
+      const fromMonth = searchContainer.querySelector(`#fromDateMonth`);
+      const fromDay = searchContainer.querySelector(`#fromDateDay`);
+      const toYear= searchContainer.querySelector(`#toDateYear`);
+      const toMonth = searchContainer.querySelector(`#toDateMonth`);
+      const toDay = searchContainer.querySelector(`#toDateDay`);
+      topFilter.addEventListener("input", async (e) => {
+        const paramsArray = [
+          {
+            afterYear: fromYear.value,
+            afterMonth: fromMonth.value,
+            afterDate: fromDay.value,
+            beforeYear: toYear.value,
+            beforeMonth: toMonth.value,
+            beforeDate: toDay.value,
+          }
+        ]
+        if(fromYear.value.length > 3 || toYear.value.length > 3){
+          if((fromYear.value && fromMonth.value && fromDay.value) || (toYear.value && toMonth.value && toDay.value)){
+            switchDate(paramsArray);
+          }
+        }
+      });
+    });
 
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
