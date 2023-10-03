@@ -217,6 +217,80 @@ if (searchContainer) {
       });
     });
 
+
+      // create listeners for content-type filter checkboxes controlling each other
+  [
+    ...searchContainer.querySelectorAll(
+      ".updated-select"
+    ),
+  ].map((topFilter) => {
+    topFilter.addEventListener("input", async (e) => {
+      var element = document.getElementById("dateFilters");
+      if(topFilter.value === "custom"){
+        if(element.classList.contains("hidden")){
+          element.classList.remove("hidden");
+        }
+      } else {
+        if(!element.classList.contains("hidden")){
+          element.classList.add("hidden");
+        }
+
+        const dateToday = new Date();
+
+        var fromDay, fromMonth, fromYear, toDay, toMonth, toYear;
+
+        switch (topFilter.value) {
+          case 'today':
+            fromDay = dateToday.getDate();
+            fromMonth = dateToday.getMonth();
+            fromYear = dateToday.getFullYear();
+            const dateTomorrow = new Date(dateToday)
+            dateTomorrow.setDate(dateTomorrow.getDate() + 1)
+            toDay = dateTomorrow.getDate();
+            toMonth = dateTomorrow.getMonth();
+            toYear = dateTomorrow.getFullYear();
+            break;
+          case 'week':
+              toDay = dateToday.getDate();
+              toMonth = dateToday.getMonth();
+              toYear = dateToday.getFullYear();
+              const dateLastWeek = new Date(dateToday)
+              dateLastWeek.setDate(dateLastWeek.getDate() - 7)
+              fromDay = dateLastWeek.getDate();
+              fromMonth = dateLastWeek.getMonth();
+              fromYear = dateLastWeek.getFullYear();
+              break;
+          case 'month':
+              toDay = dateToday.getDate();
+              toMonth = dateToday.getMonth();
+              toYear = dateToday.getFullYear();
+              const dateLastMonth = new Date(dateToday)
+              dateLastMonth.setMonth(dateLastMonth.getMonth() - 1);
+              fromDay = dateLastMonth.getDate();
+              fromMonth = dateLastMonth.getMonth();
+              fromYear = dateLastMonth.getFullYear();
+              break;
+          default:
+
+            break;
+        }
+        if(fromYear){
+          const paramsArray = [
+            {
+              afterYear: fromYear,
+              afterMonth: fromMonth,
+              afterDate: fromDay,
+              beforeYear: toYear,
+              beforeMonth: toMonth,
+              beforeDate: toDay,
+            }
+          ]
+          switchDate(paramsArray);
+        }
+      }
+    });
+  });
+
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
     let url = new URL(location.href);
