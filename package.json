@@ -47,6 +47,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "@babel/traverse": "^7.23.2",
     "abortcontroller-polyfill": "^1.7.3",
     "auditjs": "^4.0.37",
     "autoprefixer": "^10.2.4",
