@@ -4,22 +4,24 @@ const searchContainer = document.querySelector(".search__container");
 
 if (searchContainer) {
   let categoryCheckbox = searchContainer.querySelector("#checkbox-nlp-categories")
-  categoryCheckbox.addEventListener('click', (e) => {
-    let url = new URL(location.href);
-    if(categoryCheckbox.checked){
-      if(url.searchParams.has("c")){
-        url.searchParams.set("c", "1");
-      } else{
-        url.searchParams.append("c", "1");
+  if(categoryCheckbox){
+    categoryCheckbox.addEventListener('click', (e) => {
+      let url = new URL(location.href);
+      if(categoryCheckbox.checked){
+        if(url.searchParams.has("c")){
+          url.searchParams.set("c", "1");
+        } else{
+          url.searchParams.append("c", "1");
+        }
+        switchSearchMarkup(url, true);
+      } else {
+        if(url.searchParams.has("c")){
+          url.searchParams.set("c", "0");
+        }
+        switchSearchMarkup(url, true);
       }
-      switchSearchMarkup(url, true);
-    } else {
-      if(url.searchParams.has("c")){
-        url.searchParams.set("c", "0");
-      }
-      switchSearchMarkup(url, true);
-    }
-});
+    });
+  }
   const scrollToTopOfSearch = () => {
     // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
     const searchResultsSection = searchContainer.querySelector(
