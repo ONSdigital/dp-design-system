@@ -53,7 +53,6 @@
     "abortcontroller-polyfill": "^1.7.3",
     "auditjs": "^4.0.37",
     "autoprefixer": "^10.2.4",
-    "babel-eslint": "^10.1.0",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "eslint": "^8.51.0",
