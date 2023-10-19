@@ -10,7 +10,9 @@
     "watch": "gulp watch",
     "start": "ws -p ${PORT:-9002}",
     "dev": "run-p clean watch start",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "lint": "eslint --ext js src/js",
+    "lint:fix": "eslint --ext js --fix"
   },
   "browserslist": [
     "last 2 versions",
@@ -54,6 +56,9 @@
     "babel-eslint": "^10.1.0",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
+    "eslint": "^8.51.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1",
     "gulp-if": "^3.0.0",
     "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
