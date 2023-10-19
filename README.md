@@ -73,7 +73,7 @@ Locally served on port 9002
 
 ## Linter
 
-This app lints using [eslint](https://eslint.org/) with [Airbnb](https://airbnb.io/javascript) base configuration. See `.eslintrc.json` for settings
+This app lints using [eslint](https://eslint.org/) with [Airbnb](https://airbnb.io/javascript) base configuration. See `.eslintrc.json` for settings.
 
 ### Run
 
@@ -83,7 +83,7 @@ npm run lint
 
 ### Fix
 
-Some linting issues can be fixed automatically. To use this functionality, pass the file you wish to fix at the end of the command
+Some linting issues can be fixed automatically. To use this functionality, pass the file you wish to fix at the end of the command:
 
 ```bash
 npm run lint:fix path/to/js/file/to/fix
