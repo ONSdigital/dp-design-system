@@ -4,27 +4,27 @@ if(timeSeriesContainer){
     var listContainer = timeSeriesContainer.querySelector(".timeseries__list-container"),
         basket = timeSeriesContainer.querySelector("#timeseries__basket"),
         resultsContainer = timeSeriesContainer.querySelector("#results"),
-        buttons = timeSeriesContainer.querySelectorAll('.timeseries__remember, .timeseries__download'),
-        noTimeseries = timeSeriesContainer.querySelector('.timeseries__empty'),
+        buttons = timeSeriesContainer.querySelectorAll(".timeseries__remember, .timeseries__download"),
+        noTimeseries = timeSeriesContainer.querySelector(".timeseries__empty"),
         xlsForm = timeSeriesContainer.querySelector("#xls-form"),
         csvForm = timeSeriesContainer.querySelector("#csv-form"),
         list = timeSeriesContainer.querySelector(".timeseries__list"),
         timeseriesList = {},
         timeseriesUris = [], //saved as cookie, to load selections from the server on page load
-        basketCookieName = 'timeseriesBasket',
-        rememberCookieName = 'rememberBasket',
+        basketCookieName = "timeseriesBasket",
+        rememberCookieName = "rememberBasket",
         listCount = 0,
-        counter = timeSeriesContainer.querySelector('#timeseries__count'),
-        exitBtn = timeSeriesContainer.querySelector('.timeseries__list--exit'),
-        rememberCb = timeSeriesContainer.querySelector('#remember-selection');
+        counter = timeSeriesContainer.querySelector("#timeseries__count"),
+        exitBtn = timeSeriesContainer.querySelector(".timeseries__list--exit"),
+        rememberCb = timeSeriesContainer.querySelector("#remember-selection");
 
-    exitBtn.addEventListener('click', () => {
-        boxWithStuff.classList.toggle('hidden');
+    exitBtn.addEventListener("click", () => {
+        boxWithStuff.classList.toggle("hidden");
     });
 
     function initialize() {
         remember = getCookie(rememberCookieName);
-        if (typeof remember === 'undefined') { 
+        if (typeof remember === "undefined") { 
             //remember cookie never set, sets to true by default
             remember = true;
             setCookie(rememberCookieName, remember, 7);
@@ -42,14 +42,6 @@ if(timeSeriesContainer){
                 addToPage(timeseries);
                 checkIfItemsAreSelected();
             })
-        //             check(findIn(resultsContainer, timeseries.uri));
-
-
-            // timeseriesUris = Cookies.getJSON(basketCookieName) || [];
-            // $.each(timeseriesUris, function(index, uri) {
-            //     loadTimeseries(uri);
-            // });
-            // check($('#remember-selection'));
         } else {
             setCookie(basketCookieName, null, 0);
         }
@@ -63,7 +55,7 @@ if(timeSeriesContainer){
     // create an observer instance
     var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
-            if(mutation.target.classList.contains('test-delegation') && mutation.addedNodes.length > 0){
+            if(mutation.target.classList.contains("test-delegation") && mutation.addedNodes.length > 0){
                 checkIfItemsAreSelected();
             }
         });
@@ -80,7 +72,7 @@ if(timeSeriesContainer){
         rememberCb.checked = true;
     }
 
-    rememberCb.addEventListener('input', () => {
+    rememberCb.addEventListener("input", () => {
         if(rememberCb.checked){
             setCookie(rememberCookieName, true, 7);
             setCookie(basketCookieName, JSON.stringify(timeseriesUris), 7);
@@ -91,15 +83,15 @@ if(timeSeriesContainer){
     })
     
 
-    timeSeriesContainer.querySelector('.test-delegation').addEventListener('click', (event) => {
-        if(event.target.classList.contains('select-time-series')){
+    timeSeriesContainer.querySelector(".test-delegation").addEventListener("click", (event) => {
+        if(event.target.classList.contains("select-time-series")){
             if (event.target.checked) {
                 addElement(event.target);
             } else {
                 removeElement(event.target.getAttribute("data-uri"));
             }
         }
-        if(event.target.id === 'select-all-time-series'){
+        if(event.target.id === "select-all-time-series"){
             if (event.target.checked) {
                 selectAll();
             } else {
@@ -112,7 +104,7 @@ if(timeSeriesContainer){
     let boxWithStuff = timeSeriesContainer.querySelector("#timeseriesListContainer");
     
     function checkIfItemsAreSelected() {
-        let checkboxesTemp = timeSeriesContainer.querySelectorAll('.select-time-series');
+        let checkboxesTemp = timeSeriesContainer.querySelectorAll(".select-time-series");
         let allSelected = true;
         checkboxesTemp.forEach((item) => {
             if (timeseriesList.hasOwnProperty(item.getAttribute("data-uri"))) {
@@ -122,7 +114,7 @@ if(timeSeriesContainer){
             }
         });
         if(allSelected){
-            timeSeriesContainer.querySelector('#select-all-time-series').checked = true;
+            timeSeriesContainer.querySelector("#select-all-time-series").checked = true;
         }
     }
 
@@ -133,9 +125,9 @@ if(timeSeriesContainer){
         };
     
         // var timeseries = {
-        //   uri: element.data('uri'),
-        //   datasetId: element.data('datasetid'),
-        //   title: element.data('title')
+        //   uri: element.data("uri"),
+        //   datasetId: element.data("datasetid"),
+        //   title: element.data("title")
         // };
         if (timeseriesList.hasOwnProperty(timeseries.uri)) {
             return; // it is already in the list    
@@ -152,10 +144,10 @@ if(timeSeriesContainer){
         remove(list, uri)
         if (list.children.length === 0) {
             buttons.forEach((btn) => {
-                btn.style.display = 'none';
+                btn.style.display = "none";
             });
-            if (noTimeseries.classList.contains('hidden')) {
-                noTimeseries.classList.remove('hidden');
+            if (noTimeseries.classList.contains("hidden")) {
+                noTimeseries.classList.remove("hidden");
             }
         }
     }
@@ -176,15 +168,15 @@ if(timeSeriesContainer){
         xlsForm.appendChild(getInputMarkup(timeseries));
         csvForm.appendChild(getInputMarkup(timeseries));
         buttons.forEach((btn) => {
-            btn.style.display = 'block';
+            btn.style.display = "block";
         })
-        if (!noTimeseries.classList.contains('hidden')) {
-            noTimeseries.classList.add('hidden');
+        if (!noTimeseries.classList.contains("hidden")) {
+            noTimeseries.classList.add("hidden");
         }
     }
     
     function selectAll() {
-        timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
+        timeSeriesContainer.querySelectorAll(".select-time-series").forEach((item) => {
             item.checked = true;
             addElement(item);
         });
@@ -198,11 +190,11 @@ if(timeSeriesContainer){
         if(process.env.NODE_ENV === "production"){
             isSecure = true;
         }
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";" + (isSecure ? 'Secure' : '') + "path=/";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";" + (isSecure ? "Secure" : "") + "path=/";
     }
 
     function getCookie(name){
-        let cookieValue = '';
+        let cookieValue = "";
         let cookieArray = new Array();
         let result = new Array();
       
@@ -211,9 +203,9 @@ if(timeSeriesContainer){
       
         //Divide the cookie into an array and convert them to JSON
         if(cookieValue){
-          cookieArray = cookieValue.split(';');
+          cookieArray = cookieValue.split(";");
           cookieArray.forEach(data => {
-            data = data.split('=');
+            data = data.split("=");
             //data[0]: Cookie name
             //data[1]: Cookie value
             if(data[0].trim() === name){
@@ -225,7 +217,7 @@ if(timeSeriesContainer){
     }
     
     function deselectAll() {
-        timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
+        timeSeriesContainer.querySelectorAll(".select-time-series").forEach((item) => {
             item.checked = false;
             removeElement(item.getAttribute("data-uri"));
         });
@@ -237,28 +229,28 @@ if(timeSeriesContainer){
     }
     
     function findIn(element, uri) {
-        return element.querySelector('[data-uri="' + uri + '"]');
+        return element.querySelector('[data-uri="' + uri + ']');
     }
     
     function getListElementMarkup(timeseries) {
-        var listItem = document.createElement('li');
-        listItem.classList.add('flush', 'col-wrap');
-        listItem.setAttribute('data-uri', timeseries.uri);
-        var listItemParagraph = document.createElement('p');
-        listItemParagraph.classList.add('flush', 'col', 'col--md-22', 'col--lg-22');
+        var listItem = document.createElement("li");
+        listItem.classList.add("flush", "col-wrap");
+        listItem.setAttribute("data-uri", timeseries.uri);
+        var listItemParagraph = document.createElement("p");
+        listItemParagraph.classList.add("flush", "col", "col--md-22", "col--lg-22");
         listItemParagraph.innerHTML = timeseries.title;
-        var listItemDiv = document.createElement('div');
-        listItemDiv.classList.add('col', 'col--md-4', 'col--lg-4');
-        var listItemRemoveBtn = document.createElement('button');
-        listItemRemoveBtn.classList.add('btn', 'btn--primary', 'btn--thin', 'btn--small', 'btn--narrow', 'float-right', 'margin-top-md--1', 'js-remove-selected');
-        listItemRemoveBtn.innerText = 'remove';
+        var listItemDiv = document.createElement("div");
+        listItemDiv.classList.add("col", "col--md-4", "col--lg-4");
+        var listItemRemoveBtn = document.createElement("button");
+        listItemRemoveBtn.classList.add("btn", "btn--primary", "btn--thin", "btn--small", "btn--narrow", "float-right", "margin-top-md--1", "js-remove-selected");
+        listItemRemoveBtn.innerText = "remove";
     
         listItemRemoveBtn.addEventListener("click", async (e) => {
             removeElement(timeseries.uri);
-            timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
+            timeSeriesContainer.querySelectorAll(".select-time-series").forEach((item) => {
                 if (item.getAttribute("data-uri") === timeseries.uri) {
                     item.checked = false;
-                    timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
+                    timeSeriesContainer.querySelector("#select-all-time-series").checked = false;
                 }
             })
         });
@@ -271,17 +263,17 @@ if(timeSeriesContainer){
     }
 
     function getInputMarkup(timeseries) {
-        var input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'uri';
-        input.setAttribute('uri', timeseries.uri);
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "uri";
+        input.setAttribute("uri", timeseries.uri);
         input.value = timeseries.uri;
         return input;
     }
     
     basket.addEventListener(
         "click", async (e) => {
-            boxWithStuff.classList.toggle('hidden');
+            boxWithStuff.classList.toggle("hidden");
         }
     );
 }
