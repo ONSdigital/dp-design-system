@@ -6,7 +6,7 @@ if (searchContainer) {
   const scrollToTopOfSearch = () => {
     // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
     const searchResultsSection = searchContainer.querySelector(
-      '[aria-label="Search results"]'
+      "[aria-label='Search results']"
     );
     const resultsSectionOffsetFromTop =
       searchResultsSection.getBoundingClientRect().top +
@@ -22,24 +22,24 @@ if (searchContainer) {
     if (resetPagination) {
       /*
       * reset to page 1 since filtering and sorting will change the length/order of results.
-      * in the case where it's page one, remove page from searchParams.
+      * in the case where it"s page one, remove page from searchParams.
       */
       url.searchParams.set("page", "1");
     }
-    const resultsLoader = document.querySelector('#results-loading');
+    const resultsLoader = document.querySelector("#results-loading");
 
     const numOfParams = Array.from(url.searchParams).length
 
     /*
     * Current behaviour of search controller gets the results using fetch and render in page
     * However, if no filters are selected or no query - the fetched page has no results and
-    * so they can't be retrieved. This condition below bypasses that until it is fixed. 
+    * so they can"t be retrieved. This condition below bypasses that until it is fixed. 
     */
     const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has("page"));
 
     // if it takes more than 500ms to retreive results, show a loading message
     const timer = setTimeout(() => {
-      if (resultsLoader) resultsLoader.classList.remove('hide');
+      if (resultsLoader) resultsLoader.classList.remove("hide");
       if (scrollToTop) scrollToTopOfSearch();
     }, 500);
 
@@ -49,7 +49,7 @@ if (searchContainer) {
     if (scrollToTop) scrollToTopOfSearch();
 
     if (!responseText) {
-      const pTag = resultsLoader.querySelector('p');
+      const pTag = resultsLoader.querySelector("p");
       if (pTag) pTag.innerText = pTag.dataset.errorMessage;
     } else {
       const fetchedDom = new DOMParser().parseFromString(responseText, "text/html");
@@ -100,7 +100,7 @@ if (searchContainer) {
     // build new param
     paramsArray.map((param) => {
       if (param && param.query) {
-        if (!url.searchParams.get('q')) {
+        if (!url.searchParams.get("q")) {
           url.searchParams.append("q", param.query);
         } else {
           url.searchParams.set("q", param.query);
@@ -121,28 +121,28 @@ if (searchContainer) {
 
     const dateParamsArray = [
       {
-        key: 'afterYear',
-        queryKey: 'after-year'
+        key: "afterYear",
+        queryKey: "after-year"
       },
       {
-        key: 'afterMonth',
-        queryKey: 'after-month'
+        key: "afterMonth",
+        queryKey: "after-month"
       },
       {
-        key: 'afterDate',
-        queryKey: 'after-day'
+        key: "afterDate",
+        queryKey: "after-day"
       },
       {
-        key: 'beforeYear',
-        queryKey: 'before-year'
+        key: "beforeYear",
+        queryKey: "before-year"
       },
       {
-        key: 'beforeMonth',
-        queryKey: 'before-month'
+        key: "beforeMonth",
+        queryKey: "before-month"
       },
       {
-        key: 'beforeDate',
-        queryKey: 'before-day'
+        key: "beforeDate",
+        queryKey: "before-day"
       },
     ]
 
@@ -238,7 +238,7 @@ if (searchContainer) {
               var fromDay, fromMonth, fromYear, toDay, toMonth, toYear;
   
               switch (topFilter.value) {
-                  case 'today':
+                  case "today":
                       fromDay = dateToday.getDate();
                       fromMonth = dateToday.getMonth() + 1;
                       fromYear = dateToday.getFullYear();
@@ -248,7 +248,7 @@ if (searchContainer) {
                       toMonth = dateTomorrow.getMonth() + 1;
                       toYear = dateTomorrow.getFullYear();
                       break;
-                  case 'week':
+                  case "week":
                       toDay = dateToday.getDate();
                       toMonth = dateToday.getMonth() + 1;
                       toYear = dateToday.getFullYear();
@@ -258,7 +258,7 @@ if (searchContainer) {
                       fromMonth = dateLastWeek.getMonth() + 1;
                       fromYear = dateLastWeek.getFullYear();
                       break;
-                  case 'month':
+                  case "month":
                       toDay = dateToday.getDate();
                       toMonth = dateToday.getMonth() + 1;
                       toYear = dateToday.getFullYear();
@@ -340,30 +340,30 @@ if (searchContainer) {
       const paramsArray = theChildren.map((item) => ({
         isChecked: e.target.checked,
         topics: item.value,
-        strParamType: 'topics',
+        strParamType: "topics",
       }));
       theChildren.map((item) => (item.checked = e.target.checked));
       switchTopicFilterCheckbox(paramsArray);
 
       // Google Tag Manager
       gtmDataLayerPush({
-        'event': 'Topic-Filter',
-        'filter-by': e.target.dataset.gtmLabel,
-        'selected': e.target.checked ? 'selected' : 'unselected'
+        "event": "Topic-Filter",
+        "filter-by": e.target.dataset.gtmLabel,
+        "selected": e.target.checked ? "selected" : "unselected"
       });
     });
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: "topics" },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'SubTopics-Filter',
-          'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          "event": "SubTopics-Filter",
+          "filter-by": e.target.dataset.gtmLabel,
+          "selected": e.target.checked ? "selected" : "unselected"
         });
       })
     })
@@ -385,15 +385,15 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types' },
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: "population_types" },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'PopulationTypes-Filter',
-          'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          "event": "PopulationTypes-Filter",
+          "filter-by": e.target.dataset.gtmLabel,
+          "selected": e.target.checked ? "selected" : "unselected"
         });
       })
     })
@@ -414,15 +414,15 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions' },
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: "dimensions" },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'Dimensions-Filter',
-          'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          "event": "Dimensions-Filter",
+          "filter-by": e.target.dataset.gtmLabel,
+          "selected": e.target.checked ? "selected" : "unselected"
         });
       })
     })
@@ -436,22 +436,22 @@ if (searchContainer) {
   ].map((topicFilter) => {
     const theChildren = [
       ...topicFilter.querySelectorAll(
-        `[type=checkbox]`
+        "[type=checkbox]"
       ),
     ];
     if (!theChildren) return;
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: "topics" },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'Census-Filter',
-          'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          "event": "Census-Filter",
+          "filter-by": e.target.dataset.gtmLabel,
+          "selected": e.target.checked ? "selected" : "unselected"
         });
       })
     })
@@ -467,8 +467,8 @@ if (searchContainer) {
 
       // Google Tag Manager
       gtmDataLayerPush({
-        'event': 'SortBy',
-        'sort-by': e.target.value
+        "event": "SortBy",
+        "sort-by": e.target.value
       });
     });
   }
@@ -495,7 +495,7 @@ if (searchContainer) {
   initPaginationListeners();
 
   // filter menu for mobile
-  // if the page is running javascript let's make the filter menus togglable and full-screen when displayed
+  // if the page is running javascript let"s make the filter menus togglable and full-screen when displayed
   const toggleBtns = [
     ...searchContainer.querySelectorAll(
       ".search__filter__mobile-filter-toggle"
@@ -517,13 +517,13 @@ if (searchContainer) {
   };
 
   //capture focus in checkboxes
-  const showResultsBtn = document.getElementById('show-results');
-  const focusableElmnts = document.querySelectorAll('input[type="checkbox"]:not([disabled]), #clear-search');
+  const showResultsBtn = document.getElementById("show-results");
+  const focusableElmnts = document.querySelectorAll("input[type='checkbox']:not([disabled]), #clear-search");
   const firstFocusableElmnt = focusableElmnts[0];
 
   if (showResultsBtn) {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Tab') {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Tab") {
         if (document.activeElement === showResultsBtn) {
           firstFocusableElmnt.focus();
           e.preventDefault();
