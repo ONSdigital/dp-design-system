@@ -23,7 +23,7 @@ if (searchContainer) {
       /*
       * reset to page 1 since filtering and sorting will change the length/order of results.
       * in the case where it's page one, remove page from searchParams.
-      */ 
+      */
       url.searchParams.set("page", "1");
     }
     const resultsLoader = document.querySelector('#results-loading');
@@ -50,7 +50,7 @@ if (searchContainer) {
 
     if (!responseText) {
       const pTag = resultsLoader.querySelector('p');
-      if(pTag) pTag.innerText = pTag.dataset.errorMessage;
+      if (pTag) pTag.innerText = pTag.dataset.errorMessage;
     } else {
       const fetchedDom = new DOMParser().parseFromString(responseText, "text/html");
 
@@ -100,12 +100,12 @@ if (searchContainer) {
     // build new param
     paramsArray.map((param) => {
       if (param && param.query) {
-        if(!url.searchParams.get('q')){
+        if (!url.searchParams.get('q')) {
           url.searchParams.append("q", param.query);
-        } else{
+        } else {
           url.searchParams.set("q", param.query);
         }
-      } else{
+      } else {
         url.searchParams.delete("q");
       }
     });
@@ -150,12 +150,12 @@ if (searchContainer) {
     paramsArray.map((param) => {
       dateParamsArray.forEach(element => {
         if (param && param[element.key]) {
-          if(!url.searchParams.get(element.queryKey)){
+          if (!url.searchParams.get(element.queryKey)) {
             url.searchParams.append(element.queryKey, param[element.key]);
-          } else{
+          } else {
             url.searchParams.set(element.queryKey, param[element.key]);
           }
-        } else{
+        } else {
           url.searchParams.delete(element.queryKey);
         }
       });
@@ -164,7 +164,7 @@ if (searchContainer) {
     // make the change to the markup
     switchSearchMarkup(url, true);
   };
-  
+
   // create listeners for content-type filter checkboxes controlling each other
   [
     ...searchContainer.querySelectorAll(
@@ -185,110 +185,108 @@ if (searchContainer) {
     });
   });
 
-    // create listeners for content-type filter checkboxes controlling each other
-    [
-      ...searchContainer.querySelectorAll(
-        ".date-filters"
-      ),
-    ].map((topFilter) => {
-      // const childrenSelector = topFilter.getAttribute("aria-controls");
-      const fromYear= searchContainer.querySelector(`#fromDateYear`);
-      const fromMonth = searchContainer.querySelector(`#fromDateMonth`);
-      const fromDay = searchContainer.querySelector(`#fromDateDay`);
-      const toYear= searchContainer.querySelector(`#toDateYear`);
-      const toMonth = searchContainer.querySelector(`#toDateMonth`);
-      const toDay = searchContainer.querySelector(`#toDateDay`);
-      topFilter.addEventListener("input", async (e) => {
-        const paramsArray = [
-          {
-            afterYear: fromYear.value,
-            afterMonth: fromMonth.value,
-            afterDate: fromDay.value,
-            beforeYear: toYear.value,
-            beforeMonth: toMonth.value,
-            beforeDate: toDay.value,
-          }
-        ]
-        if(fromYear.value.length > 3 || toYear.value.length > 3){
-          if((fromYear.value && fromMonth.value && fromDay.value) || (toYear.value && toMonth.value && toDay.value)){
-            switchDate(paramsArray);
-          }
-        }
-      });
-    });
-
-
-      // create listeners for content-type filter checkboxes controlling each other
+  // create listeners for content-type filter checkboxes controlling each other
   [
     ...searchContainer.querySelectorAll(
-      ".updated-select"
+      ".date-filters"
     ),
   ].map((topFilter) => {
+    // const childrenSelector = topFilter.getAttribute("aria-controls");
+    const fromYear = searchContainer.querySelector(`#fromDateYear`);
+    const fromMonth = searchContainer.querySelector(`#fromDateMonth`);
+    const fromDay = searchContainer.querySelector(`#fromDateDay`);
+    const toYear = searchContainer.querySelector(`#toDateYear`);
+    const toMonth = searchContainer.querySelector(`#toDateMonth`);
+    const toDay = searchContainer.querySelector(`#toDateDay`);
     topFilter.addEventListener("input", async (e) => {
-      var element = document.getElementById("dateFilters");
-      if(topFilter.value === "custom"){
-        if(element.classList.contains("hidden")){
-          element.classList.remove("hidden");
+      const paramsArray = [
+        {
+          afterYear: fromYear.value,
+          afterMonth: fromMonth.value,
+          afterDate: fromDay.value,
+          beforeYear: toYear.value,
+          beforeMonth: toMonth.value,
+          beforeDate: toDay.value,
         }
-      } else {
-        if(!element.classList.contains("hidden")){
-          element.classList.add("hidden");
-        }
-
-        const dateToday = new Date();
-
-        var fromDay, fromMonth, fromYear, toDay, toMonth, toYear;
-
-        switch (topFilter.value) {
-          case 'today':
-            fromDay = dateToday.getDate();
-            fromMonth = dateToday.getMonth();
-            fromYear = dateToday.getFullYear();
-            const dateTomorrow = new Date(dateToday)
-            dateTomorrow.setDate(dateTomorrow.getDate() + 1)
-            toDay = dateTomorrow.getDate();
-            toMonth = dateTomorrow.getMonth();
-            toYear = dateTomorrow.getFullYear();
-            break;
-          case 'week':
-              toDay = dateToday.getDate();
-              toMonth = dateToday.getMonth();
-              toYear = dateToday.getFullYear();
-              const dateLastWeek = new Date(dateToday)
-              dateLastWeek.setDate(dateLastWeek.getDate() - 7)
-              fromDay = dateLastWeek.getDate();
-              fromMonth = dateLastWeek.getMonth();
-              fromYear = dateLastWeek.getFullYear();
-              break;
-          case 'month':
-              toDay = dateToday.getDate();
-              toMonth = dateToday.getMonth();
-              toYear = dateToday.getFullYear();
-              const dateLastMonth = new Date(dateToday)
-              dateLastMonth.setMonth(dateLastMonth.getMonth() - 1);
-              fromDay = dateLastMonth.getDate();
-              fromMonth = dateLastMonth.getMonth();
-              fromYear = dateLastMonth.getFullYear();
-              break;
-          default:
-
-            break;
-        }
-        if(fromYear){
-          const paramsArray = [
-            {
-              afterYear: fromYear,
-              afterMonth: fromMonth,
-              afterDate: fromDay,
-              beforeYear: toYear,
-              beforeMonth: toMonth,
-              beforeDate: toDay,
-            }
-          ]
+      ]
+      if (fromYear.value.length > 3 || toYear.value.length > 3) {
+        if ((fromYear.value && fromMonth.value && fromDay.value) || (toYear.value && toMonth.value && toDay.value)) {
           switchDate(paramsArray);
         }
       }
     });
+  });
+
+  [
+    ...searchContainer.querySelectorAll(
+        "#lastUpdatedSelect"
+    ),
+  ].map((topFilter) => {
+      topFilter.addEventListener("input", async (e) => {
+          var element = document.getElementById("dateFilters");
+          if (topFilter.value === "custom") {
+              if (element.classList.contains("hidden")) {
+                  element.classList.remove("hidden");
+              }
+          } else {
+              if (!element.classList.contains("hidden")) {
+                  element.classList.add("hidden");
+              }
+  
+              const dateToday = new Date();
+  
+              var fromDay, fromMonth, fromYear, toDay, toMonth, toYear;
+  
+              switch (topFilter.value) {
+                  case 'today':
+                      fromDay = dateToday.getDate();
+                      fromMonth = dateToday.getMonth() + 1;
+                      fromYear = dateToday.getFullYear();
+                      const dateTomorrow = new Date(dateToday)
+                      dateTomorrow.setDate(dateTomorrow.getDate() + 1)
+                      toDay = dateTomorrow.getDate();
+                      toMonth = dateTomorrow.getMonth() + 1;
+                      toYear = dateTomorrow.getFullYear();
+                      break;
+                  case 'week':
+                      toDay = dateToday.getDate();
+                      toMonth = dateToday.getMonth() + 1;
+                      toYear = dateToday.getFullYear();
+                      const dateLastWeek = new Date(dateToday)
+                      dateLastWeek.setDate(dateLastWeek.getDate() - 7)
+                      fromDay = dateLastWeek.getDate();
+                      fromMonth = dateLastWeek.getMonth() + 1;
+                      fromYear = dateLastWeek.getFullYear();
+                      break;
+                  case 'month':
+                      toDay = dateToday.getDate();
+                      toMonth = dateToday.getMonth() + 1;
+                      toYear = dateToday.getFullYear();
+                      const dateLastMonth = new Date(dateToday)
+                      dateLastMonth.setMonth(dateLastMonth.getMonth());
+                      fromDay = dateLastMonth.getDate();
+                      fromMonth = dateLastMonth.getMonth();
+                      fromYear = dateLastMonth.getFullYear();
+                      break;
+                  default:
+  
+                      break;
+              }
+              if (fromYear) {
+                  const paramsArray = [
+                      {
+                          afterYear: fromYear,
+                          afterMonth: fromMonth,
+                          afterDate: fromDay,
+                          beforeYear: toYear,
+                          beforeMonth: toMonth,
+                          beforeDate: toDay,
+                      }
+                  ]
+                  switchDate(paramsArray);
+              }
+          }
+      });
   });
 
   const switchTopicFilterCheckbox = (paramsArray) => {
@@ -303,11 +301,11 @@ if (searchContainer) {
         if (param.isChecked) {
           if (tmpValues.length === 0) {
             tmpValues.push(param.topics);
-            url.searchParams.append(strParamType,tmpValues);
+            url.searchParams.append(strParamType, tmpValues);
           } else {
             let tmpValue = tmpValues[0].split(",");
             tmpValue.push(param.topics);
-            url.searchParams.append(strParamType,tmpValue);
+            url.searchParams.append(strParamType, tmpValue);
           }
         } else {
           if (tmpValues.length <= 1) {
@@ -321,8 +319,8 @@ if (searchContainer) {
       }
     });
 
-      // make the change to the markup
-      switchSearchMarkup(url, true);
+    // make the change to the markup
+    switchSearchMarkup(url, true);
   };
 
   // create listeners for topic filter checkboxes
@@ -333,9 +331,9 @@ if (searchContainer) {
   ].map((topicFilter) => {
     const childrenSelector = topicFilter.getAttribute("aria-controls");
     const theChildren = [
-        ...searchContainer.querySelectorAll(
-            `#${childrenSelector} [type=checkbox]`
-        ),
+      ...searchContainer.querySelectorAll(
+        `# searchContainer.querySelector{childrenSelector} [type=checkbox]`
+      ),
     ];
     if (!childrenSelector) return;
     topicFilter.addEventListener("change", async (e) => {
@@ -357,9 +355,9 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener("change", async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
 
         // Google Tag Manager
         gtmDataLayerPush({
@@ -371,100 +369,100 @@ if (searchContainer) {
     })
   });
 
-    // create listeners for population-types filter checkboxes
-    [
-      ...searchContainer.querySelectorAll(
-        ".population-types"
+  // create listeners for population-types filter checkboxes
+  [
+    ...searchContainer.querySelectorAll(
+      ".population-types"
+    ),
+  ].map((topicFilter) => {
+    const theChildren = [
+      ...topicFilter.querySelectorAll(
+        `[type=checkbox]`
       ),
-    ].map((topicFilter) => {
-      const theChildren = [
-          ...topicFilter.querySelectorAll(
-              `[type=checkbox]`
-          ),
-      ];
+    ];
 
-      if (!theChildren) return;
-      theChildren.map((item) => {
-        item.addEventListener("change", async (e) => {
-          switchTopicFilterCheckbox([
-            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
-          ]);
-          topicFilter.checked= theChildren.some((x) => x.checked);
-  
-          // Google Tag Manager
-          gtmDataLayerPush({
-            'event': 'PopulationTypes-Filter',
-            'filter-by': e.target.dataset.gtmLabel,
-            'selected': e.target.checked ? 'selected' : 'unselected'
-          });
-        })
+    if (!theChildren) return;
+    theChildren.map((item) => {
+      item.addEventListener("change", async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types' },
+        ]);
+        topicFilter.checked = theChildren.some((x) => x.checked);
+
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'PopulationTypes-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
       })
-    });
+    })
+  });
 
-    // create listeners for dimensions filter checkboxes
-    [
-      ...searchContainer.querySelectorAll(
-        ".dimensions"
+  // create listeners for dimensions filter checkboxes
+  [
+    ...searchContainer.querySelectorAll(
+      ".dimensions"
+    ),
+  ].map((topicFilter) => {
+    const theChildren = [
+      ...topicFilter.querySelectorAll(
+        `[type=checkbox]`
       ),
-    ].map((topicFilter) => {
-      const theChildren = [
-          ...topicFilter.querySelectorAll(
-              `[type=checkbox]`
-          ),
-      ];
-      if (!theChildren) return;
-      theChildren.map((item) => {
-        item.addEventListener("change", async (e) => {
-          switchTopicFilterCheckbox([
-            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
-          ]);
-          topicFilter.checked= theChildren.some((x) => x.checked);
-  
-          // Google Tag Manager
-          gtmDataLayerPush({
-            'event': 'Dimensions-Filter',
-            'filter-by': e.target.dataset.gtmLabel,
-            'selected': e.target.checked ? 'selected' : 'unselected'
-          });
-        })
-      })
-    });
+    ];
+    if (!theChildren) return;
+    theChildren.map((item) => {
+      item.addEventListener("change", async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions' },
+        ]);
+        topicFilter.checked = theChildren.some((x) => x.checked);
 
-    // create listeners for dimensions filter checkboxes
-    [
-      ...searchContainer.querySelectorAll(
-        ".census"
-      ),
-    ].map((topicFilter) => {
-      const theChildren = [
-          ...topicFilter.querySelectorAll(
-              `[type=checkbox]`
-          ),
-      ];
-      if (!theChildren) return;
-      theChildren.map((item) => {
-        item.addEventListener("change", async (e) => {
-          switchTopicFilterCheckbox([
-            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
-          ]);
-          topicFilter.checked= theChildren.some((x) => x.checked);
-  
-          // Google Tag Manager
-          gtmDataLayerPush({
-            'event': 'Census-Filter',
-            'filter-by': e.target.dataset.gtmLabel,
-            'selected': e.target.checked ? 'selected' : 'unselected'
-          });
-        })
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'Dimensions-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
       })
-    });
+    })
+  });
+
+  // create listeners for dimensions filter checkboxes
+  [
+    ...searchContainer.querySelectorAll(
+      ".census"
+    ),
+  ].map((topicFilter) => {
+    const theChildren = [
+      ...topicFilter.querySelectorAll(
+        `[type=checkbox]`
+      ),
+    ];
+    if (!theChildren) return;
+    theChildren.map((item) => {
+      item.addEventListener("change", async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
+        ]);
+        topicFilter.checked = theChildren.some((x) => x.checked);
+
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'Census-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
+        });
+      })
+    })
+  });
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
   if (!!sortSelector) {
     sortSelector.addEventListener("change", async (e) => {
       let url = new URL(location.href);
-      url.searchParams.set("sort",e.target.value)
+      url.searchParams.set("sort", e.target.value)
       switchSearchMarkup(url, true);
 
       // Google Tag Manager
@@ -537,9 +535,9 @@ if (searchContainer) {
     const filterBtn = document.getElementById("filter-results");
     if (filterBtn) {
       document.addEventListener("click", () => {
-          if (document.activeElement === filterBtn) {
-            firstFocusableElmnt.focus();
-          }
+        if (document.activeElement === filterBtn) {
+          firstFocusableElmnt.focus();
+        }
       });
     }
   }
