@@ -114,7 +114,6 @@ if (searchContainer) {
     switchSearchMarkup(url, true);
   };
 
-
   const switchDate = (paramsArray) => {
     // get current param
     let url = new URL(location.href);
@@ -185,7 +184,7 @@ if (searchContainer) {
     });
   });
 
-  // create listeners for content-type filter checkboxes controlling each other
+  // create listeners for date filter inputs controlling each other
   [
     ...searchContainer.querySelectorAll(
       ".date-filters"
@@ -490,6 +489,21 @@ if (searchContainer) {
         });
       });
     }
+    let url = new URL(location.href);
+    const pageSizeSelector = searchContainer.querySelector("#page-size");
+    const pageSizeValue = searchContainer.querySelector("#page-size-value");
+    pageSizeSelector.value = pageSizeValue.value;
+    // create listener for the results per page filter
+    pageSizeSelector.addEventListener("input", async (e) => {
+      if (!url.searchParams.get("limit")) {
+        url.searchParams.append("limit", e.target.value);
+      } else {
+        url.searchParams.set("limit", e.target.value);
+      }
+      pageSizeSelector.value = e.target.value;
+      // make the change to the markup
+      switchSearchMarkup(url, false, true);
+    });
   };
 
   initPaginationListeners();

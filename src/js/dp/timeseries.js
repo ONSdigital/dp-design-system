@@ -86,7 +86,7 @@ if(timeSeriesContainer){
     timeSeriesContainer.querySelector(".time-series-results").addEventListener("click", (event) => {
         if(event.target.classList.contains("select-time-series")){
             if (event.target.checked) {
-                if(Object.keys(timeseriesList).length <= 50){
+                if(Object.keys(timeseriesList).length < 50){
                     addElement(event.target);
                 } else {
                     alert("You can only add up to 50 timeseries at a time");
