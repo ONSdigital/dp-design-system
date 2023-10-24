@@ -10,32 +10,32 @@ if(timeSeriesContainer){
         csvForm = timeSeriesContainer.querySelector("#csv-form"),
         list = timeSeriesContainer.querySelector(".timeseries__list"),
         timeseriesList = {},
-        timeseriesUris = [], //saved as cookie, to load selections from the server on page load
         basketCookieName = "timeseriesBasket",
         rememberCookieName = "rememberBasket",
         listCount = 0,
         counter = timeSeriesContainer.querySelector("#timeseries__count"),
         exitBtn = timeSeriesContainer.querySelector(".timeseries__list--exit"),
         rememberCb = timeSeriesContainer.querySelector("#remember-selection");
-
+        
     exitBtn.addEventListener("click", () => {
         boxWithStuff.classList.toggle("hidden");
     });
 
     function initialize() {
-        remember = getCookie(rememberCookieName);
-        if (typeof remember === "undefined") { 
+        remember = getLocalStorageProperty(rememberCookieName);
+        if (remember) { 
             //remember cookie never set, sets to true by default
             remember = true;
-            setCookie(rememberCookieName, remember, 7);
+            setLocalStorageProperty(rememberCookieName, remember, 7);
             rememberCb.checked = true;
         }
 
         if (remember) {
-            let timeSeries = getCookie(basketCookieName)
+            let timeSeries = getLocalStorageProperty(basketCookieName)
             timeSeries.forEach( timeseriesTemp => {
                 var timeseries = {
                     uri: timeseriesTemp.uri,
+                    datasetId: timeseriesTemp.datasetId,
                     title: timeseriesTemp.title
                 };
                 timeseriesList[timeseries.uri] = timeseries;
@@ -43,7 +43,7 @@ if(timeSeriesContainer){
                 checkIfItemsAreSelected();
             })
         } else {
-            setCookie(basketCookieName, null, 0);
+            setLocalStorageProperty(basketCookieName, null, 0);
         }
     }
 
@@ -55,7 +55,7 @@ if(timeSeriesContainer){
     // create an observer instance
     var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
-            if(mutation.target.classList.contains("test-delegation") && mutation.addedNodes.length > 0){
+            if(mutation.target.classList.contains("time-series-results") && mutation.addedNodes.length > 0){
                 checkIfItemsAreSelected();
             }
         });
@@ -67,26 +67,30 @@ if(timeSeriesContainer){
     // pass in the target node, as well as the observer options
     observer.observe(target, config);
 
-    let remember = getCookie(rememberCookieName);
+    let remember = getLocalStorageProperty(rememberCookieName);
     if(remember){
         rememberCb.checked = true;
     }
 
     rememberCb.addEventListener("input", () => {
         if(rememberCb.checked){
-            setCookie(rememberCookieName, true, 7);
-            setCookie(basketCookieName, JSON.stringify(timeseriesUris), 7);
+            setLocalStorageProperty(rememberCookieName, true, 7);
+            setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)), 7);
         } else {
-            setCookie(rememberCookieName, false, 7);
-            setCookie(basketCookieName, null, 7);
+            setLocalStorageProperty(rememberCookieName, false, 7);
+            setLocalStorageProperty(basketCookieName, null, 7);
         }
     })
     
 
-    timeSeriesContainer.querySelector(".test-delegation").addEventListener("click", (event) => {
+    timeSeriesContainer.querySelector(".time-series-results").addEventListener("click", (event) => {
         if(event.target.classList.contains("select-time-series")){
             if (event.target.checked) {
-                addElement(event.target);
+                if(Object.keys(timeseriesList).length <= 50){
+                    addElement(event.target);
+                } else {
+                    alert("You can only add up to 50 timeseries at a time");
+                }
             } else {
                 removeElement(event.target.getAttribute("data-uri"));
             }
@@ -121,24 +125,21 @@ if(timeSeriesContainer){
     function addElement(element) {
         var timeseries = {
             title: element.getAttribute("data-title"),
-            uri: element.getAttribute("data-uri")
+            uri: element.getAttribute("data-uri"),
+            datasetId: element.getAttribute("data-dataset-id"),
         };
     
-        // var timeseries = {
-        //   uri: element.data("uri"),
-        //   datasetId: element.data("datasetid"),
-        //   title: element.data("title")
-        // };
         if (timeseriesList.hasOwnProperty(timeseries.uri)) {
             return; // it is already in the list    
         }
+        
         timeseriesList[timeseries.uri] = timeseries;
         addToPage(timeseries)
     }
     
     function removeElement(uri) {
         listCount--;
-        var timeseries = timeseriesList[uri];
+        // var timeseries = timeseriesList[uri];
         delete timeseriesList[uri];
         counter.innerHTML = listCount;
         remove(list, uri)
@@ -152,9 +153,9 @@ if(timeSeriesContainer){
         }
     }
 
-    function addToCookie(timeseries) {
-        timeseriesUris.push(timeseries);
-        setCookie(basketCookieName, JSON.stringify(timeseriesUris), 7);
+    function addToLocalStorageProperty(timeseries) {
+        timeseriesList[timeseries.uri] = timeseries;
+        setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)), 7);
     }
     
     //Add time series markup to basket, and put hidden inputs for download
@@ -162,8 +163,8 @@ if(timeSeriesContainer){
         listCount++;
         counter.innerHTML = listCount;
         list.prepend(getListElementMarkup(timeseries));
-        if(getCookie(rememberCookieName)){
-            addToCookie(timeseries)
+        if(getLocalStorageProperty(rememberCookieName)){
+            addToLocalStorageProperty(timeseries)
         }
         xlsForm.appendChild(getInputMarkup(timeseries));
         csvForm.appendChild(getInputMarkup(timeseries));
@@ -176,43 +177,27 @@ if(timeSeriesContainer){
     }
     
     function selectAll() {
+        let alertShown = false;
         timeSeriesContainer.querySelectorAll(".select-time-series").forEach((item) => {
-            item.checked = true;
-            addElement(item);
+            if(Object.keys(timeseriesList).length < 50){
+                item.checked = true;
+                addElement(item);
+            } else {
+                if(!alertShown){
+                    alert("You can only add up to 50 timeseries at a time");
+                    timeSeriesContainer.querySelector("#select-all-time-series").checked = false;
+                    alertShown = true;
+                }
+            }
         });
     }
 
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        let expires = "expires="+ d.toUTCString();
-        let isSecure = false;
-        if(process.env.NODE_ENV === "production"){
-            isSecure = true;
-        }
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";" + (isSecure ? "Secure" : "") + "path=/";
+    function setLocalStorageProperty(cname, cvalue, exdays) {
+        localStorage.setItem(cname, cvalue);
     }
 
-    function getCookie(name){
-        let cookieValue = "";
-        let cookieArray = new Array();
-        let result = new Array();
-      
-        //Get cookie
-        cookieValue = document.cookie;
-      
-        //Divide the cookie into an array and convert them to JSON
-        if(cookieValue){
-          cookieArray = cookieValue.split(";");
-          cookieArray.forEach(data => {
-            data = data.split("=");
-            //data[0]: Cookie name
-            //data[1]: Cookie value
-            if(data[0].trim() === name){
-                result = JSON.parse(data[1]);
-            }
-          });
-        }
+    function getLocalStorageProperty(name){
+        let result = JSON.parse(localStorage.getItem(name));
         return result;
     }
     
