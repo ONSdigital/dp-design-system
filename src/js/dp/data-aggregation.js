@@ -489,21 +489,22 @@ if (searchContainer) {
         });
       });
     }
-    let url = new URL(location.href);
-    const pageSizeSelector = searchContainer.querySelector("#page-size");
-    const pageSizeValue = searchContainer.querySelector("#page-size-value");
-    pageSizeSelector.value = pageSizeValue.value;
-    // create listener for the results per page filter
-    pageSizeSelector.addEventListener("input", async (e) => {
-      if (!url.searchParams.get("limit")) {
-        url.searchParams.append("limit", e.target.value);
-      } else {
-        url.searchParams.set("limit", e.target.value);
-      }
-      pageSizeSelector.value = e.target.value;
-      // make the change to the markup
-      switchSearchMarkup(url, false, true);
-    });
+    // adds the results per page functionality
+    // let url = new URL(location.href);
+    // const pageSizeSelector = searchContainer.querySelector("#page-size");
+    // const pageSizeValue = searchContainer.querySelector("#page-size-value");
+    // pageSizeSelector.value = pageSizeValue.value;
+    // // create listener for the results per page filter
+    // pageSizeSelector.addEventListener("input", async (e) => {
+    //   if (!url.searchParams.get("limit")) {
+    //     url.searchParams.append("limit", e.target.value);
+    //   } else {
+    //     url.searchParams.set("limit", e.target.value);
+    //   }
+    //   pageSizeSelector.value = e.target.value;
+    //   // make the change to the markup
+    //   switchSearchMarkup(url, false, true);
+    // });
   };
 
   initPaginationListeners();
