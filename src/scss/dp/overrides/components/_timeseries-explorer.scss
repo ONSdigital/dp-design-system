@@ -1,25 +1,12 @@
 .timeseries__list-container {
   position: absolute;
   width: 500px;
-  background: #e5e6e7;
-  top: 245px;
+  top: 250px;
   right: 0;
   z-index: 1000;
   padding: 8px 0 24px;
-  color: #e5e6e7;
-  background: #414042;
-}
-
-.timeseries__list-container:after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 16px solid #414042;
-  position: absolute;
-  top: -16px;
-  right: 40px;
+  background: white;
+  outline: black 1px solid;
 }
 
 .timeseries__list--exit {
