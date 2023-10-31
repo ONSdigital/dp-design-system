@@ -210,7 +210,9 @@ if(timeSeriesContainer){
     
     function remove(element, uri) {
         var listItem = findIn(element, uri);
-        listItem.remove();
+        if(listItem){
+            listItem.remove();
+        }
     }
     
     function findIn(element, uri) {
