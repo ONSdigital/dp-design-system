@@ -1,4 +1,4 @@
-import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from "../utilities";
+import { fetchHtml, replaceWithIEPolyfill } from "../utilities";
 
 const searchContainer = document.querySelector(".search__container");
 
@@ -84,8 +84,6 @@ if (searchContainer) {
           searchContainer.querySelector(".search__summary__count"),
           fetchedDom.querySelector(".search__summary__count")
         );
-
-        initPaginationListeners();
       }
     }
 
@@ -178,10 +176,10 @@ if (searchContainer) {
     switchSearchMarkup(url, true);
   };
 
-  // create listeners for content-type filter checkboxes controlling each other
+  // create listeners for the keywords input
   [
     ...searchContainer.querySelectorAll(
-      ".content-type-filter"
+      "#keywords"
     ),
   ].map((topFilter) => {
     // const childrenSelector = topFilter.getAttribute("aria-controls");
@@ -274,6 +272,7 @@ if (searchContainer) {
       });
     });
 
+  // create listeners for the last updated filter select
   [
     ...searchContainer.querySelectorAll(
         "#lastUpdatedSelect"
@@ -346,6 +345,7 @@ if (searchContainer) {
       });
   });
 
+  //a method to validate and raise errors for the date inputs
   const validateDates = (datesArray) => {
     const releasedAfterContainer = document.querySelector(".inputs-released-after");
     const releasedBeforeContainer = document.querySelector(".inputs-released-before");
@@ -425,292 +425,23 @@ if (searchContainer) {
     return !validationError;
   };
 
-  const switchTopicFilterCheckbox = (paramsArray) => {
-    // get current param
-    let url = new URL(location.href);
-    paramsArray.map((param) => {
-      if (!("isChecked" in param) || !("topics" in param) || !("strParamType" in param)) return;
-      let strParamType = param.strParamType;
-      let tmpValues = url.searchParams.getAll(strParamType);
-      url.searchParams.delete(strParamType);
-      if (tmpValues.length <= 1) {
-        if (param.isChecked) {
-          if (tmpValues.length === 0) {
-            tmpValues.push(param.topics);
-            url.searchParams.append(strParamType, tmpValues);
-          } else {
-            let tmpValue = tmpValues[0].split(",");
-            tmpValue.push(param.topics);
-            url.searchParams.append(strParamType, tmpValue);
-          }
-        } else {
-          if (tmpValues.length <= 1) {
-            let tmpValue = tmpValues[0].split(",");
-            let tmpParam = tmpValue.filter(e => e !== param.topics);
-            if (tmpParam.length !== 0) {
-              url.searchParams.append(strParamType, tmpParam);
-            }
-          }
-        }
-      }
-    });
+  // const allReleasesCb = searchContainer.querySelector("#all-releases");
 
-    // make the change to the markup
-    switchSearchMarkup(url, true);
-  };
-
-  // create listeners for topic filter checkboxes
-  [
-    ...searchContainer.querySelectorAll(
-      ".topic-filter [aria-controls]:not(input:disabled)"
-    ),
-  ].map((topicFilter) => {
-    const childrenSelector = topicFilter.getAttribute("aria-controls");
-    const theChildren = [
-      ...searchContainer.querySelectorAll(
-        `# searchContainer.querySelector{childrenSelector} [type=checkbox]`
-      ),
-    ];
-    if (!childrenSelector) return;
-    topicFilter.addEventListener("change", async (e) => {
-      const paramsArray = theChildren.map((item) => ({
-        isChecked: e.target.checked,
-        topics: item.value,
-        strParamType: "topics",
-      }));
-      theChildren.map((item) => (item.checked = e.target.checked));
-      switchTopicFilterCheckbox(paramsArray);
-
-      // Google Tag Manager
-      gtmDataLayerPush({
-        "event": "Topic-Filter",
-        "filter-by": e.target.dataset.gtmLabel,
-        "selected": e.target.checked ? "selected" : "unselected"
-      });
-    });
-    theChildren.map((item) => {
-      item.addEventListener("change", async (e) => {
-        switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: "topics" },
-        ]);
-        topicFilter.checked = theChildren.some((x) => x.checked);
-
-        // Google Tag Manager
-        gtmDataLayerPush({
-          "event": "SubTopics-Filter",
-          "filter-by": e.target.dataset.gtmLabel,
-          "selected": e.target.checked ? "selected" : "unselected"
-        });
-      })
-    })
-  });
-
-  // create listeners for population-types filter checkboxes
-  [
-    ...searchContainer.querySelectorAll(
-      ".population-types"
-    ),
-  ].map((topicFilter) => {
-    const theChildren = [
-      ...topicFilter.querySelectorAll(
-        `[type=checkbox]`
-      ),
-    ];
-
-    if (!theChildren) return;
-    theChildren.map((item) => {
-      item.addEventListener("change", async (e) => {
-        switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: "population_types" },
-        ]);
-        topicFilter.checked = theChildren.some((x) => x.checked);
-
-        // Google Tag Manager
-        gtmDataLayerPush({
-          "event": "PopulationTypes-Filter",
-          "filter-by": e.target.dataset.gtmLabel,
-          "selected": e.target.checked ? "selected" : "unselected"
-        });
-      })
-    })
-  });
-
-  // create listeners for dimensions filter checkboxes
-  [
-    ...searchContainer.querySelectorAll(
-      ".dimensions"
-    ),
-  ].map((topicFilter) => {
-    const theChildren = [
-      ...topicFilter.querySelectorAll(
-        `[type=checkbox]`
-      ),
-    ];
-    if (!theChildren) return;
-    theChildren.map((item) => {
-      item.addEventListener("change", async (e) => {
-        switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: "dimensions" },
-        ]);
-        topicFilter.checked = theChildren.some((x) => x.checked);
-
-        // Google Tag Manager
-        gtmDataLayerPush({
-          "event": "Dimensions-Filter",
-          "filter-by": e.target.dataset.gtmLabel,
-          "selected": e.target.checked ? "selected" : "unselected"
-        });
-      })
-    })
-  });
-
-  // create listeners for dimensions filter checkboxes
-  [
-    ...searchContainer.querySelectorAll(
-      ".census"
-    ),
-  ].map((topicFilter) => {
-    const theChildren = [
-      ...topicFilter.querySelectorAll(
-        "[type=checkbox]"
-      ),
-    ];
-    if (!theChildren) return;
-    theChildren.map((item) => {
-      item.addEventListener("change", async (e) => {
-        switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: "topics" },
-        ]);
-        topicFilter.checked = theChildren.some((x) => x.checked);
-
-        // Google Tag Manager
-        gtmDataLayerPush({
-          "event": "Census-Filter",
-          "filter-by": e.target.dataset.gtmLabel,
-          "selected": e.target.checked ? "selected" : "unselected"
-        });
-      })
-    })
-  });
-
-  // create listeners for the sort dropdown
-  const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
-  if (!!sortSelector) {
-    sortSelector.addEventListener("change", async (e) => {
-      let url = new URL(location.href);
-      url.searchParams.set("sort", e.target.value)
-      switchSearchMarkup(url, true);
-
-      // Google Tag Manager
-      gtmDataLayerPush({
-        "event": "SortBy",
-        "sort-by": e.target.value
-      });
-    });
-  }
-
-  // create listeners for the pagination
-  const initPaginationListeners = () => {
-    const paginationItems = searchContainer.querySelectorAll(
-      ".ons-pagination__item a[data-target-page]"
-    );
-    if (!!paginationItems) {
-      paginationItems.forEach((item) => {
-        item.addEventListener("click", async (e) => {
-          e.preventDefault();
-          let url = new URL(location.href);
-          const { targetPage } = e.target.dataset;
-          if (!targetPage) return;
-          url.searchParams.set("page", targetPage)
-          switchSearchMarkup(url, false, true);
-        });
-      });
-    }
-    // adds the results per page functionality
-    // let url = new URL(location.href);
-    // const pageSizeSelector = searchContainer.querySelector("#page-size");
-    // const pageSizeValue = searchContainer.querySelector("#page-size-value");
-    // pageSizeSelector.value = pageSizeValue.value;
-    // // create listener for the results per page filter
-    // pageSizeSelector.addEventListener("input", async (e) => {
-    //   if (!url.searchParams.get("limit")) {
-    //     url.searchParams.append("limit", e.target.value);
-    //   } else {
-    //     url.searchParams.set("limit", e.target.value);
-    //   }
-    //   pageSizeSelector.value = e.target.value;
-    //   // make the change to the markup
-    //   switchSearchMarkup(url, false, true);
-    // });
-  };
-
-  initPaginationListeners();
-
-  const allReleasesCb = searchContainer.querySelector("#all-releases");
-
-  if(allReleasesCb){
-    allReleasesCb.addEventListener("input", async (e) => {
-      let url = new URL(location.href);
-      if(allReleasesCb.checked){
-        if (!url.searchParams.get("allReleases")) {
-          url.searchParams.append("allReleases", 1);
-        } else {
-          url.searchParams.set("allReleases", 1);
-        }
-      } else{
-        url.searchParams.delete("allReleases");
+  // if(allReleasesCb){
+  //   allReleasesCb.addEventListener("input", async (e) => {
+  //     let url = new URL(location.href);
+  //     if(allReleasesCb.checked){
+  //       if (!url.searchParams.get("allReleases")) {
+  //         url.searchParams.append("allReleases", 1);
+  //       } else {
+  //         url.searchParams.set("allReleases", 1);
+  //       }
+  //     } else{
+  //       url.searchParams.delete("allReleases");
   
-      }
-      // make the change to the markup
-      switchSearchMarkup(url, true, false);
-    });
-  }
-
-  // filter menu for mobile
-  // if the page is running javascript let"s make the filter menus togglable and full-screen when displayed
-  const toggleBtns = [
-    ...searchContainer.querySelectorAll(
-      ".search__filter__mobile-filter-toggle"
-    ),
-  ];
-  const filterMenu = searchContainer.querySelector("#search-filter");
-  if (filterMenu) {
-    filterMenu.classList.add("js-fullscreen-filter-menu-content", "hide--sm");
-    toggleBtns.map((btn) => {
-      btn.classList.remove("hide");
-      btn.addEventListener("click", () => {
-        if (filterMenu.classList.contains("hide--sm")) {
-          filterMenu.classList.remove("hide--sm");
-        } else {
-          filterMenu.classList.add("hide--sm");
-        }
-      });
-    });
-  };
-
-  //capture focus in checkboxes
-  const showResultsBtn = document.getElementById("show-results");
-  const focusableElmnts = document.querySelectorAll("input[type='checkbox']:not([disabled]), #clear-search");
-  const firstFocusableElmnt = focusableElmnts[0];
-
-  if (showResultsBtn) {
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Tab") {
-        if (document.activeElement === showResultsBtn) {
-          firstFocusableElmnt.focus();
-          e.preventDefault();
-        }
-      }
-    });
-
-    //tab to checkboxes after filtering results
-    const filterBtn = document.getElementById("filter-results");
-    if (filterBtn) {
-      document.addEventListener("click", () => {
-        if (document.activeElement === filterBtn) {
-          firstFocusableElmnt.focus();
-        }
-      });
-    }
-  }
+  //     }
+  //     // make the change to the markup
+  //     switchSearchMarkup(url, true, false);
+  //   });
+  // }
 }

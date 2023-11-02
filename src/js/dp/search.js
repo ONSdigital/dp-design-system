@@ -93,7 +93,6 @@ if (searchContainer) {
     history.pushState(null, "", decodeURIComponent(url));
   };
 
-
   const switchContentTypeFilterCheckbox = (paramsArray) => {
     // get current param
     let url = new URL(location.href);
