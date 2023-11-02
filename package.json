@@ -10,7 +10,9 @@
     "watch": "gulp watch",
     "start": "ws -p ${PORT:-9002}",
     "dev": "run-p clean watch start",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "lint": "eslint --ext js src/js",
+    "lint:fix": "eslint --ext js --fix"
   },
   "browserslist": [
     "last 2 versions",
@@ -31,14 +33,14 @@
   "homepage": "https://github.com/ONSdigital/dp-design-system#readme",
   "dependencies": {
     "@ons/design-system": "^57.0.1",
-    "core-js": "^3.28.0",
+    "core-js": "^3.32.1",
     "glob-parent": "^6.0.2",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.3.0",
     "local-web-server": "^4.2.1",
-    "regenerator-runtime": "^0.13.9",
-    "sass": "^1.52.1"
+    "regenerator-runtime": "^0.14.0",
+    "sass": "^1.66.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
@@ -47,12 +49,15 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "@babel/traverse": "^7.23.2",
     "abortcontroller-polyfill": "^1.7.3",
     "auditjs": "^4.0.37",
     "autoprefixer": "^10.2.4",
-    "babel-eslint": "^10.1.0",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
+    "eslint": "^8.51.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1",
     "gulp-if": "^3.0.0",
     "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",

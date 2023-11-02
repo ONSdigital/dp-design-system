@@ -33,6 +33,12 @@ nvm install
 
 ### Generate the CSS and JS
 
+- Make sure you are using the correct version of node and npm
+
+```bash
+nvm use
+```
+
 - Build the CSS and JS, and start the local web server with
 
 ```bash
@@ -64,6 +70,24 @@ which installs:
 
 Locally served on port 9002
 .sass-lint
+
+## Linter
+
+This app lints using [eslint](https://eslint.org/) with [Airbnb](https://airbnb.io/javascript) base configuration. See `.eslintrc.json` for settings.
+
+### Run
+
+```bash
+npm run lint
+```
+
+### Fix
+
+Some linting issues can be fixed automatically. To use this functionality, pass the file you wish to fix at the end of the command:
+
+```bash
+npm run lint:fix path/to/js/file/to/fix
+```
 
 ## Contributing
 
