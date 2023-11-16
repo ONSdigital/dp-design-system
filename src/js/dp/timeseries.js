@@ -23,7 +23,7 @@ if(timeSeriesContainer){
 
     function initialize() {
         remember = getLocalStorageProperty(rememberCookieName);
-        if (remember) { 
+        if (typeof remember === 'undefined') { 
             //remember cookie never set, sets to true by default
             remember = true;
             setLocalStorageProperty(rememberCookieName, remember, 7);
@@ -139,7 +139,6 @@ if(timeSeriesContainer){
     
     function removeElement(uri) {
         listCount--;
-        // var timeseries = timeseriesList[uri];
         delete timeseriesList[uri];
         counter.innerHTML = listCount;
         remove(list, uri)
