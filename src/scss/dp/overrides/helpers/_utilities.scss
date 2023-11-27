@@ -670,3 +670,7 @@ $old-ie: false;
 .clearfix {
     @extend %clearfix;
 }
+// Use to give element it's initial color
+.color-initial {
+    color: initial;
+}
