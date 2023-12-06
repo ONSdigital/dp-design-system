@@ -160,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelector('#release-calendar__filters').onsubmit = (e) => {
-      e.preventDefault();
       const formData = new FormData(e.target);
       const formProps = Object.fromEntries(formData);
       if (formProps.keywords) {
