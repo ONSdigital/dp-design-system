@@ -99,7 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (releasePageContainer) {
     const releaseStatus = releasePageContainer.dataset.gtmReleaseStatus;
-    const releaseDate = new Date(releasePageContainer.dataset.gtmReleaseDate);
+    const releaseDate = new Date(
+      `${releasePageContainer.dataset.gtmReleaseDate} ${releasePageContainer.dataset.gtmReleaseTime}`,
+    );
     const releaseDateStatus = releasePageContainer.dataset.gtmReleaseDateStatus;
     const nextReleaseDate = new Date(
       releasePageContainer.dataset.gtmNextReleaseDate,
@@ -107,32 +109,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactName = releasePageContainer.dataset.gtmContactName;
 
     const year = releaseDate.getFullYear().toString().padStart(2, '0');
-    const month = releaseDate.getMonth().toString().padStart(2, '0');
+    const month = (releaseDate.getMonth() + 1).toString().padStart(2, '0'); // getMonth is zero based
     const date = releaseDate.getDate().toString().padStart(2, '0');
     const hour = releaseDate.getHours().toString().padStart(2, '0');
     const minutes = releaseDate.getMinutes().toString().padStart(2, '0');
 
-    const nextReleaseYear = nextReleaseDate
-      .getFullYear()
-      .toString()
-      .padStart(2, '0');
-    const nextReleaseMonth = nextReleaseDate
-      .getMonth()
-      .toString()
-      .padStart(2, '0');
-    const nextReleaseDayDate = nextReleaseDate
-      .getDate()
-      .toString()
-      .padStart(2, '0');
-
-    gtmDataLayerPush({
+    const gtmObj = {
       'release-status': releaseStatus,
       'release-date': `${year}${month}${date}`,
       'release-time': `${hour}:${minutes}`,
       'release-date-status': releaseDateStatus,
       'contact-name': contactName,
-      'next-release-date': `${nextReleaseYear}${nextReleaseMonth}${nextReleaseDayDate}`,
-    });
+    };
+
+    if (Date.parse(nextReleaseDate)) {
+      const nextReleaseYear = nextReleaseDate
+        .getFullYear()
+        .toString()
+        .padStart(2, '0');
+      const nextReleaseMonth = (nextReleaseDate.getMonth() + 1) // getMonth is zero based
+        .toString()
+        .padStart(2, '0');
+      const nextReleaseDayDate = nextReleaseDate
+        .getDate()
+        .toString()
+        .padStart(2, '0');
+
+      gtmObj[
+        'next-release-date'
+      ] = `${nextReleaseYear}${nextReleaseMonth}${nextReleaseDayDate}`;
+    }
+
+    gtmDataLayerPush(gtmObj);
   }
   if (releaseCalendarContainer) {
     const sortSelector = document.querySelector('.ons-input--select');
