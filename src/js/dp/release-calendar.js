@@ -149,15 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ...releaseCalendarContainer.querySelectorAll(
         '.ons-radio__input[type=radio]:not(input:disabled)',
       ),
-    ].map((topFilter) => {
-      topFilter.addEventListener('change', (e) => {
-        gtmDataLayerPush({
-          event: 'Filter',
-          'filter-by': e.target.name,
-          selected: e.target.value.toString().replace('type-', ''),
-        });
+    ].map((topFilter) => topFilter.addEventListener('change', (e) => {
+      gtmDataLayerPush({
+        event: 'Filter',
+        'filter-by': e.target.name,
+        selected: e.target.value.toString().replace('type-', ''),
       });
-    });
+    }));
 
     document.querySelector('#release-calendar__filters').onsubmit = (e) => {
       const formData = new FormData(e.target);
@@ -175,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document
       .querySelector('#release-type-census')
-      .addEventListener('change', (e) => {
+      .addEventListener('change', () => {
         gtmDataLayerPush({
           event: 'Filter',
           'filter-by': 'census',
