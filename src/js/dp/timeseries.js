@@ -209,7 +209,7 @@ if (timeSeriesContainer) {
   }
 
   function findIn(element, uri) {
-    return element.querySelector(`[data-uri="${uri}]`);
+    return element.querySelector(`[data-uri="${uri}"]`);
   }
 
   function getListElementMarkup(timeseries) {
