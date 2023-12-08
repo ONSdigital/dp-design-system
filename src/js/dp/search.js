@@ -1,6 +1,6 @@
-import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from "../utilities";
+import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from '../utilities';
 
-const searchContainer = document.querySelector(".search__container");
+const searchContainer = document.querySelector('.search__container');
 
 if (searchContainer) {
   const scrollToTopOfSearch = () => {
@@ -24,7 +24,7 @@ if (searchContainer) {
       * reset to page 1 since filtering and sorting will change the length/order of results.
       * in the case where it's page one, remove page from searchParams.
       */ 
-      url.searchParams.set("page", "1");
+      url.searchParams.set('page', '1');
     }
     const resultsLoader = document.querySelector('#results-loading');
 
@@ -35,7 +35,7 @@ if (searchContainer) {
     * However, if no filters are selected or no query - the fetched page has no results and
     * so they can't be retrieved. This condition below bypasses that until it is fixed. 
     */
-    const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has("page"));
+    const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has('page'));
 
     // if it takes more than 500ms to retreive results, show a loading message
     const timer = setTimeout(() => {
@@ -52,37 +52,37 @@ if (searchContainer) {
       const pTag = resultsLoader.querySelector('p');
       if(pTag) pTag.innerText = pTag.dataset.errorMessage;
     } else {
-      const fetchedDom = new DOMParser().parseFromString(responseText, "text/html");
+      const fetchedDom = new DOMParser().parseFromString(responseText, 'text/html');
 
       let resultsCount = 0;
-      const searchPrompt = fetchedDom.querySelector(".search__form--no-results");
+      const searchPrompt = fetchedDom.querySelector('.search__form--no-results');
       if (!searchPrompt) {
-        resultsCount = parseInt(fetchedDom.querySelector(".search__summary__count").innerText, 10);
+        resultsCount = parseInt(fetchedDom.querySelector('.search__summary__count').innerText, 10);
       }
 
-      const noResultsMessage = document.querySelector("#results-zero");
+      const noResultsMessage = document.querySelector('#results-zero');
 
       if (resultsCount === 0) {
         if (noResultsMessage) {
-          noResultsMessage.classList.remove("hide");
+          noResultsMessage.classList.remove('hide');
         }
-        searchContainer.querySelector("#results > ul").innerHTML = "";
-        searchContainer.querySelector(".search__pagination").innerHTML = "";
-        searchContainer.querySelector(".search__summary__count").innerText = "0";
+        searchContainer.querySelector('#results > ul').innerHTML = '';
+        searchContainer.querySelector('.search__pagination').innerHTML = '';
+        searchContainer.querySelector('.search__summary__count').innerText = '0';
       } else {
         replaceWithIEPolyfill(
-          searchContainer.querySelector(".search__results"),
-          fetchedDom.querySelector(".search__results")
+          searchContainer.querySelector('.search__results'),
+          fetchedDom.querySelector('.search__results')
         );
 
         replaceWithIEPolyfill(
-          searchContainer.querySelector(".search__pagination"),
-          fetchedDom.querySelector(".search__pagination")
+          searchContainer.querySelector('.search__pagination'),
+          fetchedDom.querySelector('.search__pagination')
         );
 
         replaceWithIEPolyfill(
-          searchContainer.querySelector(".search__summary__count"),
-          fetchedDom.querySelector(".search__summary__count")
+          searchContainer.querySelector('.search__summary__count'),
+          fetchedDom.querySelector('.search__summary__count')
         );
 
         initPaginationListeners();
@@ -90,7 +90,7 @@ if (searchContainer) {
     }
 
     // update the address bar
-    history.pushState(null, "", decodeURIComponent(url));
+    history.pushState(null, '', decodeURIComponent(url));
   };
 
   const switchContentTypeFilterCheckbox = (paramsArray) => {
@@ -99,15 +99,15 @@ if (searchContainer) {
 
     // build new param
     paramsArray.map((param) => {
-      if (!("isChecked" in param) || !("filterName" in param)) return;
+      if (!('isChecked' in param) || !('filterName' in param)) return;
       if (param.isChecked) {
-        url.searchParams.append("filter", param.filterName);
+        url.searchParams.append('filter', param.filterName);
       } else {
-        let tmpValues = url.searchParams.getAll("filter").filter(e => e !== param.filterName);
-        url.searchParams.delete("filter");
+        let tmpValues = url.searchParams.getAll('filter').filter(e => e !== param.filterName);
+        url.searchParams.delete('filter');
         if (tmpValues.length !== 0) {
           tmpValues.forEach((x, i) => {
-            url.searchParams.append("filter", x);
+            url.searchParams.append('filter', x);
           });
         }
       }
@@ -120,17 +120,17 @@ if (searchContainer) {
   // create listeners for content-type filter checkboxes controlling each other
   [
     ...searchContainer.querySelectorAll(
-      ".content-type-filter [aria-controls]:not(input:disabled)"
+      '.content-type-filter [aria-controls]:not(input:disabled)'
     ),
   ].map((topFilter) => {
-    const childrenSelector = topFilter.getAttribute("aria-controls");
+    const childrenSelector = topFilter.getAttribute('aria-controls');
     const theChildren = [
       ...searchContainer.querySelectorAll(
         `#${childrenSelector} [type=checkbox]:not(input:disabled)`
       ),
     ];
     if (!childrenSelector) return;
-    topFilter.addEventListener("change", async (e) => {
+    topFilter.addEventListener('change', async (e) => {
       const paramsArray = theChildren.map((item) => ({
         isChecked: e.target.checked,
         filterName: item.value,
@@ -146,7 +146,7 @@ if (searchContainer) {
       });
     });
     theChildren.map((item) => {
-      item.addEventListener("change", async (e) => {
+      item.addEventListener('change', async (e) => {
         switchContentTypeFilterCheckbox([
           { isChecked: e.target.checked, filterName: e.target.value },
         ]);
@@ -166,7 +166,7 @@ if (searchContainer) {
     // get current param
     let url = new URL(location.href);
     paramsArray.map((param) => {
-      if (!("isChecked" in param) || !("topics" in param) || !("strParamType" in param)) return;
+      if (!('isChecked' in param) || !('topics' in param) || !('strParamType' in param)) return;
       let strParamType = param.strParamType;
       let tmpValues = url.searchParams.getAll(strParamType);
       url.searchParams.delete(strParamType);
@@ -176,13 +176,13 @@ if (searchContainer) {
             tmpValues.push(param.topics);
             url.searchParams.append(strParamType,tmpValues);
           } else {
-            let tmpValue = tmpValues[0].split(",");
+            let tmpValue = tmpValues[0].split(',');
             tmpValue.push(param.topics);
             url.searchParams.append(strParamType,tmpValue);
           }
         } else {
           if (tmpValues.length <= 1) {
-            let tmpValue = tmpValues[0].split(",");
+            let tmpValue = tmpValues[0].split(',');
             let tmpParam = tmpValue.filter(e => e !== param.topics);
             if (tmpParam.length !== 0) {
               url.searchParams.append(strParamType, tmpParam);
@@ -199,17 +199,17 @@ if (searchContainer) {
   // create listeners for topic filter checkboxes
   [
     ...searchContainer.querySelectorAll(
-      ".topic-filter [aria-controls]:not(input:disabled)"
+      '.topic-filter [aria-controls]:not(input:disabled)'
     ),
   ].map((topicFilter) => {
-    const childrenSelector = topicFilter.getAttribute("aria-controls");
+    const childrenSelector = topicFilter.getAttribute('aria-controls');
     const theChildren = [
         ...searchContainer.querySelectorAll(
             `#${childrenSelector} [type=checkbox]`
         ),
     ];
     if (!childrenSelector) return;
-    topicFilter.addEventListener("change", async (e) => {
+    topicFilter.addEventListener('change', async (e) => {
       const paramsArray = theChildren.map((item) => ({
         isChecked: e.target.checked,
         topics: item.value,
@@ -226,7 +226,7 @@ if (searchContainer) {
       });
     });
     theChildren.map((item) => {
-      item.addEventListener("change", async (e) => {
+      item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
         ]);
@@ -245,18 +245,18 @@ if (searchContainer) {
     // create listeners for population-types filter checkboxes
     [
       ...searchContainer.querySelectorAll(
-        ".population-types"
+        '.population-types'
       ),
     ].map((topicFilter) => {
       const theChildren = [
           ...topicFilter.querySelectorAll(
-              `[type=checkbox]`
+              '[type=checkbox]'
           ),
       ];
 
       if (!theChildren) return;
       theChildren.map((item) => {
-        item.addEventListener("change", async (e) => {
+        item.addEventListener('change', async (e) => {
           switchTopicFilterCheckbox([
             { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
           ]);
@@ -275,17 +275,17 @@ if (searchContainer) {
     // create listeners for dimensions filter checkboxes
     [
       ...searchContainer.querySelectorAll(
-        ".dimensions"
+        '.dimensions'
       ),
     ].map((topicFilter) => {
       const theChildren = [
           ...topicFilter.querySelectorAll(
-              `[type=checkbox]`
+              '[type=checkbox]'
           ),
       ];
       if (!theChildren) return;
       theChildren.map((item) => {
-        item.addEventListener("change", async (e) => {
+        item.addEventListener('change', async (e) => {
           switchTopicFilterCheckbox([
             { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
           ]);
@@ -304,17 +304,17 @@ if (searchContainer) {
     // create listeners for dimensions filter checkboxes
     [
       ...searchContainer.querySelectorAll(
-        ".census"
+        '.census'
       ),
     ].map((topicFilter) => {
       const theChildren = [
           ...topicFilter.querySelectorAll(
-              `[type=checkbox]`
+              '[type=checkbox]'
           ),
       ];
       if (!theChildren) return;
       theChildren.map((item) => {
-        item.addEventListener("change", async (e) => {
+        item.addEventListener('change', async (e) => {
           switchTopicFilterCheckbox([
             { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
           ]);
@@ -331,11 +331,11 @@ if (searchContainer) {
     });
 
   // create listeners for the sort dropdown
-  const sortSelector = searchContainer.querySelector(".ons-input--sort-select");
+  const sortSelector = searchContainer.querySelector('.ons-input--sort-select');
   if (!!sortSelector) {
-    sortSelector.addEventListener("change", async (e) => {
+    sortSelector.addEventListener('change', async (e) => {
       let url = new URL(location.href);
-      url.searchParams.set("sort",e.target.value)
+      url.searchParams.set('sort',e.target.value)
       switchSearchMarkup(url, true);
 
       // Google Tag Manager
@@ -349,16 +349,16 @@ if (searchContainer) {
   // create listeners for the pagination
   const initPaginationListeners = () => {
     const paginationItems = searchContainer.querySelectorAll(
-      ".ons-pagination__item a[data-target-page]"
+      '.ons-pagination__item a[data-target-page]'
     );
     if (!!paginationItems) {
       paginationItems.forEach((item) => {
-        item.addEventListener("click", async (e) => {
+        item.addEventListener('click', async (e) => {
           e.preventDefault();
           let url = new URL(location.href);
           const { targetPage } = e.target.dataset;
           if (!targetPage) return;
-          url.searchParams.set("page", targetPage)
+          url.searchParams.set('page', targetPage)
           switchSearchMarkup(url, false, true);
         });
       });
@@ -371,19 +371,19 @@ if (searchContainer) {
   // if the page is running javascript let's make the filter menus togglable and full-screen when displayed
   const toggleBtns = [
     ...searchContainer.querySelectorAll(
-      ".search__filter__mobile-filter-toggle"
+      '.search__filter__mobile-filter-toggle'
     ),
   ];
-  const filterMenu = searchContainer.querySelector("#search-filter");
+  const filterMenu = searchContainer.querySelector('#search-filter');
   if (filterMenu) {
-    filterMenu.classList.add("js-fullscreen-filter-menu-content", "hide--sm");
+    filterMenu.classList.add('js-fullscreen-filter-menu-content', 'hide--sm');
     toggleBtns.map((btn) => {
-      btn.classList.remove("hide");
-      btn.addEventListener("click", () => {
-        if (filterMenu.classList.contains("hide--sm")) {
-          filterMenu.classList.remove("hide--sm");
+      btn.classList.remove('hide');
+      btn.addEventListener('click', () => {
+        if (filterMenu.classList.contains('hide--sm')) {
+          filterMenu.classList.remove('hide--sm');
         } else {
-          filterMenu.classList.add("hide--sm");
+          filterMenu.classList.add('hide--sm');
         }
       });
     });
@@ -405,9 +405,9 @@ if (searchContainer) {
     });
 
     //tab to checkboxes after filtering results
-    const filterBtn = document.getElementById("filter-results");
+    const filterBtn = document.getElementById('filter-results');
     if (filterBtn) {
-      document.addEventListener("click", () => {
+      document.addEventListener('click', () => {
           if (document.activeElement === filterBtn) {
             firstFocusableElmnt.focus();
           }

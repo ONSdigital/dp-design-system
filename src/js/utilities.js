@@ -1,12 +1,12 @@
 // Google Tag Manager
 export const gtmDataLayerPush = (obj) => {
-  if ("dataLayer" in window) {
+  if ('dataLayer' in window) {
     window.dataLayer.push(obj);
   }
 };
 
 export const findNode = (rootNode, selector) => {
-  if (typeof rootNode === "string") {
+  if (typeof rootNode === 'string') {
     selector = rootNode;
     rootNode = document;
   }
@@ -23,10 +23,10 @@ export const daysBetween = (startDate, endDate) => {
 
 export const fetchHtml = async (url) => {
   const response = await fetch(url, {
-    method: "get",
-    mode: "cors",
+    method: 'get',
+    mode: 'cors',
     headers: new Headers({
-      Accept: "application/json",
+      Accept: 'application/json',
     }),
   });
   return response && (await response.text());
@@ -34,6 +34,6 @@ export const fetchHtml = async (url) => {
 
 // element.replaceWith() is not IE compatible, this is a workaround
 export const replaceWithIEPolyfill = (el1, el2) => {
-  el1.insertAdjacentElement("beforebegin", el2);
+  el1.insertAdjacentElement('beforebegin', el2);
   el1.parentElement.removeChild(el1);
 };

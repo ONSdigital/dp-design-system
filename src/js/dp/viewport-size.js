@@ -1,5 +1,5 @@
 function initViewportSize() {
-  const footers = document.querySelector("footer");
+  const footers = document.querySelector('footer');
   if (footers) {
     // Get the last one expected to be the main one for the page
     const viewportDivHTML =
@@ -7,25 +7,25 @@ function initViewportSize() {
       "<div id='viewport-md' class='js-viewport-size'></div>" +
       "<div id='viewport-lg' class='js-viewport-size'></div>";
 
-    footers.insertAdjacentHTML("beforeend", viewportDivHTML);
+    footers.insertAdjacentHTML('beforeend', viewportDivHTML);
 
     jsEnhanceViewportSize();
   }
 }
 
-window.addEventListener("resize", function () {
+window.addEventListener('resize', function () {
   jsEnhanceViewportSize();
 });
 
 function clearViewportSizes() {
-  document.body.classList.remove("viewport-sm", "viewport-md", "viewport-lg");
+  document.body.classList.remove('viewport-sm', 'viewport-md', 'viewport-lg');
 }
 
 function jsEnhanceViewportSize() {
-  const viewportDivs = document.querySelectorAll(".js-viewport-size");
+  const viewportDivs = document.querySelectorAll('.js-viewport-size');
   if (viewportDivs) {
     viewportDivs.forEach((div) => {
-      if (window.getComputedStyle(div).display === "block") {
+      if (window.getComputedStyle(div).display === 'block') {
         clearViewportSizes();
         const idName = div.id;
         document.body.classList.add(idName);
@@ -34,4 +34,4 @@ function jsEnhanceViewportSize() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", initViewportSize);
+document.addEventListener('DOMContentLoaded', initViewportSize);

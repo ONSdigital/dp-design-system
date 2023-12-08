@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
     if (document.querySelectorAll('.cookies-no-js').length > 0) {
         document.querySelectorAll('.cookies-no-js').forEach((item) => item.classList.add('hidden'))
     }

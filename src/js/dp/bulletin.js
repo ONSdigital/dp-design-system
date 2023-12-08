@@ -1,6 +1,6 @@
-import { findNode } from "../utilities";
+import { findNode } from '../utilities';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   function attachAction(actionsList, selector, handler) {
     const actionNode = findNode(
       actionsList,
@@ -11,22 +11,22 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    actionNode.addEventListener("click", handler);
+    actionNode.addEventListener('click', handler);
   }
 
   function attachPageActions(actionsListSelector) {
     const actionsList = findNode(actionsListSelector);
     if (!actionsList) {
-      console.warn("attachPageActions() No actions list found");
+      console.warn('attachPageActions() No actions list found');
       return;
     }
 
-    attachAction(actionsList, ".page-action--print", (event) => {
+    attachAction(actionsList, '.page-action--print', (event) => {
       event.preventDefault();
       window.print();
     });
 
-    attachAction(actionsList, ".page-action--copy-link", (event) => {
+    attachAction(actionsList, '.page-action--copy-link', (event) => {
       event.preventDefault();
       if (navigator.clipboard) {
         navigator.clipboard
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  if (findNode(".bulletin")) {
-    attachPageActions(".bulletin .page-actions");
+  if (findNode('.bulletin')) {
+    attachPageActions('.bulletin .page-actions');
   }
 });

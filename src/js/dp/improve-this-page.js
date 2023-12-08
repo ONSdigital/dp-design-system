@@ -2,13 +2,13 @@ import {
   clearValidation,
   validateFields,
   setFormValidation,
-} from "./validation";
+} from './validation';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   const pageURL = window.location.href;
-  const feedbackPath = "/feedback";
+  const feedbackPath = '/feedback';
   const positiveFeedbackPath = `${feedbackPath}/thanks`;
-  const feedbackFormHeader = document.querySelector("#feedback-form-header");
+  const feedbackFormHeader = document.querySelector('#feedback-form-header');
   const feedbackMessage =
     '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
   const feedbackMessageError =
@@ -16,29 +16,29 @@ document.addEventListener("DOMContentLoaded", function () {
   let feedbackPositive = false;
   const title = document.title;
 
-  const useFeedbackAPI = document.querySelector("#feedback-api-enabled");
-  const feedbackAPIURL = document.querySelector("#feedback-api-url");
+  const useFeedbackAPI = document.querySelector('#feedback-api-enabled');
+  const feedbackAPIURL = document.querySelector('#feedback-api-url');
 
-  const feedbackFormURL = document.querySelector("#feedback-form-url");
+  const feedbackFormURL = document.querySelector('#feedback-form-url');
   if (feedbackFormURL) {
     feedbackFormURL.value = pageURL;
   }
 
-  const feedbackToggles = document.querySelectorAll("a.js-toggle");
+  const feedbackToggles = document.querySelectorAll('a.js-toggle');
   if (feedbackToggles) {
     feedbackToggles.forEach((toggle) => {
-      toggle.addEventListener("click", function (e) {
+      toggle.addEventListener('click', function (e) {
         e.preventDefault();
-        const feedbackForm = document.querySelector("#feedback-form");
+        const feedbackForm = document.querySelector('#feedback-form');
         if (feedbackForm) {
-          feedbackForm.classList.toggle("js-hidden");
+          feedbackForm.classList.toggle('js-hidden');
         }
         if (feedbackFormHeader) {
-          feedbackFormHeader.classList.toggle("js-hidden");
+          feedbackFormHeader.classList.toggle('js-hidden');
         }
         const id = toggle.id;
-        if (id !== "feedback-form-close") {
-          const descriptionField = document.querySelector("#description-field");
+        if (id !== 'feedback-form-close') {
+          const descriptionField = document.querySelector('#description-field');
           if (descriptionField) {
             descriptionField.focus();
           }
@@ -47,16 +47,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  const feedbackFormYes = document.querySelector("#feedback-form-yes");
+  const feedbackFormYes = document.querySelector('#feedback-form-yes');
   if (feedbackFormYes && feedbackFormHeader) {
-    feedbackFormYes.addEventListener("click", function (e) {
+    feedbackFormYes.addEventListener('click', function (e) {
       feedbackPositive = true;
       e.preventDefault();
       const feedbackFormContainer = document.querySelector(
-        "#feedback-form-container"
+        '#feedback-form-container'
       );
 
-      if (useFeedbackAPI && useFeedbackAPI.value === "true" && feedbackAPIURL) {
+      if (useFeedbackAPI && useFeedbackAPI.value === 'true' && feedbackAPIURL) {
         const postObject = {
           is_page_useful: true,
           is_general_feedback: false,
@@ -85,25 +85,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const feedbackFormContainer = document.querySelector(
-    "#feedback-form-container"
+    '#feedback-form-container'
   );
   if (feedbackFormContainer) {
-    const cancelBtn = feedbackFormContainer.querySelector("#btn__cancel");
-    const feedbackForm = document.querySelector("#feedback-form");
+    const cancelBtn = feedbackFormContainer.querySelector('#btn__cancel');
+    const feedbackForm = document.querySelector('#feedback-form');
     if (cancelBtn) {
-      cancelBtn.addEventListener("click", () => {
-        feedbackFormHeader.classList.toggle("js-hidden");
-        feedbackForm.classList.toggle("js-hidden");
+      cancelBtn.addEventListener('click', () => {
+        feedbackFormHeader.classList.toggle('js-hidden');
+        feedbackForm.classList.toggle('js-hidden');
       });
     }
 
-    feedbackFormContainer.addEventListener("submit", function (e) {
+    feedbackFormContainer.addEventListener('submit', function (e) {
       e.preventDefault();
-      const emailField = document.querySelector("#email-field");
-      const descriptionField = document.querySelector("#description-field");
-      const nameField = document.querySelector("#name-field");
+      const emailField = document.querySelector('#email-field');
+      const descriptionField = document.querySelector('#description-field');
+      const nameField = document.querySelector('#name-field');
 
-      clearValidation("feedback-form-container", "feedback-form", title);
+      clearValidation('feedback-form-container', 'feedback-form', title);
 
       const validationErrs = validateFields([
         descriptionField,
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      if (useFeedbackAPI && useFeedbackAPI.value === "true" && feedbackAPIURL) {
+      if (useFeedbackAPI && useFeedbackAPI.value === 'true' && feedbackAPIURL) {
         const postObject = {
           is_page_useful: false,
           is_general_feedback: false,
@@ -141,8 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
           feedbackMessageError,
           feedbackMessage
         );
-        feedbackFormHeader.classList.toggle("js-hidden");
-        feedbackForm.classList.toggle("js-hidden");
+        feedbackFormHeader.classList.toggle('js-hidden');
+        feedbackForm.classList.toggle('js-hidden');
       }
     });
   }
@@ -157,13 +157,13 @@ function fetchFeedbackAPI(
   feedbackMessage
 ) {
   const contentType = useUrlEncoding
-    ? "application/x-www-form-urlencoded"
-    : "application/json; charset=UTF-8";
+    ? 'application/x-www-form-urlencoded'
+    : 'application/json; charset=UTF-8';
   const fetchConfig = {
-    method: "POST",
+    method: 'POST',
     body: form,
     headers: new Headers({
-      "Content-Type": contentType,
+      'Content-Type': contentType,
     }),
   };
 

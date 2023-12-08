@@ -4,10 +4,10 @@
 export const clearValidation = (formId, errSummaryContainerId, pageTitle) => {
   const panels = document.querySelectorAll(`#${formId} .ons-panel--error`);
   panels?.forEach((panel) => {
-    const label = panel.querySelector("label");
+    const label = panel.querySelector('label');
     const input =
-      panel.querySelector("input") || panel.querySelector("textarea");
-    input?.classList?.remove("ons-input--error");
+      panel.querySelector('input') || panel.querySelector('textarea');
+    input?.classList?.remove('ons-input--error');
     panel.parentNode.replaceChildren(label, input);
   });
   const summary = document.querySelector(
@@ -28,8 +28,8 @@ export const validateFields = (fields) => {
 export const setFormValidation = (pageTitle, validationErrs, form) => {
   document.title = `Error: ${pageTitle}`;
   const errorSummary = getErrorSummary(validationErrs);
-  form.insertAdjacentHTML("afterbegin", errorSummary);
-  const validationPanel = document.querySelector("#form-validation-panel");
+  form.insertAdjacentHTML('afterbegin', errorSummary);
+  const validationPanel = document.querySelector('#form-validation-panel');
   validationPanel?.focus();
 };
 
@@ -39,11 +39,11 @@ function setFieldValidation(field, errors) {
     const errText = getValidationErrText(field.validity, field.dataset);
     const fieldLabel = field.previousElementSibling;
     const fieldErr = getFieldErr(errText, fieldLabel, `${field.id}-error`);
-    if (!fieldLabel.parentNode.classList.contains("ons-panel__body")) {
+    if (!fieldLabel.parentNode.classList.contains('ons-panel__body')) {
       fieldLabel.parentNode.innerHTML = fieldErr;
       const newField = document.getElementById(field.id);
       newField.value = field.value;
-      newField.classList.add("ons-input--error");
+      newField.classList.add('ons-input--error');
     }
     errors.push(new ValidationError(errText, `#${field.id}-error`));
   }
@@ -56,7 +56,7 @@ function getValidationErrText(validityState, dataset) {
       const datasetKey = Object.keys(dataset).filter((key) => key === validKey);
       return dataset[datasetKey]
         ? dataset[datasetKey]
-        : "Input field is invalid";
+        : 'Input field is invalid';
     }
   }
 }
@@ -85,8 +85,8 @@ function getErrorSummary(errors) {
   const header =
     errors.length > 1
       ? `There are ${errors.length} problems with your answer`
-      : "There is a problem with your answer";
-  let detail = "";
+      : 'There is a problem with your answer';
+  let detail = '';
   errors.forEach((error) => {
     detail += `<li class="ons-list__item">
         <a href="${error.url}" class="ons-list__link ons-js-inpagelink">
