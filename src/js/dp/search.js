@@ -49,7 +49,7 @@ if (searchContainer) {
 
     if (!responseText) {
       const pTag = resultsLoader.querySelector('p');
-      if(pTag) pTag.innerText = pTag.dataset.errorMessage;
+      if (pTag) pTag.innerText = pTag.dataset.errorMessage;
     } else {
       const fetchedDom = new DOMParser().parseFromString(responseText, 'text/html');
 
