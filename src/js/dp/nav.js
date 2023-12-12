@@ -22,7 +22,7 @@ function toggleMenu(toggleElement, menuElement) {
 }
 
 function getBoolFromString(stringToConvert) {
-  return (stringToConvert == 'true') ? true : false;
+  return (stringToConvert == 'true');
 }
 
 function toggleSearch(toggleElement, searchElement) {
