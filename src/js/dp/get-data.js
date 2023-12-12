@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Checking for downloads with loading spinner
   const getPage = async () => {
     const responseText = await fetchHtml(
-      window.location.pathname + '?spinner=true',
+      `${window.location.pathname}?spinner=true`,
     );
     const dom = new DOMParser().parseFromString(responseText, 'text/html');
     return dom.querySelector('[data-get-data-form-downloads=ready]');

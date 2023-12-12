@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const returnToURL = document.querySelector('#page-url-field').value;
-      const feedbackThanksURL = returnToURL ? feedbackThanks + '?returnTo=' + returnToURL : feedbackThanks;
+      const feedbackThanksURL = returnToURL ? `${feedbackThanks}?returnTo=${returnToURL}` : feedbackThanks;
 
       const fetchConfig = {
         method: 'POST',
