@@ -229,7 +229,7 @@ if (searchContainer) {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
 
         // Google Tag Manager
         gtmDataLayerPush({
@@ -259,7 +259,7 @@ if (searchContainer) {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
   
         // Google Tag Manager
         gtmDataLayerPush({
@@ -288,7 +288,7 @@ if (searchContainer) {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
   
         // Google Tag Manager
         gtmDataLayerPush({
@@ -317,7 +317,7 @@ if (searchContainer) {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
   
         // Google Tag Manager
         gtmDataLayerPush({
