@@ -139,9 +139,9 @@ if (searchContainer) {
 
       // Google Tag Manager
       gtmDataLayerPush({
-        'event': 'Filter',
+        event: 'Filter',
         'filter-by': e.target.dataset.gtmLabel,
-        'selected': e.target.checked ? 'selected' : 'unselected',
+        selected: e.target.checked ? 'selected' : 'unselected',
       });
     });
     theChildren.map((item) => {
@@ -153,9 +153,9 @@ if (searchContainer) {
 
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'ContentType-Filter',
+          event: 'ContentType-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -219,9 +219,9 @@ if (searchContainer) {
 
       // Google Tag Manager
       gtmDataLayerPush({
-        'event': 'Topic-Filter',
+        event: 'Topic-Filter',
         'filter-by': e.target.dataset.gtmLabel,
-        'selected': e.target.checked ? 'selected' : 'unselected',
+        selected: e.target.checked ? 'selected' : 'unselected',
       });
     });
     theChildren.map((item) => {
@@ -233,9 +233,9 @@ if (searchContainer) {
 
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'SubTopics-Filter',
+          event: 'SubTopics-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -263,9 +263,9 @@ if (searchContainer) {
   
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'PopulationTypes-Filter',
+          event: 'PopulationTypes-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -292,9 +292,9 @@ if (searchContainer) {
   
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'Dimensions-Filter',
+          event: 'Dimensions-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -321,9 +321,9 @@ if (searchContainer) {
   
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'Census-Filter',
+          event: 'Census-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -339,7 +339,7 @@ if (searchContainer) {
 
       // Google Tag Manager
       gtmDataLayerPush({
-        'event': 'SortBy',
+        event: 'SortBy',
         'sort-by': e.target.value,
       });
     });
