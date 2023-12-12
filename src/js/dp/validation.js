@@ -18,7 +18,7 @@ export const clearValidation = (formId, errSummaryContainerId, pageTitle) => {
 
 // validateFields takes an array of input fields to validate
 export const validateFields = (fields) => {
-  let errors = [];
+  const errors = [];
   fields.forEach((field) => setFieldValidation(field, errors));
   return errors;
 };

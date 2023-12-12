@@ -94,7 +94,7 @@ if (searchContainer) {
 
   const switchContentTypeFilterCheckbox = (paramsArray) => {
     // get current param
-    let url = new URL(location.href);
+    const url = new URL(location.href);
 
     // build new param
     paramsArray.map((param) => {
@@ -102,7 +102,7 @@ if (searchContainer) {
       if (param.isChecked) {
         url.searchParams.append('filter', param.filterName);
       } else {
-        let tmpValues = url.searchParams.getAll('filter').filter((e) => e !== param.filterName);
+        const tmpValues = url.searchParams.getAll('filter').filter((e) => e !== param.filterName);
         url.searchParams.delete('filter');
         if (tmpValues.length !== 0) {
           tmpValues.forEach((x, i) => {
@@ -163,11 +163,11 @@ if (searchContainer) {
 
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
-    let url = new URL(location.href);
+    const url = new URL(location.href);
     paramsArray.map((param) => {
       if (!('isChecked' in param) || !('topics' in param) || !('strParamType' in param)) return;
-      let strParamType = param.strParamType;
-      let tmpValues = url.searchParams.getAll(strParamType);
+      const strParamType = param.strParamType;
+      const tmpValues = url.searchParams.getAll(strParamType);
       url.searchParams.delete(strParamType);
       if (tmpValues.length <= 1) {
         if (param.isChecked) {
@@ -175,14 +175,14 @@ if (searchContainer) {
             tmpValues.push(param.topics);
             url.searchParams.append(strParamType,tmpValues);
           } else {
-            let tmpValue = tmpValues[0].split(',');
+            const tmpValue = tmpValues[0].split(',');
             tmpValue.push(param.topics);
             url.searchParams.append(strParamType,tmpValue);
           }
         } else {
           if (tmpValues.length <= 1) {
-            let tmpValue = tmpValues[0].split(',');
-            let tmpParam = tmpValue.filter((e) => e !== param.topics);
+            const tmpValue = tmpValues[0].split(',');
+            const tmpParam = tmpValue.filter((e) => e !== param.topics);
             if (tmpParam.length !== 0) {
               url.searchParams.append(strParamType, tmpParam);
             }
@@ -333,7 +333,7 @@ if (searchContainer) {
   const sortSelector = searchContainer.querySelector('.ons-input--sort-select');
   if (!!sortSelector) {
     sortSelector.addEventListener('change', async (e) => {
-      let url = new URL(location.href);
+      const url = new URL(location.href);
       url.searchParams.set('sort',e.target.value);
       switchSearchMarkup(url, true);
 
@@ -354,7 +354,7 @@ if (searchContainer) {
       paginationItems.forEach((item) => {
         item.addEventListener('click', async (e) => {
           e.preventDefault();
-          let url = new URL(location.href);
+          const url = new URL(location.href);
           const { targetPage } = e.target.dataset;
           if (!targetPage) return;
           url.searchParams.set('page', targetPage);
