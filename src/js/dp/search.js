@@ -166,7 +166,7 @@ if (searchContainer) {
     const url = new URL(location.href);
     paramsArray.map((param) => {
       if (!('isChecked' in param) || !('topics' in param) || !('strParamType' in param)) return;
-      const strParamType = param.strParamType;
+      const { strParamType } = param;
       const tmpValues = url.searchParams.getAll(strParamType);
       url.searchParams.delete(strParamType);
       if (tmpValues.length <= 1) {
