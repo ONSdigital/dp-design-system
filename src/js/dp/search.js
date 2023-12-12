@@ -22,7 +22,7 @@ if (searchContainer) {
       /*
       * reset to page 1 since filtering and sorting will change the length/order of results.
       * in the case where it's page one, remove page from searchParams.
-      */ 
+      */
       url.searchParams.set('page', '1');
     }
     const resultsLoader = document.querySelector('#results-loading');
@@ -32,7 +32,7 @@ if (searchContainer) {
     /*
     * Current behaviour of search controller gets the results using fetch and render in page
     * However, if no filters are selected or no query - the fetched page has no results and
-    * so they can't be retrieved. This condition below bypasses that until it is fixed. 
+    * so they can't be retrieved. This condition below bypasses that until it is fixed.
     */
     const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has('page'));
 
@@ -115,7 +115,7 @@ if (searchContainer) {
     // make the change to the markup
     switchSearchMarkup(url, true);
   };
-  
+
   // create listeners for content-type filter checkboxes controlling each other
   [
     ...searchContainer.querySelectorAll(
@@ -260,7 +260,7 @@ if (searchContainer) {
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
-  
+
         // Google Tag Manager
         gtmDataLayerPush({
           event: 'PopulationTypes-Filter',
@@ -289,7 +289,7 @@ if (searchContainer) {
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
-  
+
         // Google Tag Manager
         gtmDataLayerPush({
           event: 'Dimensions-Filter',
@@ -318,7 +318,7 @@ if (searchContainer) {
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
-  
+
         // Google Tag Manager
         gtmDataLayerPush({
           event: 'Census-Filter',

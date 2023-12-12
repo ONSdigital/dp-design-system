@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
     if (!searchBar.classList.contains('nav-search--hidden')) {
       toggleSearch(searchToggleContainer, searchBar);
-    } 
+    }
     toggleMenu(menuToggleContainer, primaryNav);
   });
 
