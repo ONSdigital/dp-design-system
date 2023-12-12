@@ -1,6 +1,6 @@
 import { findNode } from '../utilities';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   function attachAction(actionsList, selector, handler) {
     const actionNode = findNode(
       actionsList,

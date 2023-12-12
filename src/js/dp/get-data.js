@@ -4,7 +4,7 @@ import {
   gtmDataLayerPush,
 } from '../utilities';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   // Google Tag Manager
   function addAnalyticsToForm() {
     const getDataForm = document.forms['get-data-form'];

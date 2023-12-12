@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const feedbackFormContainer = document.querySelector(
     '#feedback-form-page-container',
   );
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (feedbackFormURL) {
       feedbackFormURL.value = pageURL;
     }
-    feedbackFormContainer.addEventListener('submit', function (e) {
+    feedbackFormContainer.addEventListener('submit', (e) => {
       e.preventDefault();
       const fieldErrors = document.querySelectorAll(
         '#feedback-form-page-container .feedback-form-control__error',

@@ -4,7 +4,7 @@ import {
   setFormValidation,
 } from './validation';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const pageURL = window.location.href;
   const feedbackPath = '/feedback';
   const positiveFeedbackPath = `${feedbackPath}/thanks`;
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const feedbackToggles = document.querySelectorAll('a.js-toggle');
   if (feedbackToggles) {
     feedbackToggles.forEach((toggle) => {
-      toggle.addEventListener('click', function (e) {
+      toggle.addEventListener('click', (e) => {
         e.preventDefault();
         const feedbackForm = document.querySelector('#feedback-form');
         if (feedbackForm) {
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const feedbackFormYes = document.querySelector('#feedback-form-yes');
   if (feedbackFormYes && feedbackFormHeader) {
-    feedbackFormYes.addEventListener('click', function (e) {
+    feedbackFormYes.addEventListener('click', (e) => {
       feedbackPositive = true;
       e.preventDefault();
       const feedbackFormContainer = document.querySelector(
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    feedbackFormContainer.addEventListener('submit', function (e) {
+    feedbackFormContainer.addEventListener('submit', (e) => {
       e.preventDefault();
       const emailField = document.querySelector('#email-field');
       const descriptionField = document.querySelector('#description-field');

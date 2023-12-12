@@ -12,7 +12,7 @@ function initViewportSize() {
   }
 }
 
-window.addEventListener('resize', function () {
+window.addEventListener('resize', () => {
   jsEnhanceViewportSize();
 });
 

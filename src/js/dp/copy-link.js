@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const copyBtn = document.querySelector('.ons-copy-link__btn');
   const btnText = copyBtn?.querySelector('.ons-btn__inner');
   const elemInitialContent = btnText?.textContent;

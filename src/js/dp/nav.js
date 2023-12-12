@@ -134,12 +134,12 @@ function clonePrimaryItems() {
   }
 }
 
-window.addEventListener('resize', function () {
+window.addEventListener('resize', () => {
   clonePrimaryItems();
   cloneSecondaryNav();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const primaryNav = document.querySelector('#nav-primary');
   const searchBar = document.querySelector('#searchBar');
   const navItem = document.querySelectorAll('.js-nav');
@@ -164,13 +164,13 @@ document.addEventListener('DOMContentLoaded', function () {
   document
     .querySelectorAll('.js-expandable > .js-expandable__content')
     .forEach((elem) => {
-      elem.addEventListener('click', function (event) {
+      elem.addEventListener('click', (event) => {
         event.stopPropagation();
       });
     });
 
   navItem.forEach((item) => {
-    item.addEventListener('keydown', function (e) {
+    item.addEventListener('keydown', (e) => {
       const focusedItem = document.querySelector(
           '.js-expandable__child a:focus',
         ), // only selects child item that is in focus
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const link = closestNav.querySelector('a');
         link.classList.add('hide-children');
         link.focus();
-        link.addEventListener('focusout', function () {
+        link.addEventListener('focusout', () => {
           link.classList.remove('hide-children');
         });
       }
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const searchToggle = document.querySelector('#search-toggle');
   const searchToggleContainer = searchToggle.parentNode;
 
-  menuToggle.addEventListener('click', function (event) {
+  menuToggle.addEventListener('click', (event) => {
     event.preventDefault();
     if (!searchBar.classList.contains('nav-search--hidden')) {
       toggleSearch(searchToggleContainer, searchBar);
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleMenu(menuToggleContainer, primaryNav);
   });
 
-  searchToggle.addEventListener('click', function (event) {
+  searchToggle.addEventListener('click', (event) => {
     event.preventDefault();
     if (!primaryNav.classList.contains('nav-main--hidden')) {
       toggleMenu(menuToggleContainer, primaryNav);
