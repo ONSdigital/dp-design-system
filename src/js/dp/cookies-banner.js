@@ -19,8 +19,7 @@ function determineWhetherToRenderBanner() {
 function initCookiesBanner() {
   const jsHideBanner = document.querySelector('.js-hide-cookies-banner');
   if (jsHideBanner) {
-    jsHideBanner.addEventListener('click', () =>
-      cookiesBanner.classList.add('hidden'),
+    jsHideBanner.addEventListener('click', () => cookiesBanner.classList.add('hidden'),
     );
   }
 
