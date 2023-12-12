@@ -227,7 +227,7 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
@@ -257,7 +257,7 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types' },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
@@ -286,7 +286,7 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions' },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
@@ -315,7 +315,7 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
