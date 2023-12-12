@@ -173,11 +173,11 @@ if (searchContainer) {
         if (param.isChecked) {
           if (tmpValues.length === 0) {
             tmpValues.push(param.topics);
-            url.searchParams.append(strParamType,tmpValues);
+            url.searchParams.append(strParamType, tmpValues);
           } else {
             const tmpValue = tmpValues[0].split(',');
             tmpValue.push(param.topics);
-            url.searchParams.append(strParamType,tmpValue);
+            url.searchParams.append(strParamType, tmpValue);
           }
         } else {
           if (tmpValues.length <= 1) {
@@ -334,7 +334,7 @@ if (searchContainer) {
   if (!!sortSelector) {
     sortSelector.addEventListener('change', async (e) => {
       const url = new URL(location.href);
-      url.searchParams.set('sort',e.target.value);
+      url.searchParams.set('sort', e.target.value);
       switchSearchMarkup(url, true);
 
       // Google Tag Manager
