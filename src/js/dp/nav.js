@@ -172,15 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
   navItem.forEach((item) => {
     item.addEventListener('keydown', (e) => {
       const focusedItem = document.querySelector(
-          '.js-expandable__child a:focus',
-        ), // only selects child item that is in focus
-        keycode = e.keyCode,
-        up = '38',
-        down = '40',
-        right = '39',
-        left = '37',
-        esc = '27',
-        tab = '9';
+        '.js-expandable__child a:focus',
+      ); // only selects child item that is in focus
+      const keycode = e.keyCode;
+      const up = '38';
+      const down = '40';
+      const right = '39';
+      const left = '37';
+      const esc = '27';
+      const tab = '9';
       if (keycode == tab && focusedItem) {
         item.classList.remove('primary-nav__item--focus');
         item.nextElementSibling.focus();
