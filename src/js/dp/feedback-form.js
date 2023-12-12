@@ -91,9 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           return response.text();
         })
-        .then((response) => {
-          return response;
-        })
+        .then((response) => response)
         .catch((error) => {
           console.error(error);
           return Promise.reject(error);
