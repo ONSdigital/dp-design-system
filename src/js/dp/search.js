@@ -102,7 +102,7 @@ if (searchContainer) {
       if (param.isChecked) {
         url.searchParams.append('filter', param.filterName);
       } else {
-        let tmpValues = url.searchParams.getAll('filter').filter(e => e !== param.filterName);
+        let tmpValues = url.searchParams.getAll('filter').filter((e) => e !== param.filterName);
         url.searchParams.delete('filter');
         if (tmpValues.length !== 0) {
           tmpValues.forEach((x, i) => {
@@ -182,7 +182,7 @@ if (searchContainer) {
         } else {
           if (tmpValues.length <= 1) {
             let tmpValue = tmpValues[0].split(',');
-            let tmpParam = tmpValue.filter(e => e !== param.topics);
+            let tmpParam = tmpValue.filter((e) => e !== param.topics);
             if (tmpParam.length !== 0) {
               url.searchParams.append(strParamType, tmpParam);
             }
