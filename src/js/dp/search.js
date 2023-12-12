@@ -6,7 +6,7 @@ if (searchContainer) {
   const scrollToTopOfSearch = () => {
     // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
     const searchResultsSection = searchContainer.querySelector(
-      '[aria-label="Search results"]'
+      '[aria-label="Search results"]',
     );
     const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top
       + document.documentElement.scrollTop;
@@ -16,7 +16,7 @@ if (searchContainer) {
   const switchSearchMarkup = async (
     url,
     resetPagination = false,
-    scrollToTop = false
+    scrollToTop = false,
   ) => {
     if (resetPagination) {
       /*
@@ -71,17 +71,17 @@ if (searchContainer) {
       } else {
         replaceWithIEPolyfill(
           searchContainer.querySelector('.search__results'),
-          fetchedDom.querySelector('.search__results')
+          fetchedDom.querySelector('.search__results'),
         );
 
         replaceWithIEPolyfill(
           searchContainer.querySelector('.search__pagination'),
-          fetchedDom.querySelector('.search__pagination')
+          fetchedDom.querySelector('.search__pagination'),
         );
 
         replaceWithIEPolyfill(
           searchContainer.querySelector('.search__summary__count'),
-          fetchedDom.querySelector('.search__summary__count')
+          fetchedDom.querySelector('.search__summary__count'),
         );
 
         initPaginationListeners();
@@ -119,13 +119,13 @@ if (searchContainer) {
   // create listeners for content-type filter checkboxes controlling each other
   [
     ...searchContainer.querySelectorAll(
-      '.content-type-filter [aria-controls]:not(input:disabled)'
+      '.content-type-filter [aria-controls]:not(input:disabled)',
     ),
   ].map((topFilter) => {
     const childrenSelector = topFilter.getAttribute('aria-controls');
     const theChildren = [
       ...searchContainer.querySelectorAll(
-        `#${childrenSelector} [type=checkbox]:not(input:disabled)`
+        `#${childrenSelector} [type=checkbox]:not(input:disabled)`,
       ),
     ];
     if (!childrenSelector) return;
@@ -141,7 +141,7 @@ if (searchContainer) {
       gtmDataLayerPush({
         'event': 'Filter',
         'filter-by': e.target.dataset.gtmLabel,
-        'selected': e.target.checked ? 'selected' : 'unselected'
+        'selected': e.target.checked ? 'selected' : 'unselected',
       });
     });
     theChildren.map((item) => {
@@ -155,7 +155,7 @@ if (searchContainer) {
         gtmDataLayerPush({
           'event': 'ContentType-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          'selected': e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -198,13 +198,13 @@ if (searchContainer) {
   // create listeners for topic filter checkboxes
   [
     ...searchContainer.querySelectorAll(
-      '.topic-filter [aria-controls]:not(input:disabled)'
+      '.topic-filter [aria-controls]:not(input:disabled)',
     ),
   ].map((topicFilter) => {
     const childrenSelector = topicFilter.getAttribute('aria-controls');
     const theChildren = [
       ...searchContainer.querySelectorAll(
-        `#${childrenSelector} [type=checkbox]`
+        `#${childrenSelector} [type=checkbox]`,
       ),
     ];
     if (!childrenSelector) return;
@@ -221,7 +221,7 @@ if (searchContainer) {
       gtmDataLayerPush({
         'event': 'Topic-Filter',
         'filter-by': e.target.dataset.gtmLabel,
-        'selected': e.target.checked ? 'selected' : 'unselected'
+        'selected': e.target.checked ? 'selected' : 'unselected',
       });
     });
     theChildren.map((item) => {
@@ -235,7 +235,7 @@ if (searchContainer) {
         gtmDataLayerPush({
           'event': 'SubTopics-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          'selected': e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -244,12 +244,12 @@ if (searchContainer) {
   // create listeners for population-types filter checkboxes
   [
     ...searchContainer.querySelectorAll(
-      '.population-types'
+      '.population-types',
     ),
   ].map((topicFilter) => {
     const theChildren = [
       ...topicFilter.querySelectorAll(
-        '[type=checkbox]'
+        '[type=checkbox]',
       ),
     ];
 
@@ -265,7 +265,7 @@ if (searchContainer) {
         gtmDataLayerPush({
           'event': 'PopulationTypes-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          'selected': e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -274,12 +274,12 @@ if (searchContainer) {
   // create listeners for dimensions filter checkboxes
   [
     ...searchContainer.querySelectorAll(
-      '.dimensions'
+      '.dimensions',
     ),
   ].map((topicFilter) => {
     const theChildren = [
       ...topicFilter.querySelectorAll(
-        '[type=checkbox]'
+        '[type=checkbox]',
       ),
     ];
     if (!theChildren) return;
@@ -294,7 +294,7 @@ if (searchContainer) {
         gtmDataLayerPush({
           'event': 'Dimensions-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          'selected': e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -303,12 +303,12 @@ if (searchContainer) {
   // create listeners for dimensions filter checkboxes
   [
     ...searchContainer.querySelectorAll(
-      '.census'
+      '.census',
     ),
   ].map((topicFilter) => {
     const theChildren = [
       ...topicFilter.querySelectorAll(
-        '[type=checkbox]'
+        '[type=checkbox]',
       ),
     ];
     if (!theChildren) return;
@@ -323,7 +323,7 @@ if (searchContainer) {
         gtmDataLayerPush({
           'event': 'Census-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected'
+          'selected': e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -340,7 +340,7 @@ if (searchContainer) {
       // Google Tag Manager
       gtmDataLayerPush({
         'event': 'SortBy',
-        'sort-by': e.target.value
+        'sort-by': e.target.value,
       });
     });
   }
@@ -348,7 +348,7 @@ if (searchContainer) {
   // create listeners for the pagination
   const initPaginationListeners = () => {
     const paginationItems = searchContainer.querySelectorAll(
-      '.ons-pagination__item a[data-target-page]'
+      '.ons-pagination__item a[data-target-page]',
     );
     if (!!paginationItems) {
       paginationItems.forEach((item) => {
@@ -370,7 +370,7 @@ if (searchContainer) {
   // if the page is running javascript let's make the filter menus togglable and full-screen when displayed
   const toggleBtns = [
     ...searchContainer.querySelectorAll(
-      '.search__filter__mobile-filter-toggle'
+      '.search__filter__mobile-filter-toggle',
     ),
   ];
   const filterMenu = searchContainer.querySelector('#search-filter');

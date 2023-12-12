@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function attachAction(actionsList, selector, handler) {
     const actionNode = findNode(
       actionsList,
-      `:scope ${selector}`
+      `:scope ${selector}`,
     );
     if (!actionNode) {
       console.warn(`attachAction() No node found for "${selector}"`);

@@ -10,7 +10,7 @@ export const clearValidation = (formId, errSummaryContainerId, pageTitle) => {
     panel.parentNode.replaceChildren(label, input);
   });
   const summary = document.querySelector(
-    `#${errSummaryContainerId} .ons-panel--error`
+    `#${errSummaryContainerId} .ons-panel--error`,
   );
   summary?.remove();
   document.title = pageTitle;

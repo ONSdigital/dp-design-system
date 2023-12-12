@@ -20,7 +20,7 @@ function initCookiesBanner() {
   const jsHideBanner = document.querySelector('.js-hide-cookies-banner');
   if (jsHideBanner) {
     jsHideBanner.addEventListener('click', () =>
-      cookiesBanner.classList.add('hidden')
+      cookiesBanner.classList.add('hidden'),
     );
   }
 
@@ -47,7 +47,7 @@ function submitCookieForm(e) {
   }
 
   const acceptConfirmation = document.querySelector(
-    '.js-cookies-banner-confirmation'
+    '.js-cookies-banner-confirmation',
   );
   if (acceptConfirmation) {
     acceptConfirmation.classList.remove('hidden');

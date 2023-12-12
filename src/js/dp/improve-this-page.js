@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
       feedbackPositive = true;
       e.preventDefault();
       const feedbackFormContainer = document.querySelector(
-        '#feedback-form-container'
+        '#feedback-form-container',
       );
 
       if (useFeedbackAPI && useFeedbackAPI.value === 'true' && feedbackAPIURL) {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
           feedbackFormHeader,
           postJson,
           feedbackMessageError,
-          feedbackMessage
+          feedbackMessage,
         );
       } else {
         fetchFeedbackAPI(
@@ -76,14 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
           feedbackFormHeader,
           serializeFormData(feedbackFormContainer),
           feedbackMessageError,
-          feedbackMessage
+          feedbackMessage,
         );
       }
     });
   }
 
   const feedbackFormContainer = document.querySelector(
-    '#feedback-form-container'
+    '#feedback-form-container',
   );
   if (feedbackFormContainer) {
     const cancelBtn = feedbackFormContainer.querySelector('#btn__cancel');
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
           feedbackFormHeader,
           postJson,
           feedbackMessageError,
-          feedbackMessage
+          feedbackMessage,
         );
       } else {
         fetchFeedbackAPI(
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
           feedbackFormHeader,
           serializeFormData(feedbackFormContainer),
           feedbackMessageError,
-          feedbackMessage
+          feedbackMessage,
         );
         feedbackFormHeader.classList.toggle('js-hidden');
         feedbackForm.classList.toggle('js-hidden');
@@ -152,7 +152,7 @@ function fetchFeedbackAPI(
   feedbackFormHeader,
   form,
   feedbackMessageError,
-  feedbackMessage
+  feedbackMessage,
 ) {
   const contentType = useUrlEncoding
     ? 'application/x-www-form-urlencoded'

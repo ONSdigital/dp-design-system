@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   const feedbackFormContainer = document.querySelector(
-    '#feedback-form-page-container'
+    '#feedback-form-page-container',
   );
 
   if (feedbackFormContainer) {
@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', function () {
     feedbackFormContainer.addEventListener('submit', function (e) {
       e.preventDefault();
       const fieldErrors = document.querySelectorAll(
-        '#feedback-form-page-container .feedback-form-control__error'
+        '#feedback-form-page-container .feedback-form-control__error',
       );
       fieldErrors.forEach((fieldError) => {
         fieldError.classList.remove('feedback-form-control__error');
       });
 
       const formErrors = document.querySelectorAll(
-        '#feedback-form-page-container .feedback-form-error'
+        '#feedback-form-page-container .feedback-form-error',
       );
       formErrors.forEach((formError) => {
         formError.remove();
@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
         method: 'POST',
         body: serializeFormData(feedbackFormContainer),
         headers: new Headers({
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        })
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        }),
       };
       return fetch(feedbackThanksURL, fetchConfig)
         .then(response => {

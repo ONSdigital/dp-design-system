@@ -13,7 +13,7 @@ function toggleSubnav(element) {
 function toggleMenu(toggleElement, menuElement) {
   toggleElement.classList.toggle('menu-is-expanded');
   const toggleAriaState = getBoolFromString(
-    toggleElement.querySelector('a').ariaExpanded
+    toggleElement.querySelector('a').ariaExpanded,
   );
   toggleElement.querySelector('a').ariaExpanded = !toggleAriaState;
   menuElement.classList.toggle('nav-main--hidden');
@@ -29,7 +29,7 @@ function toggleSearch(toggleElement, searchElement) {
   const langAttribute = document.documentElement.lang;
   toggleElement.classList.toggle('search-is-expanded');
   const toggleAriaState = getBoolFromString(
-    toggleElement.querySelector('a').ariaExpanded
+    toggleElement.querySelector('a').ariaExpanded,
   );
   toggleElement.querySelector('a').ariaExpanded = !toggleAriaState;
   let searchStr = '';
@@ -73,7 +73,7 @@ function cloneSecondaryNav() {
       newNavItem.insertAdjacentElement('beforeend', link);
 
       const primaryNavList = document.querySelector(
-        '.primary-nav__list li.primary-nav__language'
+        '.primary-nav__list li.primary-nav__language',
       );
       primaryNavList.insertAdjacentElement('beforebegin', newNavItem);
     });
@@ -88,7 +88,7 @@ function cloneSecondaryNav() {
       link.classList.remove('primary-nav__link', 'col');
       link.parentNode.remove();
       const cloneList = document.querySelector(
-        `.js-nav-clone__list li:nth-child(${index})`
+        `.js-nav-clone__list li:nth-child(${index})`,
       );
       cloneList.insertAdjacentElement('beforeend', link);
       link.parentNode.style.display = 'block';
@@ -119,7 +119,7 @@ function clonePrimaryItems() {
       newItem.classList.add(
         'primary-nav__child-item',
         'js-nav__duplicate',
-        'js-expandable__child'
+        'js-expandable__child',
       );
       newItem.insertAdjacentElement('beforeend', newLink);
       childList.insertBefore(newItem, childList.firstChild);
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
   navItem.forEach((item) => {
     item.addEventListener('keydown', function (e) {
       const focusedItem = document.querySelector(
-          '.js-expandable__child a:focus'
+          '.js-expandable__child a:focus',
         ), // only selects child item that is in focus
         keycode = e.keyCode,
         up = '38',

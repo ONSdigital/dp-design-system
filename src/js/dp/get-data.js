@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // Checking for downloads with loading spinner
   const getPage = async () => {
     const responseText = await fetchHtml(
-      window.location.pathname + '?spinner=true'
+      window.location.pathname + '?spinner=true',
     );
     const dom = new DOMParser().parseFromString(responseText, 'text/html');
     return dom.querySelector('[data-get-data-form-downloads=ready]');
   };
   const loadingSection = document.querySelector(
-    '[data-get-data-form-downloads=loading]'
+    '[data-get-data-form-downloads=loading]',
   );
   if (!!loadingSection) {
     let pollCount = 0;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (pollCount > 60) {
         clearTimeout(pollForDownloads);
         const spinner = loadingSection.querySelector(
-          '.ons-loading-spinner--after'
+          '.ons-loading-spinner--after',
         );
         spinner?.classList.add('ons-u-hidden');
       }
