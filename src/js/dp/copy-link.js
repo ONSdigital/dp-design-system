@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function failure(elem) {
     return function () {
       elem.textContent = elem.dataset.copyLinkFailure;
-      copyBtn.classList.add('ons-btn--disabled')
+      copyBtn.classList.add('ons-btn--disabled');
       copyBtn.setAttribute('aria-live', 'polite');
       copyBtn.setAttribute('disabled', 'true');
     };

@@ -12,7 +12,7 @@ if (searchContainer) {
       searchResultsSection.getBoundingClientRect().top +
       document.documentElement.scrollTop;
     window.scrollTo(0, resultsSectionOffsetFromTop);
-  }
+  };
 
   const switchSearchMarkup = async (
     url,
@@ -28,7 +28,7 @@ if (searchContainer) {
     }
     const resultsLoader = document.querySelector('#results-loading');
 
-    const numOfParams = Array.from(url.searchParams).length
+    const numOfParams = Array.from(url.searchParams).length;
 
     /*
     * Current behaviour of search controller gets the results using fetch and render in page
@@ -238,8 +238,8 @@ if (searchContainer) {
           'filter-by': e.target.dataset.gtmLabel,
           'selected': e.target.checked ? 'selected' : 'unselected'
         });
-      })
-    })
+      });
+    });
   });
 
     // create listeners for population-types filter checkboxes
@@ -268,8 +268,8 @@ if (searchContainer) {
             'filter-by': e.target.dataset.gtmLabel,
             'selected': e.target.checked ? 'selected' : 'unselected'
           });
-        })
-      })
+        });
+      });
     });
 
     // create listeners for dimensions filter checkboxes
@@ -297,8 +297,8 @@ if (searchContainer) {
             'filter-by': e.target.dataset.gtmLabel,
             'selected': e.target.checked ? 'selected' : 'unselected'
           });
-        })
-      })
+        });
+      });
     });
 
     // create listeners for dimensions filter checkboxes
@@ -326,8 +326,8 @@ if (searchContainer) {
             'filter-by': e.target.dataset.gtmLabel,
             'selected': e.target.checked ? 'selected' : 'unselected'
           });
-        })
-      })
+        });
+      });
     });
 
   // create listeners for the sort dropdown
@@ -335,7 +335,7 @@ if (searchContainer) {
   if (!!sortSelector) {
     sortSelector.addEventListener('change', async (e) => {
       let url = new URL(location.href);
-      url.searchParams.set('sort',e.target.value)
+      url.searchParams.set('sort',e.target.value);
       switchSearchMarkup(url, true);
 
       // Google Tag Manager
@@ -358,7 +358,7 @@ if (searchContainer) {
           let url = new URL(location.href);
           const { targetPage } = e.target.dataset;
           if (!targetPage) return;
-          url.searchParams.set('page', targetPage)
+          url.searchParams.set('page', targetPage);
           switchSearchMarkup(url, false, true);
         });
       });

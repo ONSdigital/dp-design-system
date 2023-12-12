@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (feedbackFormContainer) {
         const pageURL = document.referrer;
-        const feedbackThanks = '/feedback/thanks'
+        const feedbackThanks = '/feedback/thanks';
         const feedbackFormURL = document.querySelector('#feedback-form-url');
         if (feedbackFormURL) {
             feedbackFormURL.value = pageURL;
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 descriptionError.textContent = 'Write some feedback';
                 descriptionError.setAttribute('role', 'alert');
                 if (!document.querySelector('#description-field-label .feedback-form-error')) {
-                    const feedbackDescriptionParent = document.querySelector('#feedback-description-field')
+                    const feedbackDescriptionParent = document.querySelector('#feedback-description-field');
                     feedbackDescriptionParent.insertBefore(descriptionError, descriptionField);
                 }
                 descriptionField.classList.add('feedback-form-control__error');
@@ -46,19 +46,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (emailField && emailField.value !== '') {
                 const emailError = document.createElement('span');
-                emailError.className = 'feedback-form-error'
-                emailError.setAttribute('role', 'alert')
-                emailError.textContent = 'This is not a valid email address, correct it or delete it.'
+                emailError.className = 'feedback-form-error';
+                emailError.setAttribute('role', 'alert');
+                emailError.textContent = 'This is not a valid email address, correct it or delete it.';
                 if (hasErrors) {
-                    emailError
+                    emailError;
                 } else {
-                    emailError
+                    emailError;
                 }
 
                 const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/g;
                 if (!emailRegex.test(emailField.value)) {
                     if (!document.querySelector('#email-field-label .feedback-form-error')) {
-                        const emailParent = document.querySelector('#reply-request')
+                        const emailParent = document.querySelector('#reply-request');
                         emailParent.insertBefore(emailError, emailField);
                     }
                     emailField.classList.add('feedback-form-control__error');
@@ -67,13 +67,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (hasErrors) {
-                const feedbackButton = document.querySelector('.feedback-btn')
+                const feedbackButton = document.querySelector('.feedback-btn');
                 feedbackButton.blur();
                 return;
             }
 
             const returnToURL = document.querySelector('#page-url-field').value;
-            const feedbackThanksURL = returnToURL ? feedbackThanks+'?returnTo='+returnToURL : feedbackThanks
+            const feedbackThanksURL = returnToURL ? feedbackThanks+'?returnTo='+returnToURL : feedbackThanks;
 
             const fetchConfig = {
                 method: 'POST',

@@ -4,10 +4,10 @@ function toggleSubnav(element) {
     el.classList.toggle('js-nav-hidden');
   });
 
-  const elementAria = getBoolFromString(element.querySelector('a:first-child').ariaExpanded)
+  const elementAria = getBoolFromString(element.querySelector('a:first-child').ariaExpanded);
   element.querySelector('a:first-child').ariaExpanded = !elementAria;
-  const subnavAria = getBoolFromString(element.querySelector('.js-expandable__content').ariaExpanded)
-  element.querySelector('.js-expandable__content').ariaExpanded = !subnavAria
+  const subnavAria = getBoolFromString(element.querySelector('.js-expandable__content').ariaExpanded);
+  element.querySelector('.js-expandable__content').ariaExpanded = !subnavAria;
 }
 
 function toggleMenu(toggleElement, menuElement) {
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const expandable = item.querySelector('.js-expandable__content');
       expandable.ariaExpanded = expandedBool;
     }
-  }
+  };
 
   expandableItems.forEach((item) => {
     item.addEventListener('focusin', () => expandBehaviour(item, true));
