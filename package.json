@@ -72,6 +72,7 @@
   },
   "overrides": {
     "glob-parent": "^6.0.2",
-    "semver": "7.5.2"
+    "semver": "7.5.2",
+    "@koa/cors": "^5.0.0"
   }
 }
