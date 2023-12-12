@@ -40,9 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
       pollCount++;
       let downloadForm = await getPage();
       if (!!downloadForm) {
-        const allRequiredFormats =
-          downloadForm.querySelectorAll('input#csv, input#csvw, input#txt')
-            .length >= 3;
+        const allRequiredFormats = downloadForm.querySelectorAll('input#csv, input#csvw, input#txt')
+          .length >= 3;
         if (!allRequiredFormats) return;
         clearTimeout(pollForDownloads);
         setTimeout(async () => {

@@ -58,8 +58,8 @@ function cloneSecondaryNav() {
   const navList = document.querySelector('.js-nav-clone__list');
 
   if (
-    document.body.classList.contains('viewport-sm') &&
-    navList.querySelectorAll('.js-nav-clone__link').length > 0
+    document.body.classList.contains('viewport-sm')
+    && navList.querySelectorAll('.js-nav-clone__link').length > 0
   ) {
     // Remove from separate UL and add into primary
     navLink.forEach((link) => {
@@ -78,8 +78,8 @@ function cloneSecondaryNav() {
       primaryNavList.insertAdjacentElement('beforebegin', newNavItem);
     });
   } else if (
-    !document.body.classList.contains('viewport-sm') &&
-    document.querySelector('.secondary-nav__item').style.display === 'none'
+    !document.body.classList.contains('viewport-sm')
+    && document.querySelector('.secondary-nav__item').style.display === 'none'
   ) {
     // Remove from primary nav and add into separate secondary list
     navLink.forEach((link, i) => {
@@ -102,8 +102,8 @@ function clonePrimaryItems() {
 
   // Clone primary nav items into sub-menu on mobile, so it can still be selected on mobile
   if (
-    document.body.classList.contains('viewport-sm') &&
-    detectDuplicate.length === 0
+    document.body.classList.contains('viewport-sm')
+    && detectDuplicate.length === 0
   ) {
     expandableList.forEach((item) => {
       const href = item.querySelector('a').getAttribute('href');
@@ -125,8 +125,8 @@ function clonePrimaryItems() {
       childList.insertBefore(newItem, childList.firstChild);
     });
   } else if (
-    !document.body.classList.contains('viewport-sm') &&
-    detectDuplicate.length > 0
+    !document.body.classList.contains('viewport-sm')
+    && detectDuplicate.length > 0
   ) {
     detectDuplicate.forEach((duplicate) => {
       duplicate.remove();

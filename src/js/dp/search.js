@@ -8,9 +8,8 @@ if (searchContainer) {
     const searchResultsSection = searchContainer.querySelector(
       '[aria-label="Search results"]'
     );
-    const resultsSectionOffsetFromTop =
-      searchResultsSection.getBoundingClientRect().top +
-      document.documentElement.scrollTop;
+    const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top
+      + document.documentElement.scrollTop;
     window.scrollTo(0, resultsSectionOffsetFromTop);
   };
 
@@ -192,8 +191,8 @@ if (searchContainer) {
       }
     });
 
-      // make the change to the markup
-      switchSearchMarkup(url, true);
+    // make the change to the markup
+    switchSearchMarkup(url, true);
   };
 
   // create listeners for topic filter checkboxes
@@ -204,9 +203,9 @@ if (searchContainer) {
   ].map((topicFilter) => {
     const childrenSelector = topicFilter.getAttribute('aria-controls');
     const theChildren = [
-        ...searchContainer.querySelectorAll(
-            `#${childrenSelector} [type=checkbox]`
-        ),
+      ...searchContainer.querySelectorAll(
+        `#${childrenSelector} [type=checkbox]`
+      ),
     ];
     if (!childrenSelector) return;
     topicFilter.addEventListener('change', async (e) => {
@@ -242,93 +241,93 @@ if (searchContainer) {
     });
   });
 
-    // create listeners for population-types filter checkboxes
-    [
-      ...searchContainer.querySelectorAll(
-        '.population-types'
+  // create listeners for population-types filter checkboxes
+  [
+    ...searchContainer.querySelectorAll(
+      '.population-types'
+    ),
+  ].map((topicFilter) => {
+    const theChildren = [
+      ...topicFilter.querySelectorAll(
+        '[type=checkbox]'
       ),
-    ].map((topicFilter) => {
-      const theChildren = [
-          ...topicFilter.querySelectorAll(
-              '[type=checkbox]'
-          ),
-      ];
+    ];
 
-      if (!theChildren) return;
-      theChildren.map((item) => {
-        item.addEventListener('change', async (e) => {
-          switchTopicFilterCheckbox([
-            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
-          ]);
-          topicFilter.checked= theChildren.some((x) => x.checked);
+    if (!theChildren) return;
+    theChildren.map((item) => {
+      item.addEventListener('change', async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
+        ]);
+        topicFilter.checked= theChildren.some((x) => x.checked);
   
-          // Google Tag Manager
-          gtmDataLayerPush({
-            'event': 'PopulationTypes-Filter',
-            'filter-by': e.target.dataset.gtmLabel,
-            'selected': e.target.checked ? 'selected' : 'unselected'
-          });
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'PopulationTypes-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
         });
       });
     });
+  });
 
-    // create listeners for dimensions filter checkboxes
-    [
-      ...searchContainer.querySelectorAll(
-        '.dimensions'
+  // create listeners for dimensions filter checkboxes
+  [
+    ...searchContainer.querySelectorAll(
+      '.dimensions'
+    ),
+  ].map((topicFilter) => {
+    const theChildren = [
+      ...topicFilter.querySelectorAll(
+        '[type=checkbox]'
       ),
-    ].map((topicFilter) => {
-      const theChildren = [
-          ...topicFilter.querySelectorAll(
-              '[type=checkbox]'
-          ),
-      ];
-      if (!theChildren) return;
-      theChildren.map((item) => {
-        item.addEventListener('change', async (e) => {
-          switchTopicFilterCheckbox([
-            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
-          ]);
-          topicFilter.checked= theChildren.some((x) => x.checked);
+    ];
+    if (!theChildren) return;
+    theChildren.map((item) => {
+      item.addEventListener('change', async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
+        ]);
+        topicFilter.checked= theChildren.some((x) => x.checked);
   
-          // Google Tag Manager
-          gtmDataLayerPush({
-            'event': 'Dimensions-Filter',
-            'filter-by': e.target.dataset.gtmLabel,
-            'selected': e.target.checked ? 'selected' : 'unselected'
-          });
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'Dimensions-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
         });
       });
     });
+  });
 
-    // create listeners for dimensions filter checkboxes
-    [
-      ...searchContainer.querySelectorAll(
-        '.census'
+  // create listeners for dimensions filter checkboxes
+  [
+    ...searchContainer.querySelectorAll(
+      '.census'
+    ),
+  ].map((topicFilter) => {
+    const theChildren = [
+      ...topicFilter.querySelectorAll(
+        '[type=checkbox]'
       ),
-    ].map((topicFilter) => {
-      const theChildren = [
-          ...topicFilter.querySelectorAll(
-              '[type=checkbox]'
-          ),
-      ];
-      if (!theChildren) return;
-      theChildren.map((item) => {
-        item.addEventListener('change', async (e) => {
-          switchTopicFilterCheckbox([
-            { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
-          ]);
-          topicFilter.checked= theChildren.some((x) => x.checked);
+    ];
+    if (!theChildren) return;
+    theChildren.map((item) => {
+      item.addEventListener('change', async (e) => {
+        switchTopicFilterCheckbox([
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+        ]);
+        topicFilter.checked= theChildren.some((x) => x.checked);
   
-          // Google Tag Manager
-          gtmDataLayerPush({
-            'event': 'Census-Filter',
-            'filter-by': e.target.dataset.gtmLabel,
-            'selected': e.target.checked ? 'selected' : 'unselected'
-          });
+        // Google Tag Manager
+        gtmDataLayerPush({
+          'event': 'Census-Filter',
+          'filter-by': e.target.dataset.gtmLabel,
+          'selected': e.target.checked ? 'selected' : 'unselected'
         });
       });
     });
+  });
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector('.ons-input--sort-select');
@@ -408,9 +407,9 @@ if (searchContainer) {
     const filterBtn = document.getElementById('filter-results');
     if (filterBtn) {
       document.addEventListener('click', () => {
-          if (document.activeElement === filterBtn) {
-            firstFocusableElmnt.focus();
-          }
+        if (document.activeElement === filterBtn) {
+          firstFocusableElmnt.focus();
+        }
       });
     }
   }

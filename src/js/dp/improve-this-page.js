@@ -9,10 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const feedbackPath = '/feedback';
   const positiveFeedbackPath = `${feedbackPath}/thanks`;
   const feedbackFormHeader = document.querySelector('#feedback-form-header');
-  const feedbackMessage =
-    '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
-  const feedbackMessageError =
-    '<span id="feedback-form-error role="alert">Something went wrong, try using our <a href="/feedback">feedback form</a>.</span>';
+  const feedbackMessage = '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
+  const feedbackMessageError = '<span id="feedback-form-error role="alert">Something went wrong, try using our <a href="/feedback">feedback form</a>.</span>';
   let feedbackPositive = false;
   const title = document.title;
 
