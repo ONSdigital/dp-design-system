@@ -386,7 +386,7 @@ if (searchContainer) {
         }
       });
     });
-  };
+  }
 
   //capture focus in checkboxes
   const showResultsBtn = document.getElementById('show-results');
