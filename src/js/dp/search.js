@@ -331,7 +331,7 @@ if (searchContainer) {
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector('.ons-input--sort-select');
-  if (!!sortSelector) {
+  if (sortSelector) {
     sortSelector.addEventListener('change', async (e) => {
       const url = new URL(location.href);
       url.searchParams.set('sort', e.target.value);
@@ -350,7 +350,7 @@ if (searchContainer) {
     const paginationItems = searchContainer.querySelectorAll(
       '.ons-pagination__item a[data-target-page]',
     );
-    if (!!paginationItems) {
+    if (paginationItems) {
       paginationItems.forEach((item) => {
         item.addEventListener('click', async (e) => {
           e.preventDefault();
