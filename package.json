@@ -4,7 +4,7 @@
   "description": "Digital Publishing (ONS) Design System",
   "main": "",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
+    "preinstall": "npx --yes npm-force-resolutions",
     "audit": "auditjs ossi --quiet",
     "build": "npm run clean && NODE_ENV=production gulp build",
     "watch": "gulp watch",
