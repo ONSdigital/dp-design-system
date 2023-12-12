@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       const returnToURL = document.querySelector('#page-url-field').value;
-      const feedbackThanksURL = returnToURL ? feedbackThanks+'?returnTo='+returnToURL : feedbackThanks;
+      const feedbackThanksURL = returnToURL ? feedbackThanks + '?returnTo=' + returnToURL : feedbackThanks;
 
       const fetchConfig = {
         method: 'POST',
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }),
       };
       return fetch(feedbackThanksURL, fetchConfig)
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
             throw response;
           } else {
@@ -91,10 +91,10 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           return response.text();
         })
-        .then(response => {
+        .then((response) => {
           return response;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
           return Promise.reject(error);
         });

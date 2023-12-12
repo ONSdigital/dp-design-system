@@ -102,7 +102,7 @@ if (searchContainer) {
       if (param.isChecked) {
         url.searchParams.append('filter', param.filterName);
       } else {
-        let tmpValues = url.searchParams.getAll('filter').filter(e => e !== param.filterName);
+        let tmpValues = url.searchParams.getAll('filter').filter((e) => e !== param.filterName);
         url.searchParams.delete('filter');
         if (tmpValues.length !== 0) {
           tmpValues.forEach((x, i) => {
@@ -139,9 +139,9 @@ if (searchContainer) {
 
       // Google Tag Manager
       gtmDataLayerPush({
-        'event': 'Filter',
+        event: 'Filter',
         'filter-by': e.target.dataset.gtmLabel,
-        'selected': e.target.checked ? 'selected' : 'unselected',
+        selected: e.target.checked ? 'selected' : 'unselected',
       });
     });
     theChildren.map((item) => {
@@ -153,9 +153,9 @@ if (searchContainer) {
 
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'ContentType-Filter',
+          event: 'ContentType-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -182,7 +182,7 @@ if (searchContainer) {
         } else {
           if (tmpValues.length <= 1) {
             let tmpValue = tmpValues[0].split(',');
-            let tmpParam = tmpValue.filter(e => e !== param.topics);
+            let tmpParam = tmpValue.filter((e) => e !== param.topics);
             if (tmpParam.length !== 0) {
               url.searchParams.append(strParamType, tmpParam);
             }
@@ -219,9 +219,9 @@ if (searchContainer) {
 
       // Google Tag Manager
       gtmDataLayerPush({
-        'event': 'Topic-Filter',
+        event: 'Topic-Filter',
         'filter-by': e.target.dataset.gtmLabel,
-        'selected': e.target.checked ? 'selected' : 'unselected',
+        selected: e.target.checked ? 'selected' : 'unselected',
       });
     });
     theChildren.map((item) => {
@@ -229,13 +229,13 @@ if (searchContainer) {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
 
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'SubTopics-Filter',
+          event: 'SubTopics-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -259,13 +259,13 @@ if (searchContainer) {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
   
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'PopulationTypes-Filter',
+          event: 'PopulationTypes-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -288,13 +288,13 @@ if (searchContainer) {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
   
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'Dimensions-Filter',
+          event: 'Dimensions-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -317,13 +317,13 @@ if (searchContainer) {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
         ]);
-        topicFilter.checked= theChildren.some((x) => x.checked);
+        topicFilter.checked = theChildren.some((x) => x.checked);
   
         // Google Tag Manager
         gtmDataLayerPush({
-          'event': 'Census-Filter',
+          event: 'Census-Filter',
           'filter-by': e.target.dataset.gtmLabel,
-          'selected': e.target.checked ? 'selected' : 'unselected',
+          selected: e.target.checked ? 'selected' : 'unselected',
         });
       });
     });
@@ -339,7 +339,7 @@ if (searchContainer) {
 
       // Google Tag Manager
       gtmDataLayerPush({
-        'event': 'SortBy',
+        event: 'SortBy',
         'sort-by': e.target.value,
       });
     });
@@ -386,9 +386,9 @@ if (searchContainer) {
         }
       });
     });
-  };
+  }
 
-  //capture focus in checkboxes
+  // capture focus in checkboxes
   const showResultsBtn = document.getElementById('show-results');
   const focusableElmnts = document.querySelectorAll('input[type="checkbox"]:not([disabled]), #clear-search');
   const firstFocusableElmnt = focusableElmnts[0];
@@ -403,7 +403,7 @@ if (searchContainer) {
       }
     });
 
-    //tab to checkboxes after filtering results
+    // tab to checkboxes after filtering results
     const filterBtn = document.getElementById('filter-results');
     if (filterBtn) {
       document.addEventListener('click', () => {
