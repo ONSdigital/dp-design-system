@@ -388,7 +388,7 @@ if (searchContainer) {
     });
   }
 
-  //capture focus in checkboxes
+  // capture focus in checkboxes
   const showResultsBtn = document.getElementById('show-results');
   const focusableElmnts = document.querySelectorAll('input[type="checkbox"]:not([disabled]), #clear-search');
   const firstFocusableElmnt = focusableElmnts[0];
@@ -403,7 +403,7 @@ if (searchContainer) {
       }
     });
 
-    //tab to checkboxes after filtering results
+    // tab to checkboxes after filtering results
     const filterBtn = document.getElementById('filter-results');
     if (filterBtn) {
       document.addEventListener('click', () => {
