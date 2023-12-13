@@ -17,13 +17,14 @@ export const clearValidation = (formId, errSummaryContainerId, pageTitle) => {
     panel.parentNode.replaceChildren(label, input);
   });
   const summary = document.querySelector(
-    `#${errSummaryContainerId} .ons-panel--error`
+    `#${errSummaryContainerId} .ons-panel--error`,
   );
   summary?.remove();
   document.title = pageTitle;
 };
 
-// getValidationErrText is a helper function that accepts the validityState and dataset objects and will iterate over both to return the appropriate human friendly error message
+// getValidationErrText is a helper function that accepts the validityState and dataset objects
+// and will iterate over both to return the appropriate human friendly error message
 function getValidationErrText(validityState, dataset) {
   for (const validKey in validityState) {
     if (validityState[validKey]) {
@@ -33,6 +34,7 @@ function getValidationErrText(validityState, dataset) {
         : 'Input field is invalid';
     }
   }
+  return false;
 }
 
 // getFieldErr is a helper function that builds the html required for a field validation error
@@ -99,7 +101,8 @@ function setFieldValidation(field, errors) {
   }
 }
 
-// setFormValidation is a helper function that sets the page title and error summary for the form validation
+// setFormValidation is a helper function that sets the page title and error
+// summary for the form validation
 export const setFormValidation = (pageTitle, validationErrs, form) => {
   document.title = `Error: ${pageTitle}`;
   const errorSummary = getErrorSummary(validationErrs);
