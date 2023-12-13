@@ -6,12 +6,13 @@ export const gtmDataLayerPush = (obj) => {
 };
 
 export const findNode = (rootNode, selector) => {
+  let matches;
   if (typeof rootNode === 'string') {
-    selector = rootNode;
-    rootNode = document;
+    matches = document.querySelectorAll(rootNode);
+  } else {
+    matches = rootNode.querySelectorAll(selector);
   }
 
-  const matches = rootNode.querySelectorAll(selector);
   return matches ? matches[0] : null;
 };
 
@@ -29,7 +30,7 @@ export const fetchHtml = async (url) => {
       Accept: 'application/json',
     }),
   });
-  return response && (await response.text());
+  return response && response.text();
 };
 
 // element.replaceWith() is not IE compatible, this is a workaround
