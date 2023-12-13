@@ -16,8 +16,8 @@ export const findNode = (rootNode, selector) => {
 };
 
 export const daysBetween = (startDate, endDate) => {
-  let difference = endDate.getTime() - startDate.getTime();
-  let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+  const difference = endDate.getTime() - startDate.getTime();
+  const TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
   return TotalDays;
 };
 

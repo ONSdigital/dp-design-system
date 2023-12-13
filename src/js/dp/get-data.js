@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Google Tag Manager
   function addAnalyticsToForm() {
     const getDataForm = document.forms['get-data-form'];
-    if (!!getDataForm) {
+    if (getDataForm) {
       getDataForm.addEventListener('submit', (e) => {
         const formData = new FormData(e.target);
         const format = formData.get('format');
@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const loadingSection = document.querySelector(
     '[data-get-data-form-downloads=loading]',
   );
-  if (!!loadingSection) {
+  if (loadingSection) {
     let pollCount = 0;
     const pollForDownloads = setInterval(async () => {
       pollCount++;
       let downloadForm = await getPage();
-      if (!!downloadForm) {
+      if (downloadForm) {
         const allRequiredFormats = downloadForm.querySelectorAll('input#csv, input#csvw, input#txt')
           .length >= 3;
         if (!allRequiredFormats) return;

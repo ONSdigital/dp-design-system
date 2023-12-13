@@ -22,7 +22,7 @@ if (searchContainer) {
       /*
       * reset to page 1 since filtering and sorting will change the length/order of results.
       * in the case where it's page one, remove page from searchParams.
-      */ 
+      */
       url.searchParams.set('page', '1');
     }
     const resultsLoader = document.querySelector('#results-loading');
@@ -32,7 +32,7 @@ if (searchContainer) {
     /*
     * Current behaviour of search controller gets the results using fetch and render in page
     * However, if no filters are selected or no query - the fetched page has no results and
-    * so they can't be retrieved. This condition below bypasses that until it is fixed. 
+    * so they can't be retrieved. This condition below bypasses that until it is fixed.
     */
     const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has('page'));
 
@@ -94,7 +94,7 @@ if (searchContainer) {
 
   const switchContentTypeFilterCheckbox = (paramsArray) => {
     // get current param
-    let url = new URL(location.href);
+    const url = new URL(location.href);
 
     // build new param
     paramsArray.map((param) => {
@@ -102,7 +102,7 @@ if (searchContainer) {
       if (param.isChecked) {
         url.searchParams.append('filter', param.filterName);
       } else {
-        let tmpValues = url.searchParams.getAll('filter').filter((e) => e !== param.filterName);
+        const tmpValues = url.searchParams.getAll('filter').filter((e) => e !== param.filterName);
         url.searchParams.delete('filter');
         if (tmpValues.length !== 0) {
           tmpValues.forEach((x, i) => {
@@ -115,7 +115,7 @@ if (searchContainer) {
     // make the change to the markup
     switchSearchMarkup(url, true);
   };
-  
+
   // create listeners for content-type filter checkboxes controlling each other
   [
     ...searchContainer.querySelectorAll(
@@ -163,26 +163,26 @@ if (searchContainer) {
 
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
-    let url = new URL(location.href);
+    const url = new URL(location.href);
     paramsArray.map((param) => {
       if (!('isChecked' in param) || !('topics' in param) || !('strParamType' in param)) return;
-      let strParamType = param.strParamType;
-      let tmpValues = url.searchParams.getAll(strParamType);
+      const strParamType = param.strParamType;
+      const tmpValues = url.searchParams.getAll(strParamType);
       url.searchParams.delete(strParamType);
       if (tmpValues.length <= 1) {
         if (param.isChecked) {
           if (tmpValues.length === 0) {
             tmpValues.push(param.topics);
-            url.searchParams.append(strParamType,tmpValues);
+            url.searchParams.append(strParamType, tmpValues);
           } else {
-            let tmpValue = tmpValues[0].split(',');
+            const tmpValue = tmpValues[0].split(',');
             tmpValue.push(param.topics);
-            url.searchParams.append(strParamType,tmpValue);
+            url.searchParams.append(strParamType, tmpValue);
           }
         } else {
           if (tmpValues.length <= 1) {
-            let tmpValue = tmpValues[0].split(',');
-            let tmpParam = tmpValue.filter((e) => e !== param.topics);
+            const tmpValue = tmpValues[0].split(',');
+            const tmpParam = tmpValue.filter((e) => e !== param.topics);
             if (tmpParam.length !== 0) {
               url.searchParams.append(strParamType, tmpParam);
             }
@@ -227,7 +227,7 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
 
@@ -257,10 +257,10 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types' },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
-  
+
         // Google Tag Manager
         gtmDataLayerPush({
           event: 'PopulationTypes-Filter',
@@ -286,10 +286,10 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions' },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
-  
+
         // Google Tag Manager
         gtmDataLayerPush({
           event: 'Dimensions-Filter',
@@ -315,10 +315,10 @@ if (searchContainer) {
     theChildren.map((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
-          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics'},
+          { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
         ]);
         topicFilter.checked = theChildren.some((x) => x.checked);
-  
+
         // Google Tag Manager
         gtmDataLayerPush({
           event: 'Census-Filter',
@@ -331,10 +331,10 @@ if (searchContainer) {
 
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector('.ons-input--sort-select');
-  if (!!sortSelector) {
+  if (sortSelector) {
     sortSelector.addEventListener('change', async (e) => {
-      let url = new URL(location.href);
-      url.searchParams.set('sort',e.target.value);
+      const url = new URL(location.href);
+      url.searchParams.set('sort', e.target.value);
       switchSearchMarkup(url, true);
 
       // Google Tag Manager
@@ -350,11 +350,11 @@ if (searchContainer) {
     const paginationItems = searchContainer.querySelectorAll(
       '.ons-pagination__item a[data-target-page]',
     );
-    if (!!paginationItems) {
+    if (paginationItems) {
       paginationItems.forEach((item) => {
         item.addEventListener('click', async (e) => {
           e.preventDefault();
-          let url = new URL(location.href);
+          const url = new URL(location.href);
           const { targetPage } = e.target.dataset;
           if (!targetPage) return;
           url.searchParams.set('page', targetPage);

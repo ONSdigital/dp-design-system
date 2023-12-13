@@ -83,7 +83,7 @@ function cloneSecondaryNav() {
   ) {
     // Remove from primary nav and add into separate secondary list
     navLink.forEach((link, i) => {
-      let index = i + 1;
+      const index = i + 1;
       link.classList.add('secondary-nav__link');
       link.classList.remove('primary-nav__link', 'col');
       link.parentNode.remove();
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
     if (!searchBar.classList.contains('nav-search--hidden')) {
       toggleSearch(searchToggleContainer, searchBar);
-    } 
+    }
     toggleMenu(menuToggleContainer, primaryNav);
   });
 
