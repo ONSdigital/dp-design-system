@@ -12,8 +12,7 @@ export const clearValidation = (formId, errSummaryContainerId, pageTitle) => {
   const panels = document.querySelectorAll(`#${formId} .ons-panel--error`);
   panels?.forEach((panel) => {
     const label = panel.querySelector('label');
-    const input =
-      panel.querySelector('input') || panel.querySelector('textarea');
+    const input = panel.querySelector('input') || panel.querySelector('textarea');
     input?.classList?.remove('ons-input--error');
     panel.parentNode.replaceChildren(label, input);
   });
@@ -57,10 +56,8 @@ function getFieldErr(errorMsg, labelNode, id) {
 
 // getErrorSummary is a helper function that builds the html required for the error summary
 function getErrorSummary(errors) {
-  const header =
-    errors.length > 1
-      ? `There are ${errors.length} problems with your answer`
-      : 'There is a problem with your answer';
+  const header = errors.length > 1
+    ? `There are ${errors.length} problems with your answer` : 'There is a problem with your answer';
   let detail = '';
   errors.forEach((error) => {
     detail += `<li class="ons-list__item">
@@ -69,10 +66,9 @@ function getErrorSummary(errors) {
         </a>
       </li>`;
   });
-  const detailContainer =
-    errors.length > 1
-      ? `<ol class="ons-list">${detail}</ol>`
-      : `<p><a href="${errors[0].url}" class="ons-list__link ons-js-inpagelink">
+  const detailContainer = errors.length > 1
+    ? `<ol class="ons-list">${detail}</ol>`
+    : `<p><a href="${errors[0].url}" class="ons-list__link ons-js-inpagelink">
           ${errors[0].message}
         </a></p>`;
 
