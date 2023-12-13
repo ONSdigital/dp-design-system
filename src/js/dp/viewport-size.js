@@ -1,21 +1,3 @@
-function initViewportSize() {
-  const footers = document.querySelector('footer');
-  if (footers) {
-    // Get the last one expected to be the main one for the page
-    const viewportDivHTML = "<div id='viewport-sm' class='js-viewport-size'></div>"
-      + "<div id='viewport-md' class='js-viewport-size'></div>"
-      + "<div id='viewport-lg' class='js-viewport-size'></div>";
-
-    footers.insertAdjacentHTML('beforeend', viewportDivHTML);
-
-    jsEnhanceViewportSize();
-  }
-}
-
-window.addEventListener('resize', () => {
-  jsEnhanceViewportSize();
-});
-
 function clearViewportSizes() {
   document.body.classList.remove('viewport-sm', 'viewport-md', 'viewport-lg');
 }
@@ -33,4 +15,22 @@ function jsEnhanceViewportSize() {
   }
 }
 
+function initViewportSize() {
+  const footers = document.querySelector('footer');
+  if (footers) {
+    // Get the last one expected to be the main one for the page
+    const viewportDivHTML = "<div id='viewport-sm' class='js-viewport-size'></div>"
+      + "<div id='viewport-md' class='js-viewport-size'></div>"
+      + "<div id='viewport-lg' class='js-viewport-size'></div>";
+
+    footers.insertAdjacentHTML('beforeend', viewportDivHTML);
+
+    jsEnhanceViewportSize();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', initViewportSize);
+
+window.addEventListener('resize', () => {
+  jsEnhanceViewportSize();
+});
