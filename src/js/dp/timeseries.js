@@ -25,7 +25,7 @@ if (timeSeriesContainer) {
     const checkboxesTemp = timeSeriesContainer.querySelectorAll('.select-time-series');
     let allSelected = true;
     checkboxesTemp.forEach((item) => {
-      if (timeseriesList.hasOwnProperty(item.getAttribute('data-uri'))) {
+      if (Object.hasOwn(timeseriesList, item.getAttribute('data-uri'))) {
         const checkbox = item
         checkbox.checked = true;
       } else {
@@ -157,7 +157,7 @@ if (timeSeriesContainer) {
       datasetId: element.getAttribute('data-dataset-id'),
     };
 
-    if (timeseriesList.hasOwnProperty(timeseries.uri)) {
+    if (Object.hasOwn(timeseriesList, timeseries.uri)) {
       return; // it is already in the list
     }
 
