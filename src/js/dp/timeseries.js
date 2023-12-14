@@ -26,7 +26,7 @@ if (timeSeriesContainer) {
     let allSelected = true;
     checkboxesTemp.forEach((item) => {
       if (Object.hasOwn(timeseriesList, item.getAttribute('data-uri'))) {
-        const checkbox = item
+        const checkbox = item;
         checkbox.checked = true;
       } else {
         allSelected = false;
@@ -69,7 +69,7 @@ if (timeSeriesContainer) {
     remove(list, uri);
     if (list.children.length === 0) {
       buttons.forEach((btn) => {
-        const button = btn
+        const button = btn;
         button.style.display = 'none';
       });
       if (noTimeseries.classList.contains('hidden')) {
@@ -80,7 +80,7 @@ if (timeSeriesContainer) {
 
   function deselectAll() {
     timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
-      const checkbox = item
+      const checkbox = item;
       checkbox.checked = false;
       removeElement(item.getAttribute('data-uri'));
     });
@@ -103,7 +103,7 @@ if (timeSeriesContainer) {
       removeElement(timeseries.uri);
       timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
         if (item.getAttribute('data-uri') === timeseries.uri) {
-          const checkbox = item
+          const checkbox = item;
           checkbox.checked = false;
           timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
         }
@@ -142,7 +142,7 @@ if (timeSeriesContainer) {
     xlsForm.appendChild(getInputMarkup(timeseries));
     csvForm.appendChild(getInputMarkup(timeseries));
     buttons.forEach((btn) => {
-      const button = btn
+      const button = btn;
       button.style.display = 'block';
     });
     if (!noTimeseries.classList.contains('hidden')) {
@@ -169,7 +169,7 @@ if (timeSeriesContainer) {
     let alertShown = false;
     timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
       if (Object.keys(timeseriesList).length < 50) {
-        const checkbox = item
+        const checkbox = item;
         checkbox.checked = true;
         addElement(checkbox);
       } else if (!alertShown) {
