@@ -1,3 +1,4 @@
+/* eslint-disable no-inner-declarations */
 const timeSeriesContainer = document.querySelector('#timeSeriesContainer');
 // time series
 if (timeSeriesContainer) {
@@ -25,7 +26,8 @@ if (timeSeriesContainer) {
     let allSelected = true;
     checkboxesTemp.forEach((item) => {
       if (timeseriesList.hasOwnProperty(item.getAttribute('data-uri'))) {
-        item.checked = true;
+        const checkbox = item
+        checkbox.checked = true;
       } else {
         allSelected = false;
       }
@@ -67,7 +69,8 @@ if (timeSeriesContainer) {
     remove(list, uri);
     if (list.children.length === 0) {
       buttons.forEach((btn) => {
-        btn.style.display = 'none';
+        const button = btn
+        button.style.display = 'none';
       });
       if (noTimeseries.classList.contains('hidden')) {
         noTimeseries.classList.remove('hidden');
@@ -77,7 +80,8 @@ if (timeSeriesContainer) {
 
   function deselectAll() {
     timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
-      item.checked = false;
+      const checkbox = item
+      checkbox.checked = false;
       removeElement(item.getAttribute('data-uri'));
     });
   }
@@ -99,7 +103,8 @@ if (timeSeriesContainer) {
       removeElement(timeseries.uri);
       timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
         if (item.getAttribute('data-uri') === timeseries.uri) {
-          item.checked = false;
+          const checkbox = item
+          checkbox.checked = false;
           timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
         }
       });
@@ -137,7 +142,8 @@ if (timeSeriesContainer) {
     xlsForm.appendChild(getInputMarkup(timeseries));
     csvForm.appendChild(getInputMarkup(timeseries));
     buttons.forEach((btn) => {
-      btn.style.display = 'block';
+      const button = btn
+      button.style.display = 'block';
     });
     if (!noTimeseries.classList.contains('hidden')) {
       noTimeseries.classList.add('hidden');
@@ -163,8 +169,9 @@ if (timeSeriesContainer) {
     let alertShown = false;
     timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
       if (Object.keys(timeseriesList).length < 50) {
-        item.checked = true;
-        addElement(item);
+        const checkbox = item
+        checkbox.checked = true;
+        addElement(checkbox);
       } else if (!alertShown) {
         alert('You can only add up to 50 timeseries at a time');
         timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
@@ -214,7 +221,7 @@ if (timeSeriesContainer) {
   });
 
   // configuration of the observer:
-  const config = { childList: true, subtree: true, characterData: true }; // ,subtree: true, characterData: true
+  const config = { childList: true, subtree: true, characterData: true };
 
   // pass in the target node, as well as the observer options
   observer.observe(target, config);
@@ -254,3 +261,5 @@ if (timeSeriesContainer) {
     boxWithStuff.classList.toggle('hidden');
   });
 }
+
+/* eslint-enable no-inner-declarations */
