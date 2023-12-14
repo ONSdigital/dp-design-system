@@ -14,10 +14,164 @@ if (timeSeriesContainer) {
   const counter = timeSeriesContainer.querySelector('#timeseries__count');
   const exitBtn = timeSeriesContainer.querySelector('.timeseries__list--exit');
   const rememberCb = timeSeriesContainer.querySelector('#remember-selection');
+  let boxWithStuff = timeSeriesContainer.querySelector('#timeseriesListContainer');
 
   exitBtn.addEventListener('click', () => {
     boxWithStuff.classList.toggle('hidden');
   });
+
+  function checkIfItemsAreSelected() {
+    const checkboxesTemp = timeSeriesContainer.querySelectorAll('.select-time-series');
+    let allSelected = true;
+    checkboxesTemp.forEach((item) => {
+      if (timeseriesList.hasOwnProperty(item.getAttribute('data-uri'))) {
+        item.checked = true;
+      } else {
+        allSelected = false;
+      }
+    });
+    if (allSelected) {
+      timeSeriesContainer.querySelector('#select-all-time-series').checked = true;
+    }
+  }
+
+  function setLocalStorageProperty(cname, cvalue) {
+    localStorage.setItem(cname, cvalue);
+  }
+
+  function getLocalStorageProperty(name) {
+    const result = JSON.parse(localStorage.getItem(name));
+    return result;
+  }
+
+  function addToLocalStorageProperty(timeseries) {
+    timeseriesList[timeseries.uri] = timeseries;
+    setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)));
+  }
+
+  function findIn(element, uri) {
+    return element.querySelector(`[data-uri="${uri}"]`);
+  }
+
+  function remove(element, uri) {
+    const listItem = findIn(element, uri);
+    if (listItem) {
+      listItem.remove();
+    }
+  }
+
+  function removeElement(uri) {
+    listCount--;
+    delete timeseriesList[uri];
+    counter.innerHTML = listCount;
+    remove(list, uri);
+    if (list.children.length === 0) {
+      buttons.forEach((btn) => {
+        btn.style.display = 'none';
+      });
+      if (noTimeseries.classList.contains('hidden')) {
+        noTimeseries.classList.remove('hidden');
+      }
+    }
+  }
+
+  function deselectAll() {
+    timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
+      item.checked = false;
+      removeElement(item.getAttribute('data-uri'));
+    });
+  }
+
+  function getListElementMarkup(timeseries) {
+    const listItem = document.createElement('li');
+    listItem.classList.add('flush', 'col-wrap');
+    listItem.setAttribute('data-uri', timeseries.uri);
+    const listItemParagraph = document.createElement('p');
+    listItemParagraph.classList.add('flush', 'col', 'col--md-22', 'col--lg-22');
+    listItemParagraph.innerHTML = timeseries.title;
+    const listItemDiv = document.createElement('div');
+    listItemDiv.classList.add('col', 'col--md-4', 'col--lg-4');
+    const listItemRemoveBtn = document.createElement('button');
+    listItemRemoveBtn.classList.add('btn', 'btn--primary', 'btn--thin', 'btn--small', 'btn--narrow', 'float-right', 'margin-top-md--1', 'js-remove-selected');
+    listItemRemoveBtn.innerText = 'remove';
+
+    listItemRemoveBtn.addEventListener('click', async () => {
+      removeElement(timeseries.uri);
+      timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
+        if (item.getAttribute('data-uri') === timeseries.uri) {
+          item.checked = false;
+          timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
+        }
+      });
+    });
+
+    listItemDiv.appendChild(listItemRemoveBtn);
+    listItem.appendChild(listItemParagraph);
+    listItem.appendChild(listItemDiv);
+
+    return listItem;
+  }
+
+  let remember = getLocalStorageProperty(rememberCookieName);
+  if (remember) {
+    rememberCb.checked = true;
+  }
+
+  function getInputMarkup(timeseries) {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'uri';
+    input.setAttribute('uri', timeseries.uri);
+    input.value = timeseries.uri;
+    return input;
+  }
+
+  // Add time series markup to basket, and put hidden inputs for download
+  function addToPage(timeseries) {
+    listCount++;
+    counter.innerHTML = listCount;
+    list.prepend(getListElementMarkup(timeseries));
+    if (getLocalStorageProperty(rememberCookieName)) {
+      addToLocalStorageProperty(timeseries);
+    }
+    xlsForm.appendChild(getInputMarkup(timeseries));
+    csvForm.appendChild(getInputMarkup(timeseries));
+    buttons.forEach((btn) => {
+      btn.style.display = 'block';
+    });
+    if (!noTimeseries.classList.contains('hidden')) {
+      noTimeseries.classList.add('hidden');
+    }
+  }
+
+  function addElement(element) {
+    const timeseries = {
+      title: element.getAttribute('data-title'),
+      uri: element.getAttribute('data-uri'),
+      datasetId: element.getAttribute('data-dataset-id'),
+    };
+
+    if (timeseriesList.hasOwnProperty(timeseries.uri)) {
+      return; // it is already in the list
+    }
+
+    timeseriesList[timeseries.uri] = timeseries;
+    addToPage(timeseries);
+  }
+
+  function selectAll() {
+    let alertShown = false;
+    timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
+      if (Object.keys(timeseriesList).length < 50) {
+        item.checked = true;
+        addElement(item);
+      } else if (!alertShown) {
+        alert('You can only add up to 50 timeseries at a time');
+        timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
+        alertShown = true;
+      }
+    });
+  }
 
   function initialize() {
     remember = getLocalStorageProperty(rememberCookieName);
@@ -65,11 +219,6 @@ if (timeSeriesContainer) {
   // pass in the target node, as well as the observer options
   observer.observe(target, config);
 
-  let remember = getLocalStorageProperty(rememberCookieName);
-  if (remember) {
-    rememberCb.checked = true;
-  }
-
   rememberCb.addEventListener('input', () => {
     if (rememberCb.checked) {
       setLocalStorageProperty(rememberCookieName, true);
@@ -101,155 +250,7 @@ if (timeSeriesContainer) {
     }
   });
 
-  let boxWithStuff = timeSeriesContainer.querySelector('#timeseriesListContainer');
 
-  function checkIfItemsAreSelected() {
-    const checkboxesTemp = timeSeriesContainer.querySelectorAll('.select-time-series');
-    let allSelected = true;
-    checkboxesTemp.forEach((item) => {
-      if (timeseriesList.hasOwnProperty(item.getAttribute('data-uri'))) {
-        item.checked = true;
-      } else {
-        allSelected = false;
-      }
-    });
-    if (allSelected) {
-      timeSeriesContainer.querySelector('#select-all-time-series').checked = true;
-    }
-  }
-
-  function addElement(element) {
-    const timeseries = {
-      title: element.getAttribute('data-title'),
-      uri: element.getAttribute('data-uri'),
-      datasetId: element.getAttribute('data-dataset-id'),
-    };
-
-    if (timeseriesList.hasOwnProperty(timeseries.uri)) {
-      return; // it is already in the list
-    }
-
-    timeseriesList[timeseries.uri] = timeseries;
-    addToPage(timeseries);
-  }
-
-  function removeElement(uri) {
-    listCount--;
-    delete timeseriesList[uri];
-    counter.innerHTML = listCount;
-    remove(list, uri);
-    if (list.children.length === 0) {
-      buttons.forEach((btn) => {
-        btn.style.display = 'none';
-      });
-      if (noTimeseries.classList.contains('hidden')) {
-        noTimeseries.classList.remove('hidden');
-      }
-    }
-  }
-
-  function addToLocalStorageProperty(timeseries) {
-    timeseriesList[timeseries.uri] = timeseries;
-    setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)));
-  }
-
-  // Add time series markup to basket, and put hidden inputs for download
-  function addToPage(timeseries) {
-    listCount++;
-    counter.innerHTML = listCount;
-    list.prepend(getListElementMarkup(timeseries));
-    if (getLocalStorageProperty(rememberCookieName)) {
-      addToLocalStorageProperty(timeseries);
-    }
-    xlsForm.appendChild(getInputMarkup(timeseries));
-    csvForm.appendChild(getInputMarkup(timeseries));
-    buttons.forEach((btn) => {
-      btn.style.display = 'block';
-    });
-    if (!noTimeseries.classList.contains('hidden')) {
-      noTimeseries.classList.add('hidden');
-    }
-  }
-
-  function selectAll() {
-    let alertShown = false;
-    timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
-      if (Object.keys(timeseriesList).length < 50) {
-        item.checked = true;
-        addElement(item);
-      } else if (!alertShown) {
-        alert('You can only add up to 50 timeseries at a time');
-        timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
-        alertShown = true;
-      }
-    });
-  }
-
-  function setLocalStorageProperty(cname, cvalue) {
-    localStorage.setItem(cname, cvalue);
-  }
-
-  function getLocalStorageProperty(name) {
-    const result = JSON.parse(localStorage.getItem(name));
-    return result;
-  }
-
-  function deselectAll() {
-    timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
-      item.checked = false;
-      removeElement(item.getAttribute('data-uri'));
-    });
-  }
-
-  function remove(element, uri) {
-    const listItem = findIn(element, uri);
-    if (listItem) {
-      listItem.remove();
-    }
-  }
-
-  function findIn(element, uri) {
-    return element.querySelector(`[data-uri="${uri}"]`);
-  }
-
-  function getListElementMarkup(timeseries) {
-    const listItem = document.createElement('li');
-    listItem.classList.add('flush', 'col-wrap');
-    listItem.setAttribute('data-uri', timeseries.uri);
-    const listItemParagraph = document.createElement('p');
-    listItemParagraph.classList.add('flush', 'col', 'col--md-22', 'col--lg-22');
-    listItemParagraph.innerHTML = timeseries.title;
-    const listItemDiv = document.createElement('div');
-    listItemDiv.classList.add('col', 'col--md-4', 'col--lg-4');
-    const listItemRemoveBtn = document.createElement('button');
-    listItemRemoveBtn.classList.add('btn', 'btn--primary', 'btn--thin', 'btn--small', 'btn--narrow', 'float-right', 'margin-top-md--1', 'js-remove-selected');
-    listItemRemoveBtn.innerText = 'remove';
-
-    listItemRemoveBtn.addEventListener('click', async () => {
-      removeElement(timeseries.uri);
-      timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
-        if (item.getAttribute('data-uri') === timeseries.uri) {
-          item.checked = false;
-          timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
-        }
-      });
-    });
-
-    listItemDiv.appendChild(listItemRemoveBtn);
-    listItem.appendChild(listItemParagraph);
-    listItem.appendChild(listItemDiv);
-
-    return listItem;
-  }
-
-  function getInputMarkup(timeseries) {
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'uri';
-    input.setAttribute('uri', timeseries.uri);
-    input.value = timeseries.uri;
-    return input;
-  }
 
   basket.addEventListener('click', async () => {
     boxWithStuff.classList.toggle('hidden');
