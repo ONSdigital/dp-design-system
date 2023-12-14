@@ -63,7 +63,7 @@ if (timeSeriesContainer) {
   }
 
   function removeElement(uri) {
-    listCount--;
+    listCount -= 1;
     delete timeseriesList[uri];
     counter.innerHTML = listCount;
     remove(list, uri);
@@ -133,7 +133,7 @@ if (timeSeriesContainer) {
 
   // Add time series markup to basket, and put hidden inputs for download
   function addToPage(timeseries) {
-    listCount++;
+    listCount += 1;
     counter.innerHTML = listCount;
     list.prepend(getListElementMarkup(timeseries));
     if (getLocalStorageProperty(rememberCookieName)) {
