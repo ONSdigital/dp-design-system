@@ -24,7 +24,7 @@ if (timeSeriesContainer) {
     if (typeof remember === 'undefined') {
       // remember cookie never set, sets to true by default
       remember = true;
-      setLocalStorageProperty(rememberCookieName, remember, 7);
+      setLocalStorageProperty(rememberCookieName, remember);
       rememberCb.checked = true;
     }
 
@@ -41,7 +41,7 @@ if (timeSeriesContainer) {
         checkIfItemsAreSelected();
       });
     } else {
-      setLocalStorageProperty(basketCookieName, null, 0);
+      setLocalStorageProperty(basketCookieName, null);
     }
   }
 
@@ -72,11 +72,11 @@ if (timeSeriesContainer) {
 
   rememberCb.addEventListener('input', () => {
     if (rememberCb.checked) {
-      setLocalStorageProperty(rememberCookieName, true, 7);
-      setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)), 7);
+      setLocalStorageProperty(rememberCookieName, true);
+      setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)));
     } else {
-      setLocalStorageProperty(rememberCookieName, false, 7);
-      setLocalStorageProperty(basketCookieName, null, 7);
+      setLocalStorageProperty(rememberCookieName, false);
+      setLocalStorageProperty(basketCookieName, null);
     }
   });
 
@@ -150,7 +150,7 @@ if (timeSeriesContainer) {
 
   function addToLocalStorageProperty(timeseries) {
     timeseriesList[timeseries.uri] = timeseries;
-    setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)), 7);
+    setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)));
   }
 
   // Add time series markup to basket, and put hidden inputs for download
@@ -185,7 +185,7 @@ if (timeSeriesContainer) {
     });
   }
 
-  function setLocalStorageProperty(cname, cvalue, exdays) {
+  function setLocalStorageProperty(cname, cvalue) {
     localStorage.setItem(cname, cvalue);
   }
 
@@ -225,7 +225,7 @@ if (timeSeriesContainer) {
     listItemRemoveBtn.classList.add('btn', 'btn--primary', 'btn--thin', 'btn--small', 'btn--narrow', 'float-right', 'margin-top-md--1', 'js-remove-selected');
     listItemRemoveBtn.innerText = 'remove';
 
-    listItemRemoveBtn.addEventListener('click', async (e) => {
+    listItemRemoveBtn.addEventListener('click', async () => {
       removeElement(timeseries.uri);
       timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
         if (item.getAttribute('data-uri') === timeseries.uri) {
@@ -251,7 +251,7 @@ if (timeSeriesContainer) {
     return input;
   }
 
-  basket.addEventListener('click', async (e) => {
+  basket.addEventListener('click', async () => {
     boxWithStuff.classList.toggle('hidden');
   });
 }
