@@ -14,7 +14,7 @@ if (timeSeriesContainer) {
   const counter = timeSeriesContainer.querySelector('#timeseries__count');
   const exitBtn = timeSeriesContainer.querySelector('.timeseries__list--exit');
   const rememberCb = timeSeriesContainer.querySelector('#remember-selection');
-  let boxWithStuff = timeSeriesContainer.querySelector('#timeseriesListContainer');
+  const boxWithStuff = timeSeriesContainer.querySelector('#timeseriesListContainer');
 
   exitBtn.addEventListener('click', () => {
     boxWithStuff.classList.toggle('hidden');
@@ -249,8 +249,6 @@ if (timeSeriesContainer) {
       }
     }
   });
-
-
 
   basket.addEventListener('click', async () => {
     boxWithStuff.classList.toggle('hidden');
