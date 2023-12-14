@@ -26,6 +26,8 @@ export const clearValidation = (formId, errSummaryContainerId, pageTitle) => {
 // getValidationErrText is a helper function that accepts the validityState and dataset objects
 // and will iterate over both to return the appropriate human friendly error message
 function getValidationErrText(validityState, dataset) {
+  // ValidityState cannot be accessed using Object.keys/values/entries
+  // eslint-disable-next-line no-restricted-syntax
   for (const validKey in validityState) {
     if (validityState[validKey]) {
       const datasetKey = Object.keys(dataset).filter((key) => key === validKey);
