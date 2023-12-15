@@ -83,7 +83,7 @@ if (searchContainer) {
     }
 
     // update the address bar
-    history.pushState(null, '', decodeURIComponent(url));
+    window.history.pushState(null, '', decodeURIComponent(url));
   };
 
   const switchContentTypeFilterCheckbox = (paramsArray) => {
