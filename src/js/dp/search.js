@@ -4,7 +4,8 @@ const searchContainer = document.querySelector('.search__container');
 
 if (searchContainer) {
   const scrollToTopOfSearch = () => {
-    // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
+    // scroll to the top of the page after the content has been refreshed, to indicate a change
+    // has occurred
     const searchResultsSection = searchContainer.querySelector(
       '[aria-label="Search results"]',
     );
@@ -364,8 +365,8 @@ if (searchContainer) {
 
   initPaginationListeners();
 
-  // filter menu for mobile
-  // if the page is running javascript let's make the filter menus togglable and full-screen when displayed
+  // filter menu for mobile if the page is running javascript let's make the filter menus
+  // togglable and full-screen when displayed
   const toggleBtns = [
     ...searchContainer.querySelectorAll(
       '.search__filter__mobile-filter-toggle',
