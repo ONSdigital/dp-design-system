@@ -86,7 +86,7 @@ if (searchContainer) {
 
   const switchContentTypeFilterCheckbox = (paramsArray) => {
     // get current param
-    const url = new URL(location.href);
+    const url = new URL(window.location.href);
 
     // build new param
     paramsArray.forEach((param) => {
@@ -155,7 +155,7 @@ if (searchContainer) {
 
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
-    const url = new URL(location.href);
+    const url = new URL(window.location.href);
     paramsArray.forEach((param) => {
       if (!('isChecked' in param) || !('topics' in param) || !('strParamType' in param)) return;
       const { strParamType } = param;
@@ -323,7 +323,7 @@ if (searchContainer) {
   const sortSelector = searchContainer.querySelector('.ons-input--sort-select');
   if (sortSelector) {
     sortSelector.addEventListener('change', async (e) => {
-      const url = new URL(location.href);
+      const url = new URL(window.location.href);
       url.searchParams.set('sort', e.target.value);
       switchSearchMarkup(url, true);
 
@@ -344,7 +344,7 @@ if (searchContainer) {
       paginationItems.forEach((item) => {
         item.addEventListener('click', async (e) => {
           e.preventDefault();
-          const url = new URL(location.href);
+          const url = new URL(window.location.href);
           const { targetPage } = e.target.dataset;
           if (!targetPage) return;
           url.searchParams.set('page', targetPage);
