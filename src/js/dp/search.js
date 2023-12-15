@@ -97,7 +97,7 @@ if (searchContainer) {
     const url = new URL(location.href);
 
     // build new param
-    paramsArray.map((param) => {
+    paramsArray.forEach((param) => {
       if (!('isChecked' in param) || !('filterName' in param)) return;
       if (param.isChecked) {
         url.searchParams.append('filter', param.filterName);
@@ -121,7 +121,7 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '.content-type-filter [aria-controls]:not(input:disabled)',
     ),
-  ].map((topFilter) => {
+  ].forEach((topFilter) => {
     const childrenSelector = topFilter.getAttribute('aria-controls');
     const theChildren = [
       ...searchContainer.querySelectorAll(
@@ -144,7 +144,7 @@ if (searchContainer) {
         selected: e.target.checked ? 'selected' : 'unselected',
       });
     });
-    theChildren.map((item) => {
+    theChildren.forEach((item) => {
       item.addEventListener('change', async (e) => {
         switchContentTypeFilterCheckbox([
           { isChecked: e.target.checked, filterName: e.target.value },
@@ -164,7 +164,7 @@ if (searchContainer) {
   const switchTopicFilterCheckbox = (paramsArray) => {
     // get current param
     const url = new URL(location.href);
-    paramsArray.map((param) => {
+    paramsArray.forEach((param) => {
       if (!('isChecked' in param) || !('topics' in param) || !('strParamType' in param)) return;
       const { strParamType } = param;
       const tmpValues = url.searchParams.getAll(strParamType);
@@ -198,7 +198,7 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '.topic-filter [aria-controls]:not(input:disabled)',
     ),
-  ].map((topicFilter) => {
+  ].forEach((topicFilter) => {
     const childrenSelector = topicFilter.getAttribute('aria-controls');
     const theChildren = [
       ...searchContainer.querySelectorAll(
@@ -212,7 +212,7 @@ if (searchContainer) {
         topics: item.value,
         strParamType: 'topics',
       }));
-      theChildren.map((item) => (item.checked = e.target.checked));
+      theChildren.map((item) => item.checked = e.target.checked);
       switchTopicFilterCheckbox(paramsArray);
 
       // Google Tag Manager
@@ -222,7 +222,7 @@ if (searchContainer) {
         selected: e.target.checked ? 'selected' : 'unselected',
       });
     });
-    theChildren.map((item) => {
+    theChildren.forEach((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
@@ -244,7 +244,7 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '.population-types',
     ),
-  ].map((topicFilter) => {
+  ].forEach((topicFilter) => {
     const theChildren = [
       ...topicFilter.querySelectorAll(
         '[type=checkbox]',
@@ -252,7 +252,7 @@ if (searchContainer) {
     ];
 
     if (!theChildren) return;
-    theChildren.map((item) => {
+    theChildren.forEach((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'population_types' },
@@ -274,14 +274,14 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '.dimensions',
     ),
-  ].map((topicFilter) => {
+  ].forEach((topicFilter) => {
     const theChildren = [
       ...topicFilter.querySelectorAll(
         '[type=checkbox]',
       ),
     ];
     if (!theChildren) return;
-    theChildren.map((item) => {
+    theChildren.forEach((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'dimensions' },
@@ -303,14 +303,14 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '.census',
     ),
-  ].map((topicFilter) => {
+  ].forEach((topicFilter) => {
     const theChildren = [
       ...topicFilter.querySelectorAll(
         '[type=checkbox]',
       ),
     ];
     if (!theChildren) return;
-    theChildren.map((item) => {
+    theChildren.forEach((item) => {
       item.addEventListener('change', async (e) => {
         switchTopicFilterCheckbox([
           { isChecked: e.target.checked, topics: e.target.value, strParamType: 'topics' },
@@ -374,7 +374,7 @@ if (searchContainer) {
   const filterMenu = searchContainer.querySelector('#search-filter');
   if (filterMenu) {
     filterMenu.classList.add('js-fullscreen-filter-menu-content', 'hide--sm');
-    toggleBtns.map((btn) => {
+    toggleBtns.forEach((btn) => {
       btn.classList.remove('hide');
       btn.addEventListener('click', () => {
         if (filterMenu.classList.contains('hide--sm')) {
