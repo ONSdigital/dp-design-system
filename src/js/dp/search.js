@@ -117,7 +117,7 @@ if (searchContainer) {
     ),
   ].forEach((topFilter) => {
     const childrenSelector = topFilter.getAttribute('aria-controls');
-    const theChildren = [
+    let theChildren = [
       ...searchContainer.querySelectorAll(
         `#${childrenSelector} [type=checkbox]:not(input:disabled)`,
       ),
@@ -128,7 +128,13 @@ if (searchContainer) {
         isChecked: e.target.checked,
         filterName: item.value,
       }));
-      theChildren.map((item) => (item.checked = e.target.checked));
+      theChildren = theChildren.map(
+        (item) => {
+          const checkbox = item;
+          checkbox.checked = e.target.checked;
+          return checkbox;
+        },
+      );
       switchContentTypeFilterCheckbox(paramsArray);
 
       // Google Tag Manager
@@ -207,7 +213,13 @@ if (searchContainer) {
         topics: item.value,
         strParamType: 'topics',
       }));
-      theChildren.map((item) => item.checked = e.target.checked);
+      theChildren.map(
+        (item) => {
+          const checkbox = item;
+          checkbox.checked = e.target.checked;
+          return checkbox;
+        },
+      );
       switchTopicFilterCheckbox(paramsArray);
 
       // Google Tag Manager
