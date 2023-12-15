@@ -28,15 +28,6 @@ if (searchContainer) {
     }
     const resultsLoader = document.querySelector('#results-loading');
 
-    const numOfParams = Array.from(url.searchParams).length;
-
-    /*
-    * Current behaviour of search controller gets the results using fetch and render in page
-    * However, if no filters are selected or no query - the fetched page has no results and
-    * so they can't be retrieved. This condition below bypasses that until it is fixed.
-    */
-    const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has('page'));
-
     // if it takes more than 500ms to retreive results, show a loading message
     const timer = setTimeout(() => {
       if (resultsLoader) resultsLoader.classList.remove('hide');
@@ -106,7 +97,7 @@ if (searchContainer) {
         const tmpValues = url.searchParams.getAll('filter').filter((e) => e !== param.filterName);
         url.searchParams.delete('filter');
         if (tmpValues.length !== 0) {
-          tmpValues.forEach((x, i) => {
+          tmpValues.forEach((x) => {
             url.searchParams.append('filter', x);
           });
         }
