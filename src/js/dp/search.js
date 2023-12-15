@@ -76,6 +76,8 @@ if (searchContainer) {
           fetchedDom.querySelector('.search__summary__count'),
         );
 
+        // TODO: this func or initPaginationListeners need breaking up to allow move
+        // eslint-disable-next-line no-use-before-define
         initPaginationListeners();
       }
     }
