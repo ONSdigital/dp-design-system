@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.classList.add('primary-nav__item--focus');
         if (focusedItem) {
           focusedItem.parentElement.nextElementSibling
-            .querySelector('a')
+            ?.querySelector('a')
             .focus();
         } else {
           item.querySelector('.js-expandable__child a').focus();
