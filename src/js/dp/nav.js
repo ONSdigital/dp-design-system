@@ -1,3 +1,7 @@
+function getBoolFromString(stringToConvert) {
+  return (stringToConvert === 'true');
+}
+
 function toggleSubnav(element) {
   element.classList.toggle('js-expandable-active');
   element.querySelectorAll('.js-expandable__content').forEach((el) => {
@@ -19,10 +23,6 @@ function toggleMenu(toggleElement, menuElement) {
   menuElement.classList.toggle('nav-main--hidden');
   const menuAriaState = getBoolFromString(menuElement.ariaExpanded);
   menuElement.ariaExpanded = !menuAriaState;
-}
-
-function getBoolFromString(stringToConvert) {
-  return (stringToConvert === 'true');
 }
 
 function toggleSearch(toggleElement, searchElement) {
