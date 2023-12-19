@@ -34,17 +34,15 @@ function toggleSearch(toggleElement, searchElement) {
   toggleElement.querySelector('a').ariaExpanded = !toggleAriaState;
   let searchStr = '';
   if (langAttribute === 'en') {
-    toggleElement
-      .querySelector('.nav--controls__text')
-      .textContent.includes('Hide')
-      ? (searchStr = 'Search')
-      : (searchStr = 'Hide search');
+    searchStr = 'Hide search';
+    if (toggleElement.querySelector('.nav--controls__text').textContent.includes('Hide')) {
+      searchStr = 'Search';
+    }
   } else {
-    toggleElement
-      .querySelector('.nav--controls__text')
-      .textContent.includes('Cuddio')
-      ? (searchStr = 'Chwilio')
-      : (searchStr = 'Cuddio');
+    searchStr = 'Cuddio';
+    if (toggleElement.querySelector('.nav--controls__text').textContent.includes('Cuddio')) {
+      searchStr = 'Chwilio';
+    }
   }
   toggleElement.querySelector('.nav--controls__text').textContent = searchStr;
   searchElement.classList.toggle('nav-search--hidden');
