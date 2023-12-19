@@ -3,51 +3,56 @@ function getBoolFromString(stringToConvert) {
 }
 
 function toggleSubnav(element) {
-  element.classList.toggle('js-expandable-active');
-  element.querySelectorAll('.js-expandable__content').forEach((el) => {
+  const subnav = element;
+  subnav.classList.toggle('js-expandable-active');
+  subnav.querySelectorAll('.js-expandable__content').forEach((el) => {
     el.classList.toggle('js-nav-hidden');
   });
 
   const elementAria = getBoolFromString(element.querySelector('a:first-child').ariaExpanded);
-  element.querySelector('a:first-child').ariaExpanded = !elementAria;
+  subnav.querySelector('a:first-child').ariaExpanded = !elementAria;
   const subnavAria = getBoolFromString(element.querySelector('.js-expandable__content').ariaExpanded);
-  element.querySelector('.js-expandable__content').ariaExpanded = !subnavAria;
+  subnav.querySelector('.js-expandable__content').ariaExpanded = !subnavAria;
 }
 
 function toggleMenu(toggleElement, menuElement) {
-  toggleElement.classList.toggle('menu-is-expanded');
+  const toggle = toggleElement;
+  const menu = menuElement;
+  toggle.classList.toggle('menu-is-expanded');
   const toggleAriaState = getBoolFromString(
-    toggleElement.querySelector('a').ariaExpanded,
+    toggle.querySelector('a').ariaExpanded,
   );
-  toggleElement.querySelector('a').ariaExpanded = !toggleAriaState;
-  menuElement.classList.toggle('nav-main--hidden');
+  toggle.querySelector('a').ariaExpanded = !toggleAriaState;
+  menu.classList.toggle('nav-main--hidden');
   const menuAriaState = getBoolFromString(menuElement.ariaExpanded);
-  menuElement.ariaExpanded = !menuAriaState;
+  menu.ariaExpanded = !menuAriaState;
 }
 
 function toggleSearch(toggleElement, searchElement) {
+  const toggle = toggleElement;
+  const search = searchElement;
   const langAttribute = document.documentElement.lang;
-  toggleElement.classList.toggle('search-is-expanded');
+  toggle.classList.toggle('search-is-expanded');
   const toggleAriaState = getBoolFromString(
-    toggleElement.querySelector('a').ariaExpanded,
+    toggle.querySelector('a').ariaExpanded,
   );
-  toggleElement.querySelector('a').ariaExpanded = !toggleAriaState;
+  toggle.querySelector('a').ariaExpanded = !toggleAriaState;
   let searchStr = '';
   if (langAttribute === 'en') {
     searchStr = 'Hide search';
-    if (toggleElement.querySelector('.nav--controls__text').textContent.includes('Hide')) {
+    if (toggle.querySelector('.nav--controls__text').textContent.includes('Hide')) {
       searchStr = 'Search';
     }
   } else {
     searchStr = 'Cuddio';
-    if (toggleElement.querySelector('.nav--controls__text').textContent.includes('Cuddio')) {
+    if (toggle.querySelector('.nav--controls__text').textContent.includes('Cuddio')) {
       searchStr = 'Chwilio';
     }
   }
-  toggleElement.querySelector('.nav--controls__text').textContent = searchStr;
-  searchElement.classList.toggle('nav-search--hidden');
-  const searchAriaState = getBoolFromString(searchElement.ariaExpanded);
-  searchElement.ariaExpanded = !searchAriaState;
+  toggle.querySelector('.nav--controls__text').textContent = searchStr;
+  search.classList.toggle('nav-search--hidden');
+  const searchAriaState = getBoolFromString(search.ariaExpanded);
+  search.ariaExpanded = !searchAriaState;
 }
 
 function cloneSecondaryNav() {
@@ -60,7 +65,8 @@ function cloneSecondaryNav() {
     && navList.querySelectorAll('.js-nav-clone__link').length > 0
   ) {
     // Remove from separate UL and add into primary
-    navLink.forEach((link) => {
+    navLink.forEach((l) => {
+      const link = l;
       link.parentNode.style.display = 'none';
       const newNavItem = document.createElement('li');
       newNavItem.classList.add('primary-nav__item');
@@ -80,8 +86,9 @@ function cloneSecondaryNav() {
     && document.querySelector('.secondary-nav__item').style.display === 'none'
   ) {
     // Remove from primary nav and add into separate secondary list
-    navLink.forEach((link, i) => {
+    navLink.forEach((l, i) => {
       const index = i + 1;
+      const link = l;
       link.classList.add('secondary-nav__link');
       link.classList.remove('primary-nav__link', 'col');
       link.parentNode.remove();
@@ -150,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
   primaryNav.ariaExpanded = false;
 
   expandableItems.forEach((item) => {
-    item.addEventListener('click', function (event) {
+    item.addEventListener('click', (event) => {
       if (document.body.classList.contains('viewport-sm')) {
         event.preventDefault();
         toggleSubnav(this);
