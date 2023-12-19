@@ -179,10 +179,10 @@ if (searchContainer) {
             tmpValue.push(param.topics);
             url.searchParams.append(strParamType, tmpValue);
           }
-        } else if (tmpValues.length <= 1) {
-          const tmpValue = tmpValues[0].split(',');
-          const tmpParam = tmpValue.filter((e) => e !== param.topics);
-          if (tmpParam.length !== 0) {
+        } else if (tmpValues.length <= 1 && tmpValues.length !== 0) {
+          const tmpValue = tmpValues[0]?.split(',');
+          const tmpParam = tmpValue?.filter((e) => e !== param.topics);
+          if (tmpParam?.length !== 0) {
             url.searchParams.append(strParamType, tmpParam);
           }
         }
