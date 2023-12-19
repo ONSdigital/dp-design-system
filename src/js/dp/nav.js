@@ -22,7 +22,7 @@ function toggleMenu(toggleElement, menuElement) {
 }
 
 function getBoolFromString(stringToConvert) {
-  return (stringToConvert == 'true');
+  return (stringToConvert === 'true');
 }
 
 function toggleSearch(toggleElement, searchElement) {
@@ -33,7 +33,7 @@ function toggleSearch(toggleElement, searchElement) {
   );
   toggleElement.querySelector('a').ariaExpanded = !toggleAriaState;
   let searchStr = '';
-  if (langAttribute == 'en') {
+  if (langAttribute === 'en') {
     toggleElement
       .querySelector('.nav--controls__text')
       .textContent.includes('Hide')
@@ -175,17 +175,17 @@ document.addEventListener('DOMContentLoaded', () => {
         '.js-expandable__child a:focus',
       ); // only selects child item that is in focus
       const keycode = e.keyCode;
-      const up = '38';
-      const down = '40';
-      const right = '39';
-      const left = '37';
-      const esc = '27';
-      const tab = '9';
-      if (keycode == tab && focusedItem) {
+      const up = 38;
+      const down = 40;
+      const right = 39;
+      const left = 37;
+      const esc = 27;
+      const tab = 9;
+      if (keycode === tab && focusedItem) {
         item.classList.remove('primary-nav__item--focus');
         item.nextElementSibling.focus();
       }
-      if (keycode == esc) {
+      if (keycode === esc) {
         item.classList.remove('primary-nav__item--focus');
         const closestNav = item.closest('.js-nav');
         const link = closestNav.querySelector('a');
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
           link.classList.remove('hide-children');
         });
       }
-      if (keycode == down) {
+      if (keycode === down) {
         e.preventDefault();
         item.classList.add('primary-nav__item--focus');
         if (focusedItem) {
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
           item.querySelector('.js-expandable__child a').focus();
         }
       }
-      if (keycode == up) {
+      if (keycode === up) {
         e.preventDefault();
         if (focusedItem && focusedItem.parentElement.previousElementSibling) {
           focusedItem.parentElement.previousElementSibling
@@ -217,13 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
           item.querySelector('a').focus();
         }
       }
-      if (keycode == right) {
+      if (keycode === right) {
         e.preventDefault();
         item.classList.remove('primary-nav__item--focus');
         const closestNav = item.closest('.js-nav');
         closestNav.nextElementSibling.querySelector('a').focus();
       }
-      if (keycode == left) {
+      if (keycode === left) {
         e.preventDefault();
         item.classList.remove('primary-nav__item--focus');
         const closestNav = item.closest('.js-nav');
