@@ -22,6 +22,7 @@ function fetchFeedbackAPI(
       'Content-Type': contentType,
     }),
   };
+  const formHeader = feedbackFormHeader;
 
   fetch(url, fetchConfig)
     .then((response) => {
@@ -30,11 +31,11 @@ function fetchFeedbackAPI(
       }
     })
     .then(() => {
-      feedbackFormHeader.innerHTML = feedbackMessage;
+      formHeader.innerHTML = feedbackMessage;
     })
     .catch((error) => {
       console.error(error);
-      feedbackFormHeader.innerHTML = feedbackMessageError;
+      formHeader.innerHTML = feedbackMessageError;
     });
 }
 
