@@ -73,7 +73,8 @@ function hasCookiesPreferencesSet() {
 function userIsOnCookiesPreferencesPage() {
   const href = window.location.href.split('/');
 
-  // check that last element in href array is 'cookies' - in case we add further pages within the cookies path
+  // check that last element in href array is 'cookies' - in case we add further pages
+  // within the cookies path
   const isCookiesPreferencesPage = href[href.length - 1] === 'cookies';
   return isCookiesPreferencesPage;
 }
