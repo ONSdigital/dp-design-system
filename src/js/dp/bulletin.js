@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `:scope ${selector}`,
     );
     if (!actionNode) {
-      console.warn(`attachAction() No node found for "${selector}"`);
+      console.warn(`attachAction() No node found for "${selector}"`); // eslint-disable-line
       return;
     }
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function attachPageActions(actionsListSelector) {
     const actionsList = findNode(actionsListSelector);
     if (!actionsList) {
-      console.warn('attachPageActions() No actions list found');
+      console.warn('attachPageActions() No actions list found'); // eslint-disable-line
       return;
     }
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (navigator.clipboard) {
         navigator.clipboard
           .writeText(window.location.href)
-          .catch(console.error);
+          .catch(console.error); // eslint-disable-line
       }
     });
   }
