@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackFormHeader = document.querySelector('#feedback-form-header');
   const feedbackMessage = '<span id="feedback-form-confirmation">Thank you. Your feedback will help us as we continue to improve the service.</span>';
   const feedbackMessageError = '<span id="feedback-form-error role="alert">Something went wrong, try using our <a href="/feedback">feedback form</a>.</span>';
-  let feedbackPositive = false;
   const { title } = document;
 
   const useFeedbackAPI = document.querySelector('#feedback-api-enabled');
@@ -48,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackFormYes = document.querySelector('#feedback-form-yes');
   if (feedbackFormYes && feedbackFormHeader) {
     feedbackFormYes.addEventListener('click', (e) => {
-      feedbackPositive = true;
       e.preventDefault();
       const feedbackFormContainer = document.querySelector(
         '#feedback-form-container',
@@ -171,7 +169,7 @@ function fetchFeedbackAPI(
         throw response;
       }
     })
-    .then((response) => {
+    .then(() => {
       feedbackFormHeader.innerHTML = feedbackMessage;
     })
     .catch((error) => {
