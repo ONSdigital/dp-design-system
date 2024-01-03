@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (loadingSection) {
     let pollCount = 0;
     const pollForDownloads = setInterval(async () => {
-      pollCount++;
+      pollCount += 1;
       let downloadForm = await getPage();
       if (downloadForm) {
         const allRequiredFormats = downloadForm.querySelectorAll('input#csv, input#csvw, input#txt')
