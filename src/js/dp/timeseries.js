@@ -1,4 +1,4 @@
-/* eslint-disable no-inner-declarations */
+/* eslint-disable no-inner-declarations, no-alert */
 const timeSeriesContainer = document.querySelector('#timeSeriesContainer');
 // time series
 if (timeSeriesContainer) {
@@ -262,4 +262,4 @@ if (timeSeriesContainer) {
   });
 }
 
-/* eslint-enable no-inner-declarations */
+/* eslint-enable no-inner-declarations, no-alert */
