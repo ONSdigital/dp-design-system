@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', (event) => {
       if (document.body.classList.contains('viewport-sm')) {
         event.preventDefault();
-        toggleSubnav(this);
+        toggleSubnav(item);
       }
     });
   });
