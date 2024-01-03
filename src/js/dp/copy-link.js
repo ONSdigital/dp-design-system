@@ -4,23 +4,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const elemInitialContent = btnText?.textContent;
   let timeoutId;
 
-  function resetBtnState(elem, initialContent) {
-    elem.textContent = initialContent;
+  function resetBtnState(element, initialContent) {
+    const el = element;
+    el.textContent = initialContent;
     copyBtn.removeAttribute('aria-live', 'polite');
   }
 
-  function failure(elem) {
+  function failure(element) {
     return () => {
-      elem.textContent = elem.dataset.copyLinkFailure;
+      const el = element;
+      el.textContent = element.dataset.copyLinkFailure;
       copyBtn.classList.add('ons-btn--disabled');
       copyBtn.setAttribute('aria-live', 'polite');
       copyBtn.setAttribute('disabled', 'true');
     };
   }
 
-  function success(elem) {
+  function success(element) {
     return () => {
-      elem.textContent = elem.dataset.copyLinkSuccess;
+      const el = element;
+      el.textContent = element.dataset.copyLinkSuccess;
       copyBtn.setAttribute('aria-live', 'polite');
       timeoutId = setTimeout(resetBtnState, 5000, btnText, elemInitialContent);
     };
