@@ -4,6 +4,46 @@ import {
   setFormValidation,
 } from './validation';
 
+function fetchFeedbackAPI(
+  useUrlEncoding,
+  url,
+  feedbackFormHeader,
+  form,
+  feedbackMessageError,
+  feedbackMessage,
+) {
+  const contentType = useUrlEncoding
+    ? 'application/x-www-form-urlencoded'
+    : 'application/json; charset=UTF-8';
+  const fetchConfig = {
+    method: 'POST',
+    body: form,
+    headers: new Headers({
+      'Content-Type': contentType,
+    }),
+  };
+
+  fetch(url, fetchConfig)
+    .then((response) => {
+      if (!response.ok) {
+        throw response;
+      }
+    })
+    .then(() => {
+      feedbackFormHeader.innerHTML = feedbackMessage;
+    })
+    .catch((error) => {
+      console.error(error);
+      feedbackFormHeader.innerHTML = feedbackMessageError;
+    });
+}
+
+function serializeFormData(form) {
+  const data = new FormData(form);
+  const serializedData = new URLSearchParams(data).toString();
+  return serializedData;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const pageURL = window.location.href;
   const feedbackPath = '/feedback';
@@ -143,43 +183,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-function fetchFeedbackAPI(
-  useUrlEncoding,
-  url,
-  feedbackFormHeader,
-  form,
-  feedbackMessageError,
-  feedbackMessage,
-) {
-  const contentType = useUrlEncoding
-    ? 'application/x-www-form-urlencoded'
-    : 'application/json; charset=UTF-8';
-  const fetchConfig = {
-    method: 'POST',
-    body: form,
-    headers: new Headers({
-      'Content-Type': contentType,
-    }),
-  };
-
-  fetch(url, fetchConfig)
-    .then((response) => {
-      if (!response.ok) {
-        throw response;
-      }
-    })
-    .then(() => {
-      feedbackFormHeader.innerHTML = feedbackMessage;
-    })
-    .catch((error) => {
-      console.error(error);
-      feedbackFormHeader.innerHTML = feedbackMessageError;
-    });
-}
-
-function serializeFormData(form) {
-  const data = new FormData(form);
-  const serializedData = new URLSearchParams(data).toString();
-  return serializedData;
-}
