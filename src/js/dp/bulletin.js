@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `:scope ${selector}`,
     );
     if (!actionNode) {
-      console.warn(`attachAction() No node found for "${selector}"`); // eslint-disable-line
+      console.warn(`attachAction() No node found for "${selector}"`);
       return;
     }
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function attachPageActions(actionsListSelector) {
     const actionsList = findNode(actionsListSelector);
     if (!actionsList) {
-      console.warn('attachPageActions() No actions list found'); // eslint-disable-line
+      console.warn('attachPageActions() No actions list found');
       return;
     }
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (navigator.clipboard) {
         navigator.clipboard
           .writeText(window.location.href)
-          .catch(console.error); // eslint-disable-line
+          .catch(console.error);
       }
     });
   }

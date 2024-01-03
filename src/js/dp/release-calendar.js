@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const nodeReleaseTypeForm = findNode(formSelector);
     if (!nodeReleaseTypeForm) {
-      console.warn('releaseTypeAutoSubmit() No form found'); // eslint-disable-line
+      console.warn('releaseTypeAutoSubmit() No form found');
       return;
     }
 
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ':scope .ons-radios__items',
     );
     if (!nodeRadioSet) {
-      console.warn('releaseTypeAutoSubmit() No radio set found'); // eslint-disable-line
+      console.warn('releaseTypeAutoSubmit() No radio set found');
       return;
     }
 
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const nodeReleaseTypeCensusForm = findNode(formSelector);
     if (!nodeReleaseTypeCensusForm) {
-      console.warn('releaseTypeCensusAutoSubmit() No form found'); // eslint-disable-line
+      console.warn('releaseTypeCensusAutoSubmit() No form found');
       return;
     }
 
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (!nodeCheckboxSet) {
-      console.warn('releaseTypeCensusAutoSubmit() No checkbox set found'); // eslint-disable-line
+      console.warn('releaseTypeCensusAutoSubmit() No checkbox set found');
       return;
     }
 
