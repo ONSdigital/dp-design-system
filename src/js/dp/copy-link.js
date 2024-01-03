@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function failure(elem) {
-    return function () {
+    return () => {
       elem.textContent = elem.dataset.copyLinkFailure;
       copyBtn.classList.add('ons-btn--disabled');
       copyBtn.setAttribute('aria-live', 'polite');
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function success(elem) {
-    return function () {
+    return () => {
       elem.textContent = elem.dataset.copyLinkSuccess;
       copyBtn.setAttribute('aria-live', 'polite');
       timeoutId = setTimeout(resetBtnState, 5000, btnText, elemInitialContent);
