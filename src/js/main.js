@@ -11,5 +11,4 @@ import './dp/timeseries';
 import './dp/data-aggregation';
 import './dp/release-calendar';
 import './dp/copy-link';
-import './dp/feedback-form';
 import './dp/get-data';
