@@ -33,9 +33,7 @@ function fetchFeedbackAPI(
     .then(() => {
       formHeader.innerHTML = feedbackMessage;
     })
-    .catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error(error);
+    .catch(() => {
       formHeader.innerHTML = feedbackMessageError;
     });
 }
