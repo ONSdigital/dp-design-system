@@ -3,8 +3,8 @@ const cookiesSet = hasCookiesPreferencesSet();
 const cookiesBanner = document.querySelector('.js-cookies-banner-form');
 
 const oneYearInSeconds = 31622400;
-const url = window.location.hostname;
-const cookiesDomain = extractDomainFromUrl(url);
+const currentUrl = window.location.hostname;
+const cookiesDomain = extractDomainFromUrl(currentUrl);
 const cookiesPreference = true;
 const encodedCookiesPolicy = '%7B%22essential%22%3Atrue%2C%22usage%22%3Atrue%7D';
 const cookiesPath = '/';
