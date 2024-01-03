@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navigator.clipboard
       .writeText(window.location.href)
       .then(success(btnText), failure(btnText))
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error)); // eslint-disable-line
   }
 
   if (copyBtn && navigator.clipboard) {
