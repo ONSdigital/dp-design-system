@@ -4,17 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const elemInitialContent = btnText?.textContent;
   let timeoutId;
 
-  if (copyBtn && navigator.clipboard) {
-    copyBtn.addEventListener('click', copyText);
-    copyBtn.classList.remove('ons-u-d-no');
-  }
-
-  function copyText() {
-    clearTimeout(timeoutId);
-    navigator.clipboard
-      .writeText(window.location.href)
-      .then(success(btnText), failure(btnText))
-      .catch((error) => console.error(error));
+  function resetBtnState(elem, initialContent) {
+    elem.textContent = initialContent;
+    copyBtn.removeAttribute('aria-live', 'polite');
   }
 
   function failure(elem) {
@@ -34,8 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  function resetBtnState(elem, initialContent) {
-    elem.textContent = initialContent;
-    copyBtn.removeAttribute('aria-live', 'polite');
+  function copyText() {
+    clearTimeout(timeoutId);
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then(success(btnText), failure(btnText))
+      .catch((error) => console.error(error));
+  }
+
+  if (copyBtn && navigator.clipboard) {
+    copyBtn.addEventListener('click', copyText);
+    copyBtn.classList.remove('ons-u-d-no');
   }
 });
