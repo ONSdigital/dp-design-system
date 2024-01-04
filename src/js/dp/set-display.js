@@ -1,11 +1,14 @@
 function setDisplay() {
-  document.querySelectorAll('.js--hide').forEach((el) => {
+  document.querySelectorAll('.js--hide').forEach((element) => {
+    const el = element;
     el.style.display = 'none';
   });
-  document.querySelectorAll('.js--show').forEach((el) => {
+  document.querySelectorAll('.js--show').forEach((element) => {
+    const el = element;
     el.style.display = 'block';
   });
-  document.querySelectorAll('.nojs--hide').forEach((el) => {
+  document.querySelectorAll('.nojs--hide').forEach((element) => {
+    const el = element;
     el.classList.remove('nojs--hide');
   });
 }
