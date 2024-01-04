@@ -79,12 +79,12 @@ if (searchContainer) {
     }
 
     // update the address bar
-    history.pushState(null, '', decodeURIComponent(url));
+    window.history.pushState(null, '', decodeURIComponent(url));
   };
 
   const switchQuery = (paramsArray) => {
     // get current param
-    const url = new URL(location.href);
+    const url = new URL(window.location.href);
 
     // build new param
     paramsArray.map((param) => {
@@ -105,7 +105,7 @@ if (searchContainer) {
 
   const switchDate = (paramsArray, forAfterParams = true, forBeforeParams = true) => {
     // get current param
-    const url = new URL(location.href);
+    const url = new URL(window.location.href);
 
     const afterKeyQueryArray = [
       {
