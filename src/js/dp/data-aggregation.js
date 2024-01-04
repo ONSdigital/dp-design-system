@@ -381,7 +381,8 @@ if (searchContainer) {
       if (!container.classList.contains('ons-panel--error', 'ons-panel--no-title')) {
         container.classList.add('ons-panel--error', 'ons-panel--no-title');
         errorElement.classList.contains('hidden') ? errorElement.classList.remove('hidden') : '';
-        errorTextElement.innerText = errorText;
+        const errTxtElement = errorTextElement;
+        errTxtElement.innerText = errorText;
         if (!container.contains(assistiveText)) {
           container.prepend(assistiveText);
         }
