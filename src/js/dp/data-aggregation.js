@@ -452,24 +452,4 @@ if (searchContainer) {
       }
     });
   });
-
-  // const allReleasesCb = searchContainer.querySelector("#all-releases");
-
-  // if(allReleasesCb){
-  //   allReleasesCb.addEventListener("input", async (e) => {
-  //     let url = new URL(location.href);
-  //     if(allReleasesCb.checked){
-  //       if (!url.searchParams.get("allReleases")) {
-  //         url.searchParams.append("allReleases", 1);
-  //       } else {
-  //         url.searchParams.set("allReleases", 1);
-  //       }
-  //     } else{
-  //       url.searchParams.delete("allReleases");
-
-  //     }
-  //     // make the change to the markup
-  //     switchSearchMarkup(url, true, false);
-  //   });
-  // }
 }
