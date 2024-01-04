@@ -87,7 +87,7 @@ if (searchContainer) {
     const url = new URL(window.location.href);
 
     // build new param
-    paramsArray.map((param) => {
+    paramsArray.forEach((param) => {
       if (param && param.query) {
         if (!url.searchParams.get('q')) {
           url.searchParams.append('q', param.query);
@@ -150,7 +150,7 @@ if (searchContainer) {
       }
     };
 
-    paramsArray.map((param) => {
+    paramsArray.forEach((param) => {
       if (forBeforeParams) {
         beforeKeyQueryArray.forEach((element) => {
           addOrRemoveParam(param, element);
@@ -172,7 +172,7 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '#keywords',
     ),
-  ].map((topFilter) => {
+  ].forEach((topFilter) => {
     // const childrenSelector = topFilter.getAttribute("aria-controls");
     const theChildren = [
       searchContainer.querySelector(
@@ -303,7 +303,7 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '.to-date-filters',
     ),
-  ].map((topFilter) => {
+  ].forEach((topFilter) => {
     const toYear = searchContainer.querySelector('#toDateYear');
     const toMonth = searchContainer.querySelector('#toDateMonth');
     const toDay = searchContainer.querySelector('#toDateDay');
@@ -341,7 +341,7 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '.from-date-filters',
     ),
-  ].map((topFilter) => {
+  ].forEach((topFilter) => {
     const fromYear = searchContainer.querySelector('#fromDateYear');
     const fromMonth = searchContainer.querySelector('#fromDateMonth');
     const fromDay = searchContainer.querySelector('#fromDateDay');
@@ -381,7 +381,7 @@ if (searchContainer) {
     ...searchContainer.querySelectorAll(
       '#lastUpdatedSelect',
     ),
-  ].map((topFilter) => {
+  ].forEach((topFilter) => {
     topFilter.addEventListener('input', async () => {
       const element = document.getElementById('dateFilters');
       if (topFilter.value === 'custom') {
