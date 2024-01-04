@@ -208,14 +208,14 @@ if (searchContainer) {
     const clearErrors = () => {
       if (releasedAfterContainer.classList.contains('ons-panel--error', 'ons-panel--no-title')) {
         releasedAfterContainer.classList.remove('ons-panel--error', 'ons-panel--no-title');
-        releaseAfterErrorElement.classList.contains('hidden') ? '' : releaseAfterErrorElement.classList.add('hidden');
+        releaseAfterErrorElement.classList.toggle('hidden');
         if (releasedAfterContainer.querySelector('.ons-panel__assistive-text')) {
           releasedAfterContainer.querySelector('.ons-panel__assistive-text').remove();
         }
       }
       if (releasedBeforeContainer.classList.contains('ons-panel--error', 'ons-panel--no-title')) {
         releasedBeforeContainer.classList.remove('ons-panel--error', 'ons-panel--no-title');
-        releaseBeforeErrorElement.classList.contains('hidden') ? '' : releaseBeforeErrorElement.classList.add('hidden');
+        releaseBeforeErrorElement.classList.toggle('hidden');
         if (releasedBeforeContainer.querySelector('.ons-panel__assistive-text')) {
           releasedBeforeContainer.querySelector('.ons-panel__assistive-text').remove();
         }
@@ -225,7 +225,7 @@ if (searchContainer) {
     const addError = (container, errorElement, errorTextElement, errorText) => {
       if (!container.classList.contains('ons-panel--error', 'ons-panel--no-title')) {
         container.classList.add('ons-panel--error', 'ons-panel--no-title');
-        errorElement.classList.contains('hidden') ? errorElement.classList.remove('hidden') : '';
+        errorElement.classList.toggle('hidden');
         const errTxtElement = errorTextElement;
         errTxtElement.innerText = errorText;
         if (!container.contains(assistiveText)) {
