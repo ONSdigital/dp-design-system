@@ -28,15 +28,6 @@ if (searchContainer) {
     }
     const resultsLoader = document.querySelector('#results-loading');
 
-    const numOfParams = Array.from(url.searchParams).length;
-
-    /*
-    * Current behaviour of search controller gets the results using fetch and render in page
-    * However, if no filters are selected or no query - the fetched page has no results and
-    * so they can"t be retrieved. This condition below bypasses that until it is fixed.
-    */
-    const noFiltersSelected = numOfParams === 0 || (numOfParams === 1 && url.searchParams.has('page'));
-
     // if it takes more than 500ms to retreive results, show a loading message
     const timer = setTimeout(() => {
       if (resultsLoader) resultsLoader.classList.remove('hide');
@@ -188,7 +179,7 @@ if (searchContainer) {
         '#keywords',
       ),
     ];
-    topFilter.addEventListener('input', async (e) => {
+    topFilter.addEventListener('input', async () => {
       const paramsArray = theChildren.map((item) => ({
         query: item.value,
       }));
@@ -205,7 +196,7 @@ if (searchContainer) {
     const toYear = searchContainer.querySelector('#toDateYear');
     const toMonth = searchContainer.querySelector('#toDateMonth');
     const toDay = searchContainer.querySelector('#toDateDay');
-    topFilter.addEventListener('input', async (e) => {
+    topFilter.addEventListener('input', async () => {
       const beforeParamsArray = [
         {
           beforeYear: toYear.value,
@@ -243,7 +234,7 @@ if (searchContainer) {
     const fromYear = searchContainer.querySelector('#fromDateYear');
     const fromMonth = searchContainer.querySelector('#fromDateMonth');
     const fromDay = searchContainer.querySelector('#fromDateDay');
-    topFilter.addEventListener('input', async (e) => {
+    topFilter.addEventListener('input', async () => {
       const afterParamsArray = [
         {
           afterYear: fromYear.value,
@@ -280,7 +271,7 @@ if (searchContainer) {
       '#lastUpdatedSelect',
     ),
   ].map((topFilter) => {
-    topFilter.addEventListener('input', async (e) => {
+    topFilter.addEventListener('input', async () => {
       const element = document.getElementById('dateFilters');
       if (topFilter.value === 'custom') {
         if (element.classList.contains('hidden')) {
