@@ -288,7 +288,7 @@ if (searchContainer) {
           toYear;
 
         switch (topFilter.value) {
-          case 'today':
+          case 'today': {
             fromDay = dateToday.getDate();
             fromMonth = dateToday.getMonth() + 1;
             fromYear = dateToday.getFullYear();
@@ -298,7 +298,8 @@ if (searchContainer) {
             toMonth = dateTomorrow.getMonth() + 1;
             toYear = dateTomorrow.getFullYear();
             break;
-          case 'week':
+          }
+          case 'week': {
             toDay = dateToday.getDate();
             toMonth = dateToday.getMonth() + 1;
             toYear = dateToday.getFullYear();
@@ -308,7 +309,8 @@ if (searchContainer) {
             fromMonth = dateLastWeek.getMonth() + 1;
             fromYear = dateLastWeek.getFullYear();
             break;
-          case 'month':
+          }
+          case 'month': {
             toDay = dateToday.getDate();
             toMonth = dateToday.getMonth() + 1;
             toYear = dateToday.getFullYear();
@@ -318,6 +320,7 @@ if (searchContainer) {
             fromMonth = dateLastMonth.getMonth();
             fromYear = dateLastMonth.getFullYear();
             break;
+          }
           default:
 
             break;
