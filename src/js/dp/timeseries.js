@@ -173,7 +173,7 @@ if (timeSeriesContainer) {
         checkbox.checked = true;
         addElement(checkbox);
       } else if (!alertShown) {
-        alert('You can only add up to 50 timeseries at a time');
+        alert('You can only add up to 50 timeseries at a time'); // eslint-disable-line
         timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
         alertShown = true;
       }
@@ -242,7 +242,7 @@ if (timeSeriesContainer) {
         if (Object.keys(timeseriesList).length < 50) {
           addElement(event.target);
         } else {
-          alert('You can only add up to 50 timeseries at a time');
+          alert('You can only add up to 50 timeseries at a time'); // eslint-disable-line
         }
       } else {
         removeElement(event.target.getAttribute('data-uri'));
