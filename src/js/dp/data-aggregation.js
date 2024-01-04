@@ -4,7 +4,8 @@ const searchContainer = document.querySelector('.search__container');
 
 if (searchContainer) {
   const scrollToTopOfSearch = () => {
-    // scroll to the top of the page after the content has been refreshed, to indicate a change has occured
+    // scroll to the top of the page after the content has been refreshed
+    // to indicate a change has occurred
     const searchResultsSection = searchContainer.querySelector(
       "[aria-label='Search results']",
     );
@@ -252,14 +253,16 @@ if (searchContainer) {
       ];
 
       if (fromYear.value.length > 3) {
-        if ((fromYear.value.length > 0 && fromMonth.value.length > 0 && fromDay.value.length > 0)) {
+        if ((fromYear.value.length > 0
+          && fromMonth.value.length > 0 && fromDay.value.length > 0)) {
           if (validateDates(afterParamsArray[0])) {
             switchDate(afterParamsArray, true, false);
           }
         }
       }
 
-      if (fromDay.value.length === 0 && fromMonth.value.length === 0 && fromYear.value.length === 0) {
+      if (fromDay.value.length === 0
+        && fromMonth.value.length === 0 && fromYear.value.length === 0) {
         switchDate([
           {
             afterYear: 0,
@@ -393,29 +396,59 @@ if (searchContainer) {
 
     // validate released after params
     if (datesArray.afterDate && (datesArray.afterDate > 31 || datesArray.afterDate < 1)) {
-      addError(releasedAfterContainer, releaseAfterErrorElement, releaseAfterErrorText, dayError);
+      addError(
+        releasedAfterContainer,
+        releaseAfterErrorElement,
+        releaseAfterErrorText,
+        dayError,
+      );
       validationError = true;
     }
     if (datesArray.afterMonth && (datesArray.afterMonth > 12 || datesArray.afterMonth < 1)) {
-      addError(releasedAfterContainer, releaseAfterErrorElement, releaseAfterErrorText, monthError);
+      addError(
+        releasedAfterContainer,
+        releaseAfterErrorElement,
+        releaseAfterErrorText,
+        monthError,
+      );
       validationError = true;
     }
     if (datesArray.afterYear && datesArray.afterYear < 1900) {
-      addError(releasedAfterContainer, releaseAfterErrorElement, releaseAfterErrorText, yearError);
+      addError(
+        releasedAfterContainer,
+        releaseAfterErrorElement,
+        releaseAfterErrorText,
+        yearError,
+      );
       validationError = true;
     }
 
     // validate released before params
     if (datesArray.beforeDate && (datesArray.beforeDate > 31 || datesArray.beforeDate < 1)) {
-      addError(releasedBeforeContainer, releaseBeforeErrorElement, releaseBeforeErrorText, dayError);
+      addError(
+        releasedBeforeContainer,
+        releaseBeforeErrorElement,
+        releaseBeforeErrorText,
+        dayError,
+      );
       validationError = true;
     }
     if (datesArray.beforeMonth && (datesArray.beforeMonth > 12 || datesArray.beforeMonth < 1)) {
-      addError(releasedBeforeContainer, releaseBeforeErrorElement, releaseBeforeErrorText, monthError);
+      addError(
+        releasedBeforeContainer,
+        releaseBeforeErrorElement,
+        releaseBeforeErrorText,
+        monthError,
+      );
       validationError = true;
     }
     if (datesArray.beforeYear && datesArray.beforeYear < 1900) {
-      addError(releasedBeforeContainer, releaseBeforeErrorElement, releaseBeforeErrorText, yearError);
+      addError(
+        releasedBeforeContainer,
+        releaseBeforeErrorElement,
+        releaseBeforeErrorText,
+        yearError,
+      );
       validationError = true;
     }
 
