@@ -15,16 +15,19 @@ $medium: $medium-complex-grid-cols * $col;
 $large-cols-one: $large-complex-grid-cols * $col;
 $large-cols-half: calc(calc($large-complex-grid-cols - 1) / 2) * $col;
 $large-cols-one-third: calc(calc($large-complex-grid-cols - 2) / 3) * $col;
-$large-cols-two-thirds: (($large-complex-grid-cols - 1) * $col) - $large-cols-one-third;
+$large-cols-two-thirds: (($large-complex-grid-cols - 1) * $col) -
+  $large-cols-one-third;
 $large-cols-one-quarter: calc(calc($large-complex-grid-cols - 3) / 4) * $col;
-$large-cols-three-quarters: (($large-complex-grid-cols - 1) * $col) - $large-cols-one-quarter;
+$large-cols-three-quarters: (($large-complex-grid-cols - 1) * $col) -
+  $large-cols-one-quarter;
 
 $medium-cols-one: $medium-complex-grid-cols * $col;
 $medium-cols-half: calc(calc($medium-complex-grid-cols - 1) / 2) * $col;
 $medium-cols-one-third: calc(calc($medium-complex-grid-cols - 2) / 3) * $col;
 $medium-cols-two-thirds: (($medium-complex-grid-cols - 1) * $col)- $medium-cols-one-third;
 $medium-cols-one-quarter: calc(calc($medium-complex-grid-cols - 3) / 4) * $col;
-$medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) - $medium-cols-one-quarter;
+$medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) -
+  $medium-cols-one-quarter;
 
 //--[vars end]--
 
@@ -228,7 +231,46 @@ $medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) - $medium-
     @include large-cols-complex;
     @include large-cols-offset;
   }
+}
 
+.ons-grid--flex\@xxs.ons-grid--between {
+  justify-content: space-between;
+}
+
+@media (min-width: 400px) {
+  .ons-grid--flex\@xs.ons-grid--between {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 500px) {
+  .ons-grid--flex\@s.ons-grid--between {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 740px) {
+  .ons-grid--flex\@m.ons-grid--between {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 980px) {
+  .ons-grid--flex\@l.ons-grid--between {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1300px) {
+  .ons-grid--flex\@xl.ons-grid--between {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1600px) {
+  .ons-grid--flex\@xxl.ons-grid--between {
+    justify-content: space-between;
+  }
 }
 
 //--[classes end]--
