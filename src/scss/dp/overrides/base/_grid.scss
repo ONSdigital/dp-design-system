@@ -233,44 +233,4 @@ $medium-cols-three-quarters: (($medium-complex-grid-cols - 1) * $col) -
   }
 }
 
-.ons-grid--flex\@xxs.ons-grid--between {
-  justify-content: space-between;
-}
-
-@media (min-width: 400px) {
-  .ons-grid--flex\@xs.ons-grid--between {
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: 500px) {
-  .ons-grid--flex\@s.ons-grid--between {
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: 740px) {
-  .ons-grid--flex\@m.ons-grid--between {
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: 980px) {
-  .ons-grid--flex\@l.ons-grid--between {
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: 1300px) {
-  .ons-grid--flex\@xl.ons-grid--between {
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: 1600px) {
-  .ons-grid--flex\@xxl.ons-grid--between {
-    justify-content: space-between;
-  }
-}
-
 //--[classes end]--

@@ -22,3 +22,7 @@
 @include bp-suffix(ons-grid--row, $create-between-breakpoints: true) {
   flex-direction: row;
 }
+
+@include bp-suffix("ons-grid--between", $original: true) {
+  justify-content: space-between;
+}
