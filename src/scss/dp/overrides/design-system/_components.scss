@@ -11,6 +11,14 @@
     }
   }
 
+  // TODO: Latest version of design-system will make this duplicated effort and can be removed
+  &-input_search-button {
+    display: flex;
+    flex-flow: row nowrap !important;
+    gap: 0.5rem;
+  }
+
+  // TODO: Once apps are migrated to use the new version, this can be removed
   &-compact-search {
     border: 1px solid $mine-shaft;
     border-radius: 3px;
