@@ -385,7 +385,10 @@ if (searchContainer) {
       '#lastUpdatedSelect',
     ),
   ].forEach((topFilter) => {
-    topFilter.addEventListener('input', async () => {
+    topFilter.addEventListener("input", () => handleFilterChange(topFilter));
+    handleFilterChange(topFilter);
+
+    async function handleFilterChange() {
       const element = document.getElementById('dateFilters');
       if (topFilter.value === 'custom') {
         if (element.classList.contains('hidden')) {
@@ -453,6 +456,6 @@ if (searchContainer) {
           switchDate(paramsArray);
         }
       }
-    });
+    }
   });
 }
