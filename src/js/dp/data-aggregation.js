@@ -58,9 +58,9 @@ if (searchContainer) {
           noResultsMessage.classList.remove('hide');
         }
         searchContainer.querySelector('#results > ul').innerHTML = '';
-        const searchPagination = searchContainer.querySelector('.search__pagination')
+        const searchPagination = searchContainer.querySelector('.search__pagination');
         if (searchPagination) {
-          searchPagination.innerHTML = "";
+          searchPagination.innerHTML = '';
         }
         searchContainer.querySelector('.search__summary__count').innerText = '0';
       } else {
@@ -385,9 +385,6 @@ if (searchContainer) {
       '#lastUpdatedSelect',
     ),
   ].forEach((topFilter) => {
-    topFilter.addEventListener("input", () => handleFilterChange(topFilter));
-    handleFilterChange(topFilter);
-
     async function handleFilterChange() {
       const element = document.getElementById('dateFilters');
       if (topFilter.value === 'custom') {
@@ -457,5 +454,8 @@ if (searchContainer) {
         }
       }
     }
+
+    topFilter.addEventListener('input', () => handleFilterChange(topFilter));
+    handleFilterChange(topFilter);
   });
 }
