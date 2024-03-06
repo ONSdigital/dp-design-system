@@ -58,7 +58,10 @@ if (searchContainer) {
           noResultsMessage.classList.remove('hide');
         }
         searchContainer.querySelector('#results > ul').innerHTML = '';
-        searchContainer.querySelector('.search__pagination').innerHTML = '';
+        const searchPagination = searchContainer.querySelector('.search__pagination')
+        if (searchPagination) {
+          searchPagination.innerHTML = "";
+        }
         searchContainer.querySelector('.search__summary__count').innerText = '0';
       } else {
         replaceWithIEPolyfill(
