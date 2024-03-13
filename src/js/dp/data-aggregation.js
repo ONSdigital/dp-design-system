@@ -439,19 +439,17 @@ if (searchContainer) {
 
             break;
         }
-        if (fromYear) {
-          const paramsArray = [
-            {
-              afterYear: fromYear,
-              afterMonth: fromMonth,
-              afterDate: fromDay,
-              beforeYear: toYear,
-              beforeMonth: toMonth,
-              beforeDate: toDay,
-            },
-          ];
-          switchDate(paramsArray);
-        }
+        const paramsArray = [
+          {
+            afterYear: fromYear,
+            afterMonth: fromMonth,
+            afterDate: fromDay,
+            beforeYear: toYear,
+            beforeMonth: toMonth,
+            beforeDate: toDay,
+          },
+        ];
+        switchDate(paramsArray);
       }
     }
 
