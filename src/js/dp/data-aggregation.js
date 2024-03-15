@@ -304,18 +304,18 @@ if (searchContainer) {
   // create listeners for the to-date filter inputs
   [
     ...searchContainer.querySelectorAll(
-      '.to-date-filters',
+      '#to-date-filters',
     ),
   ].forEach((topFilter) => {
-    const toYear = searchContainer.querySelector('#toDateYear');
-    const toMonth = searchContainer.querySelector('#toDateMonth');
-    const toDay = searchContainer.querySelector('#toDateDay');
+    const toYear = searchContainer.querySelector('#to-date-filters-year');
+    const toMonth = searchContainer.querySelector('#to-date-filters-month');
+    const toDay = searchContainer.querySelector('#to-date-filters-day');
     topFilter.addEventListener('input', async () => {
       const beforeParamsArray = [
         {
           beforeYear: toYear.value,
           beforeMonth: toMonth.value,
-          beforeDate: toDay.value,
+          beforeDay: toDay.value,
         },
       ];
 
@@ -342,12 +342,12 @@ if (searchContainer) {
   // create listeners for the from-date filter inputs
   [
     ...searchContainer.querySelectorAll(
-      '.from-date-filters',
+      '#from-date-filters',
     ),
   ].forEach((topFilter) => {
-    const fromYear = searchContainer.querySelector('#fromDateYear');
-    const fromMonth = searchContainer.querySelector('#fromDateMonth');
-    const fromDay = searchContainer.querySelector('#fromDateDay');
+    const fromYear = searchContainer.querySelector('#from-date-filters-year');
+    const fromMonth = searchContainer.querySelector('#from-date-filters-month');
+    const fromDay = searchContainer.querySelector('#from-date-filters-day');
     topFilter.addEventListener('input', async () => {
       const afterParamsArray = [
         {
