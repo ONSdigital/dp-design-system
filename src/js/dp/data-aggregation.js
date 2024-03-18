@@ -388,12 +388,27 @@ if (searchContainer) {
       '#lastUpdatedSelect',
     ),
   ].forEach((topFilter) => {
-    async function handleFilterChange() {
+    async function handleFilterChange(firstLoad = false) {
       const element = document.getElementById('dateFilters');
       if (topFilter.value === 'custom') {
         if (element.classList.contains('hidden')) {
           element.classList.remove('hidden');
         }
+      } else if(topFilter.value === 'select' && !firstLoad){
+        if (!element.classList.contains('hidden')) {
+          element.classList.add('hidden');
+        }
+        const paramsArray = [
+          {
+            afterYear: "",
+            afterMonth: "",
+            afterDate: "",
+            beforeYear: "",
+            beforeMonth: "",
+            beforeDate: "",
+          },
+        ];
+        switchDate(paramsArray);
       } else {
         if (!element.classList.contains('hidden')) {
           element.classList.add('hidden');
@@ -458,7 +473,7 @@ if (searchContainer) {
       }
     }
 
-    topFilter.addEventListener('input', () => handleFilterChange(topFilter));
-    handleFilterChange(topFilter);
+    topFilter.addEventListener('input', () => handleFilterChange());
+    handleFilterChange(true);
   });
 }
