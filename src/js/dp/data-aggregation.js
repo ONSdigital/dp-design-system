@@ -394,18 +394,18 @@ if (searchContainer) {
         if (element.classList.contains('hidden')) {
           element.classList.remove('hidden');
         }
-      } else if(topFilter.value === 'select' && !firstLoad){
+      } else if (topFilter.value === 'select' && !firstLoad) {
         if (!element.classList.contains('hidden')) {
           element.classList.add('hidden');
         }
         const paramsArray = [
           {
-            afterYear: "",
-            afterMonth: "",
-            afterDate: "",
-            beforeYear: "",
-            beforeMonth: "",
-            beforeDate: "",
+            afterYear: '',
+            afterMonth: '',
+            afterDate: '',
+            beforeYear: '',
+            beforeMonth: '',
+            beforeDate: '',
           },
         ];
         switchDate(paramsArray);
