@@ -69,10 +69,13 @@ if (searchContainer) {
           fetchedDom.querySelector('.search__results'),
         );
 
-        replaceWithIEPolyfill(
-          searchContainer.querySelector('.search__pagination'),
-          fetchedDom.querySelector('.search__pagination'),
-        );
+        const searchPagination = searchContainer.querySelector('.search__pagination');
+        if (searchPagination) {
+          replaceWithIEPolyfill(
+            searchPagination,
+            fetchedDom.querySelector('.search__pagination'),
+          );
+        }
 
         replaceWithIEPolyfill(
           searchContainer.querySelector('.search__summary__count'),
