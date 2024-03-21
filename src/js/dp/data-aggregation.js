@@ -120,7 +120,7 @@ if (searchContainer) {
         queryKey: 'after-month',
       },
       {
-        key: 'afterDate',
+        key: 'afterDay',
         queryKey: 'after-day',
       },
     ];
@@ -135,7 +135,7 @@ if (searchContainer) {
         queryKey: 'before-month',
       },
       {
-        key: 'beforeDate',
+        key: 'beforeDay',
         queryKey: 'before-day',
       },
     ];
@@ -195,7 +195,7 @@ if (searchContainer) {
     let validationError = false;
 
     // validate released after params
-    if (datesArray.afterDate && (datesArray.afterDate > 31 || datesArray.afterDate < 1)) {
+    if (datesArray.afterDay && (datesArray.afterDay > 31 || datesArray.afterDay < 1)) {
       validationError = true;
     }
     if (datesArray.afterMonth && (datesArray.afterMonth > 12 || datesArray.afterMonth < 1)) {
@@ -206,7 +206,7 @@ if (searchContainer) {
     }
 
     // validate released before params
-    if (datesArray.beforeDate && (datesArray.beforeDate > 31 || datesArray.beforeDate < 1)) {
+    if (datesArray.beforeDay && (datesArray.beforeDay > 31 || datesArray.beforeDay < 1)) {
       validationError = true;
     }
     if (datesArray.beforeMonth && (datesArray.beforeMonth > 12 || datesArray.beforeMonth < 1)) {
@@ -250,7 +250,7 @@ if (searchContainer) {
           {
             beforeYear: 0,
             beforeMonth: 0,
-            beforeDate: 0,
+            beforeDay: 0,
           },
         ], false, true);
       }
@@ -271,7 +271,7 @@ if (searchContainer) {
         {
           afterYear: fromYear.value,
           afterMonth: fromMonth.value,
-          afterDate: fromDay.value,
+          afterDay: fromDay.value,
         },
       ];
 
@@ -290,7 +290,7 @@ if (searchContainer) {
           {
             afterYear: 0,
             afterMonth: 0,
-            afterDate: 0,
+            afterDay: 0,
           },
         ], true, false);
       }
@@ -361,10 +361,10 @@ if (searchContainer) {
           {
             afterYear: fromYear,
             afterMonth: fromMonth,
-            afterDate: fromDay,
+            afterDay: fromDay,
             beforeYear: toYear,
             beforeMonth: toMonth,
-            beforeDate: toDay,
+            beforeDay: toDay,
           },
         ];
         switchDate(paramsArray);
