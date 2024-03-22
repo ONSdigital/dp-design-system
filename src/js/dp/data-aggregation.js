@@ -120,7 +120,7 @@ if (searchContainer) {
         queryKey: 'after-month',
       },
       {
-        key: 'afterDate',
+        key: 'afterDay',
         queryKey: 'after-day',
       },
     ];
@@ -135,7 +135,7 @@ if (searchContainer) {
         queryKey: 'before-month',
       },
       {
-        key: 'beforeDate',
+        key: 'beforeDay',
         queryKey: 'before-day',
       },
     ];
@@ -192,130 +192,48 @@ if (searchContainer) {
 
   // a method to validate and raise errors for the date inputs
   const validateDates = (datesArray) => {
-    const releasedAfterContainer = document.querySelector('.inputs-released-after');
-    const releasedBeforeContainer = document.querySelector('.inputs-released-before');
-    const releaseAfterErrorElement = document.querySelector('.inputs-released-after-error');
-    const releaseAfterErrorText = document.querySelector('.inputs-released-after-error-text');
-    const releaseBeforeErrorElement = document.querySelector('.inputs-released-before-error');
-    const releaseBeforeErrorText = document.querySelector('.inputs-released-before-error-text');
-    const assistiveText = document.createElement('span');
-    assistiveText.innerText = 'Error: ';
-    assistiveText.classList.add('ons-panel__assistive-text', 'ons-u-vh');
-
     let validationError = false;
 
-    const dayError = 'The day parameter has to be between 1 and 31';
-    const monthError = 'The month parameter has to be between 1 and 12';
-    const yearError = 'The year parameter has to be higher than 1900';
-
-    const clearErrors = () => {
-      if (releasedAfterContainer.classList.contains('ons-panel--error', 'ons-panel--no-title')) {
-        releasedAfterContainer.classList.remove('ons-panel--error', 'ons-panel--no-title');
-        releaseAfterErrorElement.classList.toggle('hidden');
-        if (releasedAfterContainer.querySelector('.ons-panel__assistive-text')) {
-          releasedAfterContainer.querySelector('.ons-panel__assistive-text').remove();
-        }
-      }
-      if (releasedBeforeContainer.classList.contains('ons-panel--error', 'ons-panel--no-title')) {
-        releasedBeforeContainer.classList.remove('ons-panel--error', 'ons-panel--no-title');
-        releaseBeforeErrorElement.classList.toggle('hidden');
-        if (releasedBeforeContainer.querySelector('.ons-panel__assistive-text')) {
-          releasedBeforeContainer.querySelector('.ons-panel__assistive-text').remove();
-        }
-      }
-    };
-
-    const addError = (container, errorElement, errorTextElement, errorText) => {
-      if (!container.classList.contains('ons-panel--error', 'ons-panel--no-title')) {
-        container.classList.add('ons-panel--error', 'ons-panel--no-title');
-        errorElement.classList.toggle('hidden');
-        const errTxtElement = errorTextElement;
-        errTxtElement.innerText = errorText;
-        if (!container.contains(assistiveText)) {
-          container.prepend(assistiveText);
-        }
-      }
-    };
-
     // validate released after params
-    if (datesArray.afterDate && (datesArray.afterDate > 31 || datesArray.afterDate < 1)) {
-      addError(
-        releasedAfterContainer,
-        releaseAfterErrorElement,
-        releaseAfterErrorText,
-        dayError,
-      );
+    if (datesArray.afterDay && (datesArray.afterDay > 31 || datesArray.afterDay < 1)) {
       validationError = true;
     }
     if (datesArray.afterMonth && (datesArray.afterMonth > 12 || datesArray.afterMonth < 1)) {
-      addError(
-        releasedAfterContainer,
-        releaseAfterErrorElement,
-        releaseAfterErrorText,
-        monthError,
-      );
       validationError = true;
     }
     if (datesArray.afterYear && datesArray.afterYear < 1900) {
-      addError(
-        releasedAfterContainer,
-        releaseAfterErrorElement,
-        releaseAfterErrorText,
-        yearError,
-      );
       validationError = true;
     }
 
     // validate released before params
-    if (datesArray.beforeDate && (datesArray.beforeDate > 31 || datesArray.beforeDate < 1)) {
-      addError(
-        releasedBeforeContainer,
-        releaseBeforeErrorElement,
-        releaseBeforeErrorText,
-        dayError,
-      );
+    if (datesArray.beforeDay && (datesArray.beforeDay > 31 || datesArray.beforeDay < 1)) {
       validationError = true;
     }
     if (datesArray.beforeMonth && (datesArray.beforeMonth > 12 || datesArray.beforeMonth < 1)) {
-      addError(
-        releasedBeforeContainer,
-        releaseBeforeErrorElement,
-        releaseBeforeErrorText,
-        monthError,
-      );
       validationError = true;
     }
     if (datesArray.beforeYear && datesArray.beforeYear < 1900) {
-      addError(
-        releasedBeforeContainer,
-        releaseBeforeErrorElement,
-        releaseBeforeErrorText,
-        yearError,
-      );
       validationError = true;
     }
 
-    if (!validationError) {
-      clearErrors();
-    }
     return !validationError;
   };
 
   // create listeners for the to-date filter inputs
   [
     ...searchContainer.querySelectorAll(
-      '.to-date-filters',
+      '#to-date-filters',
     ),
   ].forEach((topFilter) => {
-    const toYear = searchContainer.querySelector('#toDateYear');
-    const toMonth = searchContainer.querySelector('#toDateMonth');
-    const toDay = searchContainer.querySelector('#toDateDay');
+    const toYear = searchContainer.querySelector('#to-date-filters-year');
+    const toMonth = searchContainer.querySelector('#to-date-filters-month');
+    const toDay = searchContainer.querySelector('#to-date-filters-day');
     topFilter.addEventListener('input', async () => {
       const beforeParamsArray = [
         {
           beforeYear: toYear.value,
           beforeMonth: toMonth.value,
-          beforeDate: toDay.value,
+          beforeDay: toDay.value,
         },
       ];
 
@@ -332,7 +250,7 @@ if (searchContainer) {
           {
             beforeYear: 0,
             beforeMonth: 0,
-            beforeDate: 0,
+            beforeDay: 0,
           },
         ], false, true);
       }
@@ -342,18 +260,18 @@ if (searchContainer) {
   // create listeners for the from-date filter inputs
   [
     ...searchContainer.querySelectorAll(
-      '.from-date-filters',
+      '#from-date-filters',
     ),
   ].forEach((topFilter) => {
-    const fromYear = searchContainer.querySelector('#fromDateYear');
-    const fromMonth = searchContainer.querySelector('#fromDateMonth');
-    const fromDay = searchContainer.querySelector('#fromDateDay');
+    const fromYear = searchContainer.querySelector('#from-date-filters-year');
+    const fromMonth = searchContainer.querySelector('#from-date-filters-month');
+    const fromDay = searchContainer.querySelector('#from-date-filters-day');
     topFilter.addEventListener('input', async () => {
       const afterParamsArray = [
         {
           afterYear: fromYear.value,
           afterMonth: fromMonth.value,
-          afterDate: fromDay.value,
+          afterDay: fromDay.value,
         },
       ];
 
@@ -372,7 +290,7 @@ if (searchContainer) {
           {
             afterYear: 0,
             afterMonth: 0,
-            afterDate: 0,
+            afterDay: 0,
           },
         ], true, false);
       }
@@ -444,10 +362,10 @@ if (searchContainer) {
             {
               afterYear: fromYear,
               afterMonth: fromMonth,
-              afterDate: fromDay,
+              afterDay: fromDay,
               beforeYear: toYear,
               beforeMonth: toMonth,
-              beforeDate: toDay,
+              beforeDay: toDay,
             },
           ];
           switchDate(paramsArray);
