@@ -1,10 +1,9 @@
-/* eslint-disable no-inner-declarations, no-alert */
 const timeSeriesContainer = document.querySelector('#timeSeriesContainer');
 // time series
 if (timeSeriesContainer) {
   const basket = timeSeriesContainer.querySelector('#timeseries__basket');
   const buttons = timeSeriesContainer.querySelectorAll('.timeseries__remember, .timeseries__download');
-  const noTimeseries = timeSeriesContainer.querySelector('.timeseries__empty');
+  const timeseriesBasketEmpty = timeSeriesContainer.querySelector('.timeseries__empty');
   const xlsForm = timeSeriesContainer.querySelector('#xls-form');
   const csvForm = timeSeriesContainer.querySelector('#csv-form');
   const list = timeSeriesContainer.querySelector('.timeseries__list');
@@ -15,13 +14,9 @@ if (timeSeriesContainer) {
   const counter = timeSeriesContainer.querySelector('#timeseries__count');
   const exitBtn = timeSeriesContainer.querySelector('.timeseries__list--exit');
   const rememberCb = timeSeriesContainer.querySelector('#remember-selection');
-  const boxWithStuff = timeSeriesContainer.querySelector('#timeseriesListContainer');
+  const timeseriesBasketModal = timeSeriesContainer.querySelector('#timeseriesListContainer');
 
-  exitBtn.addEventListener('click', () => {
-    boxWithStuff.classList.toggle('hidden');
-  });
-
-  function checkIfItemsAreSelected() {
+  const checkIfItemsAreSelected = () => {
     const checkboxesTemp = timeSeriesContainer.querySelectorAll('.select-time-series');
     let allSelected = true;
     checkboxesTemp.forEach((item) => {
@@ -35,72 +30,99 @@ if (timeSeriesContainer) {
     if (allSelected) {
       timeSeriesContainer.querySelector('#select-all-time-series').checked = true;
     }
-  }
+  };
 
-  function setLocalStorageProperty(cname, cvalue) {
+  const setLocalStorageProperty = (cname, cvalue) => {
     localStorage.setItem(cname, cvalue);
-  }
+  };
 
-  function getLocalStorageProperty(name) {
+  const getLocalStorageProperty = (name) => {
     const result = JSON.parse(localStorage.getItem(name));
     return result;
-  }
+  };
 
-  function addToLocalStorageProperty(timeseries) {
+  const addTimeseriesToLocalStorage = (timeseries) => {
     timeseriesList[timeseries.uri] = timeseries;
     setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)));
-  }
+  };
 
-  function findIn(element, uri) {
-    return element.querySelector(`[data-uri="${uri}"]`);
-  }
+  const removeTimeseriesFromLocalStorage = (uri) => {
+    delete timeseriesList[uri];
+    setLocalStorageProperty(basketCookieName, JSON.stringify(Object.values(timeseriesList)));
+  };
 
-  function remove(element, uri) {
-    const listItem = findIn(element, uri);
+  const findElementByTimeseriesURI = (element, uri) => element.querySelector(`[data-uri="${uri}"]`);
+
+  const removeTimeseriesElement = (listElement, uri) => {
+    const listItem = findElementByTimeseriesURI(listElement, uri);
     if (listItem) {
       listItem.remove();
     }
-  }
+  };
 
-  function removeElement(uri) {
-    listCount -= 1;
-    delete timeseriesList[uri];
-    counter.innerHTML = listCount;
-    remove(list, uri);
-    if (list.children.length === 0) {
-      buttons.forEach((btn) => {
-        const button = btn;
-        button.style.display = 'none';
-      });
-      if (noTimeseries.classList.contains('hidden')) {
-        noTimeseries.classList.remove('hidden');
-      }
+  const findTimeseriesDownloadInput = (parent, uri) => parent.querySelector(`input[uri="${uri}"]`);
+
+  const removeTimeseriesDownloadInputs = (uri) => {
+    findTimeseriesDownloadInput(xlsForm, uri).remove();
+    findTimeseriesDownloadInput(csvForm, uri).remove();
+  };
+
+  const displayBasketEmpty = () => {
+    buttons.forEach((btn) => {
+      const button = btn;
+      button.style.display = 'none';
+    });
+    if (timeseriesBasketEmpty.classList.contains('hidden')) {
+      timeseriesBasketEmpty.classList.remove('hidden');
     }
-  }
+  };
 
-  function deselectAll() {
+  const removeTimeseriesFromBasket = (uri) => {
+    listCount -= 1;
+    counter.innerHTML = listCount;
+    removeTimeseriesElement(list, uri);
+    if (list.children.length === 0) {
+      displayBasketEmpty();
+    }
+    removeTimeseriesFromLocalStorage(uri);
+    removeTimeseriesDownloadInputs(uri);
+  };
+
+  const deselectAll = () => {
     timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
       const checkbox = item;
       checkbox.checked = false;
-      removeElement(item.getAttribute('data-uri'));
+      removeTimeseriesFromBasket(item.getAttribute('data-uri'));
     });
-  }
+  };
 
-  function getListElementMarkup(timeseries) {
+  const getListElementMarkup = (timeseries) => {
     const listItem = document.createElement('li');
-    listItem.classList.add('flush', 'col-wrap');
+    listItem.classList.add('col-wrap');
     listItem.setAttribute('data-uri', timeseries.uri);
+
     const listItemParagraph = document.createElement('p');
-    listItemParagraph.classList.add('flush', 'col', 'col--md-22', 'col--lg-22');
+    listItemParagraph.classList.add('col', 'col--md-22', 'col--lg-22', 'ons-u-pr-s');
     listItemParagraph.innerHTML = timeseries.title;
+
     const listItemDiv = document.createElement('div');
-    listItemDiv.classList.add('col', 'col--md-4', 'col--lg-4');
+    listItemDiv.classList.add('col', 'col--md-6', 'col--lg-6');
+
     const listItemRemoveBtn = document.createElement('button');
-    listItemRemoveBtn.classList.add('btn', 'btn--primary', 'btn--thin', 'btn--small', 'btn--narrow', 'float-right', 'margin-top-md--1', 'js-remove-selected');
-    listItemRemoveBtn.innerText = 'remove';
+    listItemRemoveBtn.classList.add('ons-btn', 'ons-btn--primary', 'ons-btn--small', 'js-remove-selected');
+
+    const listItemRemoveBtnInner = document.createElement('span');
+    listItemRemoveBtnInner.classList.add('ons-btn__inner');
+
+    const listItemRemoveBtnText = document.createElement('span');
+    listItemRemoveBtnText.classList.add('ons-btn__text');
+    listItemRemoveBtnText.innerText = 'Remove';
+
+    listItemRemoveBtnInner.appendChild(listItemRemoveBtnText);
+    listItemRemoveBtn.appendChild(listItemRemoveBtnInner);
 
     listItemRemoveBtn.addEventListener('click', async () => {
-      removeElement(timeseries.uri);
+      removeTimeseriesFromBasket(timeseries.uri);
       timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
         if (item.getAttribute('data-uri') === timeseries.uri) {
           const checkbox = item;
@@ -115,29 +137,24 @@ if (timeSeriesContainer) {
     listItem.appendChild(listItemDiv);
 
     return listItem;
-  }
+  };
 
-  let remember = getLocalStorageProperty(rememberCookieName);
-  if (remember) {
-    rememberCb.checked = true;
-  }
-
-  function getInputMarkup(timeseries) {
+  const getInputMarkup = (timeseries) => {
     const input = document.createElement('input');
     input.type = 'hidden';
     input.name = 'uri';
     input.setAttribute('uri', timeseries.uri);
     input.value = timeseries.uri;
     return input;
-  }
+  };
 
   // Add time series markup to basket, and put hidden inputs for download
-  function addToPage(timeseries) {
+  const addTimeseriesToBasket = (timeseries) => {
     listCount += 1;
     counter.innerHTML = listCount;
     list.prepend(getListElementMarkup(timeseries));
     if (getLocalStorageProperty(rememberCookieName)) {
-      addToLocalStorageProperty(timeseries);
+      addTimeseriesToLocalStorage(timeseries);
     }
     xlsForm.appendChild(getInputMarkup(timeseries));
     csvForm.appendChild(getInputMarkup(timeseries));
@@ -145,12 +162,12 @@ if (timeSeriesContainer) {
       const button = btn;
       button.style.display = 'block';
     });
-    if (!noTimeseries.classList.contains('hidden')) {
-      noTimeseries.classList.add('hidden');
+    if (!timeseriesBasketEmpty.classList.contains('hidden')) {
+      timeseriesBasketEmpty.classList.add('hidden');
     }
-  }
+  };
 
-  function addElement(element) {
+  const addTimeseriesToBasketFromElement = (element) => {
     const timeseries = {
       title: element.getAttribute('data-title'),
       uri: element.getAttribute('data-uri'),
@@ -162,25 +179,34 @@ if (timeSeriesContainer) {
     }
 
     timeseriesList[timeseries.uri] = timeseries;
-    addToPage(timeseries);
-  }
+    addTimeseriesToBasket(timeseries);
+  };
 
-  function selectAll() {
+  const selectAll = () => {
     let alertShown = false;
     timeSeriesContainer.querySelectorAll('.select-time-series').forEach((item) => {
       if (Object.keys(timeseriesList).length < 50) {
         const checkbox = item;
         checkbox.checked = true;
-        addElement(checkbox);
+        addTimeseriesToBasketFromElement(checkbox);
       } else if (!alertShown) {
         alert('You can only add up to 50 timeseries at a time'); // eslint-disable-line
         timeSeriesContainer.querySelector('#select-all-time-series').checked = false;
         alertShown = true;
       }
     });
-  }
+  };
 
-  function initialize() {
+  const initialize = () => {
+    exitBtn.addEventListener('click', () => {
+      timeseriesBasketModal.classList.toggle('hidden');
+    });
+
+    let remember = getLocalStorageProperty(rememberCookieName);
+    if (remember) {
+      rememberCb.checked = true;
+    }
+
     remember = getLocalStorageProperty(rememberCookieName);
     if (typeof remember === 'undefined') {
       // remember cookie never set, sets to true by default
@@ -198,13 +224,13 @@ if (timeSeriesContainer) {
           title: timeseriesTemp.title,
         };
         timeseriesList[timeseries.uri] = timeseries;
-        addToPage(timeseries);
+        addTimeseriesToBasket(timeseries);
         checkIfItemsAreSelected();
       });
     } else {
       setLocalStorageProperty(basketCookieName, null);
     }
-  }
+  };
 
   initialize();
 
@@ -240,12 +266,12 @@ if (timeSeriesContainer) {
     if (event.target.classList.contains('select-time-series')) {
       if (event.target.checked) {
         if (Object.keys(timeseriesList).length < 50) {
-          addElement(event.target);
+          addTimeseriesToBasketFromElement(event.target);
         } else {
           alert('You can only add up to 50 timeseries at a time'); // eslint-disable-line
         }
       } else {
-        removeElement(event.target.getAttribute('data-uri'));
+        removeTimeseriesFromBasket(event.target.getAttribute('data-uri'));
       }
     }
     if (event.target.id === 'select-all-time-series') {
@@ -258,8 +284,6 @@ if (timeSeriesContainer) {
   });
 
   basket.addEventListener('click', async () => {
-    boxWithStuff.classList.toggle('hidden');
+    timeseriesBasketModal.classList.toggle('hidden');
   });
 }
-
-/* eslint-enable no-inner-declarations, no-alert */
