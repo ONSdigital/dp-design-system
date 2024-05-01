@@ -1,1 +1,1 @@
-import '@ons/design-system/scripts/main';
+import "@ons/design-system/scripts/main";
