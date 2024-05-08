@@ -61,6 +61,10 @@
   &__page-is-useful-button {
     margin-right: 0.2em;
   }
+
+  & #form-validation-panel {
+    margin-top: 0 !important;
+  }
 }
 
 #feedback-form-close {
