@@ -1,4 +1,5 @@
 import { findNode, gtmDataLayerPush, daysBetween } from '../utilities';
+import { clearValidation, validateDateFieldset, setFormValidation } from './validation';
 
 function addDateRangeToGTM(formProps) {
   const startDate = new Date(
@@ -35,6 +36,7 @@ function addDateRangeToGTM(formProps) {
 document.addEventListener('DOMContentLoaded', () => {
   const releaseCalendarContainer = document.querySelector('.release-calendar');
   const releasePageContainer = document.querySelector('.release');
+  const { title } = document;
 
   function releaseTypeAutoSubmit(formSelector) {
     function onChangeHandler(event) {
@@ -166,6 +168,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     document.querySelector('#release-calendar__filters').onsubmit = (e) => {
+      e.preventDefault();
+      clearValidation('release-calendar__filters', 'release-calendar', title);
+
+      const beforeDateErrs = validateDateFieldset('#after-date');
+      const afterDateErrs = validateDateFieldset('#before-date');
+      if (beforeDateErrs.length > 0 || afterDateErrs.length > 0) {
+        const validationErrs = [...beforeDateErrs, ...afterDateErrs];
+        console.log(validationErrs);
+        setFormValidation(title, validationErrs, releaseCalendarContainer);
+        return;
+      }
+
       const formData = new FormData(e.target);
       const formProps = Object.fromEntries(formData);
       if (formProps.keywords) {
@@ -175,8 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
           'search-term': formProps.keywords,
         });
       }
-
+      console.log(e);
       addDateRangeToGTM(formProps);
+      e.target.submit();
     };
 
     document
