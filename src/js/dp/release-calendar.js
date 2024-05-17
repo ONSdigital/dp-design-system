@@ -1,5 +1,7 @@
 import { findNode, gtmDataLayerPush, daysBetween } from '../utilities';
-import { clearValidation, validateDateFieldset, setFormValidation } from './validation';
+import {
+  clearValidation, validateDateFieldset, setFormValidation, validateDateRange,
+} from './validation/validation';
 
 function addDateRangeToGTM(formProps) {
   const startDate = new Date(
@@ -175,8 +177,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const afterDateErrs = validateDateFieldset('#before-date');
       if (beforeDateErrs.length > 0 || afterDateErrs.length > 0) {
         const validationErrs = [...beforeDateErrs, ...afterDateErrs];
-        console.log(validationErrs);
-        setFormValidation(title, validationErrs, releaseCalendarContainer);
+        setFormValidation(title, validationErrs, releaseCalendarContainer, true);
+        return;
+      }
+      const dateRangeErrs = validateDateRange('#after-date', '#before-date');
+      if (dateRangeErrs.length > 0) {
+        setFormValidation(title, dateRangeErrs, releaseCalendarContainer, true);
         return;
       }
 
@@ -189,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
           'search-term': formProps.keywords,
         });
       }
-      console.log(e);
       addDateRangeToGTM(formProps);
       e.target.submit();
     };
