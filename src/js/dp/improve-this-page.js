@@ -2,7 +2,7 @@ import {
   clearValidation,
   validateFields,
   setFormValidation,
-} from './validation';
+} from './validation/validation';
 
 function fetchFeedbackAPI(
   useUrlEncoding,
