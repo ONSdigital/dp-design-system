@@ -74,6 +74,8 @@
     "glob-parent": "^6.0.2",
     "semver": "7.5.2",
     "@koa/cors": "^5.0.0",
-    "es5-ext": "^0.10.63"
+    "es5-ext": "^0.10.63",
+    "braces": "^3.0.3",
+    "micromatch": "^4.0.6"
   }
 }
