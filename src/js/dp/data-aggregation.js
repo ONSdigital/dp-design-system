@@ -389,7 +389,6 @@ if (searchContainer) {
     const afterDateErrs = validateDateFieldset('#before-date');
     if (beforeDateErrs.length > 0 || afterDateErrs.length > 0) {
       const validationErrs = [...beforeDateErrs, ...afterDateErrs];
-      console.log(validationErrs)
       setFormValidation(title, validationErrs, searchContainer, true);
       return;
     }
