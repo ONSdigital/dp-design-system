@@ -1,4 +1,8 @@
 {
   "ignore": [
+    { 
+      "id": "CVE-2024-4067", 
+      "reason": "A vulnerability of 'braces' a dependency of 'micromatch' which can be ignored https://github.com/micromatch/braces/pull/37#issuecomment-2121649614" 
+    }
   ]
 }
