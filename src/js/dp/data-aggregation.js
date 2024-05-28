@@ -1,6 +1,10 @@
 import { fetchHtml, replaceWithIEPolyfill } from '../utilities';
+import {
+  clearValidation, validateDateFieldset, setFormValidation, validateDateRange,
+} from './validation/validation';
 
 const searchContainer = document.querySelector('.search__container');
+const { title } = document;
 
 if (searchContainer) {
   const scrollToTopOfSearch = () => {
@@ -376,4 +380,25 @@ if (searchContainer) {
     topFilter.addEventListener('input', () => handleFilterChange(topFilter));
     handleFilterChange(topFilter);
   });
+
+  searchContainer.querySelector('#filterForm').onsubmit = (e) => {
+    e.preventDefault();
+    clearValidation('filterForm', 'search__container', title);
+
+    const beforeDateErrs = validateDateFieldset('#after-date');
+    const afterDateErrs = validateDateFieldset('#before-date');
+    if (beforeDateErrs.length > 0 || afterDateErrs.length > 0) {
+      const validationErrs = [...beforeDateErrs, ...afterDateErrs];
+      console.log(validationErrs)
+      setFormValidation(title, validationErrs, searchContainer, true);
+      return;
+    }
+    const dateRangeErrs = validateDateRange('#after-date', '#before-date');
+    if (dateRangeErrs.length > 0) {
+      setFormValidation(title, dateRangeErrs, searchContainer, true);
+      return;
+    }
+
+    e.target.submit();
+  };
 }
