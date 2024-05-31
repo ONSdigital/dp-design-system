@@ -1,0 +1,14 @@
+.osr__logo {
+    display: block;
+    height: 90px;
+    width: 90px;
+    min-height: 90px;
+    min-width: 90px;
+
+    @include breakpoint(sm) {
+        height: 58px;
+        width: 58px;
+        min-height: 58px;
+        min-width: 58px;
+    }
+}
