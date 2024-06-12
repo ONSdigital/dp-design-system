@@ -14,10 +14,22 @@ If you work across multiple Node.js projects there's a good chance they require 
 
 To enable this we use [nvm (Node Version Manager)](https://github.com/creationix/nvm) to switch between versions easily.
 
-- Install nvm
+- [Install nvm using git](https://github.com/nvm-sh/nvm?tab=readme-ov-file#git-install)
+
+**Note** brew is not supported as an installation option
+
+1. Clone this repo in the root of your user profile
+    - `cd ~/` from anywhere then `git clone https://github.com/nvm-sh/nvm.git .nvm`
+1. `cd ~/.nvm` and check out the latest version with e.g. `git checkout v0.39.7`
+1. Activate `nvm` by sourcing it from your shell: `. ./nvm.sh`
+
+Add these lines to your `~/.bashrc`, `~/.profile`, or `~/.zshrc` file to have it automatically sourced upon login:
+(you may have to add to more than one of the above files)
 
 ```bash
-brew install nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 ```
 
 - Run nvm install in the project directory (this will use .nvmrc)
