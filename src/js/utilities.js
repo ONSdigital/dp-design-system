@@ -35,6 +35,8 @@ export const fetchHtml = async (url) => {
 
 // element.replaceWith() is not IE compatible, this is a workaround
 export const replaceWithIEPolyfill = (el1, el2) => {
-  el1.insertAdjacentElement('beforebegin', el2);
-  el1.parentElement.removeChild(el1);
+  if (el1 !== null) {
+    el1.insertAdjacentElement('beforebegin', el2);
+    el1.parentElement.removeChild(el1);
+  }
 };

@@ -82,12 +82,12 @@ if (searchContainer) {
           searchContainer.querySelector('.search__summary__count'),
           fetchedDom.querySelector('.search__summary__count'),
         );
-
-        replaceWithIEPolyfill(
-          searchContainer.querySelector('.search__rss-link'),
-          fetchedDom.querySelector('.search__rss-link'),
-        );
       }
+
+      replaceWithIEPolyfill(
+        searchContainer.querySelector('.search__rss-link'),
+        fetchedDom.querySelector('.search__rss-link'),
+      );
     }
 
     // update the address bar

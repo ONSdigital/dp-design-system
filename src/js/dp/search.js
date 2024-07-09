@@ -80,6 +80,11 @@ if (searchContainer) {
         // eslint-disable-next-line no-use-before-define
         initPaginationListeners();
       }
+
+      replaceWithIEPolyfill(
+        searchContainer.querySelector('.search__rss-link'),
+        fetchedDom.querySelector('.search__rss-link'),
+      );
     }
 
     // update the address bar
