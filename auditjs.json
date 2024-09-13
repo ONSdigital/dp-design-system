@@ -3,6 +3,10 @@
     { 
       "id": "CVE-2024-4067", 
       "reason": "A vulnerability of 'braces' a dependency of 'micromatch' which can be ignored https://github.com/micromatch/braces/pull/37#issuecomment-2121649614" 
+    },
+    { 
+      "id": "CVE-2024-45296", 
+      "reason": "In certain cases, path-to-regexp will output a regular expression that can be exploited to cause poor performance." 
     }
   ]
 }
