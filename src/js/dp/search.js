@@ -7,7 +7,7 @@ if (searchContainer) {
     // scroll to the top of the page after the content has been refreshed, to indicate a change
     // has occurred
     const searchResultsSection = searchContainer.querySelector(
-      '[aria-label="Search results"]',
+      '.search__count h2',
     );
     const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top
       + document.documentElement.scrollTop;
