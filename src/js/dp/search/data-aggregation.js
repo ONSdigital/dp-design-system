@@ -1,4 +1,4 @@
-import { fetchHtml, replaceWithIEPolyfill } from '../../utilities';
+import { switchSearchMarkup } from './_helpers';
 import {
   clearValidation, validateDateFieldset, setFormValidation, validateDateRange,
 } from '../validation/validation';
@@ -16,82 +16,6 @@ if (searchContainer) {
     const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top
       + document.documentElement.scrollTop;
     window.scrollTo(0, resultsSectionOffsetFromTop);
-  };
-
-  const switchSearchMarkup = async (
-    url,
-    resetPagination = false,
-    scrollToTop = false,
-  ) => {
-    if (resetPagination) {
-      /*
-      * reset to page 1 since filtering and sorting will change the length/order of results.
-      * in the case where it"s page one, remove page from searchParams.
-      */
-      url.searchParams.set('page', '1');
-    }
-    const resultsLoader = document.querySelector('#results-loading');
-
-    // if it takes more than 500ms to retreive results, show a loading message
-    const timer = setTimeout(() => {
-      if (resultsLoader) resultsLoader.classList.remove('hide');
-      if (scrollToTop) scrollToTopOfSearch();
-    }, 500);
-
-    const responseText = await fetchHtml(url);
-    clearTimeout(timer);
-
-    if (scrollToTop) scrollToTopOfSearch();
-
-    if (!responseText) {
-      const pTag = resultsLoader.querySelector('p');
-      if (pTag) pTag.innerText = pTag.dataset.errorMessage;
-    } else {
-      const fetchedDom = new DOMParser().parseFromString(responseText, 'text/html');
-
-      let resultsCount = 0;
-      const searchPrompt = fetchedDom.querySelector('.search__form--no-results');
-      if (!searchPrompt) {
-        resultsCount = parseInt(fetchedDom.querySelector('.search__summary__count').innerText, 10);
-      }
-
-      const noResultsMessage = document.querySelector('#results-zero');
-
-      if (resultsCount === 0) {
-        if (noResultsMessage) {
-          noResultsMessage.classList.remove('hide');
-        }
-        searchContainer.querySelector('#results > ul').innerHTML = '';
-        const searchPagination = searchContainer.querySelector('.search__pagination');
-        if (searchPagination) {
-          searchPagination.innerHTML = '';
-        }
-        searchContainer.querySelector('.search__summary__count').innerText = '0';
-      } else {
-        replaceWithIEPolyfill(
-          searchContainer.querySelector('.search__results'),
-          fetchedDom.querySelector('.search__results'),
-        );
-
-        replaceWithIEPolyfill(
-          searchContainer.querySelector('.search__pagination'),
-          fetchedDom.querySelector('.search__pagination'),
-        );
-
-        replaceWithIEPolyfill(
-          searchContainer.querySelector('.search__summary__count'),
-          fetchedDom.querySelector('.search__summary__count'),
-        );
-      }
-
-      replaceWithIEPolyfill(
-        searchContainer.querySelector('.search__rss-link'),
-        fetchedDom.querySelector('.search__rss-link'),
-      );
-    }
-
-    // update the address bar
-    window.history.pushState(null, '', decodeURIComponent(url));
   };
 
   const switchQuery = (paramsArray) => {
@@ -112,7 +36,7 @@ if (searchContainer) {
     });
 
     // make the change to the markup
-    switchSearchMarkup(url, true);
+    switchSearchMarkup(searchContainer, url, true);
   };
 
   const switchDate = (paramsArray, forAfterParams = true, forBeforeParams = true) => {
@@ -176,7 +100,7 @@ if (searchContainer) {
     });
 
     // make the change to the markup
-    switchSearchMarkup(url, true);
+    switchSearchMarkup(searchContainer, url, true);
   };
 
   // create listeners for the keywords input
