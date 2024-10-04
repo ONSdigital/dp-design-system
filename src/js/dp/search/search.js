@@ -1,4 +1,4 @@
-import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from '../utilities';
+import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from '../../utilities';
 
 const searchContainer = document.querySelector('.search__container');
 
@@ -346,6 +346,7 @@ if (searchContainer) {
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector('.ons-input--sort-select');
   if (sortSelector) {
+    console.warn("look at me in main search")
     sortSelector.addEventListener('change', async (e) => {
       const url = new URL(window.location.href);
       url.searchParams.set('sort', e.target.value);

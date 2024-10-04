@@ -1,7 +1,7 @@
-import { fetchHtml, replaceWithIEPolyfill } from '../utilities';
+import { fetchHtml, replaceWithIEPolyfill } from '../../utilities';
 import {
   clearValidation, validateDateFieldset, setFormValidation, validateDateRange,
-} from './validation/validation';
+} from '../validation/validation';
 
 const searchContainer = document.querySelector('.search__container');
 const { title } = document;
