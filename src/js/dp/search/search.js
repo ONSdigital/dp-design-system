@@ -1,4 +1,4 @@
-import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from '../utilities';
+import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from '../../utilities';
 
 const searchContainer = document.querySelector('.search__container');
 
