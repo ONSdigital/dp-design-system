@@ -1,96 +1,9 @@
-import { gtmDataLayerPush, fetchHtml, replaceWithIEPolyfill } from '../../utilities';
+import { gtmDataLayerPush } from '../../utilities';
+import { switchSearchMarkup, initPaginationListeners } from './_helpers';
 
 const searchContainer = document.querySelector('.search__container');
 
 if (searchContainer) {
-  const scrollToTopOfSearch = () => {
-    // scroll to the top of the page after the content has been refreshed, to indicate a change
-    // has occurred
-    const searchResultsSection = searchContainer.querySelector(
-      '.search__count h2',
-    );
-    const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top
-      + document.documentElement.scrollTop;
-    window.scrollTo(0, resultsSectionOffsetFromTop);
-  };
-
-  const switchSearchMarkup = async (
-    url,
-    resetPagination = false,
-    scrollToTop = false,
-  ) => {
-    if (resetPagination) {
-      /*
-      * reset to page 1 since filtering and sorting will change the length/order of results.
-      * in the case where it's page one, remove page from searchParams.
-      */
-      url.searchParams.set('page', '1');
-    }
-    const resultsLoader = document.querySelector('#results-loading');
-
-    // if it takes more than 500ms to retreive results, show a loading message
-    const timer = setTimeout(() => {
-      if (resultsLoader) resultsLoader.classList.remove('hide');
-      if (scrollToTop) scrollToTopOfSearch();
-    }, 500);
-
-    const responseText = await fetchHtml(url);
-    clearTimeout(timer);
-
-    if (scrollToTop) scrollToTopOfSearch();
-
-    if (!responseText) {
-      const pTag = resultsLoader.querySelector('p');
-      if (pTag) pTag.innerText = pTag.dataset.errorMessage;
-    } else {
-      const fetchedDom = new DOMParser().parseFromString(responseText, 'text/html');
-
-      let resultsCount = 0;
-      const searchPrompt = fetchedDom.querySelector('.search__form--no-results');
-      if (!searchPrompt) {
-        resultsCount = parseInt(fetchedDom.querySelector('.search__summary__count').innerText, 10);
-      }
-
-      const noResultsMessage = document.querySelector('#results-zero');
-
-      if (resultsCount === 0) {
-        if (noResultsMessage) {
-          noResultsMessage.classList.remove('hide');
-        }
-        searchContainer.querySelector('#results > ul').innerHTML = '';
-        searchContainer.querySelector('.search__pagination').innerHTML = '';
-        searchContainer.querySelector('.search__summary__count').innerText = '0';
-      } else {
-        replaceWithIEPolyfill(
-          searchContainer.querySelector('.search__results'),
-          fetchedDom.querySelector('.search__results'),
-        );
-
-        replaceWithIEPolyfill(
-          searchContainer.querySelector('.search__pagination'),
-          fetchedDom.querySelector('.search__pagination'),
-        );
-
-        replaceWithIEPolyfill(
-          searchContainer.querySelector('.search__summary__count'),
-          fetchedDom.querySelector('.search__summary__count'),
-        );
-
-        // TODO: this func or initPaginationListeners need breaking up to allow move
-        // eslint-disable-next-line no-use-before-define
-        initPaginationListeners();
-      }
-
-      replaceWithIEPolyfill(
-        searchContainer.querySelector('.search__rss-link'),
-        fetchedDom.querySelector('.search__rss-link'),
-      );
-    }
-
-    // update the address bar
-    window.history.pushState(null, '', decodeURIComponent(url));
-  };
-
   const switchContentTypeFilterCheckbox = (paramsArray) => {
     // get current param
     const url = new URL(window.location.href);
@@ -112,7 +25,7 @@ if (searchContainer) {
     });
 
     // make the change to the markup
-    switchSearchMarkup(url, true);
+    switchSearchMarkup(searchContainer, url, true);
   };
 
   // create listeners for content-type filter checkboxes controlling each other
@@ -196,7 +109,7 @@ if (searchContainer) {
     });
 
     // make the change to the markup
-    switchSearchMarkup(url, true);
+    switchSearchMarkup(searchContainer, url, true);
   };
 
   // create listeners for topic filter checkboxes
@@ -346,11 +259,10 @@ if (searchContainer) {
   // create listeners for the sort dropdown
   const sortSelector = searchContainer.querySelector('.ons-input--sort-select');
   if (sortSelector) {
-    console.warn("look at me in main search")
     sortSelector.addEventListener('change', async (e) => {
       const url = new URL(window.location.href);
       url.searchParams.set('sort', e.target.value);
-      switchSearchMarkup(url, true);
+      switchSearchMarkup(searchContainer, url, true);
 
       // Google Tag Manager
       gtmDataLayerPush({
@@ -360,26 +272,7 @@ if (searchContainer) {
     });
   }
 
-  // create listeners for the pagination
-  const initPaginationListeners = () => {
-    const paginationItems = searchContainer.querySelectorAll(
-      '.ons-pagination__item a[data-target-page]',
-    );
-    if (paginationItems) {
-      paginationItems.forEach((item) => {
-        item.addEventListener('click', async (e) => {
-          e.preventDefault();
-          const url = new URL(window.location.href);
-          const { targetPage } = e.target.dataset;
-          if (!targetPage) return;
-          url.searchParams.set('page', targetPage);
-          switchSearchMarkup(url, false, true);
-        });
-      });
-    }
-  };
-
-  initPaginationListeners();
+  initPaginationListeners(searchContainer);
 
   // filter menu for mobile if the page is running javascript let's make the filter menus
   // togglable and full-screen when displayed
