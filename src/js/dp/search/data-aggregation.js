@@ -7,17 +7,6 @@ const searchContainer = document.querySelector('.search__container');
 const { title } = document;
 
 if (searchContainer) {
-  const scrollToTopOfSearch = () => {
-    // scroll to the top of the page after the content has been refreshed
-    // to indicate a change has occurred
-    const searchResultsSection = searchContainer.querySelector(
-      '.search__count h2',
-    );
-    const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top
-      + document.documentElement.scrollTop;
-    window.scrollTo(0, resultsSectionOffsetFromTop);
-  };
-
   const switchQuery = (paramsArray) => {
     // get current param
     const url = new URL(window.location.href);
