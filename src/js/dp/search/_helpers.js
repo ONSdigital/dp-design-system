@@ -55,9 +55,12 @@ export const switchSearchMarkup = async (
       if (noResultsMessage) {
         noResultsMessage.classList.remove('hide');
       }
-      searchContainer.querySelector('#results > ul').innerHTML = '';
-      searchContainer.querySelector('.search__pagination').innerHTML = '';
-      searchContainer.querySelector('.search__summary__count').innerText = '0';
+      const resultsList = searchContainer.querySelector('#results > ul');
+      resultsList.innerHTML = '';
+      const pagination = searchContainer.querySelector('.search__pagination');
+      pagination.innerHTML = '';
+      const resultsCountContainer = searchContainer.querySelector('.search__summary__count');
+      resultsCountContainer.innerText = '0';
     } else {
       replaceWithIEPolyfill(
         searchContainer.querySelector('.search__results'),
