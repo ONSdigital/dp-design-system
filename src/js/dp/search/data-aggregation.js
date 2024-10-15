@@ -48,23 +48,28 @@ if (searchContainer) {
     });
   });
 
-  searchContainer.querySelector('#filterForm').onsubmit = (e) => {
-    e.preventDefault();
-    clearValidation('filterForm', 'search__container', title);
+  const filterForm = searchContainer.querySelector('#filterForm');
+  if (filterForm) {
+    filterForm.onsubmit = (e) => {
+      e.preventDefault();
+      clearValidation('filterForm', 'search__container', title);
+      // timeseries has a different container ID
+      clearValidation('filterForm', 'timeSeriesContainer', title);
 
-    const beforeDateErrs = validateDateFieldset('#after-date');
-    const afterDateErrs = validateDateFieldset('#before-date');
-    if (beforeDateErrs.length > 0 || afterDateErrs.length > 0) {
-      const validationErrs = [...beforeDateErrs, ...afterDateErrs];
-      setFormValidation(title, validationErrs, searchContainer, true);
-      return;
-    }
-    const dateRangeErrs = validateDateRange('#after-date', '#before-date');
-    if (dateRangeErrs.length > 0) {
-      setFormValidation(title, dateRangeErrs, searchContainer, true);
-      return;
-    }
+      const beforeDateErrs = validateDateFieldset('#after-date');
+      const afterDateErrs = validateDateFieldset('#before-date');
+      if (beforeDateErrs.length > 0 || afterDateErrs.length > 0) {
+        const validationErrs = [...beforeDateErrs, ...afterDateErrs];
+        setFormValidation(title, validationErrs, searchContainer, true);
+        return;
+      }
+      const dateRangeErrs = validateDateRange('#after-date', '#before-date');
+      if (dateRangeErrs.length > 0) {
+        setFormValidation(title, dateRangeErrs, searchContainer, true);
+        return;
+      }
 
-    e.target.submit();
-  };
+      e.target.submit();
+    };
+  }
 }
