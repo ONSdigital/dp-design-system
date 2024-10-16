@@ -103,9 +103,9 @@ function getErrorSummary(errors, isPageError) {
           ${errors[0].message}
         </a></p>`;
 
-  return `<div aria-labelledby="alert" role="alert" tabindex="-1" id="form-validation-panel" class="ons-panel ons-panel--error ons-u-mb-m ons-u-mt-m">
+  return `<div aria-labelledby="error-summary-title" role="alert" tabindex="-1" id="form-validation-panel" class="ons-panel ons-panel--error ons-u-mb-m ons-u-mt-m">
       <div class="ons-panel__header">
-        <h2 id="alert" class="ons-panel__title ons-u-fs-r--b">${header}
+        <h2 id="error-summary-title" class="ons-panel__title ons-u-fs-r--b">${header}
         </h2>
       </div>
       <div class="ons-panel__body">
