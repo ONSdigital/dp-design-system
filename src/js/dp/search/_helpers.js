@@ -7,7 +7,7 @@ const scrollToTopOfSearch = (searchContainer) => {
     '.search__count h2',
   );
   const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top
-        + document.documentElement.scrollTop;
+    + document.documentElement.scrollTop;
   window.scrollTo(0, resultsSectionOffsetFromTop);
 };
 
@@ -77,7 +77,8 @@ export const switchSearchMarkup = async (
         fetchedDom.querySelector('.search__summary__count'),
       );
 
-      // TODO: this func or initPaginationListeners need breaking up to allow move
+      // The parent function is called after a fetch
+      // Required to reattach event listeners to new DOM elements
       // eslint-disable-next-line no-use-before-define
       initPaginationListeners(searchContainer);
     }
