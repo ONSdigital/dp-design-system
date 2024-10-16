@@ -7,7 +7,7 @@ import './dp/nav';
 import './dp/improve-this-page';
 import './dp/bulletin';
 import './dp/search/search';
-import './dp/search/timeseries';
+import './dp/search/_timeseries_handler';
 import './dp/release-calendar';
 import './dp/copy-link';
 import './dp/get-data';
