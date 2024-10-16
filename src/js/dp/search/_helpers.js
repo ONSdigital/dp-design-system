@@ -58,7 +58,9 @@ export const switchSearchMarkup = async (
       const resultsList = searchContainer.querySelector('#results > ul');
       resultsList.innerHTML = '';
       const pagination = searchContainer.querySelector('.search__pagination');
-      pagination.innerHTML = '';
+      if (pagination) {
+        pagination.innerHTML = '';
+      }
       const resultsCountContainer = searchContainer.querySelector('.search__summary__count');
       resultsCountContainer.innerText = '0';
     } else {
