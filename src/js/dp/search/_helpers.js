@@ -111,3 +111,59 @@ export const initPaginationListeners = (searchContainer) => {
     });
   }
 };
+
+export const switchContentTypeFilterCheckbox = (paramsArray, searchContainer) => {
+  // get current param
+  const url = new URL(window.location.href);
+
+  // build new param
+  paramsArray.forEach((param) => {
+    if (!('isChecked' in param) || !('filterName' in param)) return;
+    if (param.isChecked) {
+      url.searchParams.append('filter', param.filterName);
+    } else {
+      const tmpValues = url.searchParams.getAll('filter').filter((e) => e !== param.filterName);
+      url.searchParams.delete('filter');
+      if (tmpValues.length !== 0) {
+        tmpValues.forEach((x) => {
+          url.searchParams.append('filter', x);
+        });
+      }
+    }
+  });
+
+  // make the change to the markup
+  switchSearchMarkup(searchContainer, url, true);
+};
+
+export const switchTopicFilterCheckbox = (paramsArray, searchContainer) => {
+  // get current param
+  const url = new URL(window.location.href);
+  paramsArray.forEach((param) => {
+    if (!('isChecked' in param) || !('topics' in param) || !('strParamType' in param)) return;
+    const { strParamType } = param;
+    const tmpValues = url.searchParams.getAll(strParamType);
+    url.searchParams.delete(strParamType);
+    if (tmpValues.length <= 1) {
+      if (param.isChecked) {
+        if (tmpValues.length === 0) {
+          tmpValues.push(param.topics);
+          url.searchParams.append(strParamType, tmpValues);
+        } else {
+          const tmpValue = tmpValues[0].split(',');
+          tmpValue.push(param.topics);
+          url.searchParams.append(strParamType, tmpValue);
+        }
+      } else if (tmpValues.length === 1) {
+        const tmpValue = tmpValues[0]?.split(',');
+        const tmpParam = tmpValue?.filter((e) => e !== param.topics);
+        if (tmpParam?.length !== 0) {
+          url.searchParams.append(strParamType, tmpParam);
+        }
+      }
+    }
+  });
+
+  // make the change to the markup
+  switchSearchMarkup(searchContainer, url, true);
+};
