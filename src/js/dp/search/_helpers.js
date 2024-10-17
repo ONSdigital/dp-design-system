@@ -3,9 +3,14 @@ import { fetchHtml, replaceWithIEPolyfill } from '../../utilities';
 const scrollToTopOfSearch = (searchContainer) => {
   // scroll to the top of the page after the content has been refreshed, to indicate a change
   // has occurred
-  const searchResultsSection = searchContainer.querySelector(
+  let searchResultsSection = searchContainer.querySelector(
     '.search__count h2',
   );
+  if (!searchResultsSection) {
+    searchResultsSection = searchContainer.querySelector(
+      '.search__results',
+    );
+  }
   const resultsSectionOffsetFromTop = searchResultsSection.getBoundingClientRect().top
     + document.documentElement.scrollTop;
   window.scrollTo(0, resultsSectionOffsetFromTop);
@@ -46,7 +51,7 @@ export const switchSearchMarkup = async (
     let resultsCount = 0;
     const searchPrompt = fetchedDom.querySelector('.search__form--no-results');
     if (!searchPrompt) {
-      resultsCount = parseInt(fetchedDom.querySelector('.search__summary__count').innerText, 10);
+      resultsCount = parseInt(fetchedDom.querySelector('.search__summary__count')?.innerText, 10);
     }
 
     const noResultsMessage = document.querySelector('#results-zero');
