@@ -186,11 +186,7 @@ export const queryStringHandler = (paramsArray) => {
   // build new param
   paramsArray.forEach((param) => {
     if (param && param.query) {
-      if (!url.searchParams.get('q')) {
-        url.searchParams.append('q', param.query);
-      } else {
-        url.searchParams.set('q', param.query);
-      }
+      url.searchParams.set('q', param.query);
     } else {
       url.searchParams.delete('q');
     }
