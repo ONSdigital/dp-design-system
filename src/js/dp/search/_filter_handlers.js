@@ -219,6 +219,10 @@ export function keywordSearchHandler() {
 export function dateValidationHandler() {
   const filterForm = searchContainer.querySelector('#filterForm');
   if (filterForm) {
+    if (!searchContainer.querySelector('#after-date') || !searchContainer.querySelector('#before-date')) {
+      return;
+    }
+
     filterForm.onsubmit = (e) => {
       e.preventDefault();
       clearValidation('filterForm', 'search__container', title);
