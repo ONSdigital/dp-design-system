@@ -206,7 +206,6 @@ export function keywordSearchHandler() {
       '#keywords',
     ),
   ].forEach((topFilter) => {
-    // const childrenSelector = topFilter.getAttribute("aria-controls");
     const theChildren = [
       searchContainer.querySelector(
         '#keywords',
