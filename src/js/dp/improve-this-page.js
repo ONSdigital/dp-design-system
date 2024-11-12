@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const postObject = {
           is_page_useful: true,
           is_general_feedback: false,
+          feedback: "Is this page useful? Yes",
           ons_url: pageURL,
         };
         const postJson = JSON.stringify(postObject);
@@ -155,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const postObject = {
           is_page_useful: false,
           is_general_feedback: false,
+          feedback: descriptionField.value,
           ons_url: pageURL,
           name: nameField.value,
           email_address: emailField.value,
@@ -177,9 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
           feedbackMessageError,
           feedbackMessage,
         );
-        feedbackFormHeader.classList.toggle('js-hidden');
-        feedbackForm.classList.toggle('js-hidden');
       }
+      feedbackFormHeader.classList.toggle('js-hidden');
+      feedbackForm.classList.toggle('js-hidden');
     });
   }
 });
