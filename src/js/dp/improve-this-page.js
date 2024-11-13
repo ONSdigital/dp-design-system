@@ -96,13 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const postObject = {
           is_page_useful: true,
           is_general_feedback: false,
-          feedback: 'Is this page useful? Yes',
           ons_url: pageURL,
         };
         const postJson = JSON.stringify(postObject);
         fetchFeedbackAPI(
           false,
-          feedbackAPIURL.value,
+          positiveFeedbackPath,
           feedbackFormHeader,
           postJson,
           feedbackMessageError,
