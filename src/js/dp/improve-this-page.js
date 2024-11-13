@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const postJson = JSON.stringify(postObject);
         fetchFeedbackAPI(
           false,
-          positiveFeedbackPath,
+          feedbackAPIURL.value,
           feedbackFormHeader,
           postJson,
           feedbackMessageError,
