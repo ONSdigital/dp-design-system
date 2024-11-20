@@ -7,6 +7,7 @@
     "preinstall": "npx --yes npm-force-resolutions",
     "audit": "auditjs ossi --quiet",
     "build": "npm run clean && NODE_ENV=production gulp build",
+    "test": "echo no tests add yet, skipping...",
     "watch": "gulp watch",
     "start": "ws -p ${PORT:-9002}",
     "dev": "run-p clean watch start",

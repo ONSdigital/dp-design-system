@@ -8,56 +8,35 @@ dp-design-system allows us to use the modules from the ONS design system that ar
 
 ## Getting started
 
-### Using nvm
+### Install dependencies
 
 If you work across multiple Node.js projects there's a good chance they require different Node.js and npm versions.
 
-To enable this we use [nvm (Node Version Manager)](https://github.com/creationix/nvm) to switch between versions easily.
+It is recommended that you use [nvm (Node Version Manager)](https://github.com/creationix/nvm) to switch between versions easily:
 
-- [Install nvm using git](https://github.com/nvm-sh/nvm?tab=readme-ov-file#git-install)
+1. Install [nvm](https://github.com/nvm-sh/nvm):
 
-**Note** brew is not supported as an installation option
+   ```shell
+   brew install nvm
+   ```
 
-1. Clone this repo in the root of your user profile
-    - `cd ~/` from anywhere then `git clone https://github.com/nvm-sh/nvm.git .nvm`
-1. `cd ~/.nvm` and check out the latest version with e.g. `git checkout v0.39.7`
-1. Activate `nvm` by sourcing it from your shell: `. ./nvm.sh`
+   :warning: Make sure to follow the instructions provided at the end of the install to configure up your shell profile.
 
-Add these lines to your `~/.bashrc`, `~/.profile`, or `~/.zshrc` file to have it automatically sourced upon login:
-(you may have to add to more than one of the above files)
+2. Install the node version specified in [`.nvmrc`](./.nvmrc) through nvm:
 
-```bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-```
-
-- Run nvm install in the project directory (this will use .nvmrc)
-
-```bash
-nvm install
-```
-
-### Manually install Node and NPM
-
-1. Install [Node][node] (version denoted in `.nvmrc`) and [NPM][npm].
-2. Run `npm install` from the root of the repo you've cloned onto your machine.
+   ```shell
+   nvm install
+   ```
 
 ### Generate the CSS and JS
 
-- Make sure you are using the correct version of node and npm
-
-```bash
-nvm use
-```
-
 - Build the CSS and JS, and start the local web server with
 
-```bash
-npm run dev
-```
+  ```shell
+  make debug
+  ```
 
-- Once built, you can find assets stored on the web server, default location is `localhost:9002/dist/assets/`
+- Once built, you can find assets stored on the web server, default location is [localhost:9002/dist/assets/](http://localhost:9002/dist/assets/)
 
 ### Using via the ONS CDN
 
@@ -69,19 +48,11 @@ When PRs are merged into `main`, compiled assets are made available on the ONS C
 - Favicons: `https://cdn.ons.gov.uk/dp-design-system/{COMMIT_HASH}/favicons`
 - Fonts: `https://cdn.ons.gov.uk/dp-design-system/{COMMIT_HASH}/fonts`
 
-## Dependencies
-
-- [nvm](https://github.com/creationix/nvm)
-
-which installs:
-
-- [Node][node]
-- [NPM][npm]
-
 ## Configuration
 
-Locally served on port 9002
-.sass-lint
+| Environment variable | Default | Description                                                      |
+|----------------------|---------|------------------------------------------------------------------|
+| PORT                 | 9002    | The port used when running the file server for local development |
 
 ## Linter
 
@@ -90,7 +61,7 @@ This app lints using [eslint](https://eslint.org/) with [Airbnb](https://airbnb.
 ### Run
 
 ```bash
-npm run lint
+make lint
 ```
 
 ### Fix
@@ -98,7 +69,7 @@ npm run lint
 Some linting issues can be fixed automatically. To use this functionality, pass the file you wish to fix at the end of the command:
 
 ```bash
-npm run lint:fix path/to/js/file/to/fix
+nvm exec -- npm run lint:fix path/to/js/file/to/fix
 ```
 
 ## Contributing
@@ -107,9 +78,6 @@ See [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License
 
-Copyright © 2023, Office for National Statistics (<https://www.ons.gov.uk>)
+Copyright © Crown Copyright ([Office for National Statistics](https://www.ons.gov.uk>))
 
 Released under MIT license, see [LICENSE](LICENSE.md) for details.
-
-[node]: https://nodejs.org/en/
-[npm]: https://www.npmjs.com/
