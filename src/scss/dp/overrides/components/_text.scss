@@ -1,0 +1,7 @@
+// extending ons-text component from design system to add styles for static prototype
+
+.ons-text-indent-static {
+    @extend .ons-text-indent;
+    margin: 0;
+    padding: .5rem 1.5rem;
+}

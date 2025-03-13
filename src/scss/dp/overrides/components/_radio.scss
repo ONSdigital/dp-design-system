@@ -1,0 +1,7 @@
+// extending radio component from design system to add styles for static prototype
+
+// Renders label bold instead of regular text
+.ons-radio-static__label {
+    @extend .ons-radio__label;
+    font-weight: $font-weight-bold;
+}
