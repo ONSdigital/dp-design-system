@@ -1,6 +1,7 @@
 import { initPaginationListeners } from './_helpers';
 import {
   contentTypeCheckboxHandler,
+  contentTypeCategoryCheckboxHandler,
   topicFilterCheckboxHandler,
   sortHandler,
   mobileViewFilterHandler,
@@ -13,6 +14,9 @@ const searchContainer = document.querySelector('.search__container');
 if (searchContainer) {
   // create listeners for content-type filter checkboxes controlling each other
   contentTypeCheckboxHandler();
+
+  // create listeners for filter category checkbox
+  contentTypeCategoryCheckboxHandler();
 
   // create listeners for topic filter checkboxes
   topicFilterCheckboxHandler();

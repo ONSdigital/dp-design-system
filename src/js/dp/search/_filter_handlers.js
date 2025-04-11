@@ -60,6 +60,30 @@ export const contentTypeCheckboxHandler = () => {
   });
 };
 
+export const contentTypeCategoryCheckboxHandler = () => {
+  [
+    ...searchContainer.querySelectorAll(
+      '.content-type-category-filter',
+    ),
+  ].forEach((filter) => {
+    filter.addEventListener('change', async (e) => {
+      const paramsArray = [{
+        isChecked: e.target.checked,
+        filterName: e.target.value,
+      }];
+
+      switchContentTypeFilterCheckbox(paramsArray, searchContainer);
+
+      // Google Tag Manager
+      gtmDataLayerPush({
+        event: 'Filter',
+        'filter-by': e.target.dataset.gtmLabel,
+        selected: e.target.checked ? 'selected' : 'unselected',
+      });
+    });
+  });
+};
+
 export const topicFilterCheckboxHandler = () => {
   [
     ...searchContainer.querySelectorAll(
