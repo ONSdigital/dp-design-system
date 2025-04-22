@@ -37,16 +37,31 @@ function submitCookieForm(e) {
   const cookiesDomain = extractDomainFromUrl(currentUrl);
   const cookiesPreference = true;
   const encodedCookiesPolicy = '%7B%22essential%22%3Atrue%2C%22usage%22%3Atrue%7D';
+  const defaultCookiesPolicy = '%7B%22essential%22%3Atrue%2C';
   const cookiesPath = '/';
-  const cookiesAcceptBanner = document.querySelector('.js-accept-cookies');
+  const cookiesAcceptButton = document.querySelector('.js-accept-cookies');
+  const cookiesRejectButton = document.querySelector('.js-reject-cookies');
+  const cookiesAcceptedText = document.querySelector('.ons-js-accepted-text');
+  const cookiesRejecedText = document.querySelector('.ons-js-rejected-text');
+  const action = document.activeElement.getAttribute('data-action');
 
-  if (cookiesAcceptBanner) {
-    cookiesAcceptBanner.disabled = true;
-    cookiesAcceptBanner.classList.add('btn--primary-disabled');
+  if (cookiesAcceptButton || cookiesRejectButton) {
+    cookiesAcceptButton.disabled = true;
+    cookiesAcceptButton.classList.add('btn--primary-disabled');
+    cookiesRejectButton.disabled = true;
+    cookiesRejectButton.classList.add('btn--primary-disabled');
   }
 
   document.cookie = `cookies_preferences_set=${cookiesPreference};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
-  document.cookie = `cookies_policy=${encodedCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+  if (action === 'accept') {
+    cookiesAcceptedText.classList.remove('hidden');
+
+    document.cookie = `cookies_policy=${encodedCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+  } else if (action === 'reject') {
+    cookiesRejecedText.classList.remove('hidden');
+
+    document.cookie = `cookies_policy=${defaultCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+  }
 
   const informDetails = document.querySelector('.js-cookies-banner-inform');
   if (informDetails) {
