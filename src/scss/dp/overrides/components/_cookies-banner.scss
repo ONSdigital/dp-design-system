@@ -51,11 +51,6 @@
             padding: 6px 16px 10px 16px;
         }
 
-        a:hover {
-            color: $lily-white;
-            text-decoration: none;
-        }
-
         @include breakpoint(sm) {
             margin-top: 8px;
             margin-right: 0px;
