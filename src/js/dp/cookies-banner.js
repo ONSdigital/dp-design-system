@@ -37,7 +37,7 @@ function submitCookieForm(e) {
   const cookiesDomain = extractDomainFromUrl(currentUrl);
   const cookiesPreference = true;
   const encodedCookiesPolicy = '%7B%22essential%22%3Atrue%2C%22usage%22%3Atrue%7D';
-  const defaultCookiesPolicy = '%7B%22essential%22%3Atrue%2C';
+  const defaultCookiesPolicy = '%7B%22essential%22%3Atrue%2C%22usage%22%3Afalse%7D';
   const cookiesPath = '/';
   const cookiesAcceptButton = document.querySelector('.js-accept-cookies');
   const cookiesRejectButton = document.querySelector('.js-reject-cookies');
