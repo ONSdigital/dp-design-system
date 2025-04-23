@@ -53,14 +53,17 @@ function submitCookieForm(e) {
   }
 
   document.cookie = `cookies_preferences_set=${cookiesPreference};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
-  if (action === 'accept') {
-    cookiesAcceptedText.classList.remove('hidden');
-
-    document.cookie = `cookies_policy=${encodedCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
-  } else if (action === 'reject') {
-    cookiesRejecedText.classList.remove('hidden');
-
-    document.cookie = `cookies_policy=${defaultCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+  switch (action) {
+    case 'accept':
+      document.cookie = `cookies_policy=${encodedCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+      cookiesAcceptedText.classList.remove('hidden');
+      break;
+    case 'reject':
+      document.cookie = `cookies_policy=${defaultCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+      cookiesRejecedText.classList.remove('hidden');
+      break;
+    default:
+      return;
   }
 
   const informDetails = document.querySelector('.js-cookies-banner-inform');
