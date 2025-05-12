@@ -1,6 +1,6 @@
 // DP-specific JS
-import './dp/cookies-banner';
-import './dp/cookies-pref';
+import './dp/cookies/cookies-banner';
+import './dp/cookies/cookies-pref';
 import './dp/set-display';
 import './dp/viewport-size';
 import './dp/nav';

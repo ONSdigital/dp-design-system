@@ -1,6 +1,11 @@
+// Consts
+const cookiesBanner = document.querySelector('.js-cookies-banner-form');
+const displayCookie = 'ons_cookie_message_displayed';
+const preferencesCookie = 'ons_cookie_policy';
+
 // cookies settings
 function hasCookiesPreferencesSet() {
-  return document.cookie.indexOf('cookies_preferences_set=true') > -1;
+  return document.cookie.indexOf(`${displayCookie}=true`) > -1;
 }
 
 function userIsOnCookiesPreferencesPage() {
@@ -21,28 +26,41 @@ function extractDomainFromUrl(url) {
   const pattern = '(.uk|.onsdigital.uk|.gov.uk)';
   const tlds = new RegExp(pattern);
 
-  const topLevelDomain = url.match(tlds)[0];
-  const secondLevelDomain = url.replace(topLevelDomain, '').split('.').pop();
+  const isKnownDomain = tlds.test(url);
 
-  return `.${secondLevelDomain}${topLevelDomain}`;
+  if (isKnownDomain) {
+    return url;
+  }
+
+  return '';
 }
 
-const cookiesSet = hasCookiesPreferencesSet();
-
-function submitCookieForm(e) {
-  e.preventDefault();
-
+// setCookiePolicy sets a cookies policy as well as setting the banner cookie to
+// being displayed
+function setCookiePolicy(policy) {
   const oneYearInSeconds = 31622400;
   const currentUrl = window.location.hostname;
   const cookiesDomain = extractDomainFromUrl(currentUrl);
-  const cookiesPreference = true;
-  const encodedCookiesPolicy = '%7B%22essential%22%3Atrue%2C%22usage%22%3Atrue%7D';
-  const defaultCookiesPolicy = '%7B%22essential%22%3Atrue%2C%22usage%22%3Afalse%7D';
   const cookiesPath = '/';
+
+  document.cookie = `${displayCookie}=true;max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+  document.cookie = `${preferencesCookie}=${policy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+}
+
+// submitCookieBannerForm handles submission of the form in the cookie banner
+function submitCookieBannerForm(e) {
+  e.preventDefault();
+
+  // These policies are invalid JSON but this has to match the way it's done
+  // in the design-system repository.
+  // See: https://github.com/ONSdigital/design-system/blob/main/src/components/cookies-banner/cookies-banner.js
+  const acceptAllCookiesPolicy = "{'essential':true,'settings':true,'usage':true,'campaigns':true}";
+  const defaultCookiesPolicy = "{'essential':true,'settings':false,'usage':false,'campaigns':false}";
+
   const cookiesAcceptButton = document.querySelector('.js-accept-cookies');
   const cookiesRejectButton = document.querySelector('.js-reject-cookies');
   const cookiesAcceptedText = document.querySelector('.ons-js-accepted-text');
-  const cookiesRejecedText = document.querySelector('.ons-js-rejected-text');
+  const cookiesRejectedText = document.querySelector('.ons-js-rejected-text');
   const action = document.activeElement.getAttribute('data-action');
 
   if (cookiesAcceptButton || cookiesRejectButton) {
@@ -52,15 +70,14 @@ function submitCookieForm(e) {
     cookiesRejectButton.classList.add('btn--primary-disabled');
   }
 
-  document.cookie = `cookies_preferences_set=${cookiesPreference};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
   switch (action) {
     case 'accept':
-      document.cookie = `cookies_policy=${encodedCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
+      setCookiePolicy(acceptAllCookiesPolicy);
       cookiesAcceptedText.classList.remove('hidden');
       break;
     case 'reject':
-      document.cookie = `cookies_policy=${defaultCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
-      cookiesRejecedText.classList.remove('hidden');
+      setCookiePolicy(defaultCookiesPolicy);
+      cookiesRejectedText.classList.remove('hidden');
       break;
     default:
       return;
@@ -79,7 +96,6 @@ function submitCookieForm(e) {
   }
 }
 
-const cookiesBanner = document.querySelector('.js-cookies-banner-form');
 function initCookiesBanner() {
   const jsHideBanner = document.querySelector('.js-hide-cookies-banner');
   if (jsHideBanner) {
@@ -87,11 +103,13 @@ function initCookiesBanner() {
   }
 
   if (cookiesBanner) {
-    cookiesBanner.addEventListener('submit', submitCookieForm);
+    cookiesBanner.addEventListener('submit', submitCookieBannerForm);
   }
 }
 
 function determineWhetherToRenderBanner() {
+  const cookiesSet = hasCookiesPreferencesSet();
+
   if (!cookiesSet && !userIsOnCookiesPreferencesPage()) {
     cookiesBanner.classList.remove('cookies-banner--hidden');
     initCookiesBanner();
