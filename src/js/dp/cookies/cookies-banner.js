@@ -9,11 +9,10 @@ function hasCookiesPreferencesSet() {
 }
 
 function userIsOnCookiesPreferencesPage() {
-  const href = window.location.href.split('/');
+  const path = window.location.pathname;
 
-  // check that last element in href array is 'cookies' - in case we add further pages
-  // within the cookies path
-  const isCookiesPreferencesPage = href[href.length - 1] === 'cookies';
+  // suppress the cookies banner on the cookies preferences page
+  const isCookiesPreferencesPage = path === '/cookies';
   return isCookiesPreferencesPage;
 }
 
