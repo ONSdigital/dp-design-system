@@ -78,6 +78,7 @@
     "koa": "^2.16.0",
     "es5-ext": "^0.10.63",
     "braces": "^3.0.3",
+    "brace-expansion": "^1.1.12",
     "micromatch": "^4.0.6",
     "path-to-regexp": ">=6.3.0"
   }
