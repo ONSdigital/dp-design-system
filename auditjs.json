@@ -3,6 +3,14 @@
     { 
       "id": "CVE-2024-4067", 
       "reason": "A vulnerability of 'braces' a dependency of 'micromatch' which can be ignored https://github.com/micromatch/braces/pull/37#issuecomment-2121649614" 
+    },
+    { 
+      "id": "CVE-2025-8129", 
+      "reason": "A vulnerability of 'koa' a sub-dependency of 'local-web-server' which is only used in dev, not in compiled assets" 
+    },
+    { 
+      "id": "CVE-2025-7339", 
+      "reason": "A vulnerability of 'on-headers' a sub-dependency of 'local-web-server' which is only used in dev, not in compiled assets" 
     }
   ]
 }
