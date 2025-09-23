@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "preinstall": "npx --yes npm-force-resolutions",
-    "audit": "auditjs ossi --quiet",
+    "audit": "auditjs ossi --quiet -u $OSSINDEX_USERNAME -p $OSSINDEX_TOKEN",
     "build": "npm run clean && NODE_ENV=production gulp build",
     "test": "echo no tests add yet, skipping...",
     "watch": "gulp watch",
