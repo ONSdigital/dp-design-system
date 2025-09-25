@@ -28,6 +28,10 @@ It is recommended that you use [nvm (Node Version Manager)](https://github.com/c
    nvm install
    ```
 
+#### Tooling
+
+For Javascript auditing we use `auditjs` which requires you to [setup an OSS Index account](https://github.com/ONSdigital/dp/blob/main/guides/MAC_SETUP.md#oss-index-account-and-configuration)
+
 ### Generate the CSS and JS
 
 - Build the CSS and JS, and start the local web server with
