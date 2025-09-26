@@ -53,6 +53,8 @@ When PRs are merged into `main`, compiled assets are made available on the ONS C
 | Environment variable | Default | Description                                                      |
 |----------------------|---------|------------------------------------------------------------------|
 | PORT                 | 9002    | The port used when running the file server for local development |
+| OSSINDEX_USERNAME    | ""      | OSS Index username - required to run audit in CI and locally     |
+| OSSINDEX_TOKEN       | ""      | OSS Index api token - required to run audit in CI and locally    |
 
 ## Linter
 
@@ -71,6 +73,10 @@ Some linting issues can be fixed automatically. To use this functionality, pass 
 ```bash
 nvm exec -- npm run lint:fix path/to/js/file/to/fix
 ```
+
+## Audit
+
+For Javascript auditing we use `auditjs` which requires you to [setup an OSS Index account](https://github.com/ONSdigital/dp/blob/main/guides/MAC_SETUP.md#oss-index-account-and-configuration)
 
 ## Contributing
 
